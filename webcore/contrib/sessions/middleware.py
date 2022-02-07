@@ -29,81 +29,81 @@ try:
     # from paste.registry import StackedObjectProxy
     # beaker_session = StackedObjectProxy(name="Beaker Session")
     # beaker_cache = StackedObjectProxy(name="Cache Manager")
-    beaker_session = threading.local()
-    beaker_cache = threading.local()
+    web_session = threading.local()
+    # beaker_cache = threading.local()
 except:
     beaker_cache = None
     beaker_session = None
 
-from beaker.cache import CacheManager
-from beaker.session import Session, SessionObject
-from beaker.util import coerce_cache_params, coerce_session_params, \
+# from webcore.contrib.sessions.cache import CacheManager
+from webcore.contrib.sessions.session import Session, SessionObject
+from webcore.contrib.sessions.util import coerce_cache_params, coerce_session_params, \
     parse_cache_config_options
 
-
-class CacheMiddleware(object):
-    cache = beaker_cache
-
-    def __init__(self, app, config=None, environ_key='beaker.cache', **kwargs):
-        """Initialize the Cache Middleware
-
-        The Cache middleware will make a CacheManager instance available
-        every request under the ``environ['beaker.cache']`` key by
-        default. The location in environ can be changed by setting
-        ``environ_key``.
-
-        ``config``
-            dict  All settings should be prefixed by 'cache.'. This
-            method of passing variables is intended for Paste and other
-            setups that accumulate multiple component settings in a
-            single dictionary. If config contains *no cache. prefixed
-            args*, then *all* of the config options will be used to
-            intialize the Cache objects.
-
-        ``environ_key``
-            Location where the Cache instance will keyed in the WSGI
-            environ
-
-        ``**kwargs``
-            All keyword arguments are assumed to be cache settings and
-            will override any settings found in ``config``
-
-        """
-        self.app = app
-        config = config or {}
-
-        self.options = {}
-
-        # Update the options with the parsed config
-        self.options.update(parse_cache_config_options(config))
-
-        # Add any options from kwargs, but leave out the defaults this
-        # time
-        self.options.update(
-            parse_cache_config_options(kwargs, include_defaults=False))
-
-        # Assume all keys are intended for cache if none are prefixed with
-        # 'cache.'
-        if not self.options and config:
-            self.options = config
-
-        self.options.update(kwargs)
-        self.cache_manager = CacheManager(**self.options)
-        self.environ_key = environ_key
-
-    def __call__(self, environ, start_response):
-        if environ.get('paste.registry'):
-            if environ['paste.registry'].reglist:
-                environ['paste.registry'].register(self.cache,
-                                                   self.cache_manager)
-        environ[self.environ_key] = self.cache_manager
-        return self.app(environ, start_response)
+#
+# class CacheMiddleware(object):
+#     cache = beaker_cache
+#
+#     def __init__(self, app, config=None, environ_key='beaker.cache', **kwargs):
+#         """Initialize the Cache Middleware
+#
+#         The Cache middleware will make a CacheManager instance available
+#         every request under the ``environ['beaker.cache']`` key by
+#         default. The location in environ can be changed by setting
+#         ``environ_key``.
+#
+#         ``config``
+#             dict  All settings should be prefixed by 'cache.'. This
+#             method of passing variables is intended for Paste and other
+#             setups that accumulate multiple component settings in a
+#             single dictionary. If config contains *no cache. prefixed
+#             args*, then *all* of the config options will be used to
+#             intialize the Cache objects.
+#
+#         ``environ_key``
+#             Location where the Cache instance will keyed in the WSGI
+#             environ
+#
+#         ``**kwargs``
+#             All keyword arguments are assumed to be cache settings and
+#             will override any settings found in ``config``
+#
+#         """
+#         self.app = app
+#         config = config or {}
+#
+#         self.options = {}
+#
+#         # Update the options with the parsed config
+#         self.options.update(parse_cache_config_options(config))
+#
+#         # Add any options from kwargs, but leave out the defaults this
+#         # time
+#         self.options.update(
+#             parse_cache_config_options(kwargs, include_defaults=False))
+#
+#         # Assume all keys are intended for cache if none are prefixed with
+#         # 'cache.'
+#         if not self.options and config:
+#             self.options = config
+#
+#         self.options.update(kwargs)
+#         self.cache_manager = CacheManager(**self.options)
+#         self.environ_key = environ_key
+#
+#     def __call__(self, environ, start_response):
+#         if environ.get('paste.registry'):
+#             if environ['paste.registry'].reglist:
+#                 environ['paste.registry'].register(self.cache,
+#                                                    self.cache_manager)
+#         environ[self.environ_key] = self.cache_manager
+#         return self.app(environ, start_response)
 
 
 class SessionMiddleware(object):
-    session = beaker_session
+    session = web_session
 
-    def __init__(self, wrap_app, config=None, environ_key='beaker.session',
+    def __init__(self, wrap_app, config=None, environ_key='web.session',
                  **kwargs):
         """Initialize the Session Middleware
 
@@ -133,7 +133,7 @@ class SessionMiddleware(object):
 
         # Load up the default params
         self.options = dict(invalidate_corrupt=True, type=None,
-                            data_dir=None, key='beaker.session.id',
+                            data_dir=None, key='web.session.id',
                             timeout=None, save_accessed_time=True, secret=None,
                             log_file=None)
         print('config:',config)
@@ -142,8 +142,8 @@ class SessionMiddleware(object):
         for dct in [config, kwargs]:
             print('dct:', dct)
             for key, val in dct.items():
-                if key.startswith('beaker.session.'):
-                    self.options[key[15:]] = val
+                if key.startswith('web.session.'):
+                    self.options[key[12:]] = val
                 if key.startswith('session.'):
                     self.options[key[8:]] = val
                 if key.startswith('session_'):

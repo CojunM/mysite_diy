@@ -355,6 +355,7 @@ class DefaultApp(object):
     # default_app = AppStack()
     # default_app.push()
 
+
 def static_file(filename, root, mimetype='auto', download=False, charset='UTF-8'):
     """ Open a file in a safe way and return :exc:`HTTPResponse` with status
         code 200, 305, 403 or 404. The ``Content-Type``, ``Content-Encoding``,
@@ -378,14 +379,14 @@ def static_file(filename, root, mimetype='auto', download=False, charset='UTF-8'
     root = os.path.abspath(root) + os.sep
     filename = os.path.abspath(os.path.join(root, filename.strip('/\\')))
     headers = dict()
-    print('filename:',filename)
+    print('filename:', filename)
     if not filename.startswith(root):
         return HTTPError(403, "Access denied.")
     if not os.path.exists(filename) or not os.path.isfile(filename):
         return HTTPError(404, "File does not exist.")
     if not os.access(filename, os.R_OK):
         return HTTPError(403, "You do not have permission to access this file.")
-    #mimetypes：   主要处理文件文件类型问题
+    # mimetypes：   主要处理文件文件类型问题
     if mimetype == 'auto':
         mimetype, encoding = mimetypes.guess_type(filename)
         if encoding: headers['Content-Encoding'] = encoding
@@ -420,13 +421,14 @@ def static_file(filename, root, mimetype='auto', download=False, charset='UTF-8'
         if not ranges:
             return HTTPError(416, "Requested Range Not Satisfiable")
         offset, end = ranges[0]
-        headers["Content-Range"] = "bytes %d-%d/%d" % (offset, end-1, clen)
-        headers["Content-Length"] = str(end-offset)
-        if body: body = _file_iter_range(body, offset, end-offset)
+        headers["Content-Range"] = "bytes %d-%d/%d" % (offset, end - 1, clen)
+        headers["Content-Length"] = str(end - offset)
+        if body: body = _file_iter_range(body, offset, end - offset)
         return HTTPResponse(body, status=206, **headers)
     return HTTPResponse(body, **headers)
 
-def _file_iter_range(fp, offset, bytes, maxread=1024*1024):
+
+def _file_iter_range(fp, offset, bytes, maxread=1024 * 1024):
     ''' Yield chunks from a range in a file. No chunk is bigger than maxread.'''
     fp.seek(offset)
     while bytes > 0:
@@ -434,6 +436,8 @@ def _file_iter_range(fp, offset, bytes, maxread=1024*1024):
         if not part: break
         bytes -= len(part)
         yield part
+
+
 def parse_range_header(header, maxlen=0):
     ''' Yield (start, end) ranges parsed from a HTTP Range header. Skip
         unsatisfiable ranges. The end index is non-inclusive
@@ -444,23 +448,22 @@ def parse_range_header(header, maxlen=0):
     for start, end in ranges:
         try:
             if not start:  # bytes=-100    -> last 100 bytes
-                start, end = max(0, maxlen-int(end)), maxlen
+                start, end = max(0, maxlen - int(end)), maxlen
             elif not end:  # bytes=100-    -> all but the first 99 bytes
                 start, end = int(start), maxlen
-            else:          # bytes=100-200 -> bytes 100-200 (inclusive)
-                start, end = int(start), min(int(end)+1, maxlen)
+            else:  # bytes=100-200 -> bytes 100-200 (inclusive)
+                start, end = int(start), min(int(end) + 1, maxlen)
             if 0 <= start < end <= maxlen:
                 yield start, end
         except ValueError:
             pass
 
 
-
-
-
 ERROR_PAGE_TEMPLATE = """
 %%try:
-    %%from %s import DEBUG, HTTP_CODES, localrequest, tounicode
+    %%#from %s import DEBUG, HTTP_CODES, localrequest, tounicode
+   %%from webcore.httphandles.request import localrequest
+   %%DEBUG = True
     <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
     <html>
         <head>
@@ -474,7 +477,7 @@ ERROR_PAGE_TEMPLATE = """
         </head>
         <body>
             <h1>Error: {{e.status}}</h1>
-            <p>Sorry, the requested URL <tt>{{repr(request.url)}}</tt>
+            <p>Sorry, the requested URL <tt>{{repr(localrequest.environ.get('PATH_INFO', ''))}}</tt>
                caused an error:</p>
             <pre>{{e.body}}</pre>
             %%if DEBUG and e.exception:
@@ -489,9 +492,10 @@ ERROR_PAGE_TEMPLATE = """
     </html>
 %%except ImportError:
     <b>ImportError:</b> Could not generate the error page. Please add bottle to
-    the import path.
+    the import path. %s
 %%end
-""" % __name__
+""" % (__name__,  __name__)
+
 
 class FileCheckerThread(Thread):
     """ 一旦检测到更改的模块文件，立即中断主线程，锁文件被删除或变旧. """

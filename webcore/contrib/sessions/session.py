@@ -22,26 +22,37 @@
                   ┃┫┫  ┃┫┫
                   ┗┻┛  ┗┻┛
 """
-from ._compat import PY2, pickle, http_cookies, unicode_text, b64encode, b64decode, string_type
-
+# from ._compat import PY2, pickle, http_cookies, unicode_text, b64encode, b64decode, string_type
+import hmac
 import os
 import time
+from base64 import b64encode
 from datetime import datetime, timedelta
-from beaker.crypto import hmac as HMAC, hmac_sha1 as SHA1, sha1, get_nonce_size, DEFAULT_NONCE_BITS, get_crypto_module
-from beaker import crypto, util
-from beaker.cache import clsmap
-from beaker.exceptions import BeakerException, InvalidCryptoBackendError
-from beaker.cookie import SimpleCookie
+# from beaker.crypto import hnac as hnac, hmac_sha1 as SHA1, sha1, get_nonce_size, DEFAULT_NONCE_BITS, get_crypto_module
+# from beaker import crypto, util
+# from webcore.contrib.sessions.cache import clsmap
+
+from hashlib import sha1
+# hmac_sha1 = sha1
+from http.cookies import SimpleCookie, BaseCookie
+
+from webcore.contrib.sessions.cache import clsmap
+from webcore.contrib.sessions.exceptions import BeakerException, InvalidCryptoBackendError
+
+# from beaker.cookie import SimpleCookie
+from webcore.contrib.sessions.util import sha1
 
 months = (None, "Jan", "Feb", "Mar", "Apr", "May", "Jun",
           "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
 weekdays = ("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
-
+DEFAULT_NONCE_BITS = 128
 __all__ = ['SignedCookie', 'Session', 'InvalidSignature']
 
 
 class _InvalidSignatureType(object):
-    """Returned from SignedCookie when the value's signature was invalid."""
+    """Returned from SignedCookie when the value's signature was invalid.
+    值的签名无效时从SignedCookie返回。
+    """
 
     def __nonzero__(self):
         return False
@@ -58,7 +69,7 @@ try:
 
     def _session_id():
         return uuid.uuid4().hex
-except ImportError:
+except ImportError():
     import random
 
     if hasattr(os, 'getpid'):
@@ -77,27 +88,31 @@ except ImportError:
         )
         # NB: nothing against second parameter to b64encode, but it seems
         #     to be slower than simple chained replacement
-        if not PY2:
-            raw_id = b64encode(sha1(id_str.encode('ascii')).digest())
-            return str(raw_id.replace(b'+', b'-').replace(b'/', b'_').rstrip(b'='))
-        else:
-            raw_id = b64encode(sha1(id_str).digest())
-            return raw_id.replace('+', '-').replace('/', '_').rstrip('=')
+        # if not PY2:
+        #     raw_id = b64encode(sha1(id_str.encode('ascii')).digest())
+        #     return str(raw_id.replace(b'+', b'-').replace(b'/', b'_').rstrip(b'='))
+        # else:
+        #     raw_id = b64encode(sha1(id_str).digest())
+        #     return raw_id.replace('+', '-').replace('/', '_').rstrip('=')
+        raw_id = b64encode(sha1(id_str.encode('ascii')).digest())
+        return str(raw_id.replace(b'+', b'-').replace(b'/', b'_').rstrip(b'='))
 
 
 class SignedCookie(SimpleCookie):
-    """Extends python cookie to give digital signature support"""
+    """Extends python cookie to give digital signature support
+    扩展python cookie以提供数字签名支持
+    """
 
     def __init__(self, secret, input=None):
         self.secret = secret.encode('UTF-8')
-        http_cookies.BaseCookie.__init__(self, input)
+        BaseCookie.__init__(self, input)
 
     def value_decode(self, val):
         val = val.strip('"')
         if not val:
             return None, val
 
-        sig = HMAC.new(self.secret, val[40:].encode('utf-8'), SHA1).hexdigest()
+        sig = hmac.new(self.secret, val[40:].encode('utf-8'), sha1).hexdigest()
 
         # Avoid timing attacks
         invalid_bits = 0
@@ -106,7 +121,7 @@ class SignedCookie(SimpleCookie):
             return InvalidSignature, val
 
         for a, b in zip(sig, input_sig):
-            invalid_bits += a != b
+            invalid_bits += a != b  # 先计算a != b，再计算invalid_bits +=
 
         if invalid_bits:
             return InvalidSignature, val
@@ -114,7 +129,7 @@ class SignedCookie(SimpleCookie):
             return val[40:], val
 
     def value_encode(self, val):
-        sig = HMAC.new(self.secret, val.encode('utf-8'), SHA1).hexdigest()
+        sig = hmac.new(self.secret, val.encode('utf-8'), sha1).hexdigest()
         return str(val), ("%s%s" % (sig, val))
 
 
@@ -124,7 +139,9 @@ class _ConfigurableSession(dict):
     Provides a way to ensure some properties of sessions
     are always available with pre-configured values
     when they are not available in the session cookie itself.
-    """
+
+    提供对可配置会话对象的支持。提供了一种确保会话的某些属性的方法
+    始终可以使用预先配置的值，当它们在会话cookie本身中不可用时。"""
 
     def __init__(self, cookie_domain=None, cookie_path='/'):
         self._config = {
@@ -181,11 +198,52 @@ class Session(_ConfigurableSession):
     :param crypto_type: encryption module to use
     :param samesite: SameSite value for the cookie -- should be either 'Lax',
                      'Strict', or None.
-    """
+
+           使用容器包存储的会话对象。
+        ：param invalidate_corrupt：加载时如何处理损坏的数据。什么时候
+        如果设置为True，则损坏的数据将被静默地删除
+        无效并创建新会话，
+        否则无效数据将导致异常。
+        ：输入invalidate_corrupt:bool
+        ：param use_cookies：是否应创建cookies。当设置为
+        如果为False，则假定用户将处理存储
+        他们自己的会议。
+        ：键入use_cookies:bool
+        ：param type：应该使用什么数据后端类型来存储基础数据
+        会话数据
+        ：param key:cookie应设置为的名称。
+        ：param timeout：会话数据被认为有效的时间。这是用来
+        无论cookie是否存在，都要确定
+        会话数据是否仍然有效。可以设置为“无”以
+        禁用会话超时。
+        ：键入timeout:int或None
+        ：param save_accessed_time:烧杯是否应保存会话的访问权限
+        时间（真）或仅修改时间（假）。
+        默认为True。
+        ：param cookie_expires:cookie的过期日期
+        ：param cookie_domain：用于cookie的域。
+        ：param cookie_path：用于cookie的路径。
+        ：param data_serializer:如果应该使用`“json”或`“pickle”`
+        序列化数据。也可以是具有
+        ``加载和转储方法。默认情况下
+        ``使用“pickle”。
+        ：param secure：cookie是否只应通过SSL发送。
+        ：param httponly：cookie是否只能由用户访问
+        浏览器不是通过JavaScript实现的。
+        ：param encrypt_key：用于本地会话加密的密钥（如果没有）
+        前提是会话不会被加密。
+        ：param validate_key：用于对本地加密会话进行签名的密钥
+        ：param encrypt_nonce_bits：用于为加密密钥生成nonce的位数。
+        出于安全原因，默认设置为128位。如果你愿意
+        与1.8.0之前生成的会话保持向后兼容性
+        设置为48。
+        ：param crypto_type:要使用的加密模块
+        ：param samesite:cookie的samesite值应为'Lax'，
+        “严格”，或者没有。 """
 
     def __init__(self, request, id=None, invalidate_corrupt=False,
                  use_cookies=True, type=None, data_dir=None,
-                 key='beaker.session.id', timeout=None, save_accessed_time=True,
+                 key='web.session.id', timeout=None, save_accessed_time=True,
                  cookie_expires=True, cookie_domain=None, cookie_path='/',
                  data_serializer='pickle', secret=None,
                  secure=False, namespace_class=None, httponly=False,
@@ -194,7 +252,7 @@ class Session(_ConfigurableSession):
                  **namespace_args):
         _ConfigurableSession.__init__(
             self,
-            cookie_domain=cookie_domain,
+            cookie_domain=cookie_domain,  # domain 领域
             cookie_path=cookie_path
         )
         self.clear()

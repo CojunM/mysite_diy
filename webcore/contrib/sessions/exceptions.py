@@ -23,6 +23,7 @@
                   ┗┻┛  ┗┻┛
 """
 
+
 class BeakerException(Exception):
     pass
 

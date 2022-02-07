@@ -33,15 +33,22 @@ as well as the function decorators :func:`.region_decorate`,
 import warnings
 
 import beaker.container as container
-import beaker.util as util
-from beaker.crypto.util import sha1
-from beaker.exceptions import BeakerException, InvalidCacheBackendError
-from beaker.synchronization import _threading
-
-import beaker.ext.memcached as memcached
 import beaker.ext.database as database
-import beaker.ext.sqla as sqla
 import beaker.ext.google as google
+import beaker.ext.memcached as memcached
+import beaker.ext.sqla as sqla
+
+import webcore.contrib.sessions.util as util
+# from webcore.contrib.sessions.crypto.util import sha1
+from webcore.contrib.sessions.exceptions import BeakerException, InvalidCacheBackendError
+from webcore.contrib.sessions.synchronization import _threading
+
+
+# try:
+#     from inspect import signature as func_signature
+# except ImportError:
+#     from funcsigs import signature as func_signature
+
 
 # Initialize the cache region dict
 cache_regions = {}
@@ -132,6 +139,7 @@ class _backends(object):
             pass
 
 # Initialize the basic available backends
+# 初始化基本的可用后端
 clsmap = _backends({
           'memory': container.MemoryNamespaceManager,
           'dbm': container.DBMNamespaceManager,
