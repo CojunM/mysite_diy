@@ -7,11 +7,18 @@ import errno  # https://www.cnblogs.com/madsnotes/articles/5688008.html
 # import beaker.util as util
 import logging
 import os
+import pickle
 import time
 
+from webcore.contrib.sessions._compat import add_metaclass
 from webcore.contrib.sessions.exceptions import CreationAbortedError, MissingCacheParameter
 from webcore.contrib.sessions.synchronization import _threading, file_synchronizer, \
     mutex_synchronizer, NameLock, null_synchronizer
+
+try:
+    import dbm as anydbm
+except:
+    import dumbdbm as anydbm
 
 __all__ = ['Value', 'Container', 'ContainerContext',
            'MemoryContainer', 'DBMContainer', 'NamespaceManager',
@@ -19,9 +26,9 @@ __all__ = ['Value', 'Container', 'ContainerContext',
            'OpenResourceNamespaceManager',
            'FileNamespaceManager', 'CreationAbortedError']
 
+from webcore.contrib.sessions.util import verify_directory, encoded_path, SyncDict, safe_write
 
-
-logger = logging.getLogger('beaker.container')
+logger = logging.getLogger('session.container')
 if logger.isEnabledFor(logging.DEBUG):
     debug = logger.debug
 else:
@@ -261,10 +268,11 @@ class OpenResourceNamespaceManager(NamespaceManager):
             self.access_lock.release_read_lock()
 
     def acquire_write_lock(self, wait=True, replace=False):
-        r = self.access_lock.acquire_write_lock(wait)
+        print('acquire_write_lock  self.access_lock:', self.access_lock)
+        r = self.access_lock.acquire_write_lock(wait)#只是加了个锁
         try:
             if (wait or r):
-                self.open('c', checkcount=True, replace=replace)
+                self.open('c', checkcount=True, replace=replace)#self.hash得到一个反序列化对象
             return r
         except:
             self.access_lock.release_write_lock()
@@ -545,7 +553,7 @@ class AbstractDictionaryNSManager(NamespaceManager):
 class MemoryNamespaceManager(AbstractDictionaryNSManager):
     """:class:`.NamespaceManager` that uses a Python dictionary for storage."""
 
-    namespaces = util.SyncDict()
+    namespaces = SyncDict()
 
     def __init__(self, namespace, **kwargs):
         AbstractDictionaryNSManager.__init__(self, namespace)
@@ -567,7 +575,7 @@ class DBMNamespaceManager(OpenResourceNamespaceManager):
             self.dbm_dir = dbm_dir
         else:
             self.dbm_dir = data_dir + "/container_dbm"
-        util.verify_directory(self.dbm_dir)
+        verify_directory(self.dbm_dir)
 
         if not lock_dir and not data_dir:
             raise MissingCacheParameter("data_dir or lock_dir is required")
@@ -575,17 +583,17 @@ class DBMNamespaceManager(OpenResourceNamespaceManager):
             self.lock_dir = lock_dir
         else:
             self.lock_dir = data_dir + "/container_dbm_lock"
-        util.verify_directory(self.lock_dir)
+        verify_directory(self.lock_dir)
 
         self.dbmmodule = dbmmodule or anydbm
 
         self.dbm = None
         OpenResourceNamespaceManager.__init__(self, namespace)
 
-        self.file = util.encoded_path(root=self.dbm_dir,
-                                      identifiers=[self.namespace],
-                                      extension='.dbm',
-                                      digest_filenames=self.digest_filenames)
+        self.file = encoded_path(root=self.dbm_dir,
+                                 identifiers=[self.namespace],
+                                 extension='.dbm',
+                                 digest_filenames=self.digest_filenames)
 
         debug("data file %s", self.file)
         self._checkfile()
@@ -615,7 +623,7 @@ class DBMNamespaceManager(OpenResourceNamespaceManager):
     def _ensuredir(self, filename):
         dirname = os.path.dirname(filename)
         if not os.path.exists(dirname):
-            util.verify_directory(dirname)
+            verify_directory(dirname)
 
     def _checkfile(self):
         if not self.file_exists(self.file):
@@ -654,11 +662,11 @@ class DBMNamespaceManager(OpenResourceNamespaceManager):
         return pickle.loads(self.dbm[key])
 
     def __contains__(self, key):
-        if PYVER == (3, 2):
-            # Looks like this is a bug that got solved in PY3.3 and PY3.4
-            # http://bugs.python.org/issue19288
-            if isinstance(key, unicode_text):
-                key = key.encode('UTF-8')
+        # if PYVER == (3, 2):
+        #     # Looks like this is a bug that got solved in PY3.3 and PY3.4
+        #     # http://bugs.python.org/issue19288
+        #     if isinstance(key, unicode_text):
+        #         key = key.encode('UTF-8')
         return key in self.dbm
 
     def __setitem__(self, key, value):
@@ -684,15 +692,15 @@ class FileNamespaceManager(OpenResourceNamespaceManager):
 
     def __init__(self, namespace, data_dir=None, file_dir=None, lock_dir=None,
                  digest_filenames=True, **kwargs):
-        self.digest_filenames = digest_filenames#文件名摘要
-
+        self.digest_filenames = digest_filenames  # 文件名摘要
+        print('namespace:',(namespace))
         if not file_dir and not data_dir:
             raise MissingCacheParameter("data_dir or file_dir is required")
         elif file_dir:
             self.file_dir = file_dir
         else:
             self.file_dir = data_dir + "/container_file"
-        util.verify_directory(self.file_dir)
+        verify_directory(self.file_dir)#验证并创建目录
 
         if not lock_dir and not data_dir:
             raise MissingCacheParameter("data_dir or lock_dir is required")
@@ -700,13 +708,13 @@ class FileNamespaceManager(OpenResourceNamespaceManager):
             self.lock_dir = lock_dir
         else:
             self.lock_dir = data_dir + "/container_file_lock"
-        util.verify_directory(self.lock_dir)
-        OpenResourceNamespaceManager.__init__(self, namespace)
-
-        self.file = util.encoded_path(root=self.file_dir,
-                                      identifiers=[self.namespace],
-                                      extension='.cache',
-                                      digest_filenames=self.digest_filenames)
+        verify_directory(self.lock_dir)
+        # OpenResourceNamespaceManager.__init__(self, namespace)
+        super().__init__(namespace)
+        self.file = encoded_path(root=self.file_dir,
+                                 identifiers=[self.namespace],
+                                 extension='.cache',
+                                 digest_filenames=self.digest_filenames)
         self.hash = {}
 
         debug("data file %s", self.file)
@@ -716,6 +724,9 @@ class FileNamespaceManager(OpenResourceNamespaceManager):
                                  lock_dir=self.lock_dir)
 
     def get_creation_lock(self, key):
+        identifier = "dbmcontainer/funclock/%s/%s" % (
+            self.namespace, key)
+        print('get cr identifier',identifier)
         return file_synchronizer(
             identifier="dbmcontainer/funclock/%s/%s" % (
                 self.namespace, key
@@ -730,6 +741,8 @@ class FileNamespaceManager(OpenResourceNamespaceManager):
         if not replace and self.file_exists(self.file):
             try:
                 with open(self.file, 'rb') as fh:
+                    # https: // zhuanlan.zhihu.com / p / 265856478
+                    # 反序列化对象，将文件中的数据解析为一个python对象。file中有read()接口和readline()接口
                     self.hash = pickle.load(fh)
             except IOError as e:
                 # Ignore EACCES and ENOENT as it just means we are no longer
@@ -742,7 +755,7 @@ class FileNamespaceManager(OpenResourceNamespaceManager):
     def do_close(self):
         if self.flags == 'c' or self.flags == 'w':
             pickled = pickle.dumps(self.hash)
-            util.safe_write(self.file, pickled)
+            safe_write(self.file, pickled)
 
         self.hash = {}
         self.flags = None

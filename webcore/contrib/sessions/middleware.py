@@ -136,8 +136,8 @@ class SessionMiddleware(object):
                             data_dir=None, key='web.session.id',
                             timeout=None, save_accessed_time=True, secret=None,
                             log_file=None)
-        print('config:',config)
-        print('kwargs:',kwargs)
+        # print('config:',config)
+        # print('kwargs:',kwargs)
         # Pull out any config args meant for beaker session. if there are any
         for dct in [config, kwargs]:
             print('dct:', dct)
@@ -150,11 +150,14 @@ class SessionMiddleware(object):
                     warnings.warn('Session options should start with session. '
                                   'instead of session_.', DeprecationWarning, 2)
                     self.options[key[8:]] = val
-
+                # print('key:', key)
+        print('self.options:', self.options)
         # Coerce and validate session params
-        coerce_session_params(self.options)
+        # 强制和验证会话参数
+        coerce_session_params(self.options)#可以不返回
 
         # Assume all keys are intended for session if none are prefixed with
+        # 假设所有密钥都是用于会话的，如果没有任何密钥的前缀是
         # 'session.'
         if not self.options and config:
             self.options = config
@@ -165,14 +168,14 @@ class SessionMiddleware(object):
 
     def __call__(self, environ, start_response):
         session = SessionObject(environ, **self.options)
-        if environ.get('paste.registry'):
-            if environ['paste.registry'].reglist:
-                environ['paste.registry'].register(self.session, session)
+        # if environ.get('paste.registry'):
+        #     if environ['paste.registry'].reglist:
+        #         environ['paste.registry'].register(self.session, session)
         environ[self.environ_key] = session
-        environ['beaker.get_session'] = self._get_session
+        environ['web.get_session'] = self._get_session
 
-        if 'paste.testing_variables' in environ and 'webtest_varname' in self.options:
-            environ['paste.testing_variables'][self.options['webtest_varname']] = session
+        # if 'paste.testing_variables' in environ and 'webtest_varname' in self.options:
+        #     environ['paste.testing_variables'][self.options['webtest_varname']] = session
 
         def session_start_response(status, headers, exc_info=None):
             if session.accessed():

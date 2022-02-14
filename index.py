@@ -6,32 +6,28 @@
 # @File    : index.py
 # @Project : mysite_diy
 # @Software: PyCharm
-from webcore.apps.wsgiapp import route, server_run, default_app, DefaultApp, static_file
+from webcore.apps.wsgiapp import route, server_run, default_app, static_file
 from os.path import abspath, join, dirname
 
 from webcore.contrib.sessions.middleware import SessionMiddleware
+from webcore.httphandles.request import localrequest
 from webcore.templates.simpletemplate import template, TEMPLATE_PATH
 
 # from beaker.middleware import SessionMiddleware
 # from bottle import route, run, default_app, static_file, template, TEMPLATE_PATH
 
-# 设置session参数
-session_opts = {
-    'session.type': 'file',
-    'session.cookie_expires': 3600,
-    'session.data_dir': '/tmp/sessions/simple',
-    'session.auto': True
-}
 # 指定的模板路径
 CUSTOM_TPL_PATH = abspath(join(dirname(__file__), "html/"))
-print('CUSTOM_TPL_PATH:', CUSTOM_TPL_PATH)
+# print('CUSTOM_TPL_PATH:', CUSTOM_TPL_PATH)
 # 静态文件
 WEB_Bin_PATH = abspath(join(dirname(__file__), "html/temp/"))
 WEB_css_PATH = abspath(join(dirname(__file__), "html/static/h-ui/css/"))
 TEMPLATE_PATH.insert(0, WEB_Bin_PATH)
 TEMPLATE_PATH.insert(0, CUSTOM_TPL_PATH)
 TEMPLATE_PATH.insert(0, WEB_css_PATH)
-print('WEB_Bin_PATH:', WEB_Bin_PATH)
+
+
+# print('WEB_Bin_PATH:', WEB_Bin_PATH)
 
 
 # app1 = DefaultApp()
@@ -85,21 +81,48 @@ def server_static(bootstrap):
     return static_file(bootstrap, root=WEB_Bin_PATH)
 
 
-#
-# @route('/hello/<id:float>')
-# def hello3(id):
-#     return "Hello3 %3.3f" % id
+@route('/hello/<id:float>')
+def hello3(id):
+    return "Hello3 %3.3f" % id
+
+
 #
 #
 # @route('/he/<id>')
 # def he2(id):
 #     return "Hello2 %s" % id
-#
-#
+
+
 @route('/hello/<id>')
 def hello2(id):
     return "Hello2 %s" % id
 
+
+# 设置session参数
+session_opts = {
+    'session.type': 'file',
+    'session.cookie_expires': 3600,
+    'session.data_dir': './tmp/sessions/simple',
+    'session.auto': True
+}
+
+
+@route('/test')
+def test():
+    s = localrequest.environ.get('web.session')
+    s['test'] = s.get('test', 0) + 1
+    print('web.session: ', s)
+    s.save()
+    return 'Test conter: %d' % s['test']
+
+
+@route('/clear')
+def test():
+    s = localrequest.environ.get('web.session')
+    dl = s.get('test', 0) + 1
+    print('web.session del: ', s)
+    s.delete()
+    return 'Delete conter: %d' % dl
 
 # 函数主入口
 if __name__ == '__main__':

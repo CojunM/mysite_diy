@@ -24,7 +24,7 @@
 """
 
 import binascii
-import hashlib
+# import hashlib
 import json
 import pickle
 import socket
@@ -37,6 +37,7 @@ import re
 
 import weakref
 import warnings
+from hashlib import md5
 
 from inspect import signature as func_signature, getsourcefile
 #
@@ -162,14 +163,15 @@ def assert_raises(except_cls, callable_, *args, **kw):
 
 def verify_directory(dir):
     """verifies and creates a directory.  tries to
-    ignore collisions with other threads and processes."""
+    ignore collisions with other threads and processes.
+    验证并创建目录。尝试忽略与其他线程和进程的冲突。"""
 
     tries = 0
     while not os.access(dir, os.F_OK):
         try:
             tries += 1
             os.makedirs(dir)
-        except :
+        except:
             if tries > 5:
                 raise
 
@@ -240,7 +242,11 @@ class SyncDict(object):
     Use python 2.3.3 or greater !  a major bug was just fixed in Nov.
     2003 that was driving me nuts with garbage collection/weakrefs in
     this section.
-
+    一种高效/线程安全的单例映射算法，简称a.k.a。“基于此键获取值，如果未找到或未找到，则创建
+    “有效”范例：是否存在有效（&amp;I）？获取：创建设计用于与weakref字典一起使用，以预期项目
+    从字典中异步消失。使用python 2.3.3或更高版本！去年11月，一个主要错误刚刚修复。
+    2003年，垃圾收集/垃圾收集让我抓狂
+    这部分。
     """
 
     def __init__(self):
@@ -258,12 +264,16 @@ class SyncDict(object):
 
     def sync_get(self, key, createfunc, *args, **kwargs):
         self.mutex.acquire()
+        print('key: ',key)
+        print('createfunc: ', createfunc)
         try:
             try:
                 if key in self.dict:
+                    print('key in self.dict')
                     return self.dict[key]
                 else:
-                    return self._create(key, createfunc, *args, **kwargs)
+                    print('_create')
+                    return self._create(key, createfunc, *args, **kwargs)#返回ConditionSynchronizer实列
             except KeyError:
                 return self._create(key, createfunc, *args, **kwargs)
         finally:
@@ -296,6 +306,9 @@ class WeakValuedRegistry(SyncDict):
     def __init__(self):
         super().__init__()
         self.mutex = _threading.RLock()
+        # 使用weakref模块，你可以创建到对象的弱引用，Python在对象的引用计数为0或只存在对象的弱引用时将回收这个对象。
+        # https: // blog.csdn.net / qdx411324962 / article / details / 47291265
+        # https://blog.csdn.net/lijiachang8/article/details/115772641
         self.dict = weakref.WeakValueDictionary()
 
 
@@ -305,28 +318,30 @@ sha1 = None
 def encoded_path(root, identifiers, extension=".enc", depth=3,
                  digest_filenames=True):
     """Generate a unique file-accessible path from the given list of
-    identifiers starting at the given root directory."""
+    identifiers starting at the given root directory.
+    从给定的文件列表中生成唯一的文件可访问路径从给定根目录开始的标识符"""
     ident = "_".join(identifiers)
-
+    print('ident: ', ident)
     global sha1
     if sha1 is None:
-        from beaker.crypto import sha1
+        from hashlib import sha1
 
     if digest_filenames:
         if isinstance(ident, unicode_text):
-            ident = sha1(ident.encode('utf-8')).hexdigest()
+            ident = sha1(ident.encode('utf-8')).hexdigest()  # 返回摘要，作为十六进制数据字符串值
         else:
             ident = sha1(ident).hexdigest()
-
+    print('ident1: ', ident)
     ident = os.path.basename(ident)
 
     tokens = []
     for d in range(1, depth):
         tokens.append(ident[0:d])
-
+        print('ident[0:d]: ', ident[0:d])
     dir = os.path.join(root, *tokens)
+    print('dir: ', dir)
     verify_directory(dir)
-
+    print(os.path.join(dir, ident + extension))
     return os.path.join(dir, ident + extension)
 
 
@@ -353,11 +368,14 @@ def asbool(obj):
 
 
 def verify_options(opt, types, error):
+    # print("opt:", opt)
+    # print("types:", types)
     if not isinstance(opt, types):
         if not isinstance(types, tuple):
             types = (types,)
         coerced = False
         for typ in types:
+            # print("typ:", typ)
             try:
                 if typ in (list, tuple):
                     opt = [x.strip() for x in opt.split(',')]
@@ -377,14 +395,17 @@ def verify_options(opt, types, error):
                 break
         if not coerced:
             raise Exception(error)
+        # print("opt1:", opt)
     elif isinstance(opt, str) and not opt.strip():
         raise Exception("Empty strings are invalid for: %s" % error)
+    # print("opt2:", opt)
     return opt
 
 
 def verify_rules(params, ruleset):
     for key, types, message in ruleset:
         if key in params:
+            # print('keyvr:', key)
             params[key] = verify_options(params[key], types, message)
     return params
 
@@ -418,10 +439,11 @@ def coerce_session_params(params):
     if cookie_expires and isinstance(cookie_expires, int) and \
             not isinstance(cookie_expires, bool):
         opts['cookie_expires'] = timedelta(seconds=cookie_expires)
+        # timedelta对象代表两个时间之间的时间差，两个date或datetime对象相减就可以返回一个timedelta对象。
 
     if opts.get('timeout') is not None and not opts.get('save_accessed_time', True):
         raise Exception("save_accessed_time must be true to use timeout")
-
+    print("opts:", opts)
     return opts
 
 
@@ -584,7 +606,7 @@ def deserialize(data_string, method):
 
 
 def machine_identifier():
-    machine_hash = hashlib.md5()
+    machine_hash = md5()
     machine_hash.update(socket.gethostname().encode())
 
     return binascii.hexlify(machine_hash.digest()[0:3]).decode('ascii')

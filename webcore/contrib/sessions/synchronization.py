@@ -10,6 +10,9 @@ import os
 import sys
 import tempfile
 
+from webcore.contrib.sessions.exceptions import LockError
+from webcore.contrib.sessions.util import WeakValuedRegistry, ThreadLocal, encoded_path, verify_directory
+
 try:
     import threading as _threading
 except ImportError:
@@ -21,16 +24,18 @@ try:
     has_flock = False
 except:
     try:
-        import fcntl
+        # https: // www.cnblogs.com / Zzbj / p / 11068131. html
+        import fcntl  # 文件锁
+
         has_flock = True
     except ImportError:
         has_flock = False
-
-from beaker import util
-from beaker.exceptions import LockError
+#
+# from beaker import util
+# from beaker.exceptions import LockError
 
 __all__ = ["file_synchronizer", "mutex_synchronizer", "null_synchronizer",
-            "NameLock", "_threading"]
+           "NameLock", "_threading"]
 
 
 class NameLock(object):
@@ -41,7 +46,7 @@ class NameLock(object):
     name alone, and synchronize operations related to that name.
 
     """
-    locks = util.WeakValuedRegistry()
+    locks = WeakValuedRegistry()
 
     class NLContainer(object):
         def __init__(self, reentrant):
@@ -67,17 +72,22 @@ class NameLock(object):
         self._lock().release()
 
 
-_synchronizers = util.WeakValuedRegistry()
+_synchronizers = WeakValuedRegistry()
 
 
 def _synchronizer(identifier, cls, **kwargs):
+    print('_synchronizer identifier:',identifier)
     return _synchronizers.sync_get((identifier, cls), cls, identifier, **kwargs)
 
 
 def file_synchronizer(identifier, **kwargs):
     if not has_flock or 'lock_dir' not in kwargs:
+        print('mutex')
+        print('file_synchronizer identifier:', identifier)
+        print('**kwargs:',kwargs)
         return mutex_synchronizer(identifier)
     else:
+        print('_synchronizer')
         return _synchronizer(identifier, FileSynchronizer, **kwargs)
 
 
@@ -90,6 +100,7 @@ class null_synchronizer(object):
     without any locking.
 
     """
+
     def acquire_write_lock(self, wait=True):
         return True
 
@@ -101,6 +112,7 @@ class null_synchronizer(object):
 
     def release_read_lock(self):
         pass
+
     acquire = acquire_write_lock
     release = release_write_lock
 
@@ -108,10 +120,11 @@ class null_synchronizer(object):
 class SynchronizerImpl(object):
     """Base class for a synchronization object that allows
     multiple readers, single writers.
-
+    同步对象的基类允许多个读者，一个作者。
     """
+
     def __init__(self):
-        self._state = util.ThreadLocal()
+        self._state = ThreadLocal()
 
     class SyncState(object):
         __slots__ = 'reentrantcount', 'writing', 'reading'
@@ -127,7 +140,9 @@ class SynchronizerImpl(object):
             self._state.put(state)
             return state
         else:
+            print('self._state.get：',self._state.get())
             return self._state.get()
+
     state = property(state)
 
     def release_read_lock(self):
@@ -209,31 +224,35 @@ class SynchronizerImpl(object):
 
 class FileSynchronizer(SynchronizerImpl):
     """A synchronizer which locks using flock().
-
+    使用flock（）锁定的同步器。
     """
+
     def __init__(self, identifier, lock_dir):
         super(FileSynchronizer, self).__init__()
-        self._filedescriptor = util.ThreadLocal()
+        self._filedescriptor = ThreadLocal()
 
         if lock_dir is None:
             lock_dir = tempfile.gettempdir()
         else:
             lock_dir = lock_dir
 
-        self.filename = util.encoded_path(
-                            lock_dir,
-                            [identifier],
-                            extension='.lock'
-                        )
+        self.filename = encoded_path(
+            lock_dir,
+            [identifier],
+            extension='.lock'
+        )
         self.lock_dir = os.path.dirname(self.filename)
+
+    # 语法：os.path.dirname(path)  功能：去掉文件名，返回目录
 
     def _filedesc(self):
         return self._filedescriptor.get()
+
     _filedesc = property(_filedesc)
 
     def _ensuredir(self):
         if not os.path.exists(self.lock_dir):
-            util.verify_directory(self.lock_dir)
+            verify_directory(self.lock_dir)
 
     def _open(self, mode):
         filedescriptor = self._filedesc
@@ -286,22 +305,31 @@ class FileSynchronizer(SynchronizerImpl):
 
 
 class ConditionSynchronizer(SynchronizerImpl):
-    """a synchronizer using a Condition."""
+    """a synchronizer using a Condition.使用条件的同步器"""
 
     def __init__(self, identifier):
         super(ConditionSynchronizer, self).__init__()
 
         # counts how many asynchronous methods are executing
+        # 统计正在执行的异步方法数
         self.asynch = 0
 
         # pointer to thread that is the current sync operation
+        # 指向当前同步操作线程的指针
         self.current_sync_operation = None
 
-        # condition object to lock on
+        # condition object to lock on要锁定的条件对象
+        # 有一类线程需要满足条件之后才能够继续执行，
+        # Python提供了threading.Condition 对象用于条件变量线程的支持，
+        # 此类实现条件变量对象。条件变量允许一个或多个线程等待，直到它们收到另一个线程的通知。
+        # 如果给出了 lock 参数，则它必须是 Lock 或 RLock 对象，并且它被用作基础锁。
+        # 否则，将创建一个新的 RLock 对象并将其用作基础锁。None
         self.condition = _threading.Condition(_threading.Lock())
+        # Condition的底层实现了__enter__和 __exit__协议.所以可以使用with上下文管理器
+        # 由Condition的__init__方法可知, 它的底层也是维护了一个RLock锁
 
     def do_acquire_read_lock(self, wait=True):
-        self.condition.acquire()
+        self.condition.acquire()#获取底层锁。此方法调用底层锁上的相应方法;返回值是该方法返回的任何值。
         try:
             # see if a synchronous operation is waiting to start
             # or is already running, in which case we wait (or just
