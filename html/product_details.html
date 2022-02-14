@@ -24,6 +24,7 @@
     <meta name="keywords" content="关键词,5个左右,单个8汉字以内">
     <meta name="description" content="网站描述，字数尽量空制在80个汉字，160个字符以内！">
 </head>
+<body>
 <div class="containBox">
     <div class="containBox-bg"></div>
     <div class="wap-container">
@@ -70,56 +71,22 @@
             <div style="width:1250px; border: 10px; border-color: #999;">
                 <div class="panel panel-default" style="width:250px; float:left;">
                     <div class="panel-body" style="height:100%; border: 0;">
-                        <ol class="linenums">
-                            <li>有序列表</li>
-                            <li>有序列表</li>
-                            <li>有序列表</li>
-                            <li>有序列表</li>
-                            <li>有序列表</li>
-                            <li>有序列表</li>
-                            <li>有序列表</li>
-                            <li>有序列表</li>
-                        </ol>
+                        <ol class="linenums" id="product_class"></ol>
                     </div>
                 </div>
                 <div class="panel panel-default" style="width:960px; float:left;">
                     <div class="panel-body">
                         <div style="width: 420px; height: 320px; float:left; padding-right:20px;">
-                            <img style="width:400px; height:300px" src="temp/pic.png" alt="..." class="thumbnail">
+                            <img style="width:400px; height:300px" src="" alt="..." class="thumbnail" id="front_cover_img">
                         </div>
-                        <div style="float:left; font-size: 16px">
-                            产品名称：XXXXXXX<br><br>
-                            产品编号：Y1654613<br><br>
-                            产品规格：800g<br><br>
-                            保 质 期：1年<br><br>
-                            产 地：广东广州<br><br>
-                        </div>
+                        <div style="float:left; font-size: 16px" id="product_info"></div>
                     </div>
                     <div class="panel panel-default" style="clear:both;">
                         <div class="panel-header">
                             产品描述
                         </div>
                     </div>
-                    <div class="panel-body">
-
-                    &nbsp;&nbsp;&nbsp;&nbsp;XXXX物科技有限公xxxx集团，成立于2011年3月，注册资本1000万元，是XXXX开发销售的公司，主要XXX产品的销售。
-                    旗下的XXX品牌源自XXX先生创立XXX，经过一百多年的发展，现已成为最具规模化，现代化，专业化的XXXX生产企业之一。
-                    公司特与XXXX超市股份有限公司、XXXX集团股份有限公司等合作，在XX省多个城市100多家门店进行销售。<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;公司本着“客户至上，质量为本”的原则，建立健全了严苛的质量标准检验体系，除了通过国家食品认证体系之外，还委托国家轻工业食品质量监督检测XX站特别做了XXX检测，XXX检测，以远远低于国家标准的检测结果确保XX品质。
-                        <br><br>
-                        <img src="temp/AD-1000x300.gif" width="900" height="270">
-
-                    &nbsp;&nbsp;&nbsp;&nbsp;XXXX物科技有限公xxxx集团，成立于2011年3月，注册资本1000万元，是XXXX开发销售的公司，主要XXX产品的销售。
-                    旗下的XXX品牌源自XXX先生创立XXX，经过一百多年的发展，现已成为最具规模化，现代化，专业化的XXXX生产企业之一。
-                    公司特与XXXX超市股份有限公司、XXXX集团股份有限公司等合作，在XX省多个城市100多家门店进行销售。<br>
-                        <br><br>
-                        <img src="temp/AD-1000x300.gif" width="900" height="270">
-                        <br><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;XXXX物科技有限公xxxx集团，成立于2011年3月，注册资本1000万元，是XXXX开发销售的公司，主要XXX产品的销售。
-                    旗下的XXX品牌源自XXX先生创立XXX，经过一百多年的发展，现已成为最具规模化，现代化，专业化的XXXX生产企业之一。
-                    公司特与XXXX超市股份有限公司、XXXX集团股份有限公司等合作，在XX省多个城市100多家门店进行销售。<br>
-                        <br><br>
-                    </div>
+                    <div class="panel-body" id="content"></div>
                 </div>
             </div>
         </div>
@@ -164,6 +131,45 @@
             titOnClassName: "active"
         });
     });
+
+    $.ajax({
+        url: "/api/product_class/",
+        type: "GET",
+        dataType: 'json',
+        success: function (data) {
+            if (data.rows != null && data.rows.length > 0) {
+                for (var i in data.rows) {
+                    var item = data.rows[i];
+                    var html = ' <li><a href="/products.html?id=' + item.id + '">' + item.name + '</a></li>';
+                    $("#product_class").append(html);
+                }
+            }
+        }
+    });
+    var id = getQueryString('id');
+    if (id != '') {
+        $.ajax({
+            url: "/api/product/" + id + "/",
+            type: "GET",
+            dataType: 'json',
+            success: function (data) {
+                if (data.state == 0) {
+                    $("#front_cover_img").attr('src', data.data.front_cover_img);
+                    var html = '产品名称：' + data.data.name + '<br><br>产品编号：' + data.data.code + '<br><br>产品规格：' + data.data.standard + '<br><br>保 质 期：' + data.data.quality_guarantee_period + '<br><br>产 地：' + data.data.place_of_origin + '<br><br>';
+                    $("#product_info").append(html);
+                    $("#content").append(data.data.content);
+                }
+            }
+        });
+    }
+
+    /*获取url中的参数*/
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return r[2];
+        return '';
+    }
 </script>
 </body>
 </html>

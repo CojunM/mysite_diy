@@ -8,7 +8,7 @@
 # @Software: PyCharm
 # from unittest import TestCase
 
-# from webcore.app.defaultapp import yieldroutes
+# from brick.app.defaultapp import yieldroutes
 from inspect import getfullargspec
 
 

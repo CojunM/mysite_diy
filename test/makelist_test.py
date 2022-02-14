@@ -6,7 +6,7 @@
 # @File    : makelist_test.py
 # @Project : mysite_diy
 # @Software: PyCharm
-from webcore.app.defaultapp import makelist
+from brick.app.defaultapp import makelist
 
 
 def test_list(l):

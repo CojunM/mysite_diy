@@ -15,6 +15,7 @@ body{min-height: 100%;position: relative;font-size:14px;color:#333; background-c
 a{color:#333}a:hover,a:focus,.maincolor,.maincolor a{color:#06c}
 .bg-1{ background-color:#f5fafe}
 h4{line-height:30px}
+clear{clear:both}
 
 /*页面框架*/
 .Hui-header{position:absolute;top:0; right:0; left:0;height:44px;z-index:999; padding:0 15px}
@@ -27,7 +28,7 @@ h4{line-height:30px}
 .big-page .Hui-aside{ left:-200px}
 .page-container{ padding:20px}
 @media (max-width: 767px) {
-	.page-container{ padding:15px}
+	.page-container{ padding:10px}
 }
 /*组件*/
 /*logo*/

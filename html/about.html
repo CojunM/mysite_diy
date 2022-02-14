@@ -8,16 +8,16 @@
           content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <!--[if lt IE 9]>
-    <script type="text/javascript" src="lib/html5shiv.js"></script>
-    <script type="text/javascript" src="lib/respond.min.js"></script>
+    <script type="text/javascript" src="/lib/html5shiv.js"></script>
+    <script type="text/javascript" src="/lib/respond.min.js"></script>
     <![endif]-->
-    <link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.min.css"/>
-    <link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.8/iconfont.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/lib/Hui-iconfont/1.0.8/iconfont.min.css"/>
     <!--[if lt IE 9]>
     <link href="static/h-ui/css/H-ui.ie.css" rel="stylesheet" type="text/css"/>
     <![endif]-->
     <!--[if IE 6]>
-    <script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script type="text/javascript" src="/lib/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>DD_belatedPNG.fix('*');</script>
     <![endif]-->
     <style type="text/css">
@@ -29,6 +29,7 @@
     <meta name="keywords" content="关键词,5个左右,单个8汉字以内">
     <meta name="description" content="网站描述，字数尽量空制在80个汉字，160个字符以内！">
 </head>
+<body>
 <div class="containBox">
     <div class="containBox-bg"></div>
     <div class="wap-container">
@@ -58,11 +59,11 @@
                 <i class="Hui-iconfont">&#xe67f;</i>
                 <a href="/" class="c-primary">首页</a>
                 <span class="c-gray en">-</span>
-                <a href="/about.html" class="c-primary">公司介绍</a>
+                <a href="/about" class="c-primary">公司介绍</a>
                 <span class="c-gray en">-</span>
-                <a href="/products.html" class="c-primary">产品中心</a>
+                <a href="/products" class="c-primary">产品中心</a>
                 <span class="c-gray en">-</span>
-                <a href="/contact_us.html" class="c-primary">联系我们</a>
+                <a href="/contact_us" class="c-primary">联系我们</a>
             </div>
         </nav>
     </div>
@@ -72,12 +73,7 @@
             <div class="panel panel-default">
                 <div class="panel-header">公司介绍</div>
                 <div class="panel-body">
-                    <img src="temp/banner2.jpg" width="1200" height="200">
-                    <br><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;XXXX物科技有限公xxxx集团，成立于2011年3月，注册资本1000万元，是XXXX开发销售的公司，主要XXX产品的销售。
-                    旗下的XXX品牌源自XXX先生创立XXX，经过一百多年的发展，现已成为最具规模化，现代化，专业化的XXXX生产企业之一。
-                    公司特与XXXX超市股份有限公司、XXXX集团股份有限公司等合作，在XX省多个城市100多家门店进行销售。<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;公司本着“客户至上，质量为本”的原则，建立健全了严苛的质量标准检验体系，除了通过国家食品认证体系之外，还委托国家轻工业食品质量监督检测XX站特别做了XXX检测，XXX检测，以远远低于国家标准的检测结果确保XX品质。
+                    <span id="content"></span>
                 </div>
             </div>
         </div>
@@ -121,6 +117,15 @@
             pnLoop: false,
             titOnClassName: "active"
         });
+    });
+    //读取服务器记录
+    $.ajax({
+        url: "/api/about/",
+        type: "GET",
+        dataType: 'json',
+        success: function (data) {
+            $("#content").html(data.data.content);
+        }
     });
 </script>
 </body>

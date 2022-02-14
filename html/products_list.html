@@ -11,18 +11,18 @@
     <script type="text/javascript" src="lib/html5shiv.js"></script>
     <script type="text/javascript" src="lib/respond.min.js"></script>
     <![endif]-->
-    <link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.min.css"/>
-    <link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/H-ui.admin.css"/>
-    <link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.8/iconfont.css"/>
-    <link rel="stylesheet" type="text/css" href="static/h-ui.admin/skin/default/skin.css" id="skin"/>
-    <link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/h-ui.admin/css/H-ui.admin.css"/>
+    <link rel="stylesheet" type="text/css" href="/lib/Hui-iconfont/1.0.8/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/h-ui.admin/skin/default/skin.css" id="skin"/>
+    <link rel="stylesheet" type="text/css" href="/static/h-ui.admin/css/style.css"/>
     <!-- jqGrid组件基础样式包-必要 -->
-    <link rel="stylesheet" href="lib/jqgrid/css/ui.jqgrid.css"/>
+    <link rel="stylesheet" href="/lib/jqgrid/css/ui.jqgrid.css"/>
     <!-- jqGrid主题包-非必要 -->
     <!-- 在jqgrid/css/css这个目录下还有其他的主题包，可以尝试更换看效果 -->
-    <link rel="stylesheet" href="lib/jqgrid/css/css/redmond/jquery-ui-1.8.16.custom.css"/>
+    <link rel="stylesheet" href="/lib/jqgrid/css/css/redmond/jquery-ui-1.8.16.custom.css"/>
     <!--[if IE 6]>
-    <script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script type="text/javascript" src="/lib/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>DD_belatedPNG.fix('*');</script>
     <![endif]-->
     <title>产品管理</title>
@@ -33,13 +33,18 @@
     产品管理
 </nav>
 <div class="page-container">
+    <div class="text-l mt-10">
+        产品分类：<span class="select-box w-100"><select class="select" id="product_class_id" size="1"><option value="" selected>请选择</option></select></span>
+        <button class="btn btn-success" type="button" onClick="search();"><i class="Hui-iconfont">&#xe665;</i> 搜索
+        </button>
+    </div>
     <div class="cl pd-5 bg-1 bk-gray mt-5">
 		<span class="l">
             <a href="javascript:location.replace(location.href);" class="btn btn-success radius">
                 <i class="Hui-iconfont">&#xe68f;</i> 刷新</a>
-            <a class="btn btn-primary radius" onclick="add('添加','products_edit.html', 600, 500)"
+            <a class="btn btn-primary radius" onclick="add('添加','products_edit.html', 1000, 600)"
                href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加</a>
-            <a class="btn btn-secondary radius" onclick="edit('编辑','products_edit.html', 600, 500)"
+            <a class="btn btn-secondary radius" onclick="edit('编辑','products_edit.html', 1000, 600)"
                href="javascript:;"><i class="Hui-iconfont">&#xe6df;</i> 编辑</a>
             <a href="javascript:;" onclick="del()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 删除</a>
 		</span>
@@ -52,25 +57,40 @@
     </div>
 </div>
 <!--_footer 作为公共模版分离出去-->
-<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="lib/ueditor/1.4.3/third-party/video-js/video.dev.js"></script>
-<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
-<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
-<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="/lib/ueditor/1.4.3/third-party/video-js/video.dev.js"></script>
+<script type="text/javascript" src="/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="/static/h-ui/js/H-ui.js"></script>
+<script type="text/javascript" src="/static/h-ui.admin/js/H-ui.admin.js"></script>
 <!--/_footer 作为公共模版分离出去-->
 
 <!--请在下方写此页面业务相关的脚本-->
-<script type="text/javascript" src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/lib/My97DatePicker/4.8/WdatePicker.js"></script>
 <!-- jqGrid插件包-必要 -->
-<script type="text/javascript" src="lib/jqgrid/js/jquery.jqGrid.src.js"></script>
+<script type="text/javascript" src="/lib/jqgrid/js/jquery.jqGrid.src.js"></script>
 <!-- jqGrid插件的多语言包-非必要 -->
 <!-- 在jqgrid/js/i18n下还有其他的多语言包，可以尝试更换看效果 -->
-<script type="text/javascript" src="lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
+<script type="text/javascript" src="/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
+<script type="text/javascript" src="/lib/common.js"></script>
 <script type="text/javascript">
     $(function () {
+        // 设置下拉列表
+        $.ajax({
+            url: "/api/product_class/",
+            type: "GET",
+            dataType: 'json',
+            success: function (data) {
+                if (checkLogin(data, true)) {
+                    var node = document.getElementById("product_class_id");
+                    for(var i=0;i<data.rows.length;i++){
+                        node.options.add(new Option(data.rows[i].name, data.rows[i].id));
+                    }
+                }
+            }
+        });
         //创建jqGrid组件
         $("#list").jqGrid({
-            url: server_url + "/manage/products/",//组件创建完成之后请求数据的url
+            url: "/api/product/?type=backstage",//组件创建完成之后请求数据的url
             mtype: "get",//向后台请求数据的ajax的类型。可选post,get
             datatype: "json",//请求数据返回的类型。可选json,xml,txt
             height: 'auto',//高度，表格高度。可为数值、百分比或'auto'
@@ -99,8 +119,8 @@
                     }, sortable: false
                 },
                 {
-                    name: 'is_enabled',
-                    index: 'is_enabled',
+                    name: 'is_enable',
+                    index: 'is_enable',
                     width: 80,
                     formatter: function (cellvalue, options, rowObject) {
                         if (cellvalue == 1) {
@@ -121,7 +141,7 @@
             sortname: 'id',//初始化的时候排序的字段
             sortorder: "desc",//排序方式,可选desc,asc
             viewrecords: true,//是否在浏览导航栏显示记录总数
-            caption: "合作商管理列表",//表格的标题名字
+            caption: "产品管理列表",//表格的标题名字
             gridview: true,
             multiselect: false//是否多选
         });
@@ -129,7 +149,15 @@
         /*可以控制界面上增删改查的按钮是否显示*/
         $("#list").jqGrid('navGrid', '#gridPager', {edit: false, add: false, del: false, search: false});
     });
+    /*查询*/
+    function search() {
+        product_class_id = $("#product_class_id").val();
 
+        $("#list").jqGrid('setGridParam', {
+            url: "/api/product/?type=backstage&product_class_id=" + product_class_id,
+            page: 1
+        }).trigger('reloadGrid');
+    }
 
     /*添加*/
     function add(title, url, w, h) {
@@ -153,7 +181,7 @@
             layer.confirm('确认要删除吗？', function (index) {
                 $.ajax({
                     type: 'POST',
-                    url: server_url + "/manage/products/" + id + "/",
+                    url: "/api/product/" + id + "/",
                     xhrFields: {withCredentials: true},
                     data: {'_method': 'delete'},
                     dataType: 'json',

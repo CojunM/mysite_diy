@@ -9,7 +9,7 @@
 
 # import re
 #
-# from webcore.templates.templateerror import TemplateError
+# from brick.templates.templateerror import TemplateError
 #
 #
 # class SimpleTemplate(object):
@@ -141,10 +141,10 @@ from collections.abc import MutableMapping
 
 from Scripts.bottle import TemplateError
 
-from webcore.httphandles.response import HTTPError
-from webcore.utilities.cachehelper import cached_property
-from webcore.utilities.encode import tounicode
-from webcore.utilities.htmlescape import html_escape
+from brick.httphandles.response import HTTPError
+from brick.utilities.cachehelper import cached_property
+from brick.utilities.encode import tounicode
+from brick.utilities.htmlescape import html_escape
 
 # './' 代表当前所在目录下的某个文件夹或文件
 TEMPLATE_PATH = ['./', './views/']

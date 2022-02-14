@@ -8,22 +8,23 @@
           content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <!--[if lt IE 9]>
-    <script type="text/javascript" src="lib/html5shiv.js"></script>
-    <script type="text/javascript" src="lib/respond.min.js"></script>
+    <script type="text/javascript" src="/lib/html5shiv.js"></script>
+    <script type="text/javascript" src="/lib/respond.min.js"></script>
     <![endif]-->
-    <link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.min.css"/>
-    <link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.8/iconfont.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/lib/Hui-iconfont/1.0.8/iconfont.min.css"/>
     <!--[if lt IE 9]>
     <link href="static/h-ui/css/H-ui.ie.css" rel="stylesheet" type="text/css"/>
     <![endif]-->
     <!--[if IE 6]>
-    <script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script type="text/javascript" src="/lib/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>DD_belatedPNG.fix('*');</script>
     <![endif]-->
     <title>产品中心</title>
     <meta name="keywords" content="关键词,5个左右,单个8汉字以内">
     <meta name="description" content="网站描述，字数尽量空制在80个汉字，160个字符以内！">
 </head>
+<body>
 <div class="containBox">
     <div class="containBox-bg"></div>
     <div class="wap-container">
@@ -70,69 +71,11 @@
             <div style="width:1250px; border: 10px; border-color: #999;">
                 <div class="panel panel-default" style="width:250px; float:left;">
                     <div class="panel-body" style="height:100%; border: 0;">
-                        <ol class="linenums">
-                            <li>有序列表</li>
-                            <li>有序列表</li>
-                            <li>有序列表</li>
-                            <li>有序列表</li>
-                            <li>有序列表</li>
-                            <li>有序列表</li>
-                            <li>有序列表</li>
-                            <li>有序列表</li>
-                        </ol>
+                        <ol class="linenums" id="product_class"></ol>
                     </div>
                 </div>
                 <div class="panel panel-default" style="width:960px; float:left;">
-                    <div class="panel-body">
-                        <div style="float:left; padding-right:20px; padding-bottom:20px">
-                            <a href="/product_details.html">
-                                <div><img style="width:290px; height:200px" src="temp/pic.png" alt="..."
-                                          class="thumbnail">
-                                </div>
-                                <div class="text-c" style="padding-top:5px;"><strong>XXX食品1</strong></div>
-                            </a>
-                        </div>
-                        <div style="float:left; padding-right:20px; padding-bottom:20px">
-                            <a href="/product_details.html">
-                                <div><img style="width:290px; height:200px" src="temp/pic.png" alt="..."
-                                          class="thumbnail">
-                                </div>
-                                <div class="text-c" style="padding-top:5px;"><strong>XXX食品1</strong></div>
-                            </a>
-                        </div>
-                        <div style="float:left; padding-right:20px; padding-bottom:20px">
-                            <a href="/product_details.html">
-                                <div><img style="width:290px; height:200px" src="temp/pic.png" alt="..."
-                                          class="thumbnail">
-                                </div>
-                                <div class="text-c" style="padding-top:5px;"><strong>XXX食品1</strong></div>
-                            </a>
-                        </div>
-                        <div style="float:left; padding-right:20px; padding-bottom:20px">
-                            <a href="/product_details.html">
-                                <div><img style="width:290px; height:200px" src="temp/pic.png" alt="..."
-                                          class="thumbnail">
-                                </div>
-                                <div class="text-c" style="padding-top:5px;"><strong>XXX食品1</strong></div>
-                            </a>
-                        </div>
-                        <div style="float:left; padding-right:20px; padding-bottom:20px">
-                            <a href="/product_details.html">
-                                <div><img style="width:290px; height:200px" src="temp/pic.png" alt="..."
-                                          class="thumbnail">
-                                </div>
-                                <div class="text-c" style="padding-top:5px;"><strong>XXX食品1</strong></div>
-                            </a>
-                        </div>
-                        <div style="float:left; padding-right:20px; padding-bottom:20px">
-                            <a href="/product_details.html">
-                                <div><img style="width:290px; height:200px" src="temp/pic.png" alt="..."
-                                          class="thumbnail">
-                                </div>
-                                <div class="text-c" style="padding-top:5px;"><strong>XXX食品1</strong></div>
-                            </a>
-                        </div>
-                    </div>
+                    <div class="panel-body" id="products"></div>
                 </div>
             </div>
         </div>
@@ -144,11 +87,11 @@
                 <nav class="footer-nav">
                     <a href="/" class="c-primary">首页</a>
                     <span class="c-gray en">-</span>
-                    <a href="/about.html" class="c-primary">公司介绍</a>
+                    <a href="/about" class="c-primary">公司介绍</a>
                     <span class="c-gray en">-</span>
-                    <a href="/products.html" class="c-primary">产品中心</a>
+                    <a href="/products" class="c-primary">产品中心</a>
                     <span class="c-gray en">-</span>
-                    <a href="/contact_us.html" class="c-primary">联系我们</a>
+                    <a href="/contact_us" class="c-primary">联系我们</a>
                 </nav>
                 <p>地址：广州市天河区黄浦大道XX号 电话：4008-0000-00<br>
                     CopyRight 2017, All Rights Reserved XXX食品有限公司 版权所有 粤ICP备00000000号
@@ -158,10 +101,10 @@
     </div>
 </div>
 
-<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="lib/jquery-ui/1.9.1/jquery-ui.min.js"></script>
-<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
-<script type="text/javascript" src="lib/jquery.SuperSlide/2.1.1/jquery.SuperSlide.min.js"></script>
+<script type="text/javascript" src="/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="/lib/jquery-ui/1.9.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/static/h-ui/js/H-ui.js"></script>
+<script type="text/javascript" src="/lib/jquery.SuperSlide/2.1.1/jquery.SuperSlide.min.js"></script>
 <script>
     $(function () {
         //幻灯片
@@ -177,6 +120,55 @@
             titOnClassName: "active"
         });
     });
+
+    var id = getQueryString('id');
+    if (id != ''){
+        get_product_list(id);
+    }
+
+    $.ajax({
+        url: "/api/product_class/",
+        type: "GET",
+        dataType: 'json',
+        success: function (data) {
+            if (data.rows != null && data.rows.length > 0) {
+                for (var i in data.rows) {
+                    var item = data.rows[i];
+                    if (id == '') {
+                        id = item.id;
+                        get_product_list(id);
+                    }
+                    var html = ' <li><a href="/products.html?id=' + item.id + '">' + item.name + '</a></li>';
+                    $("#product_class").append(html);
+                }
+            }
+        }
+    });
+
+    function get_product_list(id) {
+        $.ajax({
+            url: "/api/product/?product_class_id=" + id,
+            type: "GET",
+            dataType: 'json',
+            success: function (data) {
+                if (data.rows != null && data.rows.length > 0) {
+                    for (var i in data.rows) {
+                        var item = data.rows[i];
+                        var html = '<div style="float:left; padding-right:20px; padding-bottom:20px"><a href="/product_details.html?id=' + item.id + '"><div><img style="width:290px; height:200px" src="' + item.front_cover_img + '" alt="' + item.name + '" class="thumbnail"></div><div class="text-c" style="padding-top:5px;"><strong>' + item.name + '</strong></div></a></div>'
+                        $("#products").append(html);
+                    }
+                }
+            }
+        });
+    }
+
+    /*获取url中的参数*/
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return r[2];
+        return '';
+    }
 </script>
 </body>
 </html>

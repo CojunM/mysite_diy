@@ -1,5 +1,5 @@
 /* -----------H-ui前端框架-------------
-* H-ui.admin.js v3.1
+* H-ui.admin.js v3.0
 * http://www.h-ui.net/
 * Created & Modified by guojunhui
 * Date modified 2017.02.03
@@ -26,14 +26,14 @@ function tabNavallwidth(){
 		$tabNavmore.show()}
 	else{
 		$tabNavmore.hide();
-		$tabNav.css({left:0});
+		$tabNav.css({left:0})
 	}
 }
 
 /*左侧菜单响应式*/
 function Huiasidedisplay(){
 	if($(window).width()>=768){
-		$(".Hui-aside").show();
+		$(".Hui-aside").show()
 	} 
 }
 /*获取皮肤cookie*/
@@ -57,6 +57,7 @@ function Hui_admin_tab(obj){
 		topWindow = $(window.parent.document),
 		show_navLi = topWindow.find("#min_title_list li"),
 		iframe_box = topWindow.find("#iframe_box");
+	// console.log(href )
 	//console.log(topWindow);
 	if(!href||href==""){
 		alert("data-href不存在，v2.5版本之前用_href属性，升级后请改为data-href属性");
@@ -254,10 +255,7 @@ $(function(){
 		}
 	});
 	/*左侧菜单*/
-	$(".Hui-aside").Huifold({
-		titCell:'.menu_dropdown dl dt',
-		mainCell:'.menu_dropdown dl dd',
-	});
+	$.Huifold(".menu_dropdown dl dt",".menu_dropdown dl dd","fast",1,"click");
 	
 	/*选项卡导航*/
 	$(".Hui-aside").on("click",".menu_dropdown a",function(){
@@ -306,12 +304,4 @@ $(function(){
 		oUl.stop().animate({'left':-num*100},100);
 	}
 	
-	/*换肤*/
-	$("#Hui-skin .dropDown-menu a").click(function(){
-		var v = $(this).attr("data-val");
-		$.cookie("Huiskin", v);
-		var hrefStr=$("#skin").attr("href");
-		var hrefRes=hrefStr.substring(0,hrefStr.lastIndexOf('skin/'))+'skin/'+v+'/skin.css';
-		$(window.frames.document).contents().find("#skin").attr("href",hrefRes);
-	});
 }); 

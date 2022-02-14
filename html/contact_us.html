@@ -29,6 +29,7 @@
     <meta name="keywords" content="关键词,5个左右,单个8汉字以内">
     <meta name="description" content="网站描述，字数尽量空制在80个汉字，160个字符以内！">
 </head>
+<body>
 <div class="containBox">
     <div class="containBox-bg"></div>
     <div class="wap-container">
@@ -72,11 +73,7 @@
             <div class="panel panel-default">
                 <div class="panel-header">联系我们</div>
                 <div class="panel-body">
-                    &nbsp;&nbsp;&nbsp;&nbsp;地址：广州市天河区黄浦大道XX号<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;邮编： 510000<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;电话： 4008-0000-00   020-00000000<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;Email：xxxx@xxx.com<br><br>
-                    <img src="temp/map.png" width="500" height="300">
+                    <span id="content"></span>
                 </div>
             </div>
         </div>
@@ -120,6 +117,15 @@
             pnLoop: false,
             titOnClassName: "active"
         });
+    });
+    //读取服务器记录
+    $.ajax({
+        url: "/api/contact_us/",
+        type: "GET",
+        dataType: 'json',
+        success: function (data) {
+            $("#content").html(data.data.content);
+        }
     });
 </script>
 </body>

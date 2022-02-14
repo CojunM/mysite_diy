@@ -10,16 +10,16 @@
     <link rel="Bookmark" href="/favicon.ico">
     <link rel="Shortcut Icon" href="/favicon.ico"/>
     <!--[if lt IE 9]>
-    <script type="text/javascript" src="lib/html5shiv.js"></script>
-    <script type="text/javascript" src="lib/respond.min.js"></script>
+    <script type="text/javascript" src="/lib/html5shiv.js"></script>
+    <script type="text/javascript" src="/lib/respond.min.js"></script>
     <![endif]-->
-    <link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.min.css"/>
-    <link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/H-ui.admin.css"/>
-    <link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.8/iconfont.css"/>
-    <link rel="stylesheet" type="text/css" href="static/h-ui.admin/skin/default/skin.css" id="skin"/>
-    <link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/h-ui.admin/css/H-ui.admin.css"/>
+    <link rel="stylesheet" type="text/css" href="/lib/Hui-iconfont/1.0.8/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/h-ui.admin/skin/default/skin.css" id="skin"/>
+    <link rel="stylesheet" type="text/css" href="/static/h-ui.admin/css/style.css"/>
     <!--[if IE 6]>
-    <script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script type="text/javascript" src="/lib/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>DD_belatedPNG.fix('*');</script>
     <![endif]-->
     <title>后台管理系统 v1.0.0</title>
@@ -40,13 +40,12 @@
 </header>
 <aside class="Hui-aside">
     <div class="menu_dropdown bk_2" id="menu">
-        <ul>
-            <li><a data-href="about_edit.html" data-title="公司介绍" href="javascript:void(0)">公司介绍</a></li>
-            <li><a data-href="products_list.html" data-title="产品中心" href="javascript:void(0)">产品中心</a>
-            </li>
-            <li><a data-href="contact_us_edit.html" data-title="联系我们" href="javascript:void(0)">联系我们</a></li>
-        </ul>
+
     </div>
+    <div>
+                    <h5 class="formControls col-xs-8 col-xs-offset-3">
+                        <span id="msg" style="color:#F00"></span></h5>
+                </div>
 </aside>
 <div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a>
 </div>
@@ -55,8 +54,9 @@
         <div class="Hui-tabNav-wp">
             <ul id="min_title_list" class="acrossTab cl">
                 <li class="active">
-                    <span title="公司介绍" data-href="about_edit.html">公司介绍</span>
+                    <span title="我的桌面" data-href="welcome">我的桌面</span>
                     <em></em></li>
+
             </ul>
         </div>
         <div class="Hui-tabNav-more btn-group"><a id="js-tabNav-prev" class="btn radius btn-default size-S"
@@ -67,9 +67,10 @@
     <div id="iframe_box" class="Hui-article">
         <div class="show_iframe">
             <div style="display:none" class="loading"></div>
-            <iframe scrolling="yes" frameborder="0" src="about.html"></iframe>
+            <iframe scrolling="yes" frameborder="0" src="welcome"></iframe>
         </div>
     </div>
+
 </section>
 
 <div class="contextMenu" id="Huiadminmenu">
@@ -79,25 +80,46 @@
     </ul>
 </div>
 <!--_footer 作为公共模版分离出去-->
-<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
-<script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script>
-<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="/static/h-ui.admin/js/H-ui.admin.js"></script>
 <!--/_footer 作为公共模版分离出去-->
 
 <!--请在下方写此页面业务相关的脚本-->
-<script type="text/javascript" src="lib/jquery.contextmenu/jquery.contextmenu.r2.js"></script>
+<script type="text/javascript" src="/lib/jquery.contextmenu/jquery.contextmenu.r2.js"></script>
+<script type="text/javascript" src="/lib/common.js"></script>
 <script type="text/javascript">
+    $(function () {
+        $.ajax({
+			// url: "/api/main/menu_info/" ,
+            url: "/api/main/menu_info/?" + 100 * Math.random(),
+			type: "GET",
+            dataType:'json',
+			success: function (data) {
+                if (checkLogin(data, true))
+                {
+                    $("#menu").html(data.data.menu_html);
+                    $.Huifold(".menu_dropdown dl dt",".menu_dropdown dl dd","fast",1,"click");
+                }
+
+            },
+             error: function(data){
+                        if (data){
+                            $("#msg").html('').append(data.msg);
+                        }
+            }
+		});
+    });
     /*退出登录*/
     function logout() {
         $.ajax({
-            url: server_url + "/logout/",
-            xhrFields: {withCredentials: true},
+            url: "/api/logout/",
             type: "GET",
             dataType: 'json',
             success: function (data) {
                 if (data && data.state == 0) {
-                    $(location).prop('href', 'login.html');
+                    $(location).prop('href', '/api/login/');
                 }
             }
         });
