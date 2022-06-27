@@ -8,7 +8,7 @@
   <component name="TemplatesService">
     <option name="TEMPLATE_FOLDERS">
       <list>
-        <option value="$MODULE_DIR$/webcore/templates" />
+        <option value="$MODULE_DIR$/brick/templates" />
       </list>
     </option>
   </component>
