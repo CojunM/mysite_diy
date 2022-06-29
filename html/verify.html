@@ -399,6 +399,14 @@ a:link,a:visited,a:hover,a:active {
     }
   }
 }(window))
+// (function (window, undefined)｛｝)（window）
+// 这是javascript的匿名函数，其实就是定义了一个匿名方法，然后再调用它。
+// 什么时候可以用这种方式呢？就是当方法须被调用且只会被调用一次的时候。
+// 闭包的好处之一：对js进行压缩的时候，
+// (function(window, undefined))里的window和undefined
+// 均可以替换成其他简写字符，从而减少文件大小，因为他们被视为局部变量使用。
+// window： 表示 BOM 浏览器对象模型中的 window 对象，
+// https://www.cnblogs.com/youku/p/9390078.html
   jigsaw.init(document.getElementById('captcha'), function () {
 	document.getElementById('msg').innerHTML = '登录成功！'
 })
