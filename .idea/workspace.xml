@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3d0953a8-c3eb-40b0-97f7-7b4d1fc1361f" name="Default Changelist" comment="7.1">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+    <list default="true" id="3d0953a8-c3eb-40b0-97f7-7b4d1fc1361f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -53,47 +52,9 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html/verify.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="409" column="63" selection-start-line="409" selection-start-column="63" selection-end-line="409" selection-end-column="63" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/brick/apps/wsgiapp.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="621">
-              <caret line="569" column="4" selection-start-line="569" selection-start-column="4" selection-end-line="569" selection-end-column="4" />
-              <folding>
-                <element signature="e#15657#18910#0" />
-                <element signature="e#18979#19213#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/brick/apps/utilities.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-529" />
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/brick/servers/baseserver.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-57" />
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/brick/orm/databases.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-342" />
-          </provider>
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -106,32 +67,15 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/db_logic.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2299">
-              <caret line="172" column="70" selection-start-line="172" selection-start-column="67" selection-end-line="172" selection-end-column="71" />
-              <folding>
-                <element signature="e#632#647#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
-              <caret line="29" column="30" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="37" />
+            <state relative-caret-position="197">
+              <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
               <folding>
                 <element signature="e#629#663#0" expanded="true" />
               </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/94d652a1-612b-4a5c-9b1d-ec300a9f499d/console.sql">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -255,6 +199,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -268,13 +213,29 @@
             </path>
             <path>
               <item name="mysite_diy" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.7 (mysite_diy) &gt;" type="70bed36:NamedLibraryElementNode" />
+            </path>
+            <path>
+              <item name="mysite_diy" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.7 (mysite_diy) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mysite_diy" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.7 (mysite_diy) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mysite_diy" type="b2602c69:ProjectViewProjectNode" />
               <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -288,18 +249,18 @@
     <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\mysite_diy\views\system" />
+      <recent name="E:\mysite_diy\views" />
+      <recent name="E:\mysite_diy\webcore\contrib" />
+      <recent name="E:\mysite_diy" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\mysite_diy\views\system" />
       <recent name="E:\mysite_diy\views" />
       <recent name="E:\mysite_diy\webcore\contrib" />
       <recent name="E:\mysite_diy" />
       <recent name="E:\mysite_diy\webcore\configs" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\mysite_diy\views\system" />
-      <recent name="E:\mysite_diy\views" />
-      <recent name="E:\mysite_diy\webcore\contrib" />
-      <recent name="E:\mysite_diy" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -525,7 +486,8 @@
       <workItem from="1656217603379" duration="612000" />
       <workItem from="1656245383872" duration="4849000" />
       <workItem from="1656512000781" duration="1259000" />
-      <workItem from="1662004025260" duration="7161000" />
+      <workItem from="1662004025260" duration="7904000" />
+      <workItem from="1663312533572" duration="3160000" />
     </task>
     <task id="LOCAL-00001" summary="626">
       <created>1656301574449</created>
@@ -541,11 +503,18 @@
       <option name="project" value="LOCAL" />
       <updated>1656512121362</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="9.1">
+      <created>1662020004045</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1662020004046</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="581960000" />
+    <option name="totallyTimeSpent" value="585863000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -557,9 +526,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.48907104" visible="true" weight="0.21374045" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.48907104" visible="true" weight="0.21755725" />
       <window_info id="Structure" order="1" sideWeight="0.510929" side_tool="true" weight="0.31603053" />
       <window_info id="Favorites" order="2" sideWeight="0.5093333" side_tool="true" weight="0.3038168" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -573,14 +542,14 @@
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49923664" weight="0.3452594" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" sideWeight="0.49923664" weight="0.3291592" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5038168" side_tool="true" weight="0.36314848" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4984733" weight="0.2647585" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4984733" visible="true" weight="0.2647585" />
       <window_info anchor="bottom" id="Database Console" order="12" weight="0.3255814" />
       <window_info anchor="bottom" x="28" y="272" width="1310" height="184" id="Python Console" order="13" weight="0.3291592" />
       <window_info anchor="bottom" id="SQL Generator" order="14" weight="0.3291592" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" anchor="right" id="Database" order="3" visible="true" weight="0.3610687" />
+      <window_info anchor="right" id="Database" order="3" visible="true" weight="0.3610687" />
       <window_info anchor="right" id="SciView" order="4" weight="0.32977098" />
     </layout>
     <layout-to-restore>
@@ -665,7 +634,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="626" />
     <MESSAGE value="7.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="7.1" />
+    <MESSAGE value="9.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="9.1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -691,36 +661,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/brick/orm/orm0/peewee2.10.2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="3354" column="8" selection-start-line="3354" selection-start-column="8" selection-end-line="3354" selection-end-column="8" />
-          <folding>
-            <element signature="e#112568#114089#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/common_logic.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="969">
-          <caret line="55" column="10" selection-start-line="55" selection-start-column="10" selection-end-line="55" selection-end-column="10" />
-          <folding>
-            <element signature="e#38#89#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/login.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="988">
-          <caret line="56" column="99" selection-start-line="56" selection-start-column="80" selection-end-line="56" selection-end-column="99" />
-          <folding>
-            <element signature="e#39#73#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html/static/h-ui/js/H-ui.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="21432">
@@ -966,46 +906,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html/menu_info.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2717">
-          <caret line="143" column="34" selection-start-line="143" selection-start-column="34" selection-end-line="143" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/verify.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="409" column="63" selection-start-line="409" selection-start-column="63" selection-end-line="409" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/brick/apps/utilities.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-529" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/brick/apps/wsgiapp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="621">
-          <caret line="569" column="4" selection-start-line="569" selection-start-column="4" selection-end-line="569" selection-end-column="4" />
-          <folding>
-            <element signature="e#15657#18910#0" />
-            <element signature="e#18979#19213#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/brick/servers/baseserver.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-57" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/brick/orm/databases.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-342" />
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/32e3409f-f4a5-4672-abf1-74e4fefb6f4b/console.sql">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1022,9 +922,29 @@
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/a2bad041-cad3-48db-85df-02a101d8b6c2/console.sql">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/html/verify.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7771">
+          <caret line="409" column="63" selection-start-line="409" selection-start-column="63" selection-end-line="409" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brick/servers/baseserver.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brick/orm/databases.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/menu_info.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2717">
+          <caret line="143" column="34" selection-start-line="143" selection-start-column="34" selection-end-line="143" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/views/db_logic.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2299">
+        <state relative-caret-position="3135">
           <caret line="172" column="70" selection-start-line="172" selection-start-column="67" selection-end-line="172" selection-end-column="71" />
           <folding>
             <element signature="e#632#647#0" expanded="true" />
@@ -1032,17 +952,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/site-packages/django/contrib/messages/middleware.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/site-packages/django/contrib/messages/api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-171">
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/site-packages/django/contrib/sessions/base_session.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-509" />
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/94d652a1-612b-4a5c-9b1d-ec300a9f499d/console.sql">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/views/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="29" column="30" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="37" />
+        <state relative-caret-position="197">
+          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
           <folding>
             <element signature="e#629#663#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/94d652a1-612b-4a5c-9b1d-ec300a9f499d/console.sql">
+    <entry file="file://$PROJECT_DIR$/brick/apps/wsgiapp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="580" column="32" selection-start-line="580" selection-start-column="20" selection-end-line="580" selection-end-column="36" />
+          <folding>
+            <element signature="e#15657#18910#0" />
+            <element signature="e#18979#19213#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brick/apps/utilities.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>

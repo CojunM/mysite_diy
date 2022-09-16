@@ -1,0 +1,1098 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="simple_db@localhost">
+  <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.14">
+    <root id="1">
+      <ServerVersion>10.20</ServerVersion>
+    </root>
+    <database id="2" parent="1" name="postgres">
+      <ObjectId>12938</ObjectId>
+      <Comment>default administrative connection database</Comment>
+      <StateNumber>554</StateNumber>
+      <Owner>postgres</Owner>
+    </database>
+    <database id="3" parent="1" name="simple_db">
+      <ObjectId>24955</ObjectId>
+      <StateNumber>1702</StateNumber>
+      <Owner>postgres</Owner>
+      <IntrospectionStateNumber>1944</IntrospectionStateNumber>
+      <Current>1</Current>
+      <Visible>1</Visible>
+      <Relations>sequence|table|24969|24956|1
+sequence|table|24981|24971|1
+sequence|table|25009|24983|1
+sequence|table|25022|25011|1
+sequence|table|25041|25024|1
+sequence|table|25054|25043|1
+sequence|table|25081|25072|1
+sequence|table|25083|25056|1
+</Relations>
+    </database>
+    <role id="4" parent="1" name="pg_monitor">
+      <ObjectId>3373</ObjectId>
+      <Inherit>1</Inherit>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="5" parent="1" name="pg_read_all_settings">
+      <ObjectId>3374</ObjectId>
+      <Inherit>1</Inherit>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="6" parent="1" name="pg_read_all_stats">
+      <ObjectId>3375</ObjectId>
+      <Inherit>1</Inherit>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="7" parent="1" name="pg_signal_backend">
+      <ObjectId>4200</ObjectId>
+      <Inherit>1</Inherit>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="8" parent="1" name="pg_stat_scan_tables">
+      <ObjectId>3377</ObjectId>
+      <Inherit>1</Inherit>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="9" parent="1" name="postgres">
+      <ObjectId>10</ObjectId>
+      <SuperRole>1</SuperRole>
+      <Inherit>1</Inherit>
+      <CreateRole>1</CreateRole>
+      <CreateDb>1</CreateDb>
+      <CanLogin>1</CanLogin>
+      <Replication>1</Replication>
+      <ConnectionLimit>-1</ConnectionLimit>
+      <BypassRls>1</BypassRls>
+    </role>
+    <schema id="10" parent="3" name="information_schema">
+      <ObjectId>12648</ObjectId>
+      <StateNumber>354</StateNumber>
+      <Owner>postgres</Owner>
+    </schema>
+    <schema id="11" parent="3" name="pg_catalog">
+      <ObjectId>11</ObjectId>
+      <Comment>system catalog schema</Comment>
+      <StateNumber>351</StateNumber>
+      <Owner>postgres</Owner>
+    </schema>
+    <schema id="12" parent="3" name="pg_temp_1">
+      <ObjectId>11736</ObjectId>
+      <StateNumber>114</StateNumber>
+      <Owner>postgres</Owner>
+    </schema>
+    <schema id="13" parent="3" name="pg_toast">
+      <ObjectId>99</ObjectId>
+      <Comment>reserved schema for TOAST tables</Comment>
+      <StateNumber>1</StateNumber>
+      <Owner>postgres</Owner>
+    </schema>
+    <schema id="14" parent="3" name="pg_toast_temp_1">
+      <ObjectId>11737</ObjectId>
+      <StateNumber>114</StateNumber>
+      <Owner>postgres</Owner>
+    </schema>
+    <schema id="15" parent="3" name="public">
+      <ObjectId>2200</ObjectId>
+      <Comment>standard public schema</Comment>
+      <StateNumber>1882</StateNumber>
+      <Owner>postgres</Owner>
+      <IntrospectionStateNumber>1945</IntrospectionStateNumber>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <access-method id="16" parent="3" name="btree">
+      <ObjectId>403</ObjectId>
+      <Comment>b-tree index access method</Comment>
+      <StateNumber>1</StateNumber>
+      <Handler>pg_catalog.bthandler</Handler>
+      <HandlerId>330</HandlerId>
+      <Type>index</Type>
+    </access-method>
+    <access-method id="17" parent="3" name="hash">
+      <ObjectId>405</ObjectId>
+      <Comment>hash index access method</Comment>
+      <StateNumber>1</StateNumber>
+      <Handler>pg_catalog.hashhandler</Handler>
+      <HandlerId>331</HandlerId>
+      <Type>index</Type>
+    </access-method>
+    <access-method id="18" parent="3" name="gist">
+      <ObjectId>783</ObjectId>
+      <Comment>GiST index access method</Comment>
+      <StateNumber>1</StateNumber>
+      <Handler>pg_catalog.gisthandler</Handler>
+      <HandlerId>332</HandlerId>
+      <Type>index</Type>
+    </access-method>
+    <access-method id="19" parent="3" name="gin">
+      <ObjectId>2742</ObjectId>
+      <Comment>GIN index access method</Comment>
+      <StateNumber>1</StateNumber>
+      <Handler>pg_catalog.ginhandler</Handler>
+      <HandlerId>333</HandlerId>
+      <Type>index</Type>
+    </access-method>
+    <access-method id="20" parent="3" name="spgist">
+      <ObjectId>4000</ObjectId>
+      <Comment>SP-GiST index access method</Comment>
+      <StateNumber>1</StateNumber>
+      <Handler>pg_catalog.spghandler</Handler>
+      <HandlerId>334</HandlerId>
+      <Type>index</Type>
+    </access-method>
+    <access-method id="21" parent="3" name="brin">
+      <ObjectId>3580</ObjectId>
+      <Comment>block range index (BRIN) access method</Comment>
+      <StateNumber>1</StateNumber>
+      <Handler>pg_catalog.brinhandler</Handler>
+      <HandlerId>335</HandlerId>
+      <Type>index</Type>
+    </access-method>
+    <extension id="22" parent="3" name="plpgsql">
+      <ObjectId>12924</ObjectId>
+      <Comment>PL/pgSQL procedural language</Comment>
+      <StateNumber>506</StateNumber>
+      <Version>1.0</Version>
+      <SchemaName>pg_catalog</SchemaName>
+      <SchemaId>11</SchemaId>
+    </extension>
+    <sequence id="23" parent="15" name="department_id_seq">
+      <ObjectId>24969</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>1715</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>bigint</DataType>
+    </sequence>
+    <sequence id="24" parent="15" name="infomation_id_seq">
+      <ObjectId>24981</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>1726</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>bigint</DataType>
+    </sequence>
+    <sequence id="25" parent="15" name="manager_id_seq">
+      <ObjectId>25009</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>1755</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>bigint</DataType>
+    </sequence>
+    <sequence id="26" parent="15" name="manager_operation_log_id_seq">
+      <ObjectId>25022</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>1767</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>bigint</DataType>
+    </sequence>
+    <sequence id="27" parent="15" name="menu_info_id_seq">
+      <ObjectId>25041</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>1785</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>bigint</DataType>
+    </sequence>
+    <sequence id="28" parent="15" name="positions_id_seq">
+      <ObjectId>25054</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>1797</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>bigint</DataType>
+    </sequence>
+    <sequence id="29" parent="15" name="product_class_id_seq">
+      <ObjectId>25081</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>1821</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>bigint</DataType>
+    </sequence>
+    <sequence id="30" parent="15" name="product_id_seq">
+      <ObjectId>25083</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>1824</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>bigint</DataType>
+    </sequence>
+    <table id="31" parent="15" name="department">
+      <ObjectId>24956</ObjectId>
+      <Comment>部门管理表</Comment>
+      <Owner>postgres</Owner>
+      <StateNumber>1704</StateNumber>
+    </table>
+    <table id="32" parent="15" name="infomation">
+      <ObjectId>24971</ObjectId>
+      <Comment>信息表</Comment>
+      <Owner>postgres</Owner>
+      <StateNumber>1718</StateNumber>
+    </table>
+    <table id="33" parent="15" name="manager">
+      <ObjectId>24983</ObjectId>
+      <Comment>管理员管理表</Comment>
+      <Owner>postgres</Owner>
+      <StateNumber>1729</StateNumber>
+    </table>
+    <table id="34" parent="15" name="manager_operation_log">
+      <ObjectId>25011</ObjectId>
+      <Comment>管理员操作日志表</Comment>
+      <Owner>postgres</Owner>
+      <StateNumber>1758</StateNumber>
+    </table>
+    <table id="35" parent="15" name="menu_info">
+      <ObjectId>25024</ObjectId>
+      <Comment>菜单表</Comment>
+      <Owner>postgres</Owner>
+      <StateNumber>1770</StateNumber>
+    </table>
+    <table id="36" parent="15" name="positions">
+      <ObjectId>25043</ObjectId>
+      <Comment>职位管理表</Comment>
+      <Owner>postgres</Owner>
+      <StateNumber>1788</StateNumber>
+    </table>
+    <table id="37" parent="15" name="product">
+      <ObjectId>25056</ObjectId>
+      <Comment>产品信息</Comment>
+      <Owner>postgres</Owner>
+      <StateNumber>1800</StateNumber>
+    </table>
+    <table id="38" parent="15" name="product_class">
+      <ObjectId>25072</ObjectId>
+      <Comment>产品分类</Comment>
+      <Owner>postgres</Owner>
+      <StateNumber>1814</StateNumber>
+    </table>
+    <column id="39" parent="31" name="id">
+      <Position>1</Position>
+      <Comment>主键Id</Comment>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1827</StateNumber>
+      <DefaultExpression>nextval(&apos;department_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="40" parent="31" name="code">
+      <Position>2</Position>
+      <Comment>部门ID，内容为010101，即每低一级部门，编码增加两位小数</Comment>
+      <DataType>text|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1704</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="41" parent="31" name="name">
+      <Position>3</Position>
+      <Comment>部门名称</Comment>
+      <DataType>text|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1704</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="42" parent="31" name="parent_id">
+      <Position>4</Position>
+      <Comment>父ID</Comment>
+      <DataType>integer|0s</DataType>
+      <StateNumber>1704</StateNumber>
+      <DefaultExpression>0</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="43" parent="31" name="sort">
+      <Position>5</Position>
+      <Comment>排序</Comment>
+      <DataType>integer|0s</DataType>
+      <StateNumber>1704</StateNumber>
+      <DefaultExpression>0</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="44" parent="31" name="level">
+      <Position>6</Position>
+      <Comment>树列表深度级别，即当前数据在哪一级</Comment>
+      <DataType>integer|0s</DataType>
+      <StateNumber>1704</StateNumber>
+      <DefaultExpression>0</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="45" parent="31" name="is_leaf">
+      <Position>7</Position>
+      <Comment>是否最终节点</Comment>
+      <DataType>boolean|0s</DataType>
+      <StateNumber>1704</StateNumber>
+      <DefaultExpression>false</DefaultExpression>
+      <TypeId>16</TypeId>
+    </column>
+    <column id="46" parent="31" name="expanded">
+      <Position>8</Position>
+      <Comment>此节点是否展开，后台菜单列表js要用到，不用进行编辑</Comment>
+      <DataType>boolean|0s</DataType>
+      <StateNumber>1704</StateNumber>
+      <DefaultExpression>false</DefaultExpression>
+      <TypeId>16</TypeId>
+    </column>
+    <index id="47" parent="31" name="department_pkey">
+      <ObjectId>25093</ObjectId>
+      <StateNumber>1851</StateNumber>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="48" parent="31" name="department_code_idx">
+      <ObjectId>25109</ObjectId>
+      <StateNumber>1859</StateNumber>
+      <ColNames>code</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="49" parent="31" name="department_sort_idx">
+      <ObjectId>25110</ObjectId>
+      <StateNumber>1860</StateNumber>
+      <ColNames>sort</ColNames>
+    </index>
+    <key id="50" parent="31" name="department_pkey">
+      <ObjectId>25094</ObjectId>
+      <StateNumber>1851</StateNumber>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>department_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="51" parent="32" name="id">
+      <Position>1</Position>
+      <Comment>主键Id</Comment>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1828</StateNumber>
+      <DefaultExpression>nextval(&apos;infomation_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="52" parent="32" name="title">
+      <Position>2</Position>
+      <Comment>标题</Comment>
+      <DataType>text|0s</DataType>
+      <StateNumber>1718</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="53" parent="32" name="front_cover_img">
+      <Position>3</Position>
+      <Comment>封面图片地址（首页）</Comment>
+      <DataType>text|0s</DataType>
+      <StateNumber>1718</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="54" parent="32" name="content">
+      <Position>4</Position>
+      <Comment>内容</Comment>
+      <DataType>text|0s</DataType>
+      <StateNumber>1718</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="55" parent="32" name="add_time">
+      <Position>5</Position>
+      <Comment>添加时间</Comment>
+      <DataType>timestamp(0)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1718</StateNumber>
+      <DefaultExpression>now()</DefaultExpression>
+      <TypeId>1114</TypeId>
+    </column>
+    <index id="56" parent="32" name="infomation_pkey">
+      <ObjectId>25095</ObjectId>
+      <StateNumber>1852</StateNumber>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="57" parent="32" name="infomation_pkey">
+      <ObjectId>25096</ObjectId>
+      <StateNumber>1852</StateNumber>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>infomation_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="58" parent="33" name="id">
+      <Position>1</Position>
+      <Comment>主键Id</Comment>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1829</StateNumber>
+      <DefaultExpression>nextval(&apos;manager_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="59" parent="33" name="login_name">
+      <Position>2</Position>
+      <Comment>登陆账号</Comment>
+      <DataType>text|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1729</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="60" parent="33" name="login_password">
+      <Position>3</Position>
+      <Comment>登陆密码</Comment>
+      <DataType>text|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1729</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="61" parent="33" name="login_key">
+      <Position>4</Position>
+      <Comment>登录密钥</Comment>
+      <DataType>text|0s</DataType>
+      <StateNumber>1729</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="62" parent="33" name="last_login_time">
+      <Position>5</Position>
+      <Comment>最后登陆时间</Comment>
+      <DataType>timestamp(0)|0s</DataType>
+      <StateNumber>1729</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="63" parent="33" name="last_login_ip">
+      <Position>6</Position>
+      <Comment>最后登陆IP</Comment>
+      <DataType>text|0s</DataType>
+      <StateNumber>1729</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="64" parent="33" name="login_count">
+      <Position>7</Position>
+      <Comment>登陆次数</Comment>
+      <DataType>integer|0s</DataType>
+      <StateNumber>1729</StateNumber>
+      <DefaultExpression>0</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="65" parent="33" name="create_time">
+      <Position>8</Position>
+      <Comment>注册时间</Comment>
+      <DataType>timestamp(0)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1729</StateNumber>
+      <DefaultExpression>now()</DefaultExpression>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="66" parent="33" name="department_id">
+      <Position>9</Position>
+      <Comment>部门自编号Id，用户只能归属于一个部门</Comment>
+      <DataType>integer|0s</DataType>
+      <StateNumber>1729</StateNumber>
+      <DefaultExpression>0</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="67" parent="33" name="department_code">
+      <Position>10</Position>
+      <Comment>部门编号</Comment>
+      <DataType>text|0s</DataType>
+      <StateNumber>1729</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="68" parent="33" name="department_name">
+      <Position>11</Position>
+      <Comment>部门名称</Comment>
+      <DataType>text|0s</DataType>
+      <StateNumber>1729</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="69" parent="33" name="positions_id">
+      <Position>12</Position>
+      <Comment>用户职位Id</Comment>
+      <DataType>integer|0s</DataType>
+      <StateNumber>1729</StateNumber>
+      <DefaultExpression>0</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="70" parent="33" name="positions_name">
+      <Position>13</Position>
+      <Comment>职位名称</Comment>
+      <DataType>text|0s</DataType>
+      <StateNumber>1729</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="71" parent="33" name="is_work">
+      <Position>14</Position>
+      <Comment>0=离职，1=就职</Comment>
+      <DataType>boolean|0s</DataType>
+      <StateNumber>1729</StateNumber>
+      <DefaultExpression>false</DefaultExpression>
+      <TypeId>16</TypeId>
+    </column>
+    <column id="72" parent="33" name="is_enabled">
+      <Position>15</Position>
+      <Comment>账号是否启用，true=启用，false=禁用</Comment>
+      <DataType>boolean|0s</DataType>
+      <StateNumber>1729</StateNumber>
+      <DefaultExpression>false</DefaultExpression>
+      <TypeId>16</TypeId>
+    </column>
+    <column id="73" parent="33" name="name">
+      <Position>16</Position>
+      <Comment>用户中文名称</Comment>
+      <DataType>text|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1729</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="74" parent="33" name="sex">
+      <Position>17</Position>
+      <Comment>性别（未知，男，女）</Comment>
+      <DataType>text|0s</DataType>
+      <StateNumber>1729</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="75" parent="33" name="birthday">
+      <Position>18</Position>
+      <Comment>出生日期</Comment>
+      <DataType>date|0s</DataType>
+      <StateNumber>1729</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="76" parent="33" name="mobile">
+      <Position>19</Position>
+      <Comment>手机号码</Comment>
+      <DataType>text|0s</DataType>
+      <StateNumber>1729</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="77" parent="33" name="email">
+      <Position>20</Position>
+      <Comment>个人--联系邮箱</Comment>
+      <DataType>text|0s</DataType>
+      <StateNumber>1729</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="78" parent="33" name="remark">
+      <Position>21</Position>
+      <Comment>备注</Comment>
+      <DataType>text|0s</DataType>
+      <StateNumber>1729</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="79" parent="33" name="manager_id">
+      <Position>22</Position>
+      <Comment>操作人员id</Comment>
+      <DataType>integer|0s</DataType>
+      <StateNumber>1729</StateNumber>
+      <DefaultExpression>0</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="80" parent="33" name="manager_name">
+      <Position>23</Position>
+      <Comment>操作人员姓名</Comment>
+      <DataType>text|0s</DataType>
+      <StateNumber>1729</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="81" parent="33" name="manager_pkey">
+      <ObjectId>25099</ObjectId>
+      <StateNumber>1854</StateNumber>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="82" parent="33" name="manager_login_name_idx1">
+      <ObjectId>25116</ObjectId>
+      <StateNumber>1866</StateNumber>
+      <ColNames>login_name</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="83" parent="33" name="manager_last_login_time_idx">
+      <ObjectId>25115</ObjectId>
+      <StateNumber>1865</StateNumber>
+      <ColNames>last_login_time</ColNames>
+    </index>
+    <index id="84" parent="33" name="manager_department_id_idx">
+      <ObjectId>25112</ObjectId>
+      <StateNumber>1862</StateNumber>
+      <ColNames>department_id</ColNames>
+    </index>
+    <index id="85" parent="33" name="manager_department_code_idx">
+      <ObjectId>25111</ObjectId>
+      <StateNumber>1861</StateNumber>
+      <ColNames>department_code</ColNames>
+    </index>
+    <index id="86" parent="33" name="manager_positions_id_idx">
+      <ObjectId>25123</ObjectId>
+      <StateNumber>1873</StateNumber>
+      <ColNames>positions_id</ColNames>
+    </index>
+    <index id="87" parent="33" name="manager_is_work_idx">
+      <ObjectId>25114</ObjectId>
+      <StateNumber>1864</StateNumber>
+      <ColNames>is_work</ColNames>
+    </index>
+    <index id="88" parent="33" name="manager_is_enabled_idx">
+      <ObjectId>25113</ObjectId>
+      <StateNumber>1863</StateNumber>
+      <ColNames>is_enabled</ColNames>
+    </index>
+    <index id="89" parent="33" name="manager_name_idx">
+      <ObjectId>25119</ObjectId>
+      <StateNumber>1869</StateNumber>
+      <ColNames>name</ColNames>
+    </index>
+    <index id="90" parent="33" name="manager_manager_id_idx">
+      <ObjectId>25117</ObjectId>
+      <StateNumber>1867</StateNumber>
+      <ColNames>manager_id</ColNames>
+    </index>
+    <index id="91" parent="33" name="manager_manager_name_idx">
+      <ObjectId>25118</ObjectId>
+      <StateNumber>1868</StateNumber>
+      <ColNames>manager_name</ColNames>
+    </index>
+    <key id="92" parent="33" name="manager_pkey">
+      <ObjectId>25100</ObjectId>
+      <StateNumber>1854</StateNumber>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>manager_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="93" parent="34" name="id">
+      <Position>1</Position>
+      <Comment>主键Id</Comment>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1830</StateNumber>
+      <DefaultExpression>nextval(&apos;manager_operation_log_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="94" parent="34" name="ip">
+      <Position>2</Position>
+      <Comment>登陆IP</Comment>
+      <DataType>text|0s</DataType>
+      <StateNumber>1758</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="95" parent="34" name="remark">
+      <Position>3</Position>
+      <Comment>操作内容</Comment>
+      <DataType>text|0s</DataType>
+      <StateNumber>1758</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="96" parent="34" name="manager_id">
+      <Position>4</Position>
+      <Comment>操作人员id</Comment>
+      <DataType>integer|0s</DataType>
+      <StateNumber>1758</StateNumber>
+      <DefaultExpression>0</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="97" parent="34" name="manager_name">
+      <Position>5</Position>
+      <Comment>操作人员姓名</Comment>
+      <DataType>text|0s</DataType>
+      <StateNumber>1758</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="98" parent="34" name="add_time">
+      <Position>6</Position>
+      <Comment>添加时间</Comment>
+      <DataType>timestamp(0)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1758</StateNumber>
+      <DefaultExpression>now()</DefaultExpression>
+      <TypeId>1114</TypeId>
+    </column>
+    <index id="99" parent="34" name="manager_operation_log_pkey">
+      <ObjectId>25097</ObjectId>
+      <StateNumber>1853</StateNumber>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="100" parent="34" name="manager_operation_log_manager_id_idx">
+      <ObjectId>25121</ObjectId>
+      <StateNumber>1871</StateNumber>
+      <ColNames>manager_id</ColNames>
+    </index>
+    <index id="101" parent="34" name="manager_operation_log_manager_name_idx">
+      <ObjectId>25122</ObjectId>
+      <StateNumber>1872</StateNumber>
+      <ColNames>manager_name</ColNames>
+    </index>
+    <index id="102" parent="34" name="manager_operation_log_add_time_idx">
+      <ObjectId>25120</ObjectId>
+      <StateNumber>1870</StateNumber>
+      <ColNames>add_time</ColNames>
+    </index>
+    <key id="103" parent="34" name="manager_operation_log_pkey">
+      <ObjectId>25098</ObjectId>
+      <StateNumber>1853</StateNumber>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>manager_operation_log_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="104" parent="35" name="id">
+      <Position>1</Position>
+      <Comment>主键Id</Comment>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1831</StateNumber>
+      <DefaultExpression>nextval(&apos;menu_info_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="105" parent="35" name="name">
+      <Position>2</Position>
+      <Comment>菜单名称或各个页面功能名称</Comment>
+      <DataType>text|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1770</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="106" parent="35" name="icon">
+      <Position>3</Position>
+      <Comment>菜单小图标（一级菜单需要设置，二级菜单不用）</Comment>
+      <DataType>text|0s</DataType>
+      <StateNumber>1770</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="107" parent="35" name="page_url">
+      <Position>4</Position>
+      <Comment>各页面URL（主菜单与分类菜单没有URL）</Comment>
+      <DataType>text|0s</DataType>
+      <StateNumber>1770</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="108" parent="35" name="interface_url">
+      <Position>5</Position>
+      <Comment>各接口url</Comment>
+      <DataType>text|0s</DataType>
+      <StateNumber>1770</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="109" parent="35" name="parent_id">
+      <Position>6</Position>
+      <Comment>父ID</Comment>
+      <DataType>integer|0s</DataType>
+      <StateNumber>1770</StateNumber>
+      <DefaultExpression>0</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="110" parent="35" name="sort">
+      <Position>7</Position>
+      <Comment>排序</Comment>
+      <DataType>integer|0s</DataType>
+      <StateNumber>1770</StateNumber>
+      <DefaultExpression>0</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="111" parent="35" name="level">
+      <Position>8</Position>
+      <Comment>树列表深度级别，即当前数据在哪一级</Comment>
+      <DataType>integer|0s</DataType>
+      <StateNumber>1770</StateNumber>
+      <DefaultExpression>0</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="112" parent="35" name="is_leaf">
+      <Position>9</Position>
+      <Comment>是否最终节点</Comment>
+      <DataType>boolean|0s</DataType>
+      <StateNumber>1770</StateNumber>
+      <DefaultExpression>false</DefaultExpression>
+      <TypeId>16</TypeId>
+    </column>
+    <column id="113" parent="35" name="expanded">
+      <Position>10</Position>
+      <Comment>此节点是否展开，后台菜单列表js要用到，不用进行编辑</Comment>
+      <DataType>boolean|0s</DataType>
+      <StateNumber>1770</StateNumber>
+      <DefaultExpression>false</DefaultExpression>
+      <TypeId>16</TypeId>
+    </column>
+    <column id="114" parent="35" name="is_show">
+      <Position>11</Position>
+      <Comment>该菜单是否在菜单栏显示，false=不显示，true=显示</Comment>
+      <DataType>boolean|0s</DataType>
+      <StateNumber>1770</StateNumber>
+      <DefaultExpression>true</DefaultExpression>
+      <TypeId>16</TypeId>
+    </column>
+    <column id="115" parent="35" name="is_enabled">
+      <Position>12</Position>
+      <Comment>是否启用，true=启用，false=禁用</Comment>
+      <DataType>boolean|0s</DataType>
+      <StateNumber>1770</StateNumber>
+      <DefaultExpression>true</DefaultExpression>
+      <TypeId>16</TypeId>
+    </column>
+    <index id="116" parent="35" name="menu_info_pkey">
+      <ObjectId>25101</ObjectId>
+      <StateNumber>1855</StateNumber>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="117" parent="35" name="menu_info_sort_idx">
+      <ObjectId>25125</ObjectId>
+      <StateNumber>1875</StateNumber>
+      <ColNames>sort</ColNames>
+    </index>
+    <index id="118" parent="35" name="menu_info_is_show_idx">
+      <ObjectId>25124</ObjectId>
+      <StateNumber>1874</StateNumber>
+      <ColNames>is_show</ColNames>
+    </index>
+    <key id="119" parent="35" name="menu_info_pkey">
+      <ObjectId>25102</ObjectId>
+      <StateNumber>1855</StateNumber>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>menu_info_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="120" parent="36" name="id">
+      <Position>1</Position>
+      <Comment>主键Id</Comment>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1832</StateNumber>
+      <DefaultExpression>nextval(&apos;positions_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="121" parent="36" name="name">
+      <Position>2</Position>
+      <Comment>职位名称</Comment>
+      <DataType>text|0s</DataType>
+      <StateNumber>1788</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="122" parent="36" name="department_id">
+      <Position>3</Position>
+      <Comment>部门自编号ID</Comment>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1788</StateNumber>
+      <DefaultExpression>0</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="123" parent="36" name="department_code">
+      <Position>4</Position>
+      <Comment>部门编号</Comment>
+      <DataType>text|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1788</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="124" parent="36" name="department_name">
+      <Position>5</Position>
+      <Comment>部门名称</Comment>
+      <DataType>text|0s</DataType>
+      <StateNumber>1788</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="125" parent="36" name="page_power">
+      <Position>6</Position>
+      <Comment>菜单操作权限，有操作权限的菜单ID列表：,1,2,3,4,5,</Comment>
+      <DataType>text|0s</DataType>
+      <StateNumber>1788</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="126" parent="36" name="positions_pkey">
+      <ObjectId>25103</ObjectId>
+      <StateNumber>1856</StateNumber>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="127" parent="36" name="positions_name_idx">
+      <ObjectId>25128</ObjectId>
+      <StateNumber>1878</StateNumber>
+      <ColNames>name</ColNames>
+    </index>
+    <index id="128" parent="36" name="positions_department_id_idx">
+      <ObjectId>25127</ObjectId>
+      <StateNumber>1877</StateNumber>
+      <ColNames>department_id</ColNames>
+    </index>
+    <index id="129" parent="36" name="positions_department_code_idx">
+      <ObjectId>25126</ObjectId>
+      <StateNumber>1876</StateNumber>
+      <ColNames>department_code</ColNames>
+    </index>
+    <key id="130" parent="36" name="positions_pkey">
+      <ObjectId>25104</ObjectId>
+      <StateNumber>1856</StateNumber>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>positions_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="131" parent="37" name="id">
+      <Position>1</Position>
+      <Comment>主键Id</Comment>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1833</StateNumber>
+      <DefaultExpression>nextval(&apos;product_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="132" parent="37" name="name">
+      <Position>2</Position>
+      <Comment>菜单名称或各个页面功能名称</Comment>
+      <DataType>text|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1800</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="133" parent="37" name="code">
+      <Position>3</Position>
+      <Comment>产品编码</Comment>
+      <DataType>text|0s</DataType>
+      <StateNumber>1800</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="134" parent="37" name="product_class_id">
+      <Position>4</Position>
+      <Comment>所属产品分类</Comment>
+      <DataType>integer|0s</DataType>
+      <StateNumber>1800</StateNumber>
+      <DefaultExpression>0</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="135" parent="37" name="standard">
+      <Position>5</Position>
+      <Comment>产品规格</Comment>
+      <DataType>text|0s</DataType>
+      <StateNumber>1800</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="136" parent="37" name="quality_guarantee_period">
+      <Position>6</Position>
+      <Comment>保质期</Comment>
+      <DataType>text|0s</DataType>
+      <StateNumber>1800</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="137" parent="37" name="place_of_origin">
+      <Position>7</Position>
+      <Comment>产地</Comment>
+      <DataType>text|0s</DataType>
+      <StateNumber>1800</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="138" parent="37" name="front_cover_img">
+      <Position>8</Position>
+      <Comment>封面图片地址（展示图片）</Comment>
+      <DataType>text|0s</DataType>
+      <StateNumber>1800</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="139" parent="37" name="content">
+      <Position>9</Position>
+      <Comment>产品描述</Comment>
+      <DataType>text|0s</DataType>
+      <StateNumber>1800</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="140" parent="37" name="is_enable">
+      <Position>10</Position>
+      <Comment>是否启用，1=true(启用)，0=false（禁用）</Comment>
+      <DataType>integer|0s</DataType>
+      <StateNumber>1800</StateNumber>
+      <DefaultExpression>0</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="141" parent="37" name="add_time">
+      <Position>11</Position>
+      <Comment>添加时间</Comment>
+      <DataType>timestamp(0)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1800</StateNumber>
+      <DefaultExpression>now()</DefaultExpression>
+      <TypeId>1114</TypeId>
+    </column>
+    <index id="142" parent="37" name="product_pkey">
+      <ObjectId>25107</ObjectId>
+      <StateNumber>1858</StateNumber>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="143" parent="37" name="product_pkey">
+      <ObjectId>25108</ObjectId>
+      <StateNumber>1858</StateNumber>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>product_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="144" parent="38" name="id">
+      <Position>1</Position>
+      <Comment>主键Id</Comment>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1834</StateNumber>
+      <DefaultExpression>nextval(&apos;product_class_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="145" parent="38" name="name">
+      <Position>2</Position>
+      <Comment>菜单名称或各个页面功能名称</Comment>
+      <DataType>text|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1814</StateNumber>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="146" parent="38" name="is_enable">
+      <Position>3</Position>
+      <Comment>是否启用，1=true(启用)，0=false（禁用）</Comment>
+      <DataType>integer|0s</DataType>
+      <StateNumber>1814</StateNumber>
+      <DefaultExpression>0</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="147" parent="38" name="add_time">
+      <Position>4</Position>
+      <Comment>添加时间</Comment>
+      <DataType>timestamp(0)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1814</StateNumber>
+      <DefaultExpression>now()</DefaultExpression>
+      <TypeId>1114</TypeId>
+    </column>
+    <index id="148" parent="38" name="product_class_pkey">
+      <ObjectId>25105</ObjectId>
+      <StateNumber>1857</StateNumber>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="149" parent="38" name="product_class_pkey">
+      <ObjectId>25106</ObjectId>
+      <StateNumber>1857</StateNumber>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>product_class_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>
