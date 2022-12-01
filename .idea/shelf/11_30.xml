@@ -1,0 +1,674 @@
+<changelist name="11_30" date="1669797272087" recycled="false">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/shelved.patch" />
+  <option name="DESCRIPTION" value="11.30" />
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/avatar/1.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/1.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/product_1/1.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/11.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/avatar/1.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/12.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/1.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/bookingSystem/1.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/11.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/1.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/12.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/avatar/2.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/2.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/product_1/2.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/21.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/avatar/2.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/22.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/2.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/2.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/bookingSystem/2.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/21.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/2.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/22.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/3.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/3.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/avatar/3.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/31.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/product_1/3.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/32.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/3.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/33.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/avatar/3.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/34.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/3.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/3.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/bookingSystem/3.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/31.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/3.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/32.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/4.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/4.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/4.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/41.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/bookingSystem/4.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/4.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/bookingSystem/5.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/5.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/bookingSystem/6.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/6.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/bookingSystem/7.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/7.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/8.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/8.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/bookingSystem/8.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/81.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="static/arial.ttf" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/avatar.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/avatar.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/avatar.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/avatar1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/product_1/burger.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/burger.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/c1.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/c1.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/c2.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/c2.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/c3.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/c3.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/chat-person-add.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/chat-person-add.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/chat-person-add.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/chat-person-add1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/close.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/close.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/close.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/close1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/product_1/download.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/download.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/fjords.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/fjords.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/fjords.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/fjords1.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/fonts/fontawesome-webfont.eot" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/fontawesome-webfont.eot" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/fonts/fontawesome-webfont.ttf" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/fontawesome-webfont.ttf" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/fonts/fontawesome-webfont.woff" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/fontawesome-webfont.woff" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/fonts/fontawesome-webfont.woff2" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/fontawesome-webfont.woff2" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/fonts/FontAwesome.otf" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/FontAwesome.otf" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/fonts/glyphicons-halflings-regular.eot" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/glyphicons-halflings-regular.eot" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/fonts/glyphicons-halflings-regular.ttf" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/glyphicons-halflings-regular.ttf" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/fonts/glyphicons-halflings-regular.woff" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/glyphicons-halflings-regular.woff" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/fonts/glyphicons-halflings-regular.woff2" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/glyphicons-halflings-regular.woff2" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/hand.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/hand.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/hand.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/hand1.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/product_1/image-10.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/image-10.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/product_1/image-8-226x223.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/image-8-226x223.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/product_1/image-9.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/image-9.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/product_1/images.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/images.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/lights.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/lights.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/lights.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/lights1.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/logo.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/logo.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/logo.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/logo1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/maximize.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/maximize.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/maximize.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/maximize1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/minimize.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/minimize.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/minimize.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/minimize1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/fonts/MontserratLight.eot" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/MontserratLight.eot" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/fonts/MontserratLight.ttf" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/MontserratLight.ttf" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/fonts/MontserratLight.woff" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/MontserratLight.woff" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/fonts/MontserratLight.woff2" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/MontserratLight.woff2" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/nature.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/nature.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/nature.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/nature1.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/newyork.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/newyork.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/newyork.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/newyork1.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/paris.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/paris.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/paris.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/paris1.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/paypal.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/paypal.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/paypal.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/paypal1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/picture.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/picture.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/picture.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/picture1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/product_1/pizza2.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/pizza2.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/preview1.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/preview1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/preview1.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/preview11.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/product-2.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/product-2.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/product.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/product.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/profile-bg.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/profile-bg.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/profile-bg.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/profile-bg1.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/fonts/roboto/Roboto-Bold.woff" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/Roboto-Bold.woff" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/fonts/roboto/Roboto-Bold.woff2" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/Roboto-Bold.woff2" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/fonts/roboto/Roboto-Light.woff" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/Roboto-Light.woff" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/fonts/roboto/Roboto-Light.woff2" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/Roboto-Light.woff2" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/fonts/roboto/Roboto-Medium.woff" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/Roboto-Medium.woff" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/fonts/roboto/Roboto-Medium.woff2" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/Roboto-Medium.woff2" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/fonts/roboto/Roboto-Regular.woff" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/Roboto-Regular.woff" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/fonts/roboto/Roboto-Regular.woff2" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/Roboto-Regular.woff2" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/fonts/roboto/Roboto-Thin.woff" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/Roboto-Thin.woff" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/fonts/roboto/Roboto-Thin.woff2" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/Roboto-Thin.woff2" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/sanfran.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/sanfran.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/sanfran.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/sanfran1.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/smile.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/smile.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/smile.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/smile1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/rangeSliderimg/sprite-skin-flat.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/sprite-skin-flat.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/rangeSliderimg/sprite-skin-flat.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/sprite-skin-flat1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/rangeSliderimg/sprite-skin-modern.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/sprite-skin-modern.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/rangeSliderimg/sprite-skin-modern.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/sprite-skin-modern1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/rangeSliderimg/sprite-skin-nice.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/sprite-skin-nice.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/rangeSliderimg/sprite-skin-nice.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/sprite-skin-nice1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/rangeSliderimg/sprite-skin-simple.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/sprite-skin-simple.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/rangeSliderimg/sprite-skin-simple.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/sprite-skin-simple1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/css/admin/assets/fonts/themify.eot" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/themify.eot" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/fonts/themify.eot" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/themify1.eot" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/css/admin/assets/fonts/themify.ttf" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/themify.ttf" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/fonts/themify.ttf" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/themify1.ttf" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/css/admin/assets/fonts/themify.woff" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/themify.woff" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/fonts/themify.woff" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/themify1.woff" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/avatar/usa-flag.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/usa-flag.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/avatar/usa-flag.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/usa-flag1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/user-1.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/user-1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/user-1.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/user-11.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/user-bg.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/user-bg.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/user-female.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/user-female.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/user-female.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/user-female1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/user-profile.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/user-profile.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/user-profile.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/user-profile1.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/user.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/user.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/user.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/user1.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/video-cam.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/video-cam.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/video-cam.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/video-cam1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/scrollable/view-1-1200x800.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/view-1-1200x800.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/placeholder/scrollable/view-1-1200x800.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/view-1-1200x8001.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/images/watch.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/watch.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/fonts/weathericons-regular-webfont.eot" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/weathericons-regular-webfont.eot" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/fonts/weathericons-regular-webfont.ttf" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/weathericons-regular-webfont.ttf" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/fonts/weathericons-regular-webfont.woff" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/weathericons-regular-webfont.woff" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="html/theme/fonts/weathericons-regular-webfont.woff2" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/11_30/weathericons-regular-webfont.woff2" />
+  </binary>
+</changelist>

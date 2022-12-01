@@ -1,0 +1,94 @@
+2022-12-01 08:47:27,325 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2022-12-01 08:47:27,341 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2022-12-01 08:47:39,092 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1
+2022-12-01 08:47:46,963 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
+2022-12-01 08:47:47,419 log_helper.py[line:14] INFO 已放入缓存, key: {  managerdbe02c82d061c6a6bc4b4c63238ad291} {value: 1  put_time: 1669855667  expired: 86400}
+2022-12-01 08:47:47,422 log_helper.py[line:14] INFO 已放入缓存, key: {  manager_1} {value: <views.models.Manager object at 0x02EA2088>  put_time: 1669855667  expired: 43200}
+2022-12-01 08:47:47,422 log_helper.py[line:14] INFO Exception:('login_error_count_9a6854e18ec8f1b0aa0e1589b47bb8b1',)
+2022-12-01 08:47:48,004 log_helper.py[line:14] INFO url:/api/login1/desk ip:127.0.0.1
+2022-12-01 08:47:48,137 log_helper.py[line:14] INFO url:/api/login1/css/lib/calendar2/pignose.calendar.min.css ip:127.0.0.1
+2022-12-01 08:47:48,154 log_helper.py[line:14] INFO url:/api/login1/css/lib/chartist/chartist.min.css ip:127.0.0.1
+2022-12-01 08:47:48,178 log_helper.py[line:14] INFO url:/api/login1/css/lib/font-awesome.min.css ip:127.0.0.1
+2022-12-01 08:47:48,194 log_helper.py[line:14] INFO url:/api/login1/css/lib/themify-icons.css ip:127.0.0.1
+2022-12-01 08:47:48,222 log_helper.py[line:14] INFO url:/api/login1/css/lib/owl.carousel.min.css ip:127.0.0.1
+2022-12-01 08:47:48,254 log_helper.py[line:14] INFO url:/api/login1/css/lib/owl.theme.default.min.css ip:127.0.0.1
+2022-12-01 08:47:48,321 log_helper.py[line:14] INFO url:/api/login1/css/lib/weather-icons.css ip:127.0.0.1
+2022-12-01 08:47:48,353 log_helper.py[line:14] INFO url:/api/login1/css/lib/menubar/sidebar.css ip:127.0.0.1
+2022-12-01 08:47:48,368 log_helper.py[line:14] INFO url:/api/login1/css/lib/bootstrap.min.css ip:127.0.0.1
+2022-12-01 08:47:48,389 log_helper.py[line:14] INFO url:/api/login1/css/lib/helper.css ip:127.0.0.1
+2022-12-01 08:47:48,407 log_helper.py[line:14] INFO url:/api/login1/css/style.css ip:127.0.0.1
+2022-12-01 08:47:48,428 log_helper.py[line:14] INFO url:/api/login1/js/lib/jquery.min.js ip:127.0.0.1
+2022-12-01 08:47:48,448 log_helper.py[line:14] INFO url:/api/login1/js/lib/jquery.nanoscroller.min.js ip:127.0.0.1
+2022-12-01 08:47:48,466 log_helper.py[line:14] INFO url:/api/login1/js/lib/menubar/sidebar.js ip:127.0.0.1
+2022-12-01 08:47:48,486 log_helper.py[line:14] INFO url:/api/login1/js/lib/preloader/pace.min.js ip:127.0.0.1
+2022-12-01 08:47:48,504 log_helper.py[line:14] INFO url:/api/login1/js/lib/bootstrap.min.js ip:127.0.0.1
+2022-12-01 08:47:48,520 log_helper.py[line:14] INFO url:/api/login1/js/scripts.js ip:127.0.0.1
+2022-12-01 08:47:48,538 log_helper.py[line:14] INFO url:/api/login1/js/lib/calendar-2/moment.latest.min.js ip:127.0.0.1
+2022-12-01 08:47:48,562 log_helper.py[line:14] INFO url:/api/login1/js/lib/calendar-2/pignose.calendar.min.js ip:127.0.0.1
+2022-12-01 08:47:48,581 log_helper.py[line:14] INFO url:/api/login1/js/lib/calendar-2/pignose.init.js ip:127.0.0.1
+2022-12-01 08:47:48,600 log_helper.py[line:14] INFO url:/api/login1/js/lib/weather/jquery.simpleWeather.min.js ip:127.0.0.1
+2022-12-01 08:47:48,617 log_helper.py[line:14] INFO url:/api/login1/js/lib/weather/weather-init.js ip:127.0.0.1
+2022-12-01 08:47:48,638 log_helper.py[line:14] INFO url:/api/login1/js/lib/circle-progress/circle-progress.min.js ip:127.0.0.1
+2022-12-01 08:47:48,656 log_helper.py[line:14] INFO url:/api/login1/js/lib/circle-progress/circle-progress-init.js ip:127.0.0.1
+2022-12-01 08:47:48,676 log_helper.py[line:14] INFO url:/api/login1/js/lib/chartist/chartist.min.js ip:127.0.0.1
+2022-12-01 08:47:48,693 log_helper.py[line:14] INFO url:/api/login1/js/lib/sparklinechart/jquery.sparkline.min.js ip:127.0.0.1
+2022-12-01 08:47:48,710 log_helper.py[line:14] INFO url:/api/login1/js/lib/sparklinechart/sparkline.init.js ip:127.0.0.1
+2022-12-01 08:47:48,753 log_helper.py[line:14] INFO url:/api/login1/js/lib/owl-carousel/owl.carousel.min.js ip:127.0.0.1
+2022-12-01 08:47:48,777 log_helper.py[line:14] INFO url:/api/login1/js/lib/owl-carousel/owl.carousel-init.js ip:127.0.0.1
+2022-12-01 08:47:48,792 log_helper.py[line:14] INFO url:/api/login1/js/dashboard2.js ip:127.0.0.1
+2022-12-01 08:47:48,809 log_helper.py[line:14] INFO url:/api/login1/images/avatar/3.jpg ip:127.0.0.1
+2022-12-01 08:47:48,832 log_helper.py[line:14] INFO url:/api/login1/images/avatar/1.jpg ip:127.0.0.1
+2022-12-01 08:47:48,849 log_helper.py[line:14] INFO url:/api/login1/images/avatar/2.jpg ip:127.0.0.1
+2022-12-01 08:47:49,304 log_helper.py[line:14] INFO url:/api/login1/images/avatar/1.jpg ip:127.0.0.1
+2022-12-01 08:47:49,326 log_helper.py[line:14] INFO url:/api/login1/images/avatar/2.jpg ip:127.0.0.1
+2022-12-01 08:47:49,343 log_helper.py[line:14] INFO url:/api/login1/images/avatar/3.jpg ip:127.0.0.1
+2022-12-01 08:51:28,115 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1
+2022-12-01 08:51:35,474 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
+2022-12-01 08:51:35,708 log_helper.py[line:14] INFO 已放入缓存, key: {  manager9a296742aace7d96b86897224a484486} {value: 1  put_time: 1669855895  expired: 86400}
+2022-12-01 08:51:35,710 log_helper.py[line:14] INFO 已放入缓存, key: {  manager_1} {value: <views.models.Manager object at 0x033CF7A8>  put_time: 1669855895  expired: 43200}
+2022-12-01 08:51:35,710 log_helper.py[line:14] INFO Exception:('login_error_count_9a6854e18ec8f1b0aa0e1589b47bb8b1',)
+2022-12-01 08:51:35,773 log_helper.py[line:14] INFO url:/api/login1/desk ip:127.0.0.1
+2022-12-01 08:51:35,918 log_helper.py[line:14] INFO url:/api/login1/css/lib/calendar2/pignose.calendar.min.css ip:127.0.0.1
+2022-12-01 08:51:35,942 log_helper.py[line:14] INFO url:/api/login1/css/lib/chartist/chartist.min.css ip:127.0.0.1
+2022-12-01 08:51:35,962 log_helper.py[line:14] INFO url:/api/login1/css/lib/font-awesome.min.css ip:127.0.0.1
+2022-12-01 08:51:35,993 log_helper.py[line:14] INFO url:/api/login1/css/lib/themify-icons.css ip:127.0.0.1
+2022-12-01 08:51:36,014 log_helper.py[line:14] INFO url:/api/login1/css/lib/owl.carousel.min.css ip:127.0.0.1
+2022-12-01 08:51:36,048 log_helper.py[line:14] INFO url:/api/login1/css/lib/owl.theme.default.min.css ip:127.0.0.1
+2022-12-01 08:51:36,071 log_helper.py[line:14] INFO url:/api/login1/css/lib/weather-icons.css ip:127.0.0.1
+2022-12-01 08:51:36,098 log_helper.py[line:14] INFO url:/api/login1/css/lib/menubar/sidebar.css ip:127.0.0.1
+2022-12-01 08:51:36,116 log_helper.py[line:14] INFO url:/api/login1/css/lib/bootstrap.min.css ip:127.0.0.1
+2022-12-01 08:51:36,138 log_helper.py[line:14] INFO url:/api/login1/css/lib/helper.css ip:127.0.0.1
+2022-12-01 08:51:36,157 log_helper.py[line:14] INFO url:/api/login1/css/style.css ip:127.0.0.1
+2022-12-01 08:51:36,186 log_helper.py[line:14] INFO url:/api/login1/js/lib/jquery.min.js ip:127.0.0.1
+2022-12-01 08:51:36,216 log_helper.py[line:14] INFO url:/api/login1/js/lib/jquery.nanoscroller.min.js ip:127.0.0.1
+2022-12-01 08:51:36,239 log_helper.py[line:14] INFO url:/api/login1/js/lib/menubar/sidebar.js ip:127.0.0.1
+2022-12-01 08:51:36,262 log_helper.py[line:14] INFO url:/api/login1/js/lib/preloader/pace.min.js ip:127.0.0.1
+2022-12-01 08:51:36,282 log_helper.py[line:14] INFO url:/api/login1/js/lib/bootstrap.min.js ip:127.0.0.1
+2022-12-01 08:51:36,306 log_helper.py[line:14] INFO url:/api/login1/js/scripts.js ip:127.0.0.1
+2022-12-01 08:51:36,331 log_helper.py[line:14] INFO url:/api/login1/js/lib/calendar-2/moment.latest.min.js ip:127.0.0.1
+2022-12-01 08:51:36,351 log_helper.py[line:14] INFO url:/api/login1/js/lib/calendar-2/pignose.calendar.min.js ip:127.0.0.1
+2022-12-01 08:51:36,450 log_helper.py[line:14] INFO url:/api/login1/js/lib/calendar-2/pignose.init.js ip:127.0.0.1
+2022-12-01 08:51:36,501 log_helper.py[line:14] INFO url:/api/login1/js/lib/weather/jquery.simpleWeather.min.js ip:127.0.0.1
+2022-12-01 08:51:36,523 log_helper.py[line:14] INFO url:/api/login1/js/lib/weather/weather-init.js ip:127.0.0.1
+2022-12-01 08:51:36,551 log_helper.py[line:14] INFO url:/api/login1/js/lib/circle-progress/circle-progress-init.js ip:127.0.0.1
+2022-12-01 08:51:36,570 log_helper.py[line:14] INFO url:/api/login1/js/lib/circle-progress/circle-progress.min.js ip:127.0.0.1
+2022-12-01 08:51:36,589 log_helper.py[line:14] INFO url:/api/login1/js/lib/chartist/chartist.min.js ip:127.0.0.1
+2022-12-01 08:51:36,612 log_helper.py[line:14] INFO url:/api/login1/js/lib/sparklinechart/jquery.sparkline.min.js ip:127.0.0.1
+2022-12-01 08:51:36,630 log_helper.py[line:14] INFO url:/api/login1/js/lib/sparklinechart/sparkline.init.js ip:127.0.0.1
+2022-12-01 08:51:36,655 log_helper.py[line:14] INFO url:/api/login1/js/lib/owl-carousel/owl.carousel.min.js ip:127.0.0.1
+2022-12-01 08:51:36,674 log_helper.py[line:14] INFO url:/api/login1/js/lib/owl-carousel/owl.carousel-init.js ip:127.0.0.1
+2022-12-01 08:51:36,696 log_helper.py[line:14] INFO url:/api/login1/js/dashboard2.js ip:127.0.0.1
+2022-12-01 08:51:36,713 log_helper.py[line:14] INFO url:/api/login1/js/lib/circle-progress/circle-progress-init.js ip:127.0.0.1
+2022-12-01 08:51:36,734 log_helper.py[line:14] INFO url:/api/login1/images/avatar/3.jpg ip:127.0.0.1
+2022-12-01 08:51:36,754 log_helper.py[line:14] INFO url:/api/login1/images/avatar/1.jpg ip:127.0.0.1
+2022-12-01 08:51:36,771 log_helper.py[line:14] INFO url:/api/login1/js/lib/chartist/chartist.min.js ip:127.0.0.1
+2022-12-01 08:51:36,833 log_helper.py[line:14] INFO url:/api/login1/js/lib/sparklinechart/jquery.sparkline.min.js ip:127.0.0.1
+2022-12-01 08:51:36,869 log_helper.py[line:14] INFO url:/api/login1/js/lib/sparklinechart/sparkline.init.js ip:127.0.0.1
+2022-12-01 08:51:36,906 log_helper.py[line:14] INFO url:/api/login1/js/lib/owl-carousel/owl.carousel.min.js ip:127.0.0.1
+2022-12-01 08:51:36,945 log_helper.py[line:14] INFO url:/api/login1/js/lib/owl-carousel/owl.carousel-init.js ip:127.0.0.1
+2022-12-01 08:51:36,991 log_helper.py[line:14] INFO url:/api/login1/js/dashboard2.js ip:127.0.0.1
+2022-12-01 08:51:37,102 log_helper.py[line:14] INFO url:/api/login1/images/avatar/2.jpg ip:127.0.0.1
+2022-12-01 08:51:37,649 log_helper.py[line:14] INFO url:/api/login1/images/avatar/1.jpg ip:127.0.0.1
+2022-12-01 08:51:37,671 log_helper.py[line:14] INFO url:/api/login1/images/avatar/2.jpg ip:127.0.0.1
+2022-12-01 08:51:37,687 log_helper.py[line:14] INFO url:/api/login1/images/avatar/3.jpg ip:127.0.0.1
+2022-12-01 08:51:55,028 log_helper.py[line:14] INFO url:/api/login1/chartjs.html ip:127.0.0.1

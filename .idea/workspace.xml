@@ -1,577 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3d0953a8-c3eb-40b0-97f7-7b4d1fc1361f" name="Default Changelist" comment="12.1">
-      <change afterPath="$PROJECT_DIR$/brick/core/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/brick/core/db/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/brick/core/db/constants.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/brick/core/db/databases.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/brick/core/db/exceptions.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/brick/core/db/felds.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/brick/core/db/modelquerys.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/brick/core/db/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/brick/core/db/querycompiler.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/brick/core/db/utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/brick/core/routes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/brick/orm/orm0/peewee 3.15.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/captcha.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/desk.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/login1.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/static/ui.admin/css/hdyz.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/static/ui.admin/js/captcha.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/app-email.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/app-event-calender.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/app-profile.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/app-widget-card.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/blank.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/chart-flot.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/chart-knob.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/chart-morris.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/chart-peity.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/chart-sparkline.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/chartist.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/chartjs.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/admin/assets/fonts/themify.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/admin/assets/fonts/themify.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/admin/assets/fonts/themify.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/admin/assets/fonts/themify.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/barRating/barRating.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/calendar/fullcalendar.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/calendar2/pignose.calendar.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/calendar2/semantic.ui.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/chartist/chartist.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/data-table/buttons.bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/data-table/buttons.dataTables.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/data-table/dataTables.bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/datepicker/bootstrap-datepicker3.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/font-awesome.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/helper.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/jquery-ui.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/jsgrid/jsgrid-theme.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/jsgrid/jsgrid.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/line-progress/jquery.lineProgressbar.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/lobi-panel/lobipanel.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/materialize.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/menubar/sidebar.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/metismenu/menu.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/mmc-chat.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/nestable/nestable.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/owl.carousel.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/owl.theme.default.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/preloader/pace.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/rangSlider/ion.rangeSlider.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/rangSlider/ion.rangeSlider.skinFlat.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/rangSlider/ion.rangeSlider.skinHTML5.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/rangSlider/ion.rangeSlider.skinModern.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/rangSlider/ion.rangeSlider.skinNice.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/rangSlider/ion.rangeSlider.skinSimple.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/rangSlider/normalize.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/scrollable/scrollable.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/select2/select2.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/sweetalert/sweetalert.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/themify-icons.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/toastr/toastr.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/vector-map/jqvmap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/lib/weather-icons.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/css/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/font-themify.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/FontAwesome.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/MontserratLight.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/MontserratLight.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/MontserratLight.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/MontserratLight.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/MontserratLight.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/fontawesome-webfont.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/fontawesome-webfont.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/fontawesome-webfont.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/fontawesome-webfont.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/fontawesome-webfont.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/fontawesome-webfont_files/viewsource.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/glyphicons-halflings-regular.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/glyphicons-halflings-regular.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/glyphicons-halflings-regular.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/glyphicons-halflings-regular.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/glyphicons-halflings-regular.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/roboto/Roboto-Bold.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/roboto/Roboto-Bold.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/roboto/Roboto-Light.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/roboto/Roboto-Light.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/roboto/Roboto-Medium.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/roboto/Roboto-Medium.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/roboto/Roboto-Regular.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/roboto/Roboto-Regular.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/roboto/Roboto-Thin.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/roboto/Roboto-Thin.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/themify.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/themify.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/themify.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/themify.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/weathericons-regular-webfont.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/weathericons-regular-webfont.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/weathericons-regular-webfont.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/weathericons-regular-webfont.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/fonts/weathericons-regular-webfont.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/form-basic.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/form-validation.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/8.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/avatar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/avatar/1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/avatar/2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/avatar/3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/avatar/usa-flag.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/bookingSystem/1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/bookingSystem/2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/bookingSystem/3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/bookingSystem/4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/bookingSystem/5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/bookingSystem/6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/bookingSystem/7.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/bookingSystem/8.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/c1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/c2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/c3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/chat-person-add.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/close.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/fjords.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/hand.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/lights.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/maximize.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/minimize.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/nature.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/newyork.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/paris.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/paypal.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/picture.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/preview1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/product-2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/product.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/product_1/1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/product_1/2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/product_1/3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/product_1/burger.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/product_1/download.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/product_1/image-10.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/product_1/image-8-226x223.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/product_1/image-9.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/product_1/images.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/product_1/pizza2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/profile-bg.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/rangeSliderimg/sprite-skin-flat.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/rangeSliderimg/sprite-skin-modern.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/rangeSliderimg/sprite-skin-nice.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/rangeSliderimg/sprite-skin-simple.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/sanfran.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/scrollable/view-1-1200x800.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/smile.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/user-1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/user-bg.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/user-female.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/user-profile.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/user.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/video-cam.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/images/watch.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/invoice.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/dashboard1.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/dashboard2.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/barRating/barRating.init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/barRating/jquery.barrating.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/bootstrap.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/calendar-2/moment.latest.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/calendar-2/pignose.calendar.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/calendar-2/pignose.init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/calendar-2/prism.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/calendar-2/semantic.ui.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/calendar/fullcalendar-init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/calendar/fullcalendar.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/chart-js/Chart.bundle.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/chart-js/chartjs-init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/chartist/chartist-init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/chartist/chartist-plugin-tooltip.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/chartist/chartist.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/chat-widget/chat-widget-init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/circle-progress/circle-progress-init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/circle-progress/circle-progress.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/data-table/buttons.colVis.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/data-table/buttons.flash.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/data-table/buttons.html5.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/data-table/buttons.print.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/data-table/dataTables.buttons.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/data-table/datatables-init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/data-table/datatables.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/data-table/jquery-1.12.4.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/data-table/jquery.dataTables.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/data-table/jszip.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/data-table/pdfmake.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/data-table/vfs_fonts.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/datamap/d3.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/datamap/datamap-init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/datamap/datamaps.world.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/datamap/topojson.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/datepicker/bootstrap-datepicker.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/easing/jquery.easing.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/easing/stepup-form-init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/flot-chart/curvedLines.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/flot-chart/excanvas.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/flot-chart/flot-chart-init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/flot-chart/flot-tooltip/jquery.flot.tooltip.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/flot-chart/jquery.flot.categories.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/flot-chart/jquery.flot.crosshair.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/flot-chart/jquery.flot.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/flot-chart/jquery.flot.pie.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/flot-chart/jquery.flot.resize.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/flot-chart/jquery.flot.stack.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/flot-chart/jquery.flot.threshold.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/flot-chart/jquery.flot.time.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/flowtype.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/form-validation/jquery.validate-init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/form-validation/jquery.validate.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/gmap/gmap.init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/gmap/gmapApi.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/gmap/gmaps.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/granim/granim-init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/granim/granim.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/invoice-edit.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/jquery-ui/jquery-ui.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/jquery-ui/jquery.ui.touch-punch.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/jquery.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/jquery.nanoscroller.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/jsgrid/db.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/jsgrid/fields/jsgrid.field.checkbox.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/jsgrid/fields/jsgrid.field.control.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/jsgrid/fields/jsgrid.field.number.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/jsgrid/fields/jsgrid.field.select.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/jsgrid/fields/jsgrid.field.text.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/jsgrid/fields/jsgrid.field.textarea.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/jsgrid/jsgrid-init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/jsgrid/jsgrid.core.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/jsgrid/jsgrid.field.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/jsgrid/jsgrid.load-indicator.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/jsgrid/jsgrid.load-strategies.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/jsgrid/jsgrid.sort-strategies.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/jsgrid/jsgrid.validation.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/knob/jquery.knob.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/knob/knob.init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/line-progress/jquery.lineProgressbar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/line-progress/line-progress-init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/menubar/sidebar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/metismenu/jquery.slimscroll.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/metismenu/metismenu.init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/metismenu/metismenu.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/mmc-common.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/moment/moment.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/morris-chart/morris-init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/morris-chart/morris.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/morris-chart/raphael-min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/nestable/jquery.nestable.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/nestable/nestable.init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/owl-carousel/owl.carousel-init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/owl-carousel/owl.carousel.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/peitychart/jquery.peity.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/peitychart/peitychart.init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/portlets/portlets-init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/portlets/portlets.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/preloader/pace.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/rangeSlider/ion.rangeSlider.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/rangeSlider/moment-with-locales.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/rangeSlider/moment.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/rangeSlider/rangeslider.init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/rating1/jRate.init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/rating1/jRate.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/scrollable/holder.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/scrollable/jquery-asScrollable.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/scrollable/jquery-asScrollbar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/scrollable/scrollable.init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/select2/select2.full.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/sparklinechart/jquery.sparkline.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/sparklinechart/sparkline.init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/sweetalert/sweetalert.init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/sweetalert/sweetalert.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/toastr/toastr.init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/toastr/toastr.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/vector-map/country/jquery.vmap.algeria.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/vector-map/country/jquery.vmap.argentina.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/vector-map/country/jquery.vmap.brazil.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/vector-map/country/jquery.vmap.europe.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/vector-map/country/jquery.vmap.france.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/vector-map/country/jquery.vmap.germany.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/vector-map/country/jquery.vmap.greece.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/vector-map/country/jquery.vmap.iran.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/vector-map/country/jquery.vmap.iraq.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/vector-map/country/jquery.vmap.russia.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/vector-map/country/jquery.vmap.tunisia.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/vector-map/country/jquery.vmap.turkey.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/vector-map/country/jquery.vmap.usa.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/vector-map/country/jquery.vmap.world.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/vector-map/jquery.vmap.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/vector-map/jquery.vmap.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/vector-map/jquery.vmap.sampledata.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/vector-map/vector.init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/weather/jquery.simpleWeather.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/lib/weather/weather-init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/js/scripts.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/page-login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/page-register.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/page-reset-password.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/avatar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/avatar/1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/avatar/2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/avatar/3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/avatar/usa-flag.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/chat-person-add.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/close.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/fjords.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/hand.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/lights.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/maximize.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/minimize.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/nature.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/newyork.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/paris.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/paypal.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/picture.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/preview1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/profile-bg.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/rangeSliderimg/sprite-skin-flat.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/rangeSliderimg/sprite-skin-modern.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/rangeSliderimg/sprite-skin-nice.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/rangeSliderimg/sprite-skin-simple.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/sanfran.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/scrollable/view-1-1200x800.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/smile.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/user-1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/user-female.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/user-profile.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/user.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/placeholder/video-cam.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/table-basic.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/table-export.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/table-jsgrid.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/table-row-select.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/uc-calendar.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/uc-carousel.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/uc-datamap.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/uc-nestable.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/uc-range-slider-advance.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/uc-range-slider-basic.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/uc-rating-bar-rating.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/uc-rating-jRate.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/uc-sweetalert.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/uc-toastr.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/uc-todo-list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/uc-weather.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/ui-alerts.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/ui-button.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/ui-dropdown.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/ui-images.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/ui-list-group.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/ui-media-object.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/ui-navbar.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/ui-panels.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/ui-progressbar.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/ui-recent-comments.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/ui-shopping-card.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/ui-tab.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/ui-timeline.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/ui-typography.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/ui-user-card.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/theme/vector-map.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/testreload.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/apps/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/apps/utilities.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/apps/wsgiapp.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/core/wsgiapp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/contrib/csrf.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/contrib/csrf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/contrib/except_helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/contrib/except_helper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/contrib/web_helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/contrib/web_helper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/httphandles/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/httphandles/request.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/httphandles/response.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/httphandles/util.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/orm/Pools.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/core/db/Pools.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/orm/databases.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/orm/felds.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/orm/modelquerys.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/orm/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/orm/orm0/peewee2.10.2.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/orm/orm0/peewee2.10.2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/orm/orm0/peewee206.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/orm/orm0/peewee206.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/orm/orm0/peewee3.14.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/orm/orm0/peewee3.14.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/orm/querycompiler.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/orm/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/core/db/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/orm/utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/routes/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/routes/route.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/routes/routeerror.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/routes/router.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/servers/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/servers/baseserver.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/templates/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/templates/simpletemplate.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/templates/templateerror.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/utilities/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/utils/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/utilities/cachehelper.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/utils/cachehelper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/utilities/dicthelper.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/utils/dicthelper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/utilities/encode.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/utils/encode.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/utilities/htmlescape.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/utils/htmlescape.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/utilities/loadhelper.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/utils/loadhelper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/utilities/sysinfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/utils/sysinfo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/bootbox/4.4.0/bootbox.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/bootbox/4.4.0/bootbox.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/bootbox/4.4.0/bootbox.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/bootbox/4.4.0/bootbox.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/datatables/1.10.0/jquery.dataTables.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/datatables/1.10.0/jquery.dataTables.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/hcharts/Highcharts/5.0.6/js/highcharts.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/hcharts/Highcharts/5.0.6/js/highcharts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/hcharts/Highcharts/5.0.6/js/modules/accessibility.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/hcharts/Highcharts/5.0.6/js/modules/accessibility.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/hcharts/Highcharts/5.0.6/js/modules/accessibility.src.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/hcharts/Highcharts/5.0.6/js/modules/accessibility.src.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/hcharts/Highcharts/5.0.6/js/modules/exporting.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/hcharts/Highcharts/5.0.6/js/modules/exporting.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/hcharts/Highcharts/5.0.6/js/modules/exporting.src.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/hcharts/Highcharts/5.0.6/js/modules/exporting.src.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/hcharts/Highcharts/5.0.6/js/modules/offline-exporting.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/hcharts/Highcharts/5.0.6/js/modules/offline-exporting.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/hcharts/Highcharts/5.0.6/js/modules/offline-exporting.src.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/hcharts/Highcharts/5.0.6/js/modules/offline-exporting.src.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/hcharts/Highcharts/5.0.6/js/themes/sand-signika.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/hcharts/Highcharts/5.0.6/js/themes/sand-signika.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/hcharts/Highcharts/5.0.6/js/themes/skies.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/hcharts/Highcharts/5.0.6/js/themes/skies.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-ar.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-ar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-bg.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-bg.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-bg1251.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-bg1251.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-cat.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-cat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-cn.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-cn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-cs.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-cs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-da.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-da.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-de.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-de.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-dk.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-dk.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-el.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-el.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-en.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-en.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-es.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-es.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-fa.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-fa.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-fi.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-fi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-fr.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-fr.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-gl.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-gl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-he.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-he.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-hr.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-hr.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-hr1250.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-hr1250.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-hu.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-hu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-id.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-id.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-is.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-is.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-it.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-it.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-ja.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-ja.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-kr.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-kr.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-lt.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-lt.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-mne.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-mne.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-nl.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-nl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-no.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-no.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-pl.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-pl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-pt-br.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-pt-br.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-pt.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-pt.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-ro.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-ro.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-ru.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-sk.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-sk.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-sr-latin.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-sr-latin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-sr.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-sr.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-sv.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-sv.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-th.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-th.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-tr.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-tr.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-tw.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-tw.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-ua.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-ua.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-vi.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jqgrid/js/i18n/grid.locale-vi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jquery/1.9.1/jquery.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jquery/1.9.1/jquery.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/jquery/1.9.1/jquery.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/jquery/1.9.1/jquery.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/layer/2.4/layer.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/layer/2.4/layer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/lightbox2/2.8.1/js/lightbox-plus-jquery.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/lightbox2/2.8.1/js/lightbox-plus-jquery.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/lightbox2/2.8.1/js/lightbox-plus-jquery.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/lightbox2/2.8.1/js/lightbox-plus-jquery.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/dialogs/attachment/attachment.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/dialogs/attachment/attachment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/dialogs/emotion/emotion.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/dialogs/emotion/emotion.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/dialogs/image/image.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/dialogs/image/image.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/dialogs/music/music.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/dialogs/music/music.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/dialogs/template/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/dialogs/template/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/dialogs/video/video.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/dialogs/video/video.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/dialogs/wordimage/tangram.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/dialogs/wordimage/tangram.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/lang/en/en.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/lang/en/en.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/codemirror/codemirror.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/codemirror/codemirror.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/highcharts/highcharts.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/highcharts/highcharts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/highcharts/highcharts.src.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/highcharts/highcharts.src.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/highcharts/modules/exporting.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/highcharts/modules/exporting.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/highcharts/modules/exporting.src.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/highcharts/modules/exporting.src.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/highcharts/themes/skies.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/highcharts/themes/skies.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/jquery-1.10.2.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/jquery-1.10.2.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/jquery-1.10.2.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/jquery-1.10.2.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/video-js/video.dev.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/video-js/video.dev.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/video-js/video.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/video-js/video.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/webuploader/webuploader.custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/webuploader/webuploader.custom.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/webuploader/webuploader.custom.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/webuploader/webuploader.custom.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/webuploader/webuploader.flashonly.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/webuploader/webuploader.flashonly.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/webuploader/webuploader.flashonly.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/webuploader/webuploader.flashonly.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/webuploader/webuploader.html5only.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/webuploader/webuploader.html5only.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/webuploader/webuploader.html5only.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/webuploader/webuploader.html5only.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/webuploader/webuploader.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/webuploader/webuploader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/webuploader/webuploader.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/webuploader/webuploader.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/webuploader/webuploader.withoutimage.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/webuploader/webuploader.withoutimage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/webuploader/webuploader.withoutimage.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/webuploader/webuploader.withoutimage.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/xss.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/xss.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/ueditor.all.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/ueditor.all.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/ueditor.all.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/ueditor.all.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/ueditor.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/ueditor.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/ueditor.parse.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/ueditor.parse.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/ueditor.parse.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/ueditor.parse.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/image-upload/upload.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/image-upload/upload.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/requirejs/require.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/requirejs/require.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/webuploader.custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/webuploader.custom.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/webuploader.custom.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/webuploader.custom.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/webuploader.fis.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/webuploader.fis.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/webuploader.flashonly.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/webuploader.flashonly.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/webuploader.flashonly.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/webuploader.flashonly.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/webuploader.html5only.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/webuploader.html5only.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/webuploader.html5only.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/webuploader.html5only.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/webuploader.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/webuploader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/webuploader.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/webuploader.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/webuploader.noimage.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/webuploader.noimage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/webuploader.noimage.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/webuploader.noimage.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/webuploader.nolog.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/webuploader.nolog.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/webuploader.nolog.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/webuploader.nolog.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/webuploader.withoutimage.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/webuploader.withoutimage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/webuploader.withoutimage.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/webuploader/0.1.5/webuploader.withoutimage.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/lib/zTree/v3/api/apiCss/jquery-1.6.2.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/zTree/v3/api/apiCss/jquery-1.6.2.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/html/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/static/h-ui.admin/css/H-ui.admin.css" beforeDir="false" afterPath="$PROJECT_DIR$/html/static/h-ui.admin/css/H-ui.admin.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/static/h-ui.admin/css/H-ui.login.css" beforeDir="false" afterPath="$PROJECT_DIR$/html/static/h-ui.admin/css/H-ui.login.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/verify.html" beforeDir="false" afterPath="$PROJECT_DIR$/html/verify1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.py" beforeDir="false" afterPath="$PROJECT_DIR$/index.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/info.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/_common_logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/logic/_common_logic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/arial.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/123.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/123.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/makelist_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/makelist_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/ormlearn.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/ormlearn.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test/string_helper_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test/string_helper_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/testbottle.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/testbottle.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/testout.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/testout.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/teststpl.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/teststpl.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/about.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/about.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/common_logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/common_logic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/contact_us.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/contact_us.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/db_logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/db_logic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/files.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/files.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/login.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/logout.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/logout.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/product.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/product.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/product_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/product_class.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/system/department.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/system/department.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/system/manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/system/manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/system/manager_operation_log.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/system/manager_operation_log.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/system/menu_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/system/menu_info.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/system/positions.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/system/positions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/verify.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/verify.py" afterDir="false" />
+    <list default="true" id="3d0953a8-c3eb-40b0-97f7-7b4d1fc1361f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/brick/core/baseserver.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/brick/core/httphelper/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/brick/core/httphelper/request.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/brick/core/httphelper/response.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/brick/core/httphelper/util.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/brick/core/simpletemplate.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -590,7 +26,7 @@
     <SUITE FILE_PATH="coverage/mysite_diy$test.coverage" NAME="test Coverage Results" MODIFIED="1650364516287" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/brick/orm" />
     <SUITE FILE_PATH="coverage/mysite_diy$about.coverage" NAME="about Coverage Results" MODIFIED="1648452113041" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/mysite_diy$index.coverage" NAME="index Coverage Results" MODIFIED="1648610507635" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/mysite_diy$models.coverage" NAME="models Coverage Results" MODIFIED="1652360913315" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/views" />
+    <SUITE FILE_PATH="coverage/mysite_diy$models.coverage" NAME="models Coverage Results" MODIFIED="1669856628753" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/views" />
     <SUITE FILE_PATH="coverage/mysite_diy$peewee2_10_2.coverage" NAME="peewee2.10.2 Coverage Results" MODIFIED="1650587088649" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/brick/orm/orm0" />
     <SUITE FILE_PATH="coverage/mysite_diy$testdicthelper.coverage" NAME="testdicthelper Coverage Results" MODIFIED="1650327334916" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/mysite_diy$main.coverage" NAME="main Coverage Results" MODIFIED="1669855879519" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -627,11 +63,6 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/brick/core/db/databases.py">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/brick/core/db/felds.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-113">
@@ -643,45 +74,24 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/brick/orm/orm0/peewee3.14.py">
+        <entry file="file://$PROJECT_DIR$/brick/core/baseserver.py">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/db_logic.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1">
-              <caret line="30" selection-start-line="30" selection-end-line="30" />
-              <folding>
-                <element signature="e#632#647#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="113">
-              <caret line="29" column="34" lean-forward="true" selection-start-line="29" selection-start-column="34" selection-end-line="29" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/brick/core/httphelper/util.py">
+        <entry file="file://$PROJECT_DIR$/brick/core/db/modelquerys.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="5" column="20" lean-forward="true" selection-start-line="5" selection-start-column="20" selection-end-line="6" selection-end-column="23" />
+            <state relative-caret-position="-76">
+              <caret line="18" column="67" lean-forward="true" selection-start-line="18" selection-start-column="67" selection-end-line="18" selection-end-column="67" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html/menu_info.html">
+        <entry file="file://$PROJECT_DIR$/brick/orm/orm0/peewee3.14.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2717">
-              <caret line="143" column="34" selection-start-line="143" selection-start-column="34" selection-end-line="143" selection-end-column="34" />
+            <state relative-caret-position="-76">
+              <caret line="47" column="5" lean-forward="true" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -689,11 +99,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="570">
-              <caret line="32" selection-start-line="32" selection-end-line="32" />
-              <folding>
-                <element signature="e#629#663#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="143">
+              <caret line="182" column="48" lean-forward="true" selection-start-line="182" selection-start-column="48" selection-end-line="182" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -855,6 +262,20 @@
               <item name="mysite_diy" type="462c0819:PsiDirectoryNode" />
               <item name="brick" type="462c0819:PsiDirectoryNode" />
               <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="checks" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mysite_diy" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mysite_diy" type="462c0819:PsiDirectoryNode" />
+              <item name="brick" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="db" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mysite_diy" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mysite_diy" type="462c0819:PsiDirectoryNode" />
+              <item name="brick" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
               <item name="httphelper" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -925,7 +346,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.models">
     <configuration name="email_validcode" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="mysite_diy" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -970,7 +391,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="menu_info" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="models" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="mysite_diy" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -978,12 +399,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/views/system" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/views" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/views/system/menu_info.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/views/models.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -1038,11 +459,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.models" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.verify_helper" />
         <item itemvalue="Python.email_validcode" />
         <item itemvalue="Python.peewee206" />
-        <item itemvalue="Python.menu_info" />
       </list>
     </recent_temporary>
   </component>
@@ -1160,11 +581,18 @@
       <option name="project" value="LOCAL" />
       <updated>1662020004046</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="12.1">
+      <created>1669856092260</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1669856092262</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="588446000" />
+    <option name="totallyTimeSpent" value="589335000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -1178,7 +606,7 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.48907104" visible="true" weight="0.22671756" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.48907104" visible="true" weight="0.22671756" />
       <window_info id="Structure" order="1" sideWeight="0.510929" side_tool="true" weight="0.31603053" />
       <window_info id="Favorites" order="2" sideWeight="0.5093333" side_tool="true" weight="0.3038168" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -1188,7 +616,7 @@
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="5" sideWeight="0.49923664" weight="0.3291592" />
       <window_info anchor="bottom" id="Docker" order="6" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Run" order="7" sideWeight="0.49618322" visible="true" weight="0.32737032" />
+      <window_info anchor="bottom" id="Run" order="7" sideWeight="0.49618322" visible="true" weight="0.32737032" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49923664" weight="0.3452594" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" sideWeight="0.49923664" weight="0.3291592" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5038168" side_tool="true" weight="0.36314848" />
@@ -1307,8 +735,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="das://a8e688f5-8f73-4c24-843e-52b7e556fc49/database/simple_db/schema/public/table/department" />
-    <entry file="das://a8e688f5-8f73-4c24-843e-52b7e556fc49/database/simple_db/schema/public/table/positions" />
     <entry file="file://$PROJECT_DIR$/brick/contrib/except_helper.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -1533,13 +959,6 @@
     <entry file="file://$PROJECT_DIR$/brick/orm/databases.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/html/menu_info.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2717">
-          <caret line="143" column="34" selection-start-line="143" selection-start-column="34" selection-end-line="143" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/site-packages/django/contrib/messages/middleware.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
@@ -1564,16 +983,6 @@
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/94d652a1-612b-4a5c-9b1d-ec300a9f499d/console.sql">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
-          <folding>
-            <element signature="e#629#663#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/brick/apps/wsgiapp.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
@@ -1591,28 +1000,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/brick/core/db/databases.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/brick/core/db/felds.py">
+    <entry file="file://$PROJECT_DIR$/html/menu_info.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-113">
-          <folding>
-            <element signature="e#673#693#0" />
-          </folding>
+        <state relative-caret-position="276">
+          <caret line="143" column="34" selection-start-line="143" selection-start-column="34" selection-end-line="143" selection-end-column="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/brick/orm/orm0/peewee3.14.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/db_logic.py">
+    <entry file="file://$PROJECT_DIR$/views/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
-          <folding>
-            <element signature="e#632#647#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="143">
+          <caret line="182" column="48" lean-forward="true" selection-start-line="182" selection-start-column="48" selection-end-line="182" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brick/core/httphelper/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="19" column="38" lean-forward="true" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
         </state>
       </provider>
     </entry>
@@ -1623,10 +1028,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/brick/core/httphelper/util.py">
+    <entry file="file://$PROJECT_DIR$/views/db_logic.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="20" lean-forward="true" selection-start-line="5" selection-start-column="20" selection-end-line="6" selection-end-column="23" />
+        <state relative-caret-position="284">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+          <folding>
+            <element signature="e#632#647#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brick/orm/orm0/peewee3.14.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-76">
+          <caret line="47" column="5" lean-forward="true" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brick/core/db/databases.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-855" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brick/core/db/felds.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-113">
+          <folding>
+            <element signature="e#673#693#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brick/core/baseserver.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brick/core/db/modelquerys.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-76">
+          <caret line="18" column="67" lean-forward="true" selection-start-line="18" selection-start-column="67" selection-end-line="18" selection-end-column="67" />
         </state>
       </provider>
     </entry>
