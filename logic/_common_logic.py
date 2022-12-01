@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-from brick.apps.wsgiapp import request
+from brick.core.wsgiapp import request
 # from common import web_helper, string_helper
 from brick.contrib import string_helper, web_helper
 

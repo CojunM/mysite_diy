@@ -7112,7 +7112,7 @@ class ModelSelect(BaseModelSelect, Select):
             return super(ModelSelect, self).select(*fields)
         return self
 
-    def switch(self, ctx=None):
+    def get_parse_map(self, ctx=None):
         self._join_ctx = self.model if ctx is None else ctx
         return self
 
@@ -7958,13 +7958,54 @@ class Manager(BaseMode):
     manager_id = IntegerField(default=0,help_text='操作人员id')
     manager_name = TextField(help_text='操作人员姓名')
 
+class Positions(BaseMode):
+    id = IntegerField(null=False, default=0, help_text='主键Id')
+    name = TextField(help_text=' 职位名称')
+    department_id = IntegerField(null=False, default=0, help_text='部门自编号ID')
+    department_code = TextField(null=False, default='::', help_text=' 部门编号')
+    department_name = TextField(default='::', help_text=' 部门名称')
+    page_power = TextField(default='::', help_text='菜单操作权限，有操作权限的菜单ID列表：,1,2,3,4,5,')
+
+class Menu(BaseMode):
+    """
+    菜单
+    """
+    name = CharField(max_length=30, unique=True, verbose_name="菜单名")  # unique=True, 这个字段在表中必须有唯一值.
+    parent = ForeignKeyField("self", null=True, on_delete="SET_NULL", verbose_name="父菜单")
+    icon = CharField(max_length=50, null=True, verbose_name="图标")
+    code = CharField(max_length=50, null=True, verbose_name="编码")
+    url = CharField(max_length=128, unique=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = '菜单'
+        verbose_name_plural = verbose_name
+
+    @classmethod
+    def get_menu_by_request_url(cls, url):
+        return dict(menu=Menu.objects.get(url=url))
+
+class Role(BaseMode):
+    """
+    角色：用于权限绑定
+    """
+    name = CharField(max_length=32, unique=True, verbose_name="角色")
+    permissions = ManyToManyField(Menu)
+    desc = CharField(max_length=50, null=True, verbose_name="描述")
+
+
 if __name__ == "__main__":
     # new_user.create_table()
     # new_user.save()
     # r = new_user.select().where(new_user.name == 'LiMing').order_by(new_user.name)
     # print(r)
-    fields = {
-        'Manager.last_login_time': 'now()',
-        'Manager.login_count': 'login_count+1',
-    }
-    result = Manager.update(fields).where(Manager.login_name == 'admin1').execute()
+    # fields = {
+    #     'Manager.last_login_time': 'now()',
+    #     'Manager.login_count': 'login_count+1',
+    # }
+    # result = Manager.update(fields).where(Manager.login_name == 'admin1').execute()
+    Role.create_table()
+    Menu.create_table()
+    Role.permissions.get_through_model().create_table()

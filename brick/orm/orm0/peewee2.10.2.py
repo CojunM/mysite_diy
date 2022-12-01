@@ -2130,7 +2130,7 @@ class QueryCompiler(object):
 
         if query._having:
             clauses.extend([SQL('HAVING'), query._having])
-
+        # https: // zhuanlan.zhihu.com / p / 455084260
         if query._windows is not None:
             clauses.append(SQL('WINDOW'))
             clauses.append(CommaClause(*[
@@ -4105,7 +4105,7 @@ class Database(object):
             for f in fields]
         return self.execute_sql(*qc.drop_index(model_class, fobjs, safe))
 
-    def create_foreign_key(self, model_class, field, constraint=None):
+    def create_add_field(self, model_class, field, constraint=None):
         qc = self.compiler()
         return self.execute_sql(*qc.create_foreign_key(
             model_class, field, constraint))
@@ -5615,6 +5615,14 @@ class Manager(BaseMode):
     manager_id = IntegerField(default=0,help_text='操作人员id')
     manager_name = TextField(help_text='操作人员姓名')
 
+class Role(BaseMode):
+    """
+    角色：用于权限绑定
+    """
+    name = CharField(max_length=32, unique=True, verbose_name="角色")
+    # permissions = ManyToManyField(Menu)
+    desc = CharField(max_length=50, null=True, verbose_name="描述")
+
 
 # new_user = User(name='LiMingfdd', age="8")
 if __name__ == "__main__":
@@ -5624,8 +5632,14 @@ if __name__ == "__main__":
     # print(r)
     # p = new_user.delete().where(new_user.name == 'LiMing')
     # p.execute()
-    fields = {
-        'Manager.last_login_time': 'now()',
-        'Manager.login_count': 'login_count+1',
-    }
-    result = Manager.update(fields).where(Manager.login_name == 'admin1').execute()
+    # fields = {
+    #     'Manager.last_login_time': 'now()',
+    #     'Manager.login_count': 'login_count+1',
+    # }
+    # result = Manager.update(fields).where(Manager.login_name == 'admin1').execute()
+    #     fields = {
+    #     Manager.last_login_time:'now()',
+    #     Manager.login_count: Manager.login_count+1,
+    # }
+    # result = Manager.update(fields).where(Manager.login_name == 'admin').execute()
+    Role.create_table()

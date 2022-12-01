@@ -53,7 +53,7 @@ $.extend($.jgrid,{
 		    email: "ist keine gültige E-Mail-Adresse",
 		    integer: "Bitte geben Sie eine Ganzzahl ein",
 			date: "Bitte geben Sie ein gültiges Datum ein",
-			url: "ist keine gültige URL. Präfix muss eingegeben werden ('http://' oder 'https://')",
+			url: "ist keine gültige URL. Präfix muss eingegeben werden ('httphelper://' oder 'https://')",
 			nodefined : " ist nicht definiert!",
 			novalue : " Rückgabewert ist erforderlich!",
 			customarray : "Benutzerdefinierte Funktion sollte ein Array zurückgeben!",

@@ -5,10 +5,10 @@ from io import BytesIO
 
 # from common.except_helper import exception_handling
 # from common import verify_helper, log_helper, web_helper
-from brick.apps.wsgiapp import get
+from brick.core.wsgiapp import get
 from brick.contrib import verify_helper, web_helper, log_helper
 from brick.contrib.except_helper import exception_handling
-from brick.httphandles.response import response
+from brick.core.httphelper.response import response
 
 
 @get('/api/verify/')
@@ -32,8 +32,8 @@ def get_verify():
         return buffer.getvalue()
     except Exception as e:
         log_helper.error(str(e.args))
-
-@get('/api/verify1/')
-@exception_handling
-def get_verify():
-    code_img,shape_img, verify_code = verify_helper.GetPicVerify()
+#
+# @get('/api/verify/')
+# @exception_handling
+# def get_verify():
+#     code_img,shape_img, verify_code = verify_helper.GetPicVerify()

@@ -42,7 +42,7 @@ $.extend($.jgrid,{
 			email: "neteisingas el. pašto adresas",
 			integer: "Įveskite teisingą sveikąjį skaičių",
 			date: "Įveskite teisingą datą",
-			url: "blogas adresas. Nepamirškite pridėti ('http://' arba 'https://')",
+			url: "blogas adresas. Nepamirškite pridėti ('httphelper://' arba 'https://')",
 			nodefined : " nėra apibrėžta!",
 			novalue : " turi būti gražinama kokia nors reikšmė!",
 			customarray : "Custom f-ja turi grąžinti masyvą!",

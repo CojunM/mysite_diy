@@ -43,7 +43,7 @@ $.extend($.jgrid,{
 		    email: "není validní e-mail",
 		    integer: "Prosím, vložte celé číslo",
 			date: "Prosím, vložte validní datum",
-			url: "není platnou URL. Vyžadován prefix ('http://' or 'https://')",
+			url: "není platnou URL. Vyžadován prefix ('httphelper://' or 'https://')",
 			nodefined : " není definován!",
 			novalue : " je vyžadována návratová hodnota!",
 			customarray : "Custom function mělá vrátit pole!",

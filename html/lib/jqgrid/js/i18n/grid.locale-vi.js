@@ -42,7 +42,7 @@ $.extend($.jgrid,{
 			email: "không phải là một email đúng",
 			integer: "Hãy điền đúng số nguyên",
 			date: "Hãy điền đúng ngày tháng",
-			url: "không phải là URL. Khởi đầu bắt buộc là ('http://' hoặc 'https://')",
+			url: "không phải là URL. Khởi đầu bắt buộc là ('httphelper://' hoặc 'https://')",
 			nodefined : " chưa được định nghĩa!",
 			novalue : " giá trị trả về bắt buộc phải có!",
 			customarray : "Hàm nên trả về một mảng!",

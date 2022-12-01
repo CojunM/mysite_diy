@@ -42,7 +42,7 @@ $.extend($.jgrid,{
 	        email: "er ikke en gyldig email",
 	        integer: "Indtast venligst et gyldigt heltal",
 			date: "Indtast venligst en gyldig datoværdi",
-			url: "er ugyldig URL. Prefix mangler ('http://' or 'https://')",
+			url: "er ugyldig URL. Prefix mangler ('httphelper://' or 'https://')",
 			nodefined : " er ikke defineret!",
 			novalue : " returværdi kræves!",
 			customarray : "Custom function should return array!",

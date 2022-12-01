@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # coding=utf-8
-from brick.apps.wsgiapp import get, put
+from brick.core.wsgiapp import get, put
 from brick.contrib import web_helper, string_helper
 from brick.contrib.except_helper import exception_handling
 from brick.contrib.string_helper import string

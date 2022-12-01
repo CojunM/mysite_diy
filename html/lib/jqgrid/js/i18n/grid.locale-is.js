@@ -41,7 +41,7 @@ $.extend($.jgrid,{
 	        email: "er ekki löglegt email",
 	        integer: "Vinsamlega settu inn tölu",
 			date: "Vinsamlega setti inn dagsetningu",
-			url: "er ekki löglegt URL. Vantar ('http://' eða 'https://')",
+			url: "er ekki löglegt URL. Vantar ('httphelper://' eða 'https://')",
 			nodefined : " er ekki skilgreint!",
 			novalue : " skilagildi nauðsynlegt!",
 			customarray : "Fall skal skila fylki!",

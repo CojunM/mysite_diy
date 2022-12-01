@@ -2,8 +2,8 @@
 # coding=utf-8
 
 # from logic import infomation_logic, _common_logic
-from brick.apps.wsgiapp import get, put
-from brick.contrib import web_helper, string_helper
+from brick.core.wsgiapp import get, put
+from brick.contrib import web_helper
 from brick.contrib.except_helper import exception_handling
 
 

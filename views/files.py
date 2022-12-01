@@ -5,8 +5,8 @@ import os
 
 # from common import datetime_helper, random_helper, log_helper
 # from common.except_helper import exception_handling
-from brick.apps.wsgiapp import post
-from brick.httphandles.request import request
+from brick.core.wsgiapp import post
+from brick.core.httphelper.request import request
 from logic import _common_logic
 from brick.contrib.except_helper import exception_handling
 

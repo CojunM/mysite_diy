@@ -43,7 +43,7 @@ $.extend($.jgrid,{
 	        email: "no es una dirección de correo válida",
 	        integer: "Introduzca un valor entero",
 			date: "Introduza una fecha correcta ",
-			url: "no es una URL válida. Prefijo requerido ('http://' or 'https://')",
+			url: "no es una URL válida. Prefijo requerido ('httphelper://' or 'https://')",
 			nodefined : " no está definido.",
 			novalue : " valor de retorno es requerido.",
 			customarray : "La función personalizada debe devolver un array.",

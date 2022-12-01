@@ -3,7 +3,7 @@
 
 import json
 
-from brick.apps.wsgiapp import get, put, delete, post
+from brick.core.wsgiapp import get, put, delete, post
 from brick.contrib import convert_helper, web_helper
 from brick.contrib.except_helper import exception_handling
 from views import common_logic

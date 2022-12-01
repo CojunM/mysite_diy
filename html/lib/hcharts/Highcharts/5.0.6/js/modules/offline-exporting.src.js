@@ -347,7 +347,7 @@
                     ++imagesEmbedded;
 
                     // Change image href in chart copy
-                    callbackArgs.imageElement.setAttributeNS('http://www.w3.org/1999/xlink', 'href', imageURL);
+                    callbackArgs.imageElement.setAttributeNS('httphelper://www.w3.org/1999/xlink', 'href', imageURL);
 
                     // When done with last image we have our SVG
                     if (imagesEmbedded === images.length) {
@@ -384,7 +384,7 @@
                 // Go through the images we want to embed
                 for (i = 0, l = images.length; i < l; ++i) {
                     el = images[i];
-                    Highcharts.imageToDataUrl(el.getAttributeNS('http://www.w3.org/1999/xlink', 'href'), 'image/png', {
+                    Highcharts.imageToDataUrl(el.getAttributeNS('httphelper://www.w3.org/1999/xlink', 'href'), 'image/png', {
                             imageElement: el
                         }, options.scale,
                         embeddedSuccess,

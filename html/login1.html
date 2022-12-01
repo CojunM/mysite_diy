@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<!--suppress CssUnknownTarget -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--content的取值为webkit，ie-comp，ie-stand之一，区分大小写，分别代表用极速模式，兼容模式，IE模式打开。-->
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <!--在网页的<head>中增加下面这句话，可以让网页的宽度自动适应手机屏幕的宽度。-->
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <!--如第三方站点不希望某页面被转码，可在页面上添加以下协议，当用户通过移动搜索进入第三方网站时，会直接进入原网页。-->
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <!--[if lt IE 9]>
+    <! --html5shiv：解决ie9以下浏览器对html5新增标签的不识别，并导致CSS不起作用的问题。-->
+    <!--respond.min:让不支持css3 Media Query的浏览器包括IE6-IE8等其他浏览器支持查询。-->
+    　　
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.js"></script>
+    　　
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]—>
+    <!--解决IE6的PNG透明JS插件-->
+    <!--[if IE 6]>
+    <script type="text/javascript" src="/lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <!-- 新 Bootstrap5 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
+
+    <!--  popper.min.js 用于弹窗、提示、下拉菜单 -->
+    <script src="https://cdn.staticfile.org/popper.js/2.9.3/umd/popper.min.js"></script>
+
+    <!-- 最新的 Bootstrap5 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <!--<link href="/static/ui.admin/css/ui.login.css" rel="stylesheet" type="text/css"/>-->
+    <!--<link href="/static/ui.admin/css/style.css" rel="stylesheet" type="text/css"/>-->
+    <!--<script src="/static/ui.admin/js/captcha.js"></script>-->
+    <style>
+        html, body {
+            height: 100%
+        }
+
+        body {
+            font-size: 14px
+        }
+
+        .header, .footer {
+            position: absolute;
+            left: 0;
+            right: 0;
+            width: 100%;
+            z-index: 99
+        }
+
+        .header {
+            top: 0;
+            height: 60px;
+            line-height: 40px;
+            background: #426374;
+        }
+
+        .loginwraper {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            z-index: 1;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-image: url(../../static/ui.admin/images/admin-login-bg.jpg);
+            background-color: #3283AC;
+        }
+
+        .loginBox {
+            position: absolute;
+            width: 617px;
+            height: 330px;
+            background-repeat: no-repeat;
+            background-image: url(../../../static/ui.admin/images/admin-loginform-bg.png);
+            left: 50%;
+            top: 50%;
+            margin-left: -309px;
+            margin-top: -184px;
+            padding-top: 38px;
+        }
+
+        .footer {
+            height: 46px;
+            line-height: 46px;
+            bottom: 0;
+            text-align: center;
+            color: #fff;
+            font-size: 12px;
+            background-color: #426374
+        }
+
+        .drag {
+            width: 300px;
+            height: 40px;
+            line-height: 40px;
+            background-color: #e8e8e8;
+            position: relative;
+            margin: 10px auto;
+        }
+
+        .bg {
+            width: 40px;
+            height: 100%;
+            position: absolute;
+            background-color: aqua;
+        }
+
+        .text {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            text-align: center;
+            /* 不允许选中文字 */
+            user-select: none;
+        }
+
+        .btn {
+            box-sizing: border-box;
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            border: #ccc 1px solid;
+            cursor: move;
+            text-align: center;
+            /* 不允许选中文字 */
+            user-select: none;
+            color: #666;
+            background-color: white;
+            font-family: '宋体';
+        }
+    </style>
+    <title>后台登录</title>
+</head>
+<body><!--class="bg-dark bg-opacity-75 "-->
+
+<input type="hidden" id="TenantId" name="TenantId" value=""/>
+<div class="header  p-3"><h3>&nbsp;&nbsp;&nbsp;&nbsp;后台管理系统</h3></div>
+<div class="loginwraper ">
+    <div class="loginBox rounded d-flex   justify-content-center ">
+        <form>
+            <div class="text-center">
+                <h3 class="text-primary ">请登录</h3>
+            </div>
+            <div class="">
+                <div class="input-group mb-3">
+                     <span class="input-group-text "><i
+                                        class="bi bi-person-fill "></i></span>
+                    <input type="text" id="username" name="username" class="form-control" placeholder="用户名" required autofocus
+                           autofocus>
+                    <!--<input type="text" name="username" id="username"class="form-control" placeholder="用户名" required  oninvalid="setCustomValidity('不能为空')"  oninput="setCustomValidity('')" autofocus>-->
+                </div>
+                <div class="input-group mb-3">
+                                <span class="input-group-text "><i
+                                        class="bi bi-key-fill"></i></span>
+                    <input id="password" name="password" type="password" class="form-control" placeholder="密码" required>
+                </div>
+                <div class="drag">
+                    <div class="bg"></div>
+                    <div class="text">请拖动滑块验证</div>
+                    <div class="btn">&gt;&gt;</div>
+                </div>
+                  <div class="  text-center ">
+                                    <h5 id="msg" ></h5>
+                                </div>
+                <div class="  text-center mb-3">
+                    <button id="login_btn" disabled onclick="loginIn()" type="button"
+                            class="btn1 btn-primary float-right px-4  mt-2 ">登录
+                    </button>
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="footer">Copyright 你的公司名称 by admin v3.0</div>
+<!--<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>-->
+
+</body>
+<script>
+    /* 一、定义全局变量*/
+    //定义封装dom操作的$函数
+    var $1 = function (selector) {
+            return document.querySelector(selector);
+        },
+        box = $1(".drag"),//容器
+        bg = $1(".bg"),//背景
+        text = $1(".text"),//文字
+        btn = $1(".btn"),//滑块
+        success = false,//是否通过验证（默认）
+        distance = box.offsetWidth - btn.offsetWidth;//滑动成功的宽度（距离）
+
+    /*二、给滑块注册鼠标按下事件*/
+    btn.onmousedown = function (e) {
+
+        //1.鼠标按下之前必须清除掉后面设置的过渡属性，否则下一次拖动也会存在过渡
+        btn.style.transition = "";
+        bg.style.transition = "";
+
+        //2.当滑块位于初始位置时，得到鼠标按下时的水平位置
+        var e = e || window.event;
+        var downX = e.clientX;
+
+        /*三、给文档注册鼠标移动事件*/
+        document.onmousemove = function (e) {
+            var e = e || window.event;
+            //1.获取鼠标移动后的水平位置
+            var moveX = e.clientX;
+            //2.得到鼠标水平位置的偏移量（鼠标移动时的位置 - 鼠标按下时的位置）
+            var offsetX = moveX - downX;
+            //3.在这里判断一下：鼠标水平移动的距离 与 滑动成功的距离 之间的关系
+            if (offsetX > distance) {
+                offsetX = distance;//如果滑过了终点，就将它停留在终点位置
+            } else if (offsetX < 0) {
+                offsetX = 0;//如果滑到了起点的左侧，就将它重置为起点位置
+            }
+            //4.根据鼠标移动的距离来动态设置滑块的偏移量和背景颜色的宽度
+            btn.style.marginLeft = offsetX + "px";
+            bg.style.width = offsetX + "px";
+            //如果鼠标的水平移动距离 = 滑动成功的宽度
+            if (offsetX == distance) {
+
+                //1.设置滑动成功后的样式
+                text.innerHTML = "验证通过";
+                text.style.color = "#fff";
+                btn.innerHTML = "&radic;";
+                btn.style.color = "green";
+                bg.style.backgroundColor = "lightgreen";
+
+                //2.设置滑动成功后的状态
+                success = true;
+                //成功后，清除掉鼠标按下事件和移动事件（因为移动时并不会涉及到鼠标松开事件）
+                btn.onmousedown = null;
+                document.onmousemove = null;
+
+                //3.成功验证后的回调函数(模拟djax请求)
+                setTimeout(function () {
+                    // alert('验证成功！');
+                    document.getElementById("login_btn").disabled = false;
+                }, 100);
+            }
+            /*四、给文档注册鼠标松开事件*/
+            document.onmouseup = function (e) {
+
+                //如果鼠标松开时，没有滑到了终点，则验证不通过
+                if (!success) {
+                    //将滑块复位（设置了1s的属性过渡效果）
+                    btn.style.marginLeft = 0;
+                    bg.style.width = 0;
+                    btn.style.transition = "all 1s";
+                    bg.style.transition = "all 1s";
+                }
+                //只要鼠标松开了，说明此时不需要拖动滑块了，那么就清除鼠标移动和松开事件。
+                document.onmousemove = null;
+                document.onmouseup = null;
+            }
+        }
+    }
+
+    /*
+    ajax({
+        type:'',//请求方式
+        url:'',//请求地址
+        asny:true, //是否异步
+        data:'',//数据
+        dType:'',//请求数据类型
+        success：function(response){},//执行成功的回调函数
+        error:function(status){}//执行失败的回调函数
+    })
+    参数json所需要的属性：
+        *type : string 可缺省，代表请求的方式(默认'GET')
+        *url ：string 不可缺省，代表请求的地址
+        *asny : boolean 可缺省，(默认'true')代表是否异步
+        *data : json代表需要传递的数据
+        *dType:data的数据类型
+        *success ：可缺省，function代表成功的回调函数,该函数第一个形参代表后台返回的数据
+        *error ：可缺省，function代表失败的回调函数,该函数第一个形参代表请求的状态码
+    */
+    function ajax1(obj) {
+        var type = obj.type || 'GET',//默认是GET
+            url = obj.url,
+            asny = obj.asny !== false,
+            data = '',
+            dType = obj.dataType || 'json',
+            success = obj.success,
+            error = obj.error;
+
+
+
+        var xhr=null;//创建XMLHttpRequest
+        if (window.XMLHttpRequest) {
+            // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+            xhr = new XMLHttpRequest();
+        }
+        else {
+            // IE6, IE5 浏览器执行代码
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+         // var param = ''
+        //处理data
+        // if (data != {} && data != null) {
+        for (var key in obj.data) {
+            data += key + '=' + obj.data[key] + '&';
+            // data= data.substring(0,data.length-1)
+            //  param = param + key + '=' +  obj.data[key] + '&';
+
+            // console.log(data)
+        }
+        // }
+        // data=param.substring(0,param.length-1)
+        data=data.substring(0,data.length-1)
+        // alert(data)
+        if (type.toUpperCase() == 'GET') {//处理GET
+            var d = new Date();
+            url += '?' + data + '_=' + d.getTime();//处理缓存问题
+            data = null;
+        }
+
+        //xhr监听
+        if (xhr!=null){
+            xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 ) {
+                if( xhr.status>=200  ){
+                      var response;
+                    if (dType == 'text' || dType == 'json') {
+                        if (dType == 'json') {//json
+                            response = JSON.parse(xhr.responseText);
+                        } else {//普通文本
+                            response = xhr.responseText;
+                        }
+                        } else {//XML
+                            response = xhr.responseXML;
+                        }
+                    success && success(response);//成功回调函数
+                      }else{
+                       //请求失败
+                     error && error(response);//失败回调函数console.log("请求失败")
+                      }
+
+            }
+
+        // alert(data)
+     }
+         xhr.open(type, url, asny);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');//设置请求头信息
+        xhr.send(data);//发送数据
+         }
+        else {
+        alert("Your browser does not support XMLHTTP.");
+         }
+    }
+
+    function loginIn() {
+        // e.preventDefault();
+        username = document.getElementById("username").value;
+        password = document.getElementById("password").value;
+        // debugger
+        ajax1({
+            type: 'POST',
+            url: "/api/login1/",
+            data: {'_method': 'put', 'username': username, 'password': password,},
+            dataType: 'json',
+            // withCredentials: true,
+            success: function (data) {
+                if (data && data.state > -1) {
+                    // $(location).attr('href', 'main');
+                    // alert(data.msg)
+                    location.href = ('desk');
+                }
+                else {
+                    document.getElementById("msg").innerHTML=data.msg;
+
+                }
+            },
+            error: function (data) {
+                if (data) {
+                    alert(data.msg);
+                }
+
+            }
+        });
+
+        // alert(username);
+        // $.ajax({
+        //                 type: 'POST',
+        //                 url: "/api/login1/",
+        //                data: {'_method': 'put', 'username': username, 'password': password},  //
+        //                 dataType: 'json',
+        //                 // withCredentials: true,
+        //                 success: function (data) {
+        //                     if(data && data.state>-1){
+        //                         // $(location).attr('href', 'main');
+        //                          $(location).prop('href', 'main');
+        //                     }
+        //                     else{
+        //                         $("#msg").html('').append(data.msg);
+        //
+        //                     }
+        //                 },
+        //                 error: function(data){
+        //                     if (data){
+        //                         alert(data.msg);
+        //                     }
+        //
+        //                 }
+        //             });
+    }
+
+    // document.getElementById("login_btn").onclick =function(e){
+    //    // if(e.preventDefault){
+    //    //     e.preventDefault();
+    //    //   }else{
+    //    //       window.event.returnValue = false;//IE
+    // 　　　　　//注意：这个地方是无法用return false代替的
+    //     　　　　//return false只能取消元素
+    //
+    //         // }
+    //     username = document.getElementById("username").value;
+    //     password = document.getElementById("password").value;
+    //     // alert(username);
+    //     ajax({          type: 'POST',
+    //                     url: "/api/login1/",
+    //                     data:{'_method': 'put', 'username': username, 'password': password,},
+    //                     dataType: 'json',
+    //                     // withCredentials: true,
+    //                     success: function (data) {
+    //                         if(data && data.state>-1){
+    //                             // $(location).attr('href', 'main');
+    //                             alert(data.msg)
+    //                             location.href=( 'main');
+    //                         }
+    //                         else{
+    //                             document.getElementById("msg").innerHTML(data.msg);
+    //
+    //                         }
+    //                     },
+    //                     error: function(data){
+    //                         if (data){
+    //                             alert(data.msg);
+    //                         }
+    //
+    //                     }
+    //                 })
+    // }
+</script>
+</html>

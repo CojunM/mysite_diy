@@ -42,7 +42,7 @@ $.extend($.jgrid,{
 			email: "nije ispravna email adresa, nije valjda da ne umiješ ukucati mail!?",
 			integer: "Ne zajebaji se unesi cjelobrojnu vrijednost ",
 			date: "Unesite ispravan datum",
-			url: "nije ispravan URL. Potreban je prefiks ('http://' or 'https://')",
+			url: "nije ispravan URL. Potreban je prefiks ('httphelper://' or 'https://')",
 			nodefined : " nije definisan!",
 			novalue : " zahtjevana je povratna vrijednost!",
 			customarray : "Prilagođena funkcija treba da vrati niz!",

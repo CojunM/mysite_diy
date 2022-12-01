@@ -41,7 +41,7 @@ $.extend($.jgrid,{
 			maxValue: "La valeur doit être inférieure ou égale à",
 			email: "n'est pas un email correct",
 			integer: "Saisissez un entier correct",
-			url: "n'est pas une adresse correcte. Préfixe requis ('http://' or 'https://')",
+			url: "n'est pas une adresse correcte. Préfixe requis ('httphelper://' or 'https://')",
 			nodefined : " n'est pas défini!",
 			novalue : " la valeur de retour est requise!",
 			customarray : "Une fonction personnalisée devrait retourner un tableau (array)!",

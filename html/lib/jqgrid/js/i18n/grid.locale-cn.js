@@ -45,7 +45,7 @@ $.extend($.jgrid,{
 			email: "这不是有效的e-mail地址",
 			integer: "请输入有效整数",
 			date: "请输入有效时间",
-			url: "无效网址。前缀必须为 ('http://' 或 'https://')",
+			url: "无效网址。前缀必须为 ('httphelper://' 或 'https://')",
 			nodefined : " 未定义！",
 			novalue : " 需要返回值！",
 			customarray : "自定义函数需要返回数组！",

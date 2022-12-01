@@ -9,7 +9,7 @@
 
 # import re
 #
-# from brick.templates.templateerror import TemplateError
+# from brick.template.templateerror import TemplateError
 #
 #
 # class SimpleTemplate(object):
@@ -141,10 +141,10 @@ from collections.abc import MutableMapping
 
 from Scripts.bottle import TemplateError
 
-from brick.httphandles.response import HTTPError
-from brick.utilities.cachehelper import cached_property
-from brick.utilities.encode import tounicode
-from brick.utilities.htmlescape import html_escape
+from brick.core.httphelper.response import HTTPError
+from brick.utils.cachehelper import cached_property
+from brick.utils.encode import tounicode
+from brick.utils.htmlescape import html_escape
 
 # './' 代表当前所在目录下的某个文件夹或文件
 TEMPLATE_PATH = ['./', './views/']
@@ -608,7 +608,7 @@ class StplParser(object):
         if self.lineno <= 2 and not line.strip() and 'coding' in comment:
             m = re.match(r"#.*coding[:=]\s*([-\w.]+)", comment)
             if m:
-                warnings.warn('PEP263 encoding strings in templates are deprecated.')  # 0.12
+                warnings.warn('PEP263 encoding strings in template are deprecated.')  # 0.12
                 enc = m.group(1)
                 self.source = self.source.encode(self.encoding).decode(enc)
                 self.encoding = enc

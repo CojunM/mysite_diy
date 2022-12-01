@@ -42,7 +42,7 @@ $.extend($.jgrid,{
 			email: "היא לא כתובת איימל תקינה",
 			integer: "אנא, הכנס מספר שלם",
 			date: "אנא, הכנס תאריך תקין",
-			url: "הכתובת אינה תקינה. דרושה תחילית ('http://' או 'https://')",
+			url: "הכתובת אינה תקינה. דרושה תחילית ('httphelper://' או 'https://')",
 			nodefined : " is not defined!",
 			novalue : " return value is required!",
 			customarray : "Custom function should return array!",

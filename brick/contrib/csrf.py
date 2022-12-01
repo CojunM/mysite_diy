@@ -10,9 +10,9 @@ import functools
 # from .common import to_unicode
 from bottle import abort
 
-from brick.httphandles.request import request
-from brick.httphandles.response import response
-from brick.utilities.encode import tounicode
+from brick.core.httphelper.request import request
+from brick.core.httphelper.response import response
+from brick.utils.encode import tounicode
 
 ROOT = '/'
 CSRF_TOKEN = '_csrf_token'

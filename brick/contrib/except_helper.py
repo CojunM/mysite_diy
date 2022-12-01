@@ -4,7 +4,7 @@
 import os
 import sys
 from brick.contrib import log_helper, web_helper
-from brick.httphandles.response import HTTPResponse
+from brick.core.httphelper.response import HTTPResponse
 
 
 def detailtrace():

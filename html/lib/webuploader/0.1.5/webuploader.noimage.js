@@ -3619,7 +3619,7 @@
                     block.retried = block.retried || 0;
     
                     // 自动重试
-                    if ( block.chunks > 1 && ~'http,abort'.indexOf( type ) &&
+                    if ( block.chunks > 1 && ~'httphelper,abort'.indexOf( type ) &&
                             block.retried < opts.chunkRetry ) {
     
                         block.retried++;
@@ -3627,7 +3627,7 @@
     
                     } else {
     
-                        // http status 500 ~ 600
+                        // httphelper status 500 ~ 600
                         if ( !flag && type === 'server' ) {
                             type = requestAccept( type );
                         }
@@ -4580,7 +4580,7 @@
                     }
     
     
-                    return me.trigger( 'error', me._status ? 'http' : 'abort' );
+                    return me.trigger( 'error', me._status ? 'httphelper' : 'abort' );
                 };
     
                 me._xhr = xhr;
@@ -4924,7 +4924,7 @@
                         readBody = true;
                         err = 'server';
                     } else {
-                        err = 'http';
+                        err = 'httphelper';
                     }
     
                     if ( readBody ) {
@@ -4957,7 +4957,7 @@
                 xhr.on( 'error', function() {
                     xhr.off();
                     me._xhr = null;
-                    me.trigger( 'error', 'http' );
+                    me.trigger( 'error', 'httphelper' );
                 });
     
                 me._xhr = xhr;

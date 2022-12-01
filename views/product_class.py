@@ -5,7 +5,7 @@ import json
 # from common import web_helper, db_helper, convert_helper, json_helper
 # from common.string_helper import string
 # from common.except_helper import exception_handling
-from brick.apps.wsgiapp import get, post, put, delete
+from brick.core.wsgiapp import get, post, put, delete
 from logic import product_class_logic, product_logic, _common_logic
 from brick.contrib.except_helper import exception_handling
 

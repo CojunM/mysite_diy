@@ -42,7 +42,7 @@ $.extend($.jgrid,{
 			email: "nu este o adresă de e-mail validă",
 			integer: "Vă rugăm introduceți un număr valid",
 			date: "Vă rugăm să introduceți o dată validă",
-			url: "Nu este un URL valid. Prefixul  este necesar('http://' or 'https://')",
+			url: "Nu este un URL valid. Prefixul  este necesar('httphelper://' or 'https://')",
 			nodefined : " is not defined!",
 			novalue : " return value is required!",
 			customarray : "Custom function should return array!",

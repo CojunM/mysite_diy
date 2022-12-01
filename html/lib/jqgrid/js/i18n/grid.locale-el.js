@@ -41,7 +41,7 @@ $.extend($.jgrid,{
 	        maxValue:"Η τιμή πρέπει να είναι μικρότερη ή ίση του ",
 	        email: "Η διεύθυνση e-mail δεν είναι έγκυρη",
 	        integer: "Το πεδίο δέχεται μόνο ακέραιους αριθμούς",
-			url: "is not a valid URL. Prefix required ('http://' or 'https://')",
+			url: "is not a valid URL. Prefix required ('httphelper://' or 'https://')",
 			nodefined : " is not defined!",
 			novalue : " return value is required!",
 			customarray : "Custom function should return array!",

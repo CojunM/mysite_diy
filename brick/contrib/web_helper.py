@@ -7,8 +7,8 @@ import urllib.parse
 
 
 from brick.contrib import json_helper
-from brick.httphandles.request import request
-from brick.httphandles.response import response, HTTPResponse
+from brick.core.httphelper.request import request
+from brick.core.httphelper.response import response, HTTPResponse
 
 
 def get_ip():
@@ -109,7 +109,7 @@ def get_query(args_name, msg, is_strip=True, lenght=0, is_check_null=True, notif
 def __get(args_name):
     """
     从get请求中提取请求值（直接使用python的GET获取参数时，有时转换编码时会出现乱码，所以还是直接采用截取后直接转码比较好）
-    例如：http://127.0.0.1:81/manage/manager/?page=0&rows=20&sidx=id&sord=desc&name=%E5%BC%A0%E4%B8%89
+    例如：httphelper://127.0.0.1:81/manage/manager/?page=0&rows=20&sidx=id&sord=desc&name=%E5%BC%A0%E4%B8%89
     :param args_name: 要取值的参数名：name
     :return: 截取的编码值：%E5%BC%A0%E4%B8%89
     """

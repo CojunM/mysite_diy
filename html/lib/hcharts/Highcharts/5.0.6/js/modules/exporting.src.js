@@ -187,7 +187,7 @@
                         html = '<foreignObject x="0" y="0" ' +
                             'width="' + options.chart.width + '" ' +
                             'height="' + options.chart.height + '">' +
-                            '<body xmlns="http://www.w3.org/1999/xhtml">' +
+                            '<body xmlns="httphelper://www.w3.org/1999/xhtml">' +
                             html[1] +
                             '</body>' +
                             '</foreignObject>';
@@ -202,7 +202,7 @@
                     .replace(/jQuery[0-9]+="[^"]+"/g, '')
                     .replace(/url\(("|&quot;)(\S+)("|&quot;)\)/g, 'url($2)')
                     .replace(/url\([^#]+#/g, 'url(#')
-                    .replace(/<svg /, '<svg xmlns:xlink="http://www.w3.org/1999/xlink" ')
+                    .replace(/<svg /, '<svg xmlns:xlink="httphelper://www.w3.org/1999/xlink" ')
                     .replace(/ (NS[0-9]+\:)?href=/g, ' xlink:href=') // #3567
                     .replace(/\n/, ' ')
                     // Any HTML added to the container after the SVG (#894)

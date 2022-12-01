@@ -43,7 +43,7 @@ $.extend($.jgrid,{
 			email: "hibás emailcím",
 			integer: "Kérjük adjon meg egy helyes egész számot",
 			date: "Kérjük adjon meg egy helyes dátumot",
-			url: "nem helyes cím. Előtag kötelező ('http://' vagy 'https://')",
+			url: "nem helyes cím. Előtag kötelező ('httphelper://' vagy 'https://')",
 			nodefined : " nem definiált!",
 			novalue : " visszatérési érték kötelező!!",
 			customarray : "Custom function should return array!",

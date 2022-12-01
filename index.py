@@ -6,18 +6,13 @@
 # @File    : index.py
 # @Project : mysite_diy
 # @Software: PyCharm
-import json
-import re
-from xml.dom.minidom import Document
 
-from pip._vendor import requests
-
-from brick.apps.wsgiapp import route, server_run, default_app, static_file, hook
+from brick.core.wsgiapp import route, server_run, default_app, static_file, hook
 from os.path import abspath, join, dirname
 
 from brick.contrib.sessions.middleware import SessionMiddleware
-from brick.httphandles.request import request
-from brick.templates.simpletemplate import template, TEMPLATE_PATH
+from brick.core.httphelper.request import request
+from brick.core.simpletemplate import template, TEMPLATE_PATH
 
 # from beaker.middleware import SessionMiddleware
 # from bottle import route, run, default_app, static_file, template, TEMPLATE_PATH
@@ -121,9 +116,12 @@ def test():
     s.save()
     return 'Test conter: %d' % s['test']
 
+
 @hook('before_request')
 def whoop():
     print("whoop!")
+
+
 @route('/clear')
 def test():
     s = request.environ.get('web.session')
@@ -131,6 +129,7 @@ def test():
     print('web.session del: ', s)
     s.delete()
     return 'Delete conter: %d' % dl
+
 
 # 函数主入口
 if __name__ == '__main__':

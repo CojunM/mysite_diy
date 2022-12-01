@@ -6,7 +6,7 @@
 # @File    : 123.py
 # @Project : WebFrame
 # @Software: PyCharm
-from brick.apps.wsgiapp import server_run, route
+from brick.core.wsgiapp import server_run, route
 
 
 @route('/hello/<id:int>')

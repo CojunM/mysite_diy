@@ -25,11 +25,9 @@
 import operator
 from functools import reduce
 
-from bottle import request
-
 from brick.contrib import cache_helper, encrypt_helper
-# from brick.httphandles import request
-from brick.orm.felds import fn
+# from brick.httphelper import request
+from brick.core.db.felds import fn
 
 
 class db_logic:

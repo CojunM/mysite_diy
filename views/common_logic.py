@@ -2,7 +2,7 @@
 # coding=utf-8
 
 from brick.contrib import string_helper, web_helper
-from brick.httphandles.request import request
+from brick.core.httphelper.request import request
 
 from views.db_logic import db_logic
 from views.models import Menu_info, Positions

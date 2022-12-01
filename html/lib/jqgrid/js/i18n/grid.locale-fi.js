@@ -43,7 +43,7 @@ $.extend($.jgrid,{
 	        email: "ei ole kelvollinen s&auml;postiosoite",
 	        integer: "Anna kelvollinen kokonaisluku",
 			date: "Anna kelvollinen pvm",
-			url: "Ei ole kelvollinen linkki(URL). Alku oltava ('http://' tai 'https://')",
+			url: "Ei ole kelvollinen linkki(URL). Alku oltava ('httphelper://' tai 'https://')",
 			nodefined: " ei ole m&auml;&auml;ritelty!",
 			novalue: " paluuarvo vaaditaan!",
 			customarray: "Oman funktion tulee palauttaa jono!",

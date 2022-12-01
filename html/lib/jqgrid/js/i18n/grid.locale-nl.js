@@ -38,7 +38,7 @@ a.extend(a.jgrid,{
                 email: "is geen geldig e-mailadres",
                 integer: "Voer a.u.b. een geldig getal in",
                 date: "Voer a.u.b. een geldige waarde in",
-                url: "is geen geldige URL. Prefix is verplicht ('http://' or 'https://')",
+                url: "is geen geldige URL. Prefix is verplicht ('httphelper://' or 'https://')",
                 nodefined : " is not defined!",
                 novalue : " return value is required!",
                 customarray : "Custom function should return array!",

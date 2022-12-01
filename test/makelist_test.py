@@ -33,4 +33,4 @@ if __name__ == '__main__':
     test_list([1, 2, 3])
     test_tuple((1, 2, 3, 4))
     test_dict({"name": "hongming", "age": "18"})
-    test_str('http://127.0.0.1:8080/hello%E4%B8%AD')
+    test_str('httphelper://127.0.0.1:8080/hello%E4%B8%AD')

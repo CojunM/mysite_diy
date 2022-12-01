@@ -41,7 +41,7 @@ $.extend($.jgrid,{
 	        maxValue:"girilen değer daha küçük ya da buna eşit olmalıdır",
 	        email: "geçerli bir e-posta adresi değildir",
 	        integer: "Lütfen bir tamsayı giriniz",
-			url: "Geçerli bir URL değil. ('http://' or 'https://') ön eki gerekli.",
+			url: "Geçerli bir URL değil. ('httphelper://' or 'https://') ön eki gerekli.",
 			nodefined : " is not defined!",
 			novalue : " return value is required!",
 			customarray : "Custom function should return array!",

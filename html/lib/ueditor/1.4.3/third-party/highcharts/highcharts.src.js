@@ -38,7 +38,7 @@ var UNDEFINED,
 	isWebKit = /AppleWebKit/.test(userAgent),
 	isFirefox = /Firefox/.test(userAgent),
 	isTouchDevice = /(Mobile|Android|Windows Phone)/.test(userAgent),
-	SVG_NS = 'http://www.w3.org/2000/svg',
+	SVG_NS = 'httphelper://www.w3.org/2000/svg',
 	hasSVG = !!doc.createElementNS && !!doc.createElementNS(SVG_NS, 'svg').createSVGRect,
 	hasBidiBug = isFirefox && parseInt(userAgent.split('Firefox/')[1], 10) < 4, // issue #38
 	useCanVG = !hasSVG && !isIE && !!doc.createElement('canvas').getContext,
@@ -1508,8 +1508,8 @@ defaultOptions = {
 	},
 	global: {
 		useUTC: true,
-		canvasToolsURL: 'http://code.highcharts.com/3.0.6/modules/canvas-tools.js',
-		VMLRadialGradientURL: 'http://code.highcharts.com/3.0.6/gfx/vml-radial-gradient.png'
+		canvasToolsURL: 'httphelper://code.highcharts.com/3.0.6/modules/canvas-tools.js',
+		VMLRadialGradientURL: 'httphelper://code.highcharts.com/3.0.6/gfx/vml-radial-gradient.png'
 	},
 	chart: {
 		//animation: true,
@@ -1787,7 +1787,7 @@ defaultOptions = {
 	credits: {
 		enabled: true,
 		text: 'Highcharts.com',
-		href: 'http://www.highcharts.com',
+		href: 'httphelper://www.highcharts.com',
 		position: {
 			align: 'right',
 			x: -10,
@@ -3685,7 +3685,7 @@ SVGRenderer.prototype = {
 
 		// set the href in the xlink namespace
 		if (elemWrapper.element.setAttributeNS) {
-			elemWrapper.element.setAttributeNS('http://www.w3.org/1999/xlink',
+			elemWrapper.element.setAttributeNS('httphelper://www.w3.org/1999/xlink',
 				'href', src);
 		} else {
 			// could be exporting in IE
@@ -5705,7 +5705,7 @@ if (useCanVG) {
 	 */
 	Highcharts.CanVGRenderer = CanVGRenderer = function () {
 		// Override the global SVG namespace to fake SVG/HTML that accepts CSS
-		SVG_NS = 'http://www.w3.org/1999/xhtml';
+		SVG_NS = 'httphelper://www.w3.org/1999/xhtml';
 	};
 
 	/**

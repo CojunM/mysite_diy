@@ -936,8 +936,8 @@
                 return;
             }
 
-            var titleElement = doc.createElementNS('http://www.w3.org/2000/svg', 'title'),
-                exportGroupElement = doc.createElementNS('http://www.w3.org/2000/svg', 'g'),
+            var titleElement = doc.createElementNS('httphelper://www.w3.org/2000/svg', 'title'),
+                exportGroupElement = doc.createElementNS('httphelper://www.w3.org/2000/svg', 'g'),
                 descElement = chart.container.getElementsByTagName('desc')[0],
                 textElements = chart.container.getElementsByTagName('text'),
                 titleId = 'highcharts-title-' + chart.index,

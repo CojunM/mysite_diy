@@ -6914,7 +6914,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
                 container.style.zIndex = options.zIndex;
 
                 var html = ( ie && browser.version < 9  ? '' : '<!DOCTYPE html>') +
-                    '<html xmlns=\'http://www.w3.org/1999/xhtml\' class=\'view\' ><head>' +
+                    '<html xmlns=\'httphelper://www.w3.org/1999/xhtml\' class=\'view\' ><head>' +
                     '<style type=\'text/css\'>' +
                     //设置四周的留边
                     '.view{padding:0;word-wrap:break-word;cursor:text;height:90%;}\n' +
@@ -7267,7 +7267,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
                 });
 
             }
-            return '<html><head>' + (me.options.charset ? '<meta http-equiv="Content-Type" content="text/html; charset=' + me.options.charset + '"/>' : '')
+            return '<html><head>' + (me.options.charset ? '<meta httphelper-equiv="Content-Type" content="text/html; charset=' + me.options.charset + '"/>' : '')
                 + (headHtmlForIE9 || me.document.getElementsByTagName('head')[0].innerHTML) + headHtml.join('\n') + '</head>'
                 + '<body ' + (ie && browser.version < 9 ? 'class="view"' : '') + '>' + me.getContent(null, null, true) + '</body></html>';
         },
@@ -14973,7 +14973,7 @@ UE.plugins['list'] = function () {
             'dot':''
         },
         listDefaultPaddingLeft : '30',
-        listiconpath : 'http://bs.baidu.com/listicon/',
+        listiconpath : 'httphelper://bs.baidu.com/listicon/',
         maxListLevel : -1,//-1不限制
         disablePInList:false
     } );
@@ -17279,7 +17279,7 @@ UE.plugin.register('autolink',function(){
                             a.appendChild(range.extractContents());
                             a.href = a.innerHTML = a.innerHTML.replace(/<[^>]+>/g,'');
                             href = a.getAttribute("href").replace(new RegExp(domUtils.fillChar,'g'),'');
-                            href = /^(?:https?:\/\/)/ig.test(href) ? href : "http://"+ href;
+                            href = /^(?:https?:\/\/)/ig.test(href) ? href : "httphelper://"+ href;
                             a.setAttribute('_src',utils.html(href));
                             a.href = utils.html(href);
 
@@ -17657,7 +17657,7 @@ UE.plugins['video'] = function (){
                     ' src="' + me.options.UEDITOR_HOME_URL+'themes/default/images/spacer.gif" style="background:url('+me.options.UEDITOR_HOME_URL+'themes/default/images/videologo.gif) no-repeat center center; border:1px solid gray;'+(align ? 'float:' + align + ';': '')+'" />'
                 break;
             case 'embed':
-                str = '<embed type="application/x-shockwave-flash" class="' + classname + '" pluginspage="http://www.macromedia.com/go/getflashplayer"' +
+                str = '<embed type="application/x-shockwave-flash" class="' + classname + '" pluginspage="httphelper://www.macromedia.com/go/getflashplayer"' +
                     ' src="' +  utils.html(url) + '" width="' + width  + '" height="' + height  + '"'  + (align ? ' style="float:' + align + '"': '') +
                     ' wmode="transparent" play="true" loop="false" menu="false" allowscriptaccess="never" allowfullscreen="true" >';
                 break;
@@ -23659,7 +23659,7 @@ UE.plugin.register('music', function (){
                     ' width="'+ width +'" height="' + height + '" _url="'+url+'" class="edui-faked-music"' +
                     ' src="'+me.options.langPath+me.options.lang+'/images/music.png" />'
             :
-            '<embed type="application/x-shockwave-flash" class="edui-faked-music" pluginspage="http://www.macromedia.com/go/getflashplayer"' +
+            '<embed type="application/x-shockwave-flash" class="edui-faked-music" pluginspage="httphelper://www.macromedia.com/go/getflashplayer"' +
                 ' src="' + url + '" width="' + width  + '" height="' + height  + '" '+ (align && !cssfloat? 'align="' + align + '"' : '') +
                 (cssfloat ? 'style="float:' + cssfloat + '"' : '') +
                 ' wmode="transparent" play="true" loop="false" menu="false" allowscriptaccess="never" allowfullscreen="true" >';
@@ -28883,13 +28883,13 @@ UE.ui = baidu.editor.ui = {};
                         if (img.className.indexOf("edui-faked-webapp") != -1) {
                             dialogName = "webappDialog"
                         }
-                        if (img.src.indexOf("http://api.map.baidu.com") != -1) {
+                        if (img.src.indexOf("httphelper://api.map.baidu.com") != -1) {
                             dialogName = "mapDialog"
                         }
                         if (img.className.indexOf("edui-faked-music") != -1) {
                             dialogName = "musicDialog"
                         }
-                        if (img.src.indexOf("http://maps.google.com/maps/api/staticmap") != -1) {
+                        if (img.src.indexOf("httphelper://maps.google.com/maps/api/staticmap") != -1) {
                             dialogName = "gmapDialog"
                         }
                         if (img.getAttribute("anchorname")) {

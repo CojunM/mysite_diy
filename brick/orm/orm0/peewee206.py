@@ -1122,7 +1122,7 @@ class Query(object):
             (mc, list(j)) for mc, j in self._joins.items()
         )
 
-    # @returns_clone
+    @returns_clone
     def where(self, *q_or_node):
         print('*q_or_node ', q_or_node)
         if self._where is None:
@@ -1942,10 +1942,10 @@ class BaseModel(type):
         cls._data = None
 
         primary_key = None
-
+        cls._meta.indexes = list(cls._meta.indexes)
         # replace the fields with field descriptors, calling the add_to_class hook
         for name, attr in cls.__dict__.items():
-            cls._meta.indexes = list(cls._meta.indexes)
+
             if isinstance(attr, Field):
                 attr.add_to_class(cls, name)
                 if attr.primary_key:

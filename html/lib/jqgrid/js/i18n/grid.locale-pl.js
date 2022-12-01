@@ -47,7 +47,7 @@ $.extend($.jgrid,{
 			email: "nie jest poprawnym adresem e-mail",
 			integer: "Proszę wpisać poprawną liczbę",
 			date: "Proszę podaj poprawną datę",
-			url: "jest niewłaściwym adresem URL. Pamiętaj o prefiksie ('http://' lub 'https://')",
+			url: "jest niewłaściwym adresem URL. Pamiętaj o prefiksie ('httphelper://' lub 'https://')",
 			nodefined: " niezdefiniowane!",
 			novalue: " wymagana jest wartość zwracana!",
 			customarray: "Funkcja niestandardowa powinna zwracać tablicę!",

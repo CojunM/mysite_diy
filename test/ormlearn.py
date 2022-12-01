@@ -987,7 +987,7 @@ class ModelOptions(object):
         return dd
 
     def get_sorted_fields(self):
-        # lambda (k,v)python3不支持  http: // www.voidcn.com / article / p - hzlltdtw - bd.html
+        # lambda (k,v)python3不支持  httphelper: // www.voidcn.com / article / p - hzlltdtw - bd.html
         # return sorted(self.fields.items(), key=lambda (k,v): (v is self.primary_key and 1 or 2, v._order))
         return sorted(self.fields.items(), key=lambda k_v: (k_v[1] is self.primary_key and 1 or 2, k_v[1]._order))
 

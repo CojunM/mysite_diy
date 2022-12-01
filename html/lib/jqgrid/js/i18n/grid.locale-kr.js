@@ -42,7 +42,7 @@ $.extend($.jgrid,{
 			email: "유효하지 않은 이메일주소입니다",
 			integer: "유효한 숫자를 입력하세요",
 			date: "유효한 날짜를 입력하세요",
-			url: "은 유효하지 않은 URL입니다. 문장앞에 다음단어가 필요합니다('http://' or 'https://')",
+			url: "은 유효하지 않은 URL입니다. 문장앞에 다음단어가 필요합니다('httphelper://' or 'https://')",
 			nodefined : " 은 정의도지 않았습니다!",
 			novalue : " 반환값이 필요합니다!",
 			customarray : "사용자정의 함수는 배열을 반환해야 합니다!",

@@ -40,7 +40,7 @@ $.extend($.jgrid,{
 	        maxValue:"O valor deve ser menor ou igual a",
 	        email: "N�o � um endere�o de email v�lido",
 	        integer: "Por favor, introduza um numero inteiro",
-			url: "is not a valid URL. Prefix required ('http://' or 'https://')",
+			url: "is not a valid URL. Prefix required ('httphelper://' or 'https://')",
 			nodefined : " is not defined!",
 			novalue : " return value is required!",
 			customarray : "Custom function should return array!",

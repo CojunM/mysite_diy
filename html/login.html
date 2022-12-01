@@ -46,16 +46,16 @@
                     <img style="width: 100px;height: 40px;padding: 0px;vertical-align:middle" id="verifycode" src="/api/verify/" onclick="get_verify()"> <a
                         href="javascript:;" onclick="get_verify()">看不清，换一张</a></div>
             </div>
-            <div class="row cl">
-                <!--<div class="formControls col-xs-8 col-xs-offset-3">
-                    <label for="online">
-                        <input type="checkbox" name="online" id="online" value="">
-                        记住账号</label>
-                </div>-->
+                <!--<div class="row cl">-->
+                    <!--<div class="formControls col-xs-8 col-xs-offset-3">-->
+                        <!--<label for="online">-->
+                            <!--<input type="checkbox" name="online" id="online" value="">-->
+                            <!--记住账号</label>-->
+                    <!--</div>-->
                 <div>
                     <h5 class="formControls col-xs-8 col-xs-offset-3"><span id="msg" style="color:#F00"></span></h5>
                 </div>
-            </div>
+
             <div class="row cl">
                 <div class="formControls col-xs-8 col-xs-offset-3">
                     <input id="login_btn" type="submit" class="btn btn-success radius size-L"
@@ -70,6 +70,8 @@
 <script type="text/javascript" src="/static/h-ui/js/H-ui.min.js"></script>
 <script type="text/javascript" src="/lib/common.js"></script>
 <script>
+
+
     $(function () {
         $("#login_btn").click(function (e) {
             e.preventDefault();
@@ -84,11 +86,11 @@
             } else {
                 username = $("#username").val();
                 password = $("#password").val();
-                verify = $("#verify").val();
+                 verify = $("#verify").val();
                 $.ajax({
                     type: 'POST',
                     url: "/api/login/",
-                    data: {'_method': 'put', 'username': username, 'password': password, 'verify': verify},
+                   data: {'_method': 'put', 'username': username, 'password': password, 'verify': verify},  //
                     dataType: 'json',
                     // withCredentials: true,
                     success: function (data) {

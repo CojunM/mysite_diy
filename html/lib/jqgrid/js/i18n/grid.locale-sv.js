@@ -42,7 +42,7 @@ $.extend($.jgrid,{
 	        email: "är inte korrekt e-post adress",
 	        integer: "Var god ange korrekt heltal",
 	        date: "Var god ange korrekt datum",
-	        url: "är inte en korrekt URL. Prefix måste anges ('http://' or 'https://')",
+	        url: "är inte en korrekt URL. Prefix måste anges ('httphelper://' or 'https://')",
 	        nodefined : " är inte definierad!",
 	        novalue : " returvärde måste anges!",
 	        customarray : "Custom funktion måste returnera en vektor!",
