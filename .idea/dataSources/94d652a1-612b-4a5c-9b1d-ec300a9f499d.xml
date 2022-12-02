@@ -14,7 +14,7 @@
       <ObjectId>24955</ObjectId>
       <StateNumber>1702</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>1944</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2056</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
       <Relations>sequence|table|24969|24956|1
@@ -25,6 +25,9 @@ sequence|table|25041|25024|1
 sequence|table|25054|25043|1
 sequence|table|25081|25072|1
 sequence|table|25083|25056|1
+sequence|table|25256|25258|1
+sequence|table|25265|25267|1
+sequence|table|25281|25283|1
 </Relations>
     </database>
     <role id="4" parent="1" name="pg_monitor">
@@ -95,7 +98,7 @@ sequence|table|25083|25056|1
       <Comment>standard public schema</Comment>
       <StateNumber>1882</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>1945</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2057</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -187,7 +190,15 @@ sequence|table|25083|25056|1
       <CacheSize>1</CacheSize>
       <DataType>bigint</DataType>
     </sequence>
-    <sequence id="27" parent="15" name="menu_info_id_seq">
+    <sequence id="27" parent="15" name="menu_id_seq">
+      <ObjectId>25265</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>2039</StateNumber>
+      <SequenceIdentity>1..2147483647</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>integer</DataType>
+    </sequence>
+    <sequence id="28" parent="15" name="menu_info_id_seq">
       <ObjectId>25041</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>1785</StateNumber>
@@ -195,7 +206,7 @@ sequence|table|25083|25056|1
       <CacheSize>1</CacheSize>
       <DataType>bigint</DataType>
     </sequence>
-    <sequence id="28" parent="15" name="positions_id_seq">
+    <sequence id="29" parent="15" name="positions_id_seq">
       <ObjectId>25054</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>1797</StateNumber>
@@ -203,7 +214,7 @@ sequence|table|25083|25056|1
       <CacheSize>1</CacheSize>
       <DataType>bigint</DataType>
     </sequence>
-    <sequence id="29" parent="15" name="product_class_id_seq">
+    <sequence id="30" parent="15" name="product_class_id_seq">
       <ObjectId>25081</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>1821</StateNumber>
@@ -211,7 +222,7 @@ sequence|table|25083|25056|1
       <CacheSize>1</CacheSize>
       <DataType>bigint</DataType>
     </sequence>
-    <sequence id="30" parent="15" name="product_id_seq">
+    <sequence id="31" parent="15" name="product_id_seq">
       <ObjectId>25083</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>1824</StateNumber>
@@ -219,55 +230,86 @@ sequence|table|25083|25056|1
       <CacheSize>1</CacheSize>
       <DataType>bigint</DataType>
     </sequence>
-    <table id="31" parent="15" name="department">
+    <sequence id="32" parent="15" name="role_id_seq">
+      <ObjectId>25256</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>2037</StateNumber>
+      <SequenceIdentity>1..2147483647</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>integer</DataType>
+    </sequence>
+    <sequence id="33" parent="15" name="role_menu_through_id_seq">
+      <ObjectId>25281</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>2043</StateNumber>
+      <SequenceIdentity>1..2147483647</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>integer</DataType>
+    </sequence>
+    <table id="34" parent="15" name="department">
       <ObjectId>24956</ObjectId>
       <Comment>部门管理表</Comment>
       <Owner>postgres</Owner>
       <StateNumber>1704</StateNumber>
     </table>
-    <table id="32" parent="15" name="infomation">
+    <table id="35" parent="15" name="infomation">
       <ObjectId>24971</ObjectId>
       <Comment>信息表</Comment>
       <Owner>postgres</Owner>
       <StateNumber>1718</StateNumber>
     </table>
-    <table id="33" parent="15" name="manager">
+    <table id="36" parent="15" name="manager">
       <ObjectId>24983</ObjectId>
       <Comment>管理员管理表</Comment>
       <Owner>postgres</Owner>
       <StateNumber>1729</StateNumber>
     </table>
-    <table id="34" parent="15" name="manager_operation_log">
+    <table id="37" parent="15" name="manager_operation_log">
       <ObjectId>25011</ObjectId>
       <Comment>管理员操作日志表</Comment>
       <Owner>postgres</Owner>
       <StateNumber>1758</StateNumber>
     </table>
-    <table id="35" parent="15" name="menu_info">
+    <table id="38" parent="15" name="menu">
+      <ObjectId>25267</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>2043</StateNumber>
+    </table>
+    <table id="39" parent="15" name="menu_info">
       <ObjectId>25024</ObjectId>
       <Comment>菜单表</Comment>
       <Owner>postgres</Owner>
       <StateNumber>1770</StateNumber>
     </table>
-    <table id="36" parent="15" name="positions">
+    <table id="40" parent="15" name="positions">
       <ObjectId>25043</ObjectId>
       <Comment>职位管理表</Comment>
       <Owner>postgres</Owner>
       <StateNumber>1788</StateNumber>
     </table>
-    <table id="37" parent="15" name="product">
+    <table id="41" parent="15" name="product">
       <ObjectId>25056</ObjectId>
       <Comment>产品信息</Comment>
       <Owner>postgres</Owner>
       <StateNumber>1800</StateNumber>
     </table>
-    <table id="38" parent="15" name="product_class">
+    <table id="42" parent="15" name="product_class">
       <ObjectId>25072</ObjectId>
       <Comment>产品分类</Comment>
       <Owner>postgres</Owner>
       <StateNumber>1814</StateNumber>
     </table>
-    <column id="39" parent="31" name="id">
+    <table id="43" parent="15" name="role">
+      <ObjectId>25258</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>2043</StateNumber>
+    </table>
+    <table id="44" parent="15" name="role_menu_through">
+      <ObjectId>25283</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>2043</StateNumber>
+    </table>
+    <column id="45" parent="34" name="id">
       <Position>1</Position>
       <Comment>主键Id</Comment>
       <DataType>integer|0s</DataType>
@@ -276,7 +318,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>nextval(&apos;department_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="40" parent="31" name="code">
+    <column id="46" parent="34" name="code">
       <Position>2</Position>
       <Comment>部门ID，内容为010101，即每低一级部门，编码增加两位小数</Comment>
       <DataType>text|0s</DataType>
@@ -285,7 +327,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="41" parent="31" name="name">
+    <column id="47" parent="34" name="name">
       <Position>3</Position>
       <Comment>部门名称</Comment>
       <DataType>text|0s</DataType>
@@ -294,7 +336,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="42" parent="31" name="parent_id">
+    <column id="48" parent="34" name="parent_id">
       <Position>4</Position>
       <Comment>父ID</Comment>
       <DataType>integer|0s</DataType>
@@ -302,7 +344,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>0</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="43" parent="31" name="sort">
+    <column id="49" parent="34" name="sort">
       <Position>5</Position>
       <Comment>排序</Comment>
       <DataType>integer|0s</DataType>
@@ -310,7 +352,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>0</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="44" parent="31" name="level">
+    <column id="50" parent="34" name="level">
       <Position>6</Position>
       <Comment>树列表深度级别，即当前数据在哪一级</Comment>
       <DataType>integer|0s</DataType>
@@ -318,7 +360,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>0</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="45" parent="31" name="is_leaf">
+    <column id="51" parent="34" name="is_leaf">
       <Position>7</Position>
       <Comment>是否最终节点</Comment>
       <DataType>boolean|0s</DataType>
@@ -326,7 +368,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>false</DefaultExpression>
       <TypeId>16</TypeId>
     </column>
-    <column id="46" parent="31" name="expanded">
+    <column id="52" parent="34" name="expanded">
       <Position>8</Position>
       <Comment>此节点是否展开，后台菜单列表js要用到，不用进行编辑</Comment>
       <DataType>boolean|0s</DataType>
@@ -334,31 +376,31 @@ sequence|table|25083|25056|1
       <DefaultExpression>false</DefaultExpression>
       <TypeId>16</TypeId>
     </column>
-    <index id="47" parent="31" name="department_pkey">
+    <index id="53" parent="34" name="department_pkey">
       <ObjectId>25093</ObjectId>
       <StateNumber>1851</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="48" parent="31" name="department_code_idx">
+    <index id="54" parent="34" name="department_code_idx">
       <ObjectId>25109</ObjectId>
       <StateNumber>1859</StateNumber>
       <ColNames>code</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="49" parent="31" name="department_sort_idx">
+    <index id="55" parent="34" name="department_sort_idx">
       <ObjectId>25110</ObjectId>
       <StateNumber>1860</StateNumber>
       <ColNames>sort</ColNames>
     </index>
-    <key id="50" parent="31" name="department_pkey">
+    <key id="56" parent="34" name="department_pkey">
       <ObjectId>25094</ObjectId>
       <StateNumber>1851</StateNumber>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>department_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <column id="51" parent="32" name="id">
+    <column id="57" parent="35" name="id">
       <Position>1</Position>
       <Comment>主键Id</Comment>
       <DataType>integer|0s</DataType>
@@ -367,7 +409,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>nextval(&apos;infomation_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="52" parent="32" name="title">
+    <column id="58" parent="35" name="title">
       <Position>2</Position>
       <Comment>标题</Comment>
       <DataType>text|0s</DataType>
@@ -375,7 +417,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="53" parent="32" name="front_cover_img">
+    <column id="59" parent="35" name="front_cover_img">
       <Position>3</Position>
       <Comment>封面图片地址（首页）</Comment>
       <DataType>text|0s</DataType>
@@ -383,7 +425,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="54" parent="32" name="content">
+    <column id="60" parent="35" name="content">
       <Position>4</Position>
       <Comment>内容</Comment>
       <DataType>text|0s</DataType>
@@ -391,7 +433,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="55" parent="32" name="add_time">
+    <column id="61" parent="35" name="add_time">
       <Position>5</Position>
       <Comment>添加时间</Comment>
       <DataType>timestamp(0)|0s</DataType>
@@ -400,20 +442,20 @@ sequence|table|25083|25056|1
       <DefaultExpression>now()</DefaultExpression>
       <TypeId>1114</TypeId>
     </column>
-    <index id="56" parent="32" name="infomation_pkey">
+    <index id="62" parent="35" name="infomation_pkey">
       <ObjectId>25095</ObjectId>
       <StateNumber>1852</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="57" parent="32" name="infomation_pkey">
+    <key id="63" parent="35" name="infomation_pkey">
       <ObjectId>25096</ObjectId>
       <StateNumber>1852</StateNumber>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>infomation_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <column id="58" parent="33" name="id">
+    <column id="64" parent="36" name="id">
       <Position>1</Position>
       <Comment>主键Id</Comment>
       <DataType>integer|0s</DataType>
@@ -422,7 +464,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>nextval(&apos;manager_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="59" parent="33" name="login_name">
+    <column id="65" parent="36" name="login_name">
       <Position>2</Position>
       <Comment>登陆账号</Comment>
       <DataType>text|0s</DataType>
@@ -431,7 +473,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="60" parent="33" name="login_password">
+    <column id="66" parent="36" name="login_password">
       <Position>3</Position>
       <Comment>登陆密码</Comment>
       <DataType>text|0s</DataType>
@@ -440,7 +482,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="61" parent="33" name="login_key">
+    <column id="67" parent="36" name="login_key">
       <Position>4</Position>
       <Comment>登录密钥</Comment>
       <DataType>text|0s</DataType>
@@ -448,14 +490,14 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="62" parent="33" name="last_login_time">
+    <column id="68" parent="36" name="last_login_time">
       <Position>5</Position>
       <Comment>最后登陆时间</Comment>
       <DataType>timestamp(0)|0s</DataType>
       <StateNumber>1729</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="63" parent="33" name="last_login_ip">
+    <column id="69" parent="36" name="last_login_ip">
       <Position>6</Position>
       <Comment>最后登陆IP</Comment>
       <DataType>text|0s</DataType>
@@ -463,7 +505,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="64" parent="33" name="login_count">
+    <column id="70" parent="36" name="login_count">
       <Position>7</Position>
       <Comment>登陆次数</Comment>
       <DataType>integer|0s</DataType>
@@ -471,7 +513,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>0</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="65" parent="33" name="create_time">
+    <column id="71" parent="36" name="create_time">
       <Position>8</Position>
       <Comment>注册时间</Comment>
       <DataType>timestamp(0)|0s</DataType>
@@ -480,7 +522,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>now()</DefaultExpression>
       <TypeId>1114</TypeId>
     </column>
-    <column id="66" parent="33" name="department_id">
+    <column id="72" parent="36" name="department_id">
       <Position>9</Position>
       <Comment>部门自编号Id，用户只能归属于一个部门</Comment>
       <DataType>integer|0s</DataType>
@@ -488,7 +530,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>0</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="67" parent="33" name="department_code">
+    <column id="73" parent="36" name="department_code">
       <Position>10</Position>
       <Comment>部门编号</Comment>
       <DataType>text|0s</DataType>
@@ -496,7 +538,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="68" parent="33" name="department_name">
+    <column id="74" parent="36" name="department_name">
       <Position>11</Position>
       <Comment>部门名称</Comment>
       <DataType>text|0s</DataType>
@@ -504,7 +546,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="69" parent="33" name="positions_id">
+    <column id="75" parent="36" name="positions_id">
       <Position>12</Position>
       <Comment>用户职位Id</Comment>
       <DataType>integer|0s</DataType>
@@ -512,7 +554,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>0</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="70" parent="33" name="positions_name">
+    <column id="76" parent="36" name="positions_name">
       <Position>13</Position>
       <Comment>职位名称</Comment>
       <DataType>text|0s</DataType>
@@ -520,7 +562,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="71" parent="33" name="is_work">
+    <column id="77" parent="36" name="is_work">
       <Position>14</Position>
       <Comment>0=离职，1=就职</Comment>
       <DataType>boolean|0s</DataType>
@@ -528,7 +570,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>false</DefaultExpression>
       <TypeId>16</TypeId>
     </column>
-    <column id="72" parent="33" name="is_enabled">
+    <column id="78" parent="36" name="is_enabled">
       <Position>15</Position>
       <Comment>账号是否启用，true=启用，false=禁用</Comment>
       <DataType>boolean|0s</DataType>
@@ -536,7 +578,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>false</DefaultExpression>
       <TypeId>16</TypeId>
     </column>
-    <column id="73" parent="33" name="name">
+    <column id="79" parent="36" name="name">
       <Position>16</Position>
       <Comment>用户中文名称</Comment>
       <DataType>text|0s</DataType>
@@ -545,7 +587,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="74" parent="33" name="sex">
+    <column id="80" parent="36" name="sex">
       <Position>17</Position>
       <Comment>性别（未知，男，女）</Comment>
       <DataType>text|0s</DataType>
@@ -553,14 +595,14 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="75" parent="33" name="birthday">
+    <column id="81" parent="36" name="birthday">
       <Position>18</Position>
       <Comment>出生日期</Comment>
       <DataType>date|0s</DataType>
       <StateNumber>1729</StateNumber>
       <TypeId>1082</TypeId>
     </column>
-    <column id="76" parent="33" name="mobile">
+    <column id="82" parent="36" name="mobile">
       <Position>19</Position>
       <Comment>手机号码</Comment>
       <DataType>text|0s</DataType>
@@ -568,7 +610,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="77" parent="33" name="email">
+    <column id="83" parent="36" name="email">
       <Position>20</Position>
       <Comment>个人--联系邮箱</Comment>
       <DataType>text|0s</DataType>
@@ -576,7 +618,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="78" parent="33" name="remark">
+    <column id="84" parent="36" name="remark">
       <Position>21</Position>
       <Comment>备注</Comment>
       <DataType>text|0s</DataType>
@@ -584,7 +626,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="79" parent="33" name="manager_id">
+    <column id="85" parent="36" name="manager_id">
       <Position>22</Position>
       <Comment>操作人员id</Comment>
       <DataType>integer|0s</DataType>
@@ -592,7 +634,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>0</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="80" parent="33" name="manager_name">
+    <column id="86" parent="36" name="manager_name">
       <Position>23</Position>
       <Comment>操作人员姓名</Comment>
       <DataType>text|0s</DataType>
@@ -600,71 +642,71 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <index id="81" parent="33" name="manager_pkey">
+    <index id="87" parent="36" name="manager_pkey">
       <ObjectId>25099</ObjectId>
       <StateNumber>1854</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="82" parent="33" name="manager_login_name_idx1">
+    <index id="88" parent="36" name="manager_login_name_idx1">
       <ObjectId>25116</ObjectId>
       <StateNumber>1866</StateNumber>
       <ColNames>login_name</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="83" parent="33" name="manager_last_login_time_idx">
+    <index id="89" parent="36" name="manager_last_login_time_idx">
       <ObjectId>25115</ObjectId>
       <StateNumber>1865</StateNumber>
       <ColNames>last_login_time</ColNames>
     </index>
-    <index id="84" parent="33" name="manager_department_id_idx">
+    <index id="90" parent="36" name="manager_department_id_idx">
       <ObjectId>25112</ObjectId>
       <StateNumber>1862</StateNumber>
       <ColNames>department_id</ColNames>
     </index>
-    <index id="85" parent="33" name="manager_department_code_idx">
+    <index id="91" parent="36" name="manager_department_code_idx">
       <ObjectId>25111</ObjectId>
       <StateNumber>1861</StateNumber>
       <ColNames>department_code</ColNames>
     </index>
-    <index id="86" parent="33" name="manager_positions_id_idx">
+    <index id="92" parent="36" name="manager_positions_id_idx">
       <ObjectId>25123</ObjectId>
       <StateNumber>1873</StateNumber>
       <ColNames>positions_id</ColNames>
     </index>
-    <index id="87" parent="33" name="manager_is_work_idx">
+    <index id="93" parent="36" name="manager_is_work_idx">
       <ObjectId>25114</ObjectId>
       <StateNumber>1864</StateNumber>
       <ColNames>is_work</ColNames>
     </index>
-    <index id="88" parent="33" name="manager_is_enabled_idx">
+    <index id="94" parent="36" name="manager_is_enabled_idx">
       <ObjectId>25113</ObjectId>
       <StateNumber>1863</StateNumber>
       <ColNames>is_enabled</ColNames>
     </index>
-    <index id="89" parent="33" name="manager_name_idx">
+    <index id="95" parent="36" name="manager_name_idx">
       <ObjectId>25119</ObjectId>
       <StateNumber>1869</StateNumber>
       <ColNames>name</ColNames>
     </index>
-    <index id="90" parent="33" name="manager_manager_id_idx">
+    <index id="96" parent="36" name="manager_manager_id_idx">
       <ObjectId>25117</ObjectId>
       <StateNumber>1867</StateNumber>
       <ColNames>manager_id</ColNames>
     </index>
-    <index id="91" parent="33" name="manager_manager_name_idx">
+    <index id="97" parent="36" name="manager_manager_name_idx">
       <ObjectId>25118</ObjectId>
       <StateNumber>1868</StateNumber>
       <ColNames>manager_name</ColNames>
     </index>
-    <key id="92" parent="33" name="manager_pkey">
+    <key id="98" parent="36" name="manager_pkey">
       <ObjectId>25100</ObjectId>
       <StateNumber>1854</StateNumber>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>manager_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <column id="93" parent="34" name="id">
+    <column id="99" parent="37" name="id">
       <Position>1</Position>
       <Comment>主键Id</Comment>
       <DataType>integer|0s</DataType>
@@ -673,7 +715,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>nextval(&apos;manager_operation_log_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="94" parent="34" name="ip">
+    <column id="100" parent="37" name="ip">
       <Position>2</Position>
       <Comment>登陆IP</Comment>
       <DataType>text|0s</DataType>
@@ -681,7 +723,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="95" parent="34" name="remark">
+    <column id="101" parent="37" name="remark">
       <Position>3</Position>
       <Comment>操作内容</Comment>
       <DataType>text|0s</DataType>
@@ -689,7 +731,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="96" parent="34" name="manager_id">
+    <column id="102" parent="37" name="manager_id">
       <Position>4</Position>
       <Comment>操作人员id</Comment>
       <DataType>integer|0s</DataType>
@@ -697,7 +739,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>0</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="97" parent="34" name="manager_name">
+    <column id="103" parent="37" name="manager_name">
       <Position>5</Position>
       <Comment>操作人员姓名</Comment>
       <DataType>text|0s</DataType>
@@ -705,7 +747,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="98" parent="34" name="add_time">
+    <column id="104" parent="37" name="add_time">
       <Position>6</Position>
       <Comment>添加时间</Comment>
       <DataType>timestamp(0)|0s</DataType>
@@ -714,35 +756,115 @@ sequence|table|25083|25056|1
       <DefaultExpression>now()</DefaultExpression>
       <TypeId>1114</TypeId>
     </column>
-    <index id="99" parent="34" name="manager_operation_log_pkey">
+    <index id="105" parent="37" name="manager_operation_log_pkey">
       <ObjectId>25097</ObjectId>
       <StateNumber>1853</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="100" parent="34" name="manager_operation_log_manager_id_idx">
+    <index id="106" parent="37" name="manager_operation_log_manager_id_idx">
       <ObjectId>25121</ObjectId>
       <StateNumber>1871</StateNumber>
       <ColNames>manager_id</ColNames>
     </index>
-    <index id="101" parent="34" name="manager_operation_log_manager_name_idx">
+    <index id="107" parent="37" name="manager_operation_log_manager_name_idx">
       <ObjectId>25122</ObjectId>
       <StateNumber>1872</StateNumber>
       <ColNames>manager_name</ColNames>
     </index>
-    <index id="102" parent="34" name="manager_operation_log_add_time_idx">
+    <index id="108" parent="37" name="manager_operation_log_add_time_idx">
       <ObjectId>25120</ObjectId>
       <StateNumber>1870</StateNumber>
       <ColNames>add_time</ColNames>
     </index>
-    <key id="103" parent="34" name="manager_operation_log_pkey">
+    <key id="109" parent="37" name="manager_operation_log_pkey">
       <ObjectId>25098</ObjectId>
       <StateNumber>1853</StateNumber>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>manager_operation_log_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <column id="104" parent="35" name="id">
+    <column id="110" parent="38" name="id">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2039</StateNumber>
+      <DefaultExpression>nextval(&apos;menu_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="111" parent="38" name="name">
+      <Position>2</Position>
+      <DataType>varchar(30)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2039</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="112" parent="38" name="parent_id">
+      <Position>3</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>2039</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="113" parent="38" name="icon">
+      <Position>4</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <StateNumber>2039</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="114" parent="38" name="code">
+      <Position>5</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <StateNumber>2039</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="115" parent="38" name="url">
+      <Position>6</Position>
+      <DataType>varchar(128)|0s</DataType>
+      <StateNumber>2039</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="116" parent="38" name="menu_pkey">
+      <ObjectId>25271</ObjectId>
+      <StateNumber>2039</StateNumber>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="117" parent="38" name="menu_name">
+      <ObjectId>25278</ObjectId>
+      <StateNumber>2040</StateNumber>
+      <ColNames>name</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="118" parent="38" name="menu_url">
+      <ObjectId>25280</ObjectId>
+      <StateNumber>2042</StateNumber>
+      <ColNames>url</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="119" parent="38" name="menu_parent_id">
+      <ObjectId>25279</ObjectId>
+      <StateNumber>2041</StateNumber>
+      <ColNames>parent_id</ColNames>
+    </index>
+    <key id="120" parent="38" name="menu_pkey">
+      <ObjectId>25272</ObjectId>
+      <StateNumber>2039</StateNumber>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>menu_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="121" parent="38" name="menu_parent_id_fkey">
+      <ObjectId>25273</ObjectId>
+      <StateNumber>2039</StateNumber>
+      <ColNames>parent_id</ColNames>
+      <RefTableId>25267</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>menu</RefTableName>
+      <RefKeyName>menu_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+      <OnDelete>set-null</OnDelete>
+    </foreign-key>
+    <column id="122" parent="39" name="id">
       <Position>1</Position>
       <Comment>主键Id</Comment>
       <DataType>integer|0s</DataType>
@@ -751,7 +873,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>nextval(&apos;menu_info_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="105" parent="35" name="name">
+    <column id="123" parent="39" name="name">
       <Position>2</Position>
       <Comment>菜单名称或各个页面功能名称</Comment>
       <DataType>text|0s</DataType>
@@ -760,7 +882,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="106" parent="35" name="icon">
+    <column id="124" parent="39" name="icon">
       <Position>3</Position>
       <Comment>菜单小图标（一级菜单需要设置，二级菜单不用）</Comment>
       <DataType>text|0s</DataType>
@@ -768,7 +890,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="107" parent="35" name="page_url">
+    <column id="125" parent="39" name="page_url">
       <Position>4</Position>
       <Comment>各页面URL（主菜单与分类菜单没有URL）</Comment>
       <DataType>text|0s</DataType>
@@ -776,7 +898,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="108" parent="35" name="interface_url">
+    <column id="126" parent="39" name="interface_url">
       <Position>5</Position>
       <Comment>各接口url</Comment>
       <DataType>text|0s</DataType>
@@ -784,7 +906,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="109" parent="35" name="parent_id">
+    <column id="127" parent="39" name="parent_id">
       <Position>6</Position>
       <Comment>父ID</Comment>
       <DataType>integer|0s</DataType>
@@ -792,7 +914,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>0</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="110" parent="35" name="sort">
+    <column id="128" parent="39" name="sort">
       <Position>7</Position>
       <Comment>排序</Comment>
       <DataType>integer|0s</DataType>
@@ -800,7 +922,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>0</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="111" parent="35" name="level">
+    <column id="129" parent="39" name="level">
       <Position>8</Position>
       <Comment>树列表深度级别，即当前数据在哪一级</Comment>
       <DataType>integer|0s</DataType>
@@ -808,7 +930,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>0</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="112" parent="35" name="is_leaf">
+    <column id="130" parent="39" name="is_leaf">
       <Position>9</Position>
       <Comment>是否最终节点</Comment>
       <DataType>boolean|0s</DataType>
@@ -816,7 +938,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>false</DefaultExpression>
       <TypeId>16</TypeId>
     </column>
-    <column id="113" parent="35" name="expanded">
+    <column id="131" parent="39" name="expanded">
       <Position>10</Position>
       <Comment>此节点是否展开，后台菜单列表js要用到，不用进行编辑</Comment>
       <DataType>boolean|0s</DataType>
@@ -824,7 +946,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>false</DefaultExpression>
       <TypeId>16</TypeId>
     </column>
-    <column id="114" parent="35" name="is_show">
+    <column id="132" parent="39" name="is_show">
       <Position>11</Position>
       <Comment>该菜单是否在菜单栏显示，false=不显示，true=显示</Comment>
       <DataType>boolean|0s</DataType>
@@ -832,7 +954,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>true</DefaultExpression>
       <TypeId>16</TypeId>
     </column>
-    <column id="115" parent="35" name="is_enabled">
+    <column id="133" parent="39" name="is_enabled">
       <Position>12</Position>
       <Comment>是否启用，true=启用，false=禁用</Comment>
       <DataType>boolean|0s</DataType>
@@ -840,30 +962,30 @@ sequence|table|25083|25056|1
       <DefaultExpression>true</DefaultExpression>
       <TypeId>16</TypeId>
     </column>
-    <index id="116" parent="35" name="menu_info_pkey">
+    <index id="134" parent="39" name="menu_info_pkey">
       <ObjectId>25101</ObjectId>
       <StateNumber>1855</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="117" parent="35" name="menu_info_sort_idx">
+    <index id="135" parent="39" name="menu_info_sort_idx">
       <ObjectId>25125</ObjectId>
       <StateNumber>1875</StateNumber>
       <ColNames>sort</ColNames>
     </index>
-    <index id="118" parent="35" name="menu_info_is_show_idx">
+    <index id="136" parent="39" name="menu_info_is_show_idx">
       <ObjectId>25124</ObjectId>
       <StateNumber>1874</StateNumber>
       <ColNames>is_show</ColNames>
     </index>
-    <key id="119" parent="35" name="menu_info_pkey">
+    <key id="137" parent="39" name="menu_info_pkey">
       <ObjectId>25102</ObjectId>
       <StateNumber>1855</StateNumber>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>menu_info_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <column id="120" parent="36" name="id">
+    <column id="138" parent="40" name="id">
       <Position>1</Position>
       <Comment>主键Id</Comment>
       <DataType>integer|0s</DataType>
@@ -872,7 +994,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>nextval(&apos;positions_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="121" parent="36" name="name">
+    <column id="139" parent="40" name="name">
       <Position>2</Position>
       <Comment>职位名称</Comment>
       <DataType>text|0s</DataType>
@@ -880,7 +1002,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="122" parent="36" name="department_id">
+    <column id="140" parent="40" name="department_id">
       <Position>3</Position>
       <Comment>部门自编号ID</Comment>
       <DataType>integer|0s</DataType>
@@ -889,7 +1011,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>0</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="123" parent="36" name="department_code">
+    <column id="141" parent="40" name="department_code">
       <Position>4</Position>
       <Comment>部门编号</Comment>
       <DataType>text|0s</DataType>
@@ -898,7 +1020,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="124" parent="36" name="department_name">
+    <column id="142" parent="40" name="department_name">
       <Position>5</Position>
       <Comment>部门名称</Comment>
       <DataType>text|0s</DataType>
@@ -906,7 +1028,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="125" parent="36" name="page_power">
+    <column id="143" parent="40" name="page_power">
       <Position>6</Position>
       <Comment>菜单操作权限，有操作权限的菜单ID列表：,1,2,3,4,5,</Comment>
       <DataType>text|0s</DataType>
@@ -914,35 +1036,35 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <index id="126" parent="36" name="positions_pkey">
+    <index id="144" parent="40" name="positions_pkey">
       <ObjectId>25103</ObjectId>
       <StateNumber>1856</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="127" parent="36" name="positions_name_idx">
+    <index id="145" parent="40" name="positions_name_idx">
       <ObjectId>25128</ObjectId>
       <StateNumber>1878</StateNumber>
       <ColNames>name</ColNames>
     </index>
-    <index id="128" parent="36" name="positions_department_id_idx">
+    <index id="146" parent="40" name="positions_department_id_idx">
       <ObjectId>25127</ObjectId>
       <StateNumber>1877</StateNumber>
       <ColNames>department_id</ColNames>
     </index>
-    <index id="129" parent="36" name="positions_department_code_idx">
+    <index id="147" parent="40" name="positions_department_code_idx">
       <ObjectId>25126</ObjectId>
       <StateNumber>1876</StateNumber>
       <ColNames>department_code</ColNames>
     </index>
-    <key id="130" parent="36" name="positions_pkey">
+    <key id="148" parent="40" name="positions_pkey">
       <ObjectId>25104</ObjectId>
       <StateNumber>1856</StateNumber>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>positions_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <column id="131" parent="37" name="id">
+    <column id="149" parent="41" name="id">
       <Position>1</Position>
       <Comment>主键Id</Comment>
       <DataType>integer|0s</DataType>
@@ -951,7 +1073,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>nextval(&apos;product_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="132" parent="37" name="name">
+    <column id="150" parent="41" name="name">
       <Position>2</Position>
       <Comment>菜单名称或各个页面功能名称</Comment>
       <DataType>text|0s</DataType>
@@ -960,7 +1082,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="133" parent="37" name="code">
+    <column id="151" parent="41" name="code">
       <Position>3</Position>
       <Comment>产品编码</Comment>
       <DataType>text|0s</DataType>
@@ -968,7 +1090,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="134" parent="37" name="product_class_id">
+    <column id="152" parent="41" name="product_class_id">
       <Position>4</Position>
       <Comment>所属产品分类</Comment>
       <DataType>integer|0s</DataType>
@@ -976,7 +1098,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>0</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="135" parent="37" name="standard">
+    <column id="153" parent="41" name="standard">
       <Position>5</Position>
       <Comment>产品规格</Comment>
       <DataType>text|0s</DataType>
@@ -984,7 +1106,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="136" parent="37" name="quality_guarantee_period">
+    <column id="154" parent="41" name="quality_guarantee_period">
       <Position>6</Position>
       <Comment>保质期</Comment>
       <DataType>text|0s</DataType>
@@ -992,7 +1114,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="137" parent="37" name="place_of_origin">
+    <column id="155" parent="41" name="place_of_origin">
       <Position>7</Position>
       <Comment>产地</Comment>
       <DataType>text|0s</DataType>
@@ -1000,7 +1122,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="138" parent="37" name="front_cover_img">
+    <column id="156" parent="41" name="front_cover_img">
       <Position>8</Position>
       <Comment>封面图片地址（展示图片）</Comment>
       <DataType>text|0s</DataType>
@@ -1008,7 +1130,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="139" parent="37" name="content">
+    <column id="157" parent="41" name="content">
       <Position>9</Position>
       <Comment>产品描述</Comment>
       <DataType>text|0s</DataType>
@@ -1016,7 +1138,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="140" parent="37" name="is_enable">
+    <column id="158" parent="41" name="is_enable">
       <Position>10</Position>
       <Comment>是否启用，1=true(启用)，0=false（禁用）</Comment>
       <DataType>integer|0s</DataType>
@@ -1024,7 +1146,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>0</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="141" parent="37" name="add_time">
+    <column id="159" parent="41" name="add_time">
       <Position>11</Position>
       <Comment>添加时间</Comment>
       <DataType>timestamp(0)|0s</DataType>
@@ -1033,20 +1155,20 @@ sequence|table|25083|25056|1
       <DefaultExpression>now()</DefaultExpression>
       <TypeId>1114</TypeId>
     </column>
-    <index id="142" parent="37" name="product_pkey">
+    <index id="160" parent="41" name="product_pkey">
       <ObjectId>25107</ObjectId>
       <StateNumber>1858</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="143" parent="37" name="product_pkey">
+    <key id="161" parent="41" name="product_pkey">
       <ObjectId>25108</ObjectId>
       <StateNumber>1858</StateNumber>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>product_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <column id="144" parent="38" name="id">
+    <column id="162" parent="42" name="id">
       <Position>1</Position>
       <Comment>主键Id</Comment>
       <DataType>integer|0s</DataType>
@@ -1055,7 +1177,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>nextval(&apos;product_class_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="145" parent="38" name="name">
+    <column id="163" parent="42" name="name">
       <Position>2</Position>
       <Comment>菜单名称或各个页面功能名称</Comment>
       <DataType>text|0s</DataType>
@@ -1064,7 +1186,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <TypeId>25</TypeId>
     </column>
-    <column id="146" parent="38" name="is_enable">
+    <column id="164" parent="42" name="is_enable">
       <Position>3</Position>
       <Comment>是否启用，1=true(启用)，0=false（禁用）</Comment>
       <DataType>integer|0s</DataType>
@@ -1072,7 +1194,7 @@ sequence|table|25083|25056|1
       <DefaultExpression>0</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="147" parent="38" name="add_time">
+    <column id="165" parent="42" name="add_time">
       <Position>4</Position>
       <Comment>添加时间</Comment>
       <DataType>timestamp(0)|0s</DataType>
@@ -1081,18 +1203,130 @@ sequence|table|25083|25056|1
       <DefaultExpression>now()</DefaultExpression>
       <TypeId>1114</TypeId>
     </column>
-    <index id="148" parent="38" name="product_class_pkey">
+    <index id="166" parent="42" name="product_class_pkey">
       <ObjectId>25105</ObjectId>
       <StateNumber>1857</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="149" parent="38" name="product_class_pkey">
+    <key id="167" parent="42" name="product_class_pkey">
       <ObjectId>25106</ObjectId>
       <StateNumber>1857</StateNumber>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>product_class_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
+    <column id="168" parent="43" name="id">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2037</StateNumber>
+      <DefaultExpression>nextval(&apos;role_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="169" parent="43" name="name">
+      <Position>2</Position>
+      <DataType>varchar(32)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2037</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="170" parent="43" name="desc">
+      <Position>3</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <StateNumber>2037</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="171" parent="43" name="role_pkey">
+      <ObjectId>25262</ObjectId>
+      <StateNumber>2037</StateNumber>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="172" parent="43" name="role_name">
+      <ObjectId>25264</ObjectId>
+      <StateNumber>2038</StateNumber>
+      <ColNames>name</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="173" parent="43" name="role_pkey">
+      <ObjectId>25263</ObjectId>
+      <StateNumber>2037</StateNumber>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>role_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="174" parent="44" name="id">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2043</StateNumber>
+      <DefaultExpression>nextval(&apos;role_menu_through_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="175" parent="44" name="role_id">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2043</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="176" parent="44" name="menu_id">
+      <Position>3</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2043</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="177" parent="44" name="role_menu_through_pkey">
+      <ObjectId>25287</ObjectId>
+      <StateNumber>2043</StateNumber>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="178" parent="44" name="role_menu_through_role_id_menu_id">
+      <ObjectId>25301</ObjectId>
+      <StateNumber>2046</StateNumber>
+      <ColNames>role_id
+menu_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="179" parent="44" name="role_menu_through_role_id">
+      <ObjectId>25299</ObjectId>
+      <StateNumber>2044</StateNumber>
+      <ColNames>role_id</ColNames>
+    </index>
+    <index id="180" parent="44" name="role_menu_through_menu_id">
+      <ObjectId>25300</ObjectId>
+      <StateNumber>2045</StateNumber>
+      <ColNames>menu_id</ColNames>
+    </index>
+    <key id="181" parent="44" name="role_menu_through_pkey">
+      <ObjectId>25288</ObjectId>
+      <StateNumber>2043</StateNumber>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>role_menu_through_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="182" parent="44" name="role_menu_through_role_id_fkey">
+      <ObjectId>25289</ObjectId>
+      <StateNumber>2043</StateNumber>
+      <ColNames>role_id</ColNames>
+      <RefTableId>25258</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>role</RefTableName>
+      <RefKeyName>role_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="183" parent="44" name="role_menu_through_menu_id_fkey">
+      <ObjectId>25294</ObjectId>
+      <StateNumber>2043</StateNumber>
+      <ColNames>menu_id</ColNames>
+      <RefTableId>25267</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>menu</RefTableName>
+      <RefKeyName>menu_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
   </database-model>
 </dataSource>

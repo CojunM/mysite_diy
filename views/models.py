@@ -113,7 +113,7 @@ class Role(BaseModel):
     角色：用于权限绑定
     """
     name = CharField(max_length=32, unique=True, verbose_name="角色")
-    permissions = ManyToManyField(Menu)
+    permissions = ManyToManyField(Menu,backref='menu')
     desc = CharField(max_length=50, null=True, verbose_name="描述")
 
 
@@ -175,12 +175,16 @@ if __name__ == "__main__":
 #     Structure.create_table()
 #     Role.create_table()
 #     Menu.create_table()
-#     Role.permissions.get_through_model().create_table()
-        permissions = (Role
-                   .select()
-                   .join(Role.permissions.get_through_model())
-                   .join(Menu)
-                   .where(Menu.name == 'menu2'))
-        print(permissions)
-        for course in  permissions:
-            print(course.name)
+# #     Role.permissions.get_through_model().create_table()
+#         permissions = (Role
+#                    .select()
+#                    .join(Role.permissions.get_through_model())
+#                    .join(Menu)
+#                    .where(Menu.name == 'menu2'))
+#         print(permissions)
+#         for course in  permissions:
+#             print(course.name)
+    m=Menu.get(Menu.name=="menu1")
+    Role.permissions.add(m.id)
+    r=Role.get(Role.name=="role1")
+    print(m.id,r.id)

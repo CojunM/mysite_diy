@@ -1452,9 +1452,7 @@ class ManyToManyQuery(SelectQuery):
         accessor = self._accessor
         src_id = getattr(self._instance, self._src_attr)
         if isinstance(value, SelectQuery):
-            query = value.columns(
-                Value(src_id),
-                accessor.dest_fk.rel_field)
+            query = value( Value(src_id), accessor.dest_fk.rel_field)
             accessor.through_model.insert_from(
                 fields=[accessor.src_fk, accessor.dest_fk],
                 query=query).execute()

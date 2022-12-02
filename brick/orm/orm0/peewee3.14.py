@@ -8006,6 +8006,8 @@ if __name__ == "__main__":
     #     'Manager.login_count': 'login_count+1',
     # }
     # result = Manager.update(fields).where(Manager.login_name == 'admin1').execute()
-    Role.create_table()
-    Menu.create_table()
-    Role.permissions.get_through_model().create_table()
+    # Role.create_table()
+    # Menu.create_table()
+    # Role.permissions.get_through_model().create_table()
+    m = Menu.get(Menu.name == "menu1")
+    Role.permissions.add(m.id)

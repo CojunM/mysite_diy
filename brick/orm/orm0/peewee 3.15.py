@@ -44,6 +44,9 @@ import threading
 import time
 import uuid
 import warnings
+
+from views.models import Role
+
 try:
     from collections.abc import Mapping
 except ImportError:
@@ -8031,15 +8034,16 @@ class Menu(BaseMode):
     @classmethod
     def get_menu_by_request_url(cls, url):
         return dict(menu=Menu.objects.get(url=url))
+MenuThrough= DeferredThroughModel()
 
 class Role(BaseMode):
     """
     角色：用于权限绑定
     """
     name = CharField(max_length=32, unique=True, verbose_name="角色")
-    permissions = ManyToManyField(Menu)
+    permissions = ManyToManyField(Menu,backref='roles')
     desc = CharField(max_length=50, null=True, verbose_name="描述")
-
+# MenuThrough.set_model(Role.permissions.get_through_model())
 
 if __name__ == "__main__":
     # new_user.create_table()
@@ -8054,11 +8058,91 @@ if __name__ == "__main__":
     # Role.create_table()
     # Menu.create_table()
     # Role.permissions.get_through_model().create_table()
-    permissions = (Role
-                   .select()
-                   .join(Role.permissions.get_through_model())
-                   .join(Menu)
-                   .where(Menu.name == 'menu1'))
-    print(permissions)
-    for course in  permissions:
-        print(course.name)
+    # permissions = (Role
+    #                .select()
+    #                .join(Role.permissions.get_through_model())
+    #                .join(Menu)
+    #                .where(Menu.name == 'menu1'))
+    # print(permissions)
+    # for course in  permissions:
+    #     print(course.name)
+    m = Menu.get(Menu.name == "menu1")
+    # Role.permissions.add(m.id)
+    print('01',Role.permissions.get_through_model())
+    # for each in Role.get(Role.name=="role1"):
+    #     print(each)
+
+
+
+    database = SqliteDatabase('db.sqlite3')
+    class BaseModel(Model):
+        class Meta:
+            database = database
+
+
+    class User(BaseModel):
+        username = CharField(unique=True)
+        password = CharField()
+
+
+    TeacherThroughDeferred = DeferredThroughModel()
+    StudentThroughDeferred = DeferredThroughModel()
+
+
+    class Team(BaseModel):
+        title = CharField()
+        teachers = ManyToManyField(User, backref='lead_teams', through_model=TeacherThroughDeferred)
+        students = ManyToManyField(User, backref='join_teams', through_model=StudentThroughDeferred)
+
+
+    class TeacherThrough(BaseModel):
+        team = ForeignKeyField(Team)
+        user = ForeignKeyField(User)
+
+
+    TeacherThroughDeferred.set_model(TeacherThrough)
+
+
+    class StudentThrough(BaseModel):
+        team = ForeignKeyField(Team)
+        user = ForeignKeyField(User)
+
+
+    StudentThroughDeferred.set_model(StudentThrough)
+
+    database.create_tables([
+        User, Team,
+        TeacherThrough,
+        StudentThrough,
+    ])
+
+    for k in range(10):
+        usr = User()
+        usr.username = f'Alex_{k}'
+        usr.password = 'dsklf'
+        try:
+            usr.save()
+        except:
+            pass
+    team = Team()
+    team.title = "test"
+    team.save()
+    team.teachers.add([
+        User.get(User.username == 'Alex_0'),
+        User.get(User.username == 'Alex_1'),
+        User.get(User.username == 'Alex_2'),
+    ])
+    print('1',team.teachers)
+    print('12',team.teachers.add)
+    team.students.add([
+        User.get(User.username == 'Alex_3'),
+        User.get(User.username == 'Alex_4'),
+        User.get(User.username == 'Alex_5'),
+        User.get(User.username == 'Alex_6')
+    ])
+    # team.save()
+    # for each in User.get(User.username == 'Alex_0').lead_teams:
+    #     print(each)
+    # print('-' * 20)
+    # for each in User.get(User.username == 'Alex_3').join_teams:
+    #     print(each)
