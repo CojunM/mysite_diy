@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+       .containe{
+          margin-top: 100px;
+          margin-left: 100px;
+          user-select: none;/*禁止复制*/
+       }
+       table{
+         width: 400px;
+         min-height: 40px;
+         line-height: 40px;
+         text-align: center;
+         border-collapse: collapse;
+       }
+       table,th,td{
+         border: 1px solid #000
+       }
+    </style>
+</head>
+<body>
+   <div class="containe">
+      <table id="table">
+         <tr>
+            <th>A</th>
+            <th>B</th>
+            <th>C</th>
+            <th>D</th>
+         </tr>
+         <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+         </tr>
+         <tr>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+         </tr>
+         <tr>
+            <td>9</td>
+            <td>10</td>
+            <td>11</td>
+            <td>12</td>
+         </tr>
+         <tr>
+            <td>13</td>
+            <td>14</td>
+            <td>15</td>
+            <td>16</td>
+         </tr>
+      </table>
+   </div>
+   <script type="text/javascript">
+
+      var oTable = document.getElementById("table");
+      //格子内容交换
+      var content = null;
+      var contentHtml = null;
+
+      //行交换
+      var thNode = null;
+      var thNodeHtml = null;
+
+      //列交换
+      var startIndex = 0;
+      var endIndex = 0;
+      var trNodes = oTable.children[0].children;
+      var startNodeHtml = [];
+
+
+      //利用事件代理触发鼠标事件
+      oTable.onmousedown = function(e) {
+        var e = e || window.e;
+        content = e.target;  //当前事件对象
+        if(content.nodeName.toLocaleLowerCase() != 'th') {
+          contentHtml = content.innerHTML;
+        }else {
+            //行交换所用
+            thNode = content.parentNode;
+            thNodeHtml = thNode.innerHTML;
+            //列交换所用
+            startIndex = e.srcElement.cellIndex; //获取初始被触发的th索引值
+        }
+      }
+      oTable.onmouseup = function(e) {
+        var e = e || window.e;
+        if(content.nodeName.toLocaleLowerCase() != 'th') {
+           //格子内容交换
+          content.innerHTML = e.target.innerHTML;
+          e.target.innerHTML = contentHtml;
+        }else {
+            if(e.target.nodeName.toLocaleLowerCase() == 'td') {
+                //行交换
+                thNode.innerHTML = e.target.parentNode.innerHTML;
+                e.target.parentNode.innerHTML = thNodeHtml;
+            }else if(e.target.nodeName.toLocaleLowerCase() == 'th') {
+                //列交换
+                endIndex = e.srcElement.cellIndex; ////获取结束被触发的th索引值
+                for(var i = 0; i < trNodes.length; i++) { //文本内容替换
+                   var temp = trNodes[i].children[startIndex].innerHTML;
+                   trNodes[i].children[startIndex].innerHTML = trNodes[i].children[endIndex].innerHTML;
+                   trNodes[i].children[endIndex].innerHTML = temp;
+               }
+            }
+        }
+
+      }
+   </script>
+</body>
+</html>
