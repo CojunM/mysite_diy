@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3d0953a8-c3eb-40b0-97f7-7b4d1fc1361f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/94d652a1-612b-4a5c-9b1d-ec300a9f499d.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/94d652a1-612b-4a5c-9b1d-ec300a9f499d.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/94d652a1-612b-4a5c-9b1d-ec300a9f499d/storage_v2/_src_/database/simple_db.K4pggQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/94d652a1-612b-4a5c-9b1d-ec300a9f499d/storage_v2/_src_/database/simple_db.K4pggQ/schema/public.abK9xQ.meta" afterDir="false" />
+    <list default="true" id="3d0953a8-c3eb-40b0-97f7-7b4d1fc1361f" name="Default Changelist" comment="12.1">
+      <change afterPath="$PROJECT_DIR$/html/df.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/tuodong.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brick/core/db/felds.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/core/db/felds.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/brick/core/db/modelquerys.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/core/db/modelquerys.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brick/core/db/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/core/db/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/brick/orm/orm0/peewee 3.15.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/orm/orm0/peewee 3.15.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/orm/orm0/peewee3.14.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/orm/orm0/peewee3.14.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brick/orm/orm0/peewee2.10.2.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/orm/orm0/peewee2.10.2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/models.py" afterDir="false" />
     </list>
+    <ignored path="E:\mysite_diy\.idea\shelf/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,15 +24,16 @@
     <SUITE FILE_PATH="coverage/mysite_diy$peewee3_14.coverage" NAME="peewee3.14 Coverage Results" MODIFIED="1669861653212" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/brick/orm/orm0" />
     <SUITE FILE_PATH="coverage/mysite_diy$peewee206.coverage" NAME="peewee206 Coverage Results" MODIFIED="1653615008696" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/brick/orm/orm0" />
     <SUITE FILE_PATH="coverage/mysite_diy$verify_helper.coverage" NAME="verify_helper Coverage Results" MODIFIED="1655987515403" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/brick/contrib" />
+    <SUITE FILE_PATH="coverage/mysite_diy$models__1_.coverage" NAME="models (1) Coverage Results" MODIFIED="1670323659445" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/brick/core/db" />
     <SUITE FILE_PATH="coverage/mysite_diy$menu_info.coverage" NAME="menu_info Coverage Results" MODIFIED="1653057701516" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/views/system" />
     <SUITE FILE_PATH="coverage/mysite_diy$__init__.coverage" NAME="__init__ Coverage Results" MODIFIED="1653057017108" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/views" />
     <SUITE FILE_PATH="coverage/mysite_diy$email_validcode.coverage" NAME="email_validcode Coverage Results" MODIFIED="1655807998407" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/brick/contrib" />
-    <SUITE FILE_PATH="coverage/mysite_diy$peewee_3_15.coverage" NAME="peewee 3.15 Coverage Results" MODIFIED="1669882749491" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/brick/orm/orm0" />
+    <SUITE FILE_PATH="coverage/mysite_diy$peewee_3_15.coverage" NAME="peewee 3.15 Coverage Results" MODIFIED="1670926781447" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/brick/orm/orm0" />
     <SUITE FILE_PATH="coverage/mysite_diy$test.coverage" NAME="test Coverage Results" MODIFIED="1650364516287" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/brick/orm" />
     <SUITE FILE_PATH="coverage/mysite_diy$about.coverage" NAME="about Coverage Results" MODIFIED="1648452113041" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/mysite_diy$index.coverage" NAME="index Coverage Results" MODIFIED="1648610507635" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/mysite_diy$models.coverage" NAME="models Coverage Results" MODIFIED="1669860731035" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/views" />
-    <SUITE FILE_PATH="coverage/mysite_diy$peewee2_10_2.coverage" NAME="peewee2.10.2 Coverage Results" MODIFIED="1650587088649" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/brick/orm/orm0" />
+    <SUITE FILE_PATH="coverage/mysite_diy$models.coverage" NAME="models Coverage Results" MODIFIED="1670926854432" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/views" />
+    <SUITE FILE_PATH="coverage/mysite_diy$peewee2_10_2.coverage" NAME="peewee2.10.2 Coverage Results" MODIFIED="1670319961267" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/brick/orm/orm0" />
     <SUITE FILE_PATH="coverage/mysite_diy$testdicthelper.coverage" NAME="testdicthelper Coverage Results" MODIFIED="1650327334916" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/mysite_diy$main.coverage" NAME="main Coverage Results" MODIFIED="1669855879519" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
@@ -97,81 +101,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/brick/core/db/felds.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-596">
-              <caret line="2814" column="8" selection-start-line="2814" selection-start-column="8" selection-end-line="2814" selection-end-column="8" />
-              <folding>
-                <element signature="e#673#693#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/brick/core/db/modelquerys.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="883">
-              <caret line="1457" column="38" lean-forward="true" selection-start-line="1457" selection-start-column="38" selection-end-line="1457" selection-end-column="38" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/brick/orm/orm0/peewee 3.15.py">
-          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="92">
-              <caret line="8042" column="67" lean-forward="true" selection-start-line="8042" selection-start-column="67" selection-end-line="8042" selection-end-column="67" />
-              <folding>
-                <element signature="e#635#665#0" expanded="true" />
-                <element signature="e#182235#182972#0" />
-                <element signature="e#272913#274068#0" />
-                <element signature="e#274101#274504#0" />
-                <element signature="e#274532#275182#0" />
-              </folding>
+              <caret line="2112" column="28" selection-start-line="2112" selection-start-column="28" selection-end-line="2112" selection-end-column="28" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/concurrent/futures/thread.py">
+        <entry file="file://$PROJECT_DIR$/brick/core/db/querycompiler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
-              <caret line="24" selection-start-line="24" selection-end-line="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/threading.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="423">
-              <caret line="1438" column="11" lean-forward="true" selection-start-line="1438" selection-start-column="11" selection-end-line="1438" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/inspect.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="78" selection-start-line="78" selection-end-line="78" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="17" selection-start-line="17" selection-end-line="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="1134" selection-start-line="1134" selection-end-line="1134" />
+            <state relative-caret-position="459">
+              <caret line="823" selection-start-line="823" selection-end-line="823" />
             </state>
           </provider>
         </entry>
@@ -179,17 +119,74 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
-              <caret line="188" column="31" selection-start-line="188" selection-start-column="15" selection-end-line="188" selection-end-column="33" />
+            <state relative-caret-position="200">
+              <caret line="191" selection-start-line="191" selection-end-line="191" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="das://94d652a1-612b-4a5c-9b1d-ec300a9f499d/database/simple_db/schema/public/table/menu">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
+        <entry file="file://$PROJECT_DIR$/brick/core/db/modelquerys.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="1450" column="30" selection-start-line="1450" selection-start-column="30" selection-end-line="1450" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/site-packages/playhouse/fields.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="64">
+              <caret line="72" column="17" selection-start-line="72" selection-end-line="248" />
+              <folding>
+                <element signature="e#1987#2276#0" />
+                <element signature="e#2312#5107#0" />
+                <element signature="e#5164#6031#0" />
+                <element signature="e#6074#8554#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/brick/core/db/utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="104">
+              <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/brick/core/db/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="142">
+              <caret line="249" column="8" selection-start-line="249" selection-start-column="8" selection-end-line="249" selection-end-column="8" />
+              <folding>
+                <element signature="e#10405#11119#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/brick/orm/orm0/peewee2.10.2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="92">
+              <caret line="4776" column="8" selection-start-line="4776" selection-start-column="8" selection-end-line="4776" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/brick/orm/orm0/peewee 3.15.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="92">
+              <caret line="1006" selection-start-line="1006" selection-end-line="1006" />
+              <folding>
+                <element signature="e#635#665#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -199,28 +196,13 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>get_page_power</find>
-      <find>get_url</find>
-      <find>url</find>
-      <find>order_by</find>
-      <find>_max_alias</find>
-      <find>model = query.model_classs</find>
-      <find>SelectQuery</find>
-      <find>parse_select_query</find>
-      <find>FieldDescriptor</find>
-      <find>__get__</find>
-      <find>print(' interface_url: ',interface_url)</find>
-      <find>interface_url</find>
-      <find>_cache_list</find>
-      <find>where</find>
-      <find>msg</find>
       <find>menu</find>
       <find>dict</find>
       <find>dict()</find>
@@ -232,18 +214,35 @@
       <find>tree_ok</find>
       <find>ename</find>
       <find>many</find>
-      <find>ManyToManyField</find>
       <find>ManyToMany</find>
       <find>add</find>
+      <find>execute</find>
       <find>_get_descriptor</find>
+      <find>add_to_class</find>
+      <find>_create_through_model</find>
+      <find>model_refs</find>
+      <find>get_rel_for_model</find>
+      <find>rel_for_model</find>
+      <find>related_models</find>
+      <find>add_manytomany</find>
+      <find>manytomany</find>
+      <find>self.manytomany</find>
+      <find>add_ref</find>
+      <find>tr</find>
+      <find>rel_field</find>
+      <find>ModelAlias</find>
+      <find>ForeignKeyField</find>
+      <find>ManyToManyField</find>
     </findStrings>
     <replaceStrings>
       <replace>request</replace>
       <replace>response</replace>
       <replace>#print</replace>
+      <replace>tr</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
+    <option name="UPDATE_TYPE" value="MERGE" />
     <option name="ROOT_SYNC" value="SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <favorite-branches>
@@ -263,10 +262,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/test/testbottle.py" />
-        <option value="$PROJECT_DIR$/brick/apps/wsgiapp.py" />
-        <option value="$PROJECT_DIR$/brick/httphandles/request.py" />
-        <option value="$PROJECT_DIR$/brick/contrib/string_helper.py" />
         <option value="$PROJECT_DIR$/views/system/department.py" />
         <option value="$PROJECT_DIR$/views/login.py" />
         <option value="$PROJECT_DIR$/views/system/manager_operation_log.py" />
@@ -280,7 +275,6 @@
         <option value="$PROJECT_DIR$/brick/contrib/cache_helper.py" />
         <option value="$PROJECT_DIR$/html/main.html" />
         <option value="$PROJECT_DIR$/html/static/h-ui.admin/js/H-ui.admin.js" />
-        <option value="$PROJECT_DIR$/brick/orm/orm0/peewee2.10.2.py" />
         <option value="$PROJECT_DIR$/brick/orm/databases.py" />
         <option value="$PROJECT_DIR$/brick/orm/felds.py" />
         <option value="$PROJECT_DIR$/brick/orm/querycompiler.py" />
@@ -290,7 +284,6 @@
         <option value="$PROJECT_DIR$/html/menu_info.html" />
         <option value="$PROJECT_DIR$/html/menu_info_edit.html" />
         <option value="$PROJECT_DIR$/brick/orm/modelquerys.py" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
         <option value="$PROJECT_DIR$/html/products_class.html" />
         <option value="$PROJECT_DIR$/html/products_edit.html" />
         <option value="$PROJECT_DIR$/html/products_list.html" />
@@ -310,10 +303,16 @@
         <option value="$PROJECT_DIR$/brick/contrib/email_validcode.py" />
         <option value="$PROJECT_DIR$/brick/contrib/verify_helper.py" />
         <option value="$PROJECT_DIR$/html/verify.html" />
-        <option value="$PROJECT_DIR$/brick/core/db/modelquerys.py" />
-        <option value="$PROJECT_DIR$/views/models.py" />
         <option value="$PROJECT_DIR$/brick/orm/orm0/peewee3.14.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
+        <option value="$PROJECT_DIR$/views/models.py" />
+        <option value="$PROJECT_DIR$/brick/orm/orm0/peewee2.10.2.py" />
         <option value="$PROJECT_DIR$/brick/orm/orm0/peewee 3.15.py" />
+        <option value="$PROJECT_DIR$/html/tuodong.html" />
+        <option value="$PROJECT_DIR$/html/df.html" />
+        <option value="$PROJECT_DIR$/brick/core/db/models.py" />
+        <option value="$PROJECT_DIR$/brick/core/db/felds.py" />
+        <option value="$PROJECT_DIR$/brick/core/db/modelquerys.py" />
       </list>
     </option>
   </component>
@@ -337,42 +336,6 @@
             </path>
             <path>
               <item name="mysite_diy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mysite_diy" type="462c0819:PsiDirectoryNode" />
-              <item name="brick" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mysite_diy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mysite_diy" type="462c0819:PsiDirectoryNode" />
-              <item name="brick" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mysite_diy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mysite_diy" type="462c0819:PsiDirectoryNode" />
-              <item name="brick" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-              <item name="db" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mysite_diy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mysite_diy" type="462c0819:PsiDirectoryNode" />
-              <item name="brick" type="462c0819:PsiDirectoryNode" />
-              <item name="orm" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mysite_diy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mysite_diy" type="462c0819:PsiDirectoryNode" />
-              <item name="brick" type="462c0819:PsiDirectoryNode" />
-              <item name="orm" type="462c0819:PsiDirectoryNode" />
-              <item name="orm0" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mysite_diy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mysite_diy" type="462c0819:PsiDirectoryNode" />
-              <item name="html" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mysite_diy" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
             <path>
@@ -385,6 +348,13 @@
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
               <item name="&lt; Python 3.7 (mysite_diy) &gt;" type="70bed36:NamedLibraryElementNode" />
               <item name="site-packages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mysite_diy" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.7 (mysite_diy) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
+              <item name="playhouse" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="mysite_diy" type="b2602c69:ProjectViewProjectNode" />
@@ -434,8 +404,11 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.peewee 3.15">
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.models">
+    <configuration name="tuodong.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/mysite_diy/html/tuodong.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="models (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="mysite_diy" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -443,12 +416,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/brick/core/db" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/brick/core/db/models.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -501,7 +474,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="peewee3.14" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="peewee2.10.2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="mysite_diy" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -514,29 +487,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/brick/orm/orm0/peewee3.14.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="verify_helper" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="mysite_diy" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/brick/contrib" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/brick/contrib/verify_helper.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/brick/orm/orm0/peewee2.10.2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -547,11 +498,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.peewee 3.15" />
-        <item itemvalue="Python.peewee3.14" />
         <item itemvalue="Python.models" />
-        <item itemvalue="Python.main" />
-        <item itemvalue="Python.verify_helper" />
+        <item itemvalue="Python.peewee 3.15" />
+        <item itemvalue="JavaScript Debug.tuodong.html" />
+        <item itemvalue="Python.models (1)" />
+        <item itemvalue="Python.peewee2.10.2" />
       </list>
     </recent_temporary>
   </component>
@@ -647,6 +598,13 @@
       <workItem from="1656512000781" duration="1259000" />
       <workItem from="1662004025260" duration="7904000" />
       <workItem from="1663312533572" duration="3160000" />
+      <workItem from="1669947372682" duration="964000" />
+      <workItem from="1669948366595" duration="3644000" />
+      <workItem from="1670204313955" duration="8411000" />
+      <workItem from="1670290288047" duration="15995000" />
+      <workItem from="1670393813863" duration="1103000" />
+      <workItem from="1670467614468" duration="6492000" />
+      <workItem from="1670887761164" duration="10574000" />
     </task>
     <task id="LOCAL-00001" summary="626">
       <created>1656301574449</created>
@@ -683,11 +641,18 @@
       <option name="project" value="LOCAL" />
       <updated>1669856860666</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="12.1">
+      <created>1669947470508</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1669947470508</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="599533000" />
+    <option name="totallyTimeSpent" value="646716000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -700,13 +665,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.48907104" visible="true" weight="0.22671756" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.48907104" visible="true" weight="0.17557251" />
       <window_info id="Structure" order="1" sideWeight="0.510929" side_tool="true" weight="0.31603053" />
       <window_info id="Favorites" order="2" sideWeight="0.5093333" side_tool="true" weight="0.3038168" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3291592" />
-      <window_info anchor="bottom" id="Debug" order="2" weight="0.39892665" />
+      <window_info anchor="bottom" id="Debug" order="2" weight="0.40250447" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="5" sideWeight="0.49923664" weight="0.3291592" />
@@ -715,7 +681,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49923664" weight="0.3452594" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" sideWeight="0.49923664" weight="0.3291592" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5038168" side_tool="true" weight="0.36314848" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4984733" weight="0.2647585" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4984733" visible="true" weight="0.2647585" />
       <window_info anchor="bottom" id="Database Console" order="12" weight="0.3255814" />
       <window_info anchor="bottom" x="28" y="272" width="1310" height="184" id="Python Console" order="13" weight="0.3291592" />
       <window_info anchor="bottom" id="SQL Generator" order="14" weight="0.3291592" />
@@ -726,28 +692,28 @@
       <window_info anchor="right" id="SciView" order="4" weight="0.32977098" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.48907104" visible="true" weight="0.2129771" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.48907104" visible="true" weight="0.17557251" />
       <window_info id="Structure" order="1" sideWeight="0.510929" side_tool="true" weight="0.31603053" />
       <window_info id="Favorites" order="2" sideWeight="0.5093333" side_tool="true" weight="0.3038168" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3291592" />
-      <window_info anchor="bottom" id="Debug" order="2" weight="0.39892665" />
+      <window_info anchor="bottom" id="Debug" order="2" weight="0.40250447" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="5" sideWeight="0.49923664" weight="0.3291592" />
       <window_info anchor="bottom" id="Docker" order="6" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="7" sideWeight="0.49618322" weight="0.3470483" />
+      <window_info anchor="bottom" id="Run" order="7" sideWeight="0.49618322" weight="0.32737032" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49923664" weight="0.3452594" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" sideWeight="0.49923664" weight="0.3291592" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5038168" side_tool="true" weight="0.36314848" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4984733" weight="0.2647585" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.4984733" visible="true" weight="0.2647585" />
       <window_info anchor="bottom" id="Database Console" order="12" weight="0.3255814" />
       <window_info anchor="bottom" x="28" y="272" width="1310" height="184" id="Python Console" order="13" weight="0.3291592" />
       <window_info anchor="bottom" id="SQL Generator" order="14" weight="0.3291592" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" anchor="right" id="Database" order="3" visible="true" weight="0.17251909" />
+      <window_info anchor="right" id="Database" order="3" weight="0.3610687" />
       <window_info anchor="right" id="SciView" order="4" weight="0.32977098" />
     </layout-to-restore>
   </component>
@@ -830,93 +796,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/html/department.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="41" column="80" selection-start-line="41" selection-start-column="80" selection-end-line="41" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/manager_edit.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3496">
-          <caret line="176" column="37" selection-start-line="176" selection-start-column="37" selection-end-line="176" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/manager_operation_log.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-476">
-          <caret line="77" column="37" selection-start-line="77" selection-start-column="37" selection-end-line="77" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/department_edit.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" column="50" selection-start-line="16" selection-start-column="50" selection-end-line="16" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://a8e688f5-8f73-4c24-843e-52b7e556fc49/database/simple_db/schema/public/table/manager" />
-    <entry file="file://$PROJECT_DIR$/brick/contrib/json_helper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/lib/common.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/system/menu_info.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2698">
-          <caret line="150" column="18" selection-start-line="150" selection-start-column="18" selection-end-line="150" selection-end-column="18" />
-          <folding>
-            <element signature="e#38#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/system/manager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="38" column="69" selection-start-line="38" selection-start-column="69" selection-end-line="38" selection-end-column="69" />
-          <folding>
-            <element signature="e#38#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/brick/contrib/email_validcode.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="39" column="34" lean-forward="true" selection-start-line="39" selection-start-column="34" selection-end-line="39" selection-end-column="34" />
-          <folding>
-            <element signature="e#639#653#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/verify.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="497">
-          <caret line="35" column="15" selection-start-line="35" selection-start-column="11" selection-end-line="35" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/site-packages/PIL/Image.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1102">
-          <caret line="2952" selection-start-line="2952" selection-end-line="2952" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://a8e688f5-8f73-4c24-843e-52b7e556fc49/database/simple_db/schema/public/table/menu_info" />
     <entry file="file://$PROJECT_DIR$/html/menu_info_edit.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -958,19 +837,9 @@
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/a2bad041-cad3-48db-85df-02a101d8b6c2/console.sql">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/html/verify.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7771">
-          <caret line="409" column="63" selection-start-line="409" selection-start-column="63" selection-end-line="409" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/brick/servers/baseserver.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/brick/orm/databases.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/html/verify.html" />
+    <entry file="file://$PROJECT_DIR$/brick/servers/baseserver.py" />
+    <entry file="file://$PROJECT_DIR$/brick/orm/databases.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/site-packages/django/contrib/messages/middleware.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
@@ -995,23 +864,9 @@
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/94d652a1-612b-4a5c-9b1d-ec300a9f499d/console.sql">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/brick/apps/wsgiapp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="580" column="32" selection-start-line="580" selection-start-column="20" selection-end-line="580" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/brick/apps/utilities.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/brick/orm/felds.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2052">
-          <caret line="112" column="12" selection-start-line="112" selection-start-column="12" selection-end-line="112" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/brick/apps/wsgiapp.py" />
+    <entry file="file://$PROJECT_DIR$/brick/apps/utilities.py" />
+    <entry file="file://$PROJECT_DIR$/brick/orm/felds.py" />
     <entry file="file://$PROJECT_DIR$/html/menu_info.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
@@ -1043,18 +898,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/brick/core/db/databases.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-855" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/brick/core/baseserver.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="das://94d652a1-612b-4a5c-9b1d-ec300a9f499d/database/simple_db/schema/public/table/role_menu_through">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
+    <entry file="file://$PROJECT_DIR$/brick/orm/orm0/peewee3.14.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="8012" column="6" selection-start-line="8008" selection-end-line="8010" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/site-packages/peewee.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-152">
+          <caret line="5512" column="8" selection-start-line="5512" selection-start-column="8" selection-end-line="5512" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2018.3/system/python_stubs/-1007583135/builtins.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="4489" column="8" selection-start-line="4489" selection-start-column="8" selection-end-line="4489" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21546">
+          <caret line="1134" selection-start-line="1134" selection-end-line="1134" />
         </state>
       </provider>
     </entry>
@@ -1072,96 +950,164 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/brick/core/db/felds.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-596">
-          <caret line="2814" column="8" selection-start-line="2814" selection-start-column="8" selection-end-line="2814" selection-end-column="8" />
-          <folding>
-            <element signature="e#673#693#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/brick/orm/orm0/peewee3.14.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="8012" column="6" selection-start-line="8008" selection-end-line="8010" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/brick/core/db/modelquerys.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="883">
-          <caret line="1457" column="38" lean-forward="true" selection-start-line="1457" selection-start-column="38" selection-end-line="1457" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/site-packages/peewee.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-152">
-          <caret line="5512" column="8" selection-start-line="5512" selection-start-column="8" selection-end-line="5512" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="188" column="31" selection-start-line="188" selection-start-column="15" selection-end-line="188" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2018.3/system/python_stubs/-1007583135/builtins.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="4489" column="8" selection-start-line="4489" selection-start-column="8" selection-end-line="4489" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="1134" selection-start-line="1134" selection-end-line="1134" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/inspect.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="78" selection-start-line="78" selection-end-line="78" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/concurrent/futures/thread.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
+        <state relative-caret-position="342">
           <caret line="24" selection-start-line="24" selection-end-line="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/threading.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="423">
-          <caret line="1438" column="11" lean-forward="true" selection-start-line="1438" selection-start-column="11" selection-end-line="1438" selection-end-column="11" />
+        <state relative-caret-position="27189">
+          <caret line="1438" column="11" selection-start-line="1438" selection-start-column="11" selection-end-line="1438" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/codecs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="311" column="19" selection-start-line="311" selection-start-column="18" selection-end-line="311" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brick/core/db/databases.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11381">
+          <caret line="608" selection-start-line="608" selection-end-line="608" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brick/core/db/exceptions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1254">
+          <caret line="66" selection-start-line="66" selection-end-line="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/logging/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27151">
+          <caret line="1432" selection-start-line="1432" selection-end-line="1432" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/inspect.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1140">
+          <caret line="78" selection-start-line="78" selection-end-line="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://94d652a1-612b-4a5c-9b1d-ec300a9f499d/database/simple_db/schema/public/table/role_menu_through">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/product_details.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/df.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="205" selection-start-line="205" selection-end-line="205" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/tuodong.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="12" column="52" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="55" />
+          <folding>
+            <element signature="e#33#416#0" />
+            <element signature="e#477#5393#0" />
+            <element signature="e#5395#5513#0" />
+            <element signature="e#5516#6427#0" />
+            <element signature="e#6802#7100#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/3/builtins.pyi">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brick/orm/orm0/peewee2.10.2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="4776" column="8" selection-start-line="4776" selection-start-column="8" selection-end-line="4776" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brick/core/db/querycompiler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="823" selection-start-line="823" selection-end-line="823" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brick/core/db/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="249" column="8" selection-start-line="249" selection-start-column="8" selection-end-line="249" selection-end-column="8" />
+          <folding>
+            <element signature="e#10405#11119#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brick/core/db/felds.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="2112" column="28" selection-start-line="2112" selection-start-column="28" selection-end-line="2112" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brick/core/db/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/brick/orm/orm0/peewee 3.15.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="92">
-          <caret line="8042" column="67" lean-forward="true" selection-start-line="8042" selection-start-column="67" selection-end-line="8042" selection-end-column="67" />
+          <caret line="1006" selection-start-line="1006" selection-end-line="1006" />
           <folding>
             <element signature="e#635#665#0" expanded="true" />
-            <element signature="e#182235#182972#0" />
-            <element signature="e#272913#274068#0" />
-            <element signature="e#274101#274504#0" />
-            <element signature="e#274532#275182#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="191" selection-start-line="191" selection-end-line="191" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brick/core/db/modelquerys.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="1450" column="30" selection-start-line="1450" selection-start-column="30" selection-end-line="1450" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/site-packages/playhouse/fields.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="72" column="17" selection-start-line="72" selection-end-line="248" />
+          <folding>
+            <element signature="e#1987#2276#0" />
+            <element signature="e#2312#5107#0" />
+            <element signature="e#5164#6031#0" />
+            <element signature="e#6074#8554#0" />
           </folding>
         </state>
       </provider>

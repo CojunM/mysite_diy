@@ -2398,7 +2398,7 @@ class SqliteQueryCompiler(QueryCompiler):
 
 
 class ResultIterator(object):
-    def q__init__(self, qrw):
+    def __init__(self, qrw):
         self.qrw = qrw
         self._idx = 0
 
@@ -5623,6 +5623,30 @@ class Role(BaseMode):
     # permissions = ManyToManyField(Menu)
     desc = CharField(max_length=50, null=True, verbose_name="描述")
 
+class Menu(BaseMode):
+    """
+    菜单
+    """
+    name = CharField(max_length=30, unique=True, verbose_name="菜单名")  # unique=True, 这个字段在表中必须有唯一值.
+    # parent = ForeignKeyField('self', null=True, on_delete="SET NULL", verbose_name="父菜单")
+    icon = CharField(max_length=50, null=True, verbose_name="图标")
+    code = CharField(max_length=50, null=True, verbose_name="编码")
+    url = CharField(max_length=128, unique=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = '菜单'
+        verbose_name_plural = verbose_name
+
+    @classmethod
+    def get_menu_by_request_url(cls, url):
+        return dict(menu=Menu.objects.get(url=url))
+
+class Role_Menu_Through(BaseMode):
+    role = ForeignKeyField(Role)
+    menu = ForeignKeyField(Menu)
 
 # new_user = User(name='LiMingfdd', age="8")
 if __name__ == "__main__":
@@ -5642,4 +5666,96 @@ if __name__ == "__main__":
     #     Manager.login_count: Manager.login_count+1,
     # }
     # result = Manager.update(fields).where(Manager.login_name == 'admin').execute()
-    Role.create_table()
+    # Role.create_table()
+
+    # database = SqliteDatabase('db.sqlite3')
+    # class BaseModel1(Model):
+    #     class Meta:
+    #         database = database
+    #
+    #
+    # class User(BaseModel1):
+    #     username = CharField(unique=True)
+    #     password = CharField()
+    #
+    # #
+    # # TeacherThroughDeferred = DeferredThroughModel()
+    # # StudentThroughDeferred = DeferredThroughModel()
+    #
+    #
+    # class Team(BaseModel1):
+    #     title = CharField()
+    #     # teachers = ManyToManyField(User, backref='lead_teams', through_model=TeacherThroughDeferred)
+    #     # students = ManyToManyField(User, backref='join_teams', through_model=StudentThroughDeferred)
+    #
+    #
+    # class TeacherThrough(BaseModel1):
+    #     team = ForeignKeyField(Team)
+    #     user = ForeignKeyField(User)
+    #
+
+    # TeacherThroughDeferred.set_model(TeacherThrough)
+
+    #
+    # class StudentThrough(BaseModel1):
+    #     team = ForeignKeyField(Team)
+    #     user = ForeignKeyField(User)
+
+
+    # StudentThroughDeferred.set_model(StudentThrough)
+
+    # database.create_tables([
+    #     User, Team,
+    #     TeacherThrough,
+    #     StudentThrough,
+    # ])
+
+    # for k in range(10):
+    #     usr = User()
+    #     usr.username = f'Alex_{k}'
+    #     usr.password = 'dsklf'
+    #     try:
+    #         usr.save()
+    #     except:
+    #         pass
+    # team = Team()
+    # team.title = "test"
+    # team.save()
+    # team.teachers.add([
+    #     User.get(User.username == 'Alex_0'),
+    #     User.get(User.username == 'Alex_1'),
+    #     User.get(User.username == 'Alex_2'),
+    # ])
+    # TeacherThrough.save([
+    #     User.get(User.username == 'Alex_0'),
+    #     User.get(User.username == 'Alex_1'),
+    #     User.get(User.username == 'Alex_2'),
+    # ])
+    # print('1',team.teachers)
+    # print('12',team.teachers.add)
+    # team.students.add([
+    #     User.get(User.username == 'Alex_3'),
+    #     User.get(User.username == 'Alex_4'),
+    #     User.get(User.username == 'Alex_5'),
+    #     User.get(User.username == 'Alex_6')
+    # ])
+    # StudentThrough.add([
+    #     User.get(User.username == 'Alex_3'),
+    #     User.get(User.username == 'Alex_4'),
+    #     User.get(User.username == 'Alex_5'),
+    #     User.get(User.username == 'Alex_6')
+    # ])
+    # team.save()
+    # for each in User.get(User.username == 'Alex_0').lead_teams:
+    #     print(each)
+    # print('-' * 20)
+    # for each in User.get(User.username == 'Alex_3').join_teams:
+    #     print(each)
+    query = (Role
+             .select()
+             .join(Role_Menu_Through)
+             .join(Menu)
+             .where(Menu.name == 'menu1'))
+    for student in query:
+        print(student.name)
+    print('role_id',Role_Menu_Through.get(Role_Menu_Through.role_id == 1))

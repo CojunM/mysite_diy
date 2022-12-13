@@ -24,14 +24,13 @@ def not_allowed(fn):
     方法修饰符，用于指示不允许调用方法。将
     引发“NotImplementedError”。
     """
+
     def inner(self, *args, **kwargs):
         raise NotImplementedError('%s is not allowed on %s instances' % (
             fn, type(self).__name__,
         ))
 
     return inner
-
-
 
 
 class ReverseRelationDescriptor(object):
@@ -1115,8 +1114,6 @@ class RawQuery(Query):
         return iter(self.execute())
 
 
-
-
 def allow_extend(orig, new_val, **kwargs):
     extend = kwargs.pop('extend', False)
     if kwargs:
@@ -1125,7 +1122,6 @@ def allow_extend(orig, new_val, **kwargs):
         return ((orig or []) + new_val) or None
     elif new_val:
         return new_val
-
 
 
 class SelectQuery(Query):
@@ -1273,7 +1269,7 @@ class SelectQuery(Query):
             self._dicts = self._namedtuples = False
 
     @returns_clone
-    def dicts(self,as_dicts=True):
+    def dicts(self, as_dicts=True):
         self._dicts = as_dicts
         if as_dicts:
             self._tuples = self._namedtuples = False
@@ -1421,9 +1417,7 @@ class SelectQuery(Query):
         return len(self.execute())
 
     def __hash__(self):
-            return id(self)
-
-
+        return id(self)
 
 
 def ensure_tuple(value):
@@ -1431,12 +1425,14 @@ def ensure_tuple(value):
     if value is not None:
         return value if isinstance(value, (list, tuple)) else (value,)
 
+
 class ManyToManyQuery(SelectQuery):
     def __init__(self, instance, accessor, rel, *args, **kwargs):
         self._instance = instance
         self._accessor = accessor
-        self._src_attr = accessor.src_fk.rel_field.name
-        self._dest_attr = accessor.dest_fk.rel_field.name
+        self._src_attr = accessor.src_fk.to_field.name
+        self._dest_attr = accessor.dest_fk.to_field.name
+        # super(ManyToManyQuery, self).__init__(rel, (rel,), *args, **kwargs)
         super(ManyToManyQuery, self).__init__(rel, (rel,), *args, **kwargs)
 
     def _id_list(self, model_or_id_list):
@@ -1452,7 +1448,7 @@ class ManyToManyQuery(SelectQuery):
         accessor = self._accessor
         src_id = getattr(self._instance, self._src_attr)
         if isinstance(value, SelectQuery):
-            query = value( Value(src_id), accessor.dest_fk.rel_field)
+            query = value(Value(src_id), accessor.dest_fk.rel_field)
             accessor.through_model.insert_from(
                 fields=[accessor.src_fk, accessor.dest_fk],
                 query=query).execute()
@@ -1496,7 +1492,6 @@ class ManyToManyQuery(SelectQuery):
                 .execute())
 
 
-
 JoinMetadata = namedtuple('JoinMetadata', (
     'src_model',  # Source Model class.
     'dest_model',  # Dest Model class.
@@ -1510,6 +1505,7 @@ JoinMetadata = namedtuple('JoinMetadata', (
     'is_self_join',  # Is this a self-join?
     'is_expression',  # Is the join ON clause an Expression?
 ))
+
 
 class Join(namedtuple('_Join', ('src', 'dest', 'join_type', 'on'))):
     def get_foreign_key(self, source, dest, field=None):
@@ -1906,4 +1902,3 @@ class DeleteQuery(_WriteQuery):
             return self._qr
         else:
             return self.database.rows_affected(self._execute())
-

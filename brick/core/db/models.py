@@ -246,9 +246,11 @@ class ModelOptions(object):
             self.db_table = self.db_table_func(model)
 
     def add_ref(self, field):
-        rel = field.rel_model
+        rel = self.model_class   if field.rel_model == 'self' else  field.rel_model
         self.refs[field] = rel
         self.model_refs[rel].append(field)
+        print('model_refs ',self.model_refs)
+        print(rel)
         rel._meta.backrefs[field] = self.model_class
         rel._meta.model_backrefs[self.model_class].append(field)
 
@@ -291,24 +293,6 @@ class ModelOptions(object):
         self.declared_fields = [field for field in self.sorted_fields
                                 if not field.undeclared]
 
-    # @property
-    # def table(self):
-    #     if self._table is None:
-    #         self._table = Table(
-    #             self.table_name,
-    #             [field.column_name for field in self.sorted_fields],
-    #             schema=self.schema,
-    #             _model=self.model,
-    #             _database=self.database)
-    #     return self._table
-    #
-    # @table.setter
-    # def table(self, value):
-    #     raise AttributeError('Cannot set the "table".')
-    #
-    # @table.deleter
-    # def table(self):
-    #     self._table = None
 
     def add_field(self, field):
         if field.name in self.fields:
@@ -333,7 +317,10 @@ class ModelOptions(object):
                 else:
                     self._default_dict[field] = field.default
                     self._default_by_name[field.name] = field.default
+        # if isinstance(field, ForeignKeyField):
+        #     self.add_ref(field)
         elif isinstance(field, ManyToManyField) and field.name:
+            # self.add_ref(field)
             self.add_manytomany(field)
     def remove_field(self, field_name):
         if field_name not in self.fields:
@@ -392,7 +379,10 @@ class ModelOptions(object):
                     if not multi:
                         return field
                     accum.append(field)
+                    # self.add_ref(field)
+                    print('accum',accum)
         if multi:
+            print('accum1 ', accum)
             return accum
 
     def reverse_rel_for_model(self, model, field_obj=None, multi=False):
@@ -544,92 +534,6 @@ class Model(metaclass=ModelMetaclass):
     def alias(cls):
         return ModelAlias(cls)
 
-    # @classmethod
-    # def create_table(cls, fail_silently=False):
-    #     if fail_silently and cls.table_exists():
-    #         return
-    #
-    #     db = cls._meta.database
-    #     pk = cls._meta.primary_key
-    #     if db.sequences and pk.sequence and not db.sequence_exists(pk.sequence):
-    #         db.create_sequence(pk.sequence)
-    #
-    #     db.create_table(cls)
-    #
-    #     for field_name, field_obj in cls._meta.fields.items():
-    #         if isinstance(field_obj, ForeignKeyField):
-    #             db.create_foreign_key(cls, field_obj)
-    #         elif field_obj.index or field_obj.unique:
-    #             db.create_index(cls, [field_obj], field_obj.unique)
-    #
-    #     if cls._meta.indexes:
-    #         for fields, unique in cls._meta.indexes:
-    #             db.create_index(cls, fields, unique)
-    #
-    # @classmethod
-    # def update(cls, **update):
-    #     # print('11111')
-    #     fdict = dict((cls._meta.fields[f], v) for f, v in update.items())
-    #     return UpdateQuery(cls, fdict)
-    #
-    # @classmethod
-    # def insert(cls, **insert):
-    #     fdict = dict((cls._meta.fields[f], v) for f, v in insert.items())
-    #     return InsertQuery(cls, fdict)
-    #
-    # @classmethod
-    # def delete(cls):
-    #     return DeleteQuery(cls)
-    #
-    # @classmethod
-    # def select(cls, *selection):
-    #     query = SelectQuery(cls, *selection)
-    #     if cls._meta.order_by:
-    #         query = query.order_by(*cls._meta.order_by)
-    #     return query
-    #
-    # @classmethod
-    # def get(cls, *query, **kwargs):
-    #     sq = cls.select().naive()
-    #     if query:
-    #         sq = sq.where(*query)
-    #     if kwargs:
-    #         sq = sq.filter(**kwargs)
-    #     return sq.get()
-    # def get_id(self):
-    #     """
-    #     获取主键值
-    #     :return:
-    #     """
-    #     return getattr(self, self._meta.primary_key.name)
-    #
-    # def set_id(self, id):
-    #     setattr(self, self._meta.primary_key.name, id)
-    #
-    # def save(self, force_insert=False, only=None):
-    #     """
-    #     保存
-    #     :param force_insert: 强制插入
-    #     :param only:
-    #     :return:
-    #     """
-    #     field_dict = dict(self._data)
-    #     pk = self._meta.primary_key
-    #     # get_id()获取主键值
-    #     if self.get_id() is not None and not force_insert:
-    #         field_dict.pop(pk.name)
-    #         update = self.update(**field_dict).where(pk == self.get_id())
-    #         update.execute()
-    #     else:
-    #         if self._meta.auto_increment:  # 自增量存在，删除该字段
-    #             field_dict.pop(pk.name, None)
-    #         insert = self.insert(**field_dict)
-    #         new_pk = insert.execute()
-    #         if self._meta.auto_increment:
-    #             self.set_id(new_pk)
-    # def prepared(self):
-    #     pass
-
     @classmethod
     def select(cls, *selection):
         query = SelectQuery(cls, *selection)
@@ -673,12 +577,13 @@ class Model(metaclass=ModelMetaclass):
         return inst
 
     @classmethod
-    def get(cls, *query, **kwargs):
-        sq = cls.select().naive()
+    def get(cls, *query, **filters):
+        sq = cls.select()
+        # sq = cls.select().naive()
         if query:
             sq = sq.where(*query)
-        if kwargs:
-            sq = sq.filter(**kwargs)
+        if filters:
+            sq = sq.filter(**filters)
         return sq.get()
 
     @classmethod

@@ -28,667 +28,6 @@ except ImportError:
     OrderedDict = dict
 
 
-# unicode_type = str
-# string_type = bytes
-# basestring = str
-# long = int
-# __all__ = [
-#     'IntegerField', 'BigIntegerField', 'PrimaryKeyField', 'FloatField', 'DoubleField',
-#     'DecimalField', 'CharField', 'TextField', 'DateTimeField', 'DateField', 'TimeField',
-#     'BooleanField', 'ForeignKeyField', 'Model', 'DoesNotExist', 'ImproperlyConfigured',
-#     'DQ', 'fn', 'SqliteDatabase', 'MySQLDatabase', 'PostgresqlDatabase', 'Field',
-#     'JOIN_LEFT_OUTER', 'JOIN_INNER', 'JOIN_FULL',
-# ]
-#
-# OP_AND = 0
-# OP_OR = 1
-#
-# OP_ADD = 10
-# OP_SUB = 11
-# OP_MUL = 12
-# OP_DIV = 13
-# OP_AND = 14
-# OP_OR = 15
-# OP_XOR = 16
-# OP_USER = 19
-#
-# OP_EQ = 20
-# OP_LT = 21
-# OP_LTE = 22
-# OP_GT = 23
-# OP_GTE = 24
-# OP_NE = 25
-# OP_IN = 26
-# OP_IS = 27
-# OP_LIKE = 28
-# OP_ILIKE = 29
-#
-# DJANGO_MAP = {
-#     'eq': OP_EQ,
-#     'lt': OP_LT,
-#     'lte': OP_LTE,
-#     'gt': OP_GT,
-#     'gte': OP_GTE,
-#     'ne': OP_NE,
-#     'in': OP_IN,
-#     'is': OP_IS,
-#     'like': OP_LIKE,
-#     'ilike': OP_ILIKE,
-# }
-#
-# JOIN_INNER = 1
-# JOIN_LEFT_OUTER = 2
-# JOIN_FULL = 3
-#
-# op_map = {
-#     OP_EQ: '=',
-#     OP_LT: '<',
-#     OP_LTE: '<=',
-#     OP_GT: '>',
-#     OP_GTE: '>=',
-#     OP_NE: '!=',
-#     OP_IN: 'IN',
-#     OP_IS: 'IS',
-#     OP_LIKE: 'LIKE',
-#     OP_ILIKE: 'ILIKE',
-#     OP_ADD: '+',
-#     OP_SUB: '-',
-#     OP_MUL: '*',
-#     OP_DIV: '/',
-#     OP_XOR: '^',
-#     OP_AND: 'AND',
-#     OP_OR: 'OR',
-# }
-#
-# join_map = {
-#     JOIN_INNER: 'INNER',
-#     JOIN_LEFT_OUTER: 'LEFT OUTER',
-#     JOIN_FULL: 'FULL',
-# }
-#
-#
-# class FieldDescriptor(object):
-#     def __init__(self, field):
-#         self.field = field
-#         self.att_name = self.field.name
-#
-#     def __get__(self, instance, instance_type=None):
-#         if instance:
-#             return instance._data.get(self.att_name)
-#         return self.field
-#
-#     def __set__(self, instance, value):
-#         instance._data[self.att_name] = value
-#
-# class CompositeKey(object):
-#     """A primary key composed of multiple columns."""
-#     _node_type = 'composite_key'
-#     sequence = None
-#
-#     def __init__(self, *field_names):
-#         self.field_names = field_names
-#
-#     def add_to_class(self, model_class, name):
-#         self.name = name
-#         self.model_class = model_class
-#         setattr(model_class, name, self)
-#
-#     def __get__(self, instance, instance_type=None):
-#         if instance is not None:
-#             return tuple([getattr(instance, field_name)
-#                           for field_name in self.field_names])
-#         return self
-#
-#     def __set__(self, instance, value):
-#         pass
-#
-#     def __eq__(self, other):
-#         expressions = [(self.model_class._meta.fields[field] == value)
-#                        for field, value in zip(self.field_names, other)]
-#         return reduce(operator.and_, expressions)
-#
-#     def __ne__(self, other):
-#         return ~(self == other)
-#
-#     def __hash__(self):
-#         return hash((self.model_class.__name__, self.field_names))
-#
-# class Leaf(object):
-#     """查询的任何部分的基类，该部分应是可组合的"""
-#
-#     def __init__(self):
-#         self.negated = False
-#         self._alias = None
-#         self._bind_to = None
-#         self._ordering = None  # ASC or DESC.
-#     def __invert__(self):
-#         self.negated = not self.negated
-#         return self
-#
-#     def alias(self, a):
-#         self._alias = a
-#         return self
-#
-#     def asc(self):
-#         return Ordering(self, True)
-#
-#     def desc(self):
-#         return Ordering(self, False)
-#
-#     def _e(op, inv=False):
-#         """轻型工厂，它返回一个构建表达式的方法
-#         由左操作数和右操作数组成，使用'op'。
-#         以实现类似 WHERE ("name" = ?)
-#         """
-#
-#         def inner(self, rhs):
-#             if inv:
-#                 return Expr(rhs, op, self)
-#             return Expr(self, op, rhs)
-#
-#         return inner
-#
-#     __and__ = _e(OP_AND)
-#     __or__ = _e(OP_OR)
-#
-#     __add__ = _e(OP_ADD)
-#     __sub__ = _e(OP_SUB)
-#     __mul__ = _e(OP_MUL)
-#     __div__ = _e(OP_DIV)
-#     __xor__ = _e(OP_XOR)
-#     __radd__ = _e(OP_ADD, inv=True)
-#     __rsub__ = _e(OP_SUB, inv=True)
-#     __rmul__ = _e(OP_MUL, inv=True)
-#     __rdiv__ = _e(OP_DIV, inv=True)
-#     __rand__ = _e(OP_AND, inv=True)
-#     __ror__ = _e(OP_OR, inv=True)
-#     __rxor__ = _e(OP_XOR)
-#     __eq__ = _e(OP_EQ)
-#     __lt__ = _e(OP_LT)
-#     __le__ = _e(OP_LTE)
-#     __gt__ = _e(OP_GT)
-#     __ge__ = _e(OP_GTE)
-#     __ne__ = _e(OP_NE)
-#     __lshift__ = _e(OP_IN)
-#     __rshift__ = _e(OP_IS)
-#     __mod__ = _e(OP_LIKE)
-#     __pow__ = _e(OP_ILIKE)
-#
-#
-# class Expr(Leaf):
-#     def __init__(self, lhs, op, rhs, negated=False):
-#         # print('op', op)
-#         super(Expr, self).__init__()
-#         self.lhs = lhs
-#         self.op = op
-#         self.rhs = rhs
-#         self.negated = negated
-#         # print('--Expr--')
-#
-#     def clone(self):
-#         return Expr(self.lhs, self.op, self.rhs, self.negated)
-#
-#
-# class DQ(Leaf):
-#     """A "django-style" filter expression, e.g. {'foo__eq': 'x'}."""
-#     def __init__(self, **query):
-#         super(DQ, self).__init__()
-#         self.query = query
-#
-#     def clone(self):
-#         return DQ(**self.query)
-#
-#
-# class Param(Leaf):
-#     def __init__(self, data):
-#         self.data = data
-#         super(Param, self).__init__()
-#
-#
-# class Func(Leaf):
-#     def __init__(self, name, *params):
-#         self.name = name
-#         self.params = params
-#         super(Func, self).__init__()
-#
-#     def clone(self):
-#         return Func(self.name, *self.params)
-#
-#     def __getattr__(self, attr):
-#         def dec(*args, **kwargs):
-#             return Func(attr, *args, **kwargs)
-#
-#         return dec
-#
-#
-# fn = Func(None)
-# # Python元组的升级版本 -- namedtuple(具名元组)
-# # collections.namedtuple(typename, field_names, verbose=False, rename=False)
-# # 返回一个具名元组子类 typename，其中参数的意义如下：
-# # typename：元组名称
-# # field_names: 元组中元素的名称
-# # rename: 如果元素名称中含有 python 的关键字，则必须设置为 rename=True
-# # verbose: 默认就好
-# Ordering = namedtuple('Ordering', ('param', 'asc'))
-# R = namedtuple('R', ('value',))
-#
-#
-# class Field(Leaf):
-#     _field_counter = 0
-#     _order = 0
-#     db_field = 'unknown'
-#     template = '%(column_type)s'
-#
-#     def __init__(self, null=False, index=False, unique=False, verbose_name=None,
-#                  help_text=None, db_column=None, default=None, choices=None,
-#                  primary_key=False, sequence=None, *args, **kwargs):
-#         self.null = null
-#         self.index = index
-#         self.unique = unique
-#         self.verbose_name = verbose_name
-#         self.help_text = help_text
-#         self.db_column = db_column
-#         self.default = default
-#         self.choices = choices
-#         self.primary_key = primary_key
-#         self.sequence = sequence
-#
-#         self.attributes = self.field_attributes()
-#         self.attributes.update(kwargs)
-#
-#         Field._field_counter += 1
-#         self._order = Field._field_counter
-#
-#         super(Field, self).__init__()
-#
-#     def add_to_class(self, model_class, name):
-#         self.name = name
-#         self.model_class = model_class
-#         self.db_column = self.db_column or self.name
-#         self.verbose_name = self.verbose_name or re.sub('_+', ' ', name).title()
-#
-#         model_class._meta.fields[self.name] = self
-#         model_class._meta.columns[self.db_column] = self
-#         setattr(model_class, name, FieldDescriptor(self))
-#
-#     def field_attributes(self):
-#         return {}
-#     def get_database(self):
-#         return self.model_class._meta.database
-#     def get_db_field(self):
-#         return self.db_field
-#     # def get_column_type(self):
-#     #     field_type = self.get_db_field()
-#     #     return self.get_database().compiler().get_column_type(field_type)
-#     def get_modifiers(self):
-#         return None
-#     def coerce(self, value):
-#         return value
-#
-#     def db_value(self, value):
-#         return value if value is None else self.coerce(value)
-#
-#     def python_value(self, value):
-#         return value if value is None else self.coerce(value)
-#     def __hash__(self):
-#         return hash(self.name + '.' + self.model_class.__name__)
-#
-# class FloatField(Field):
-#     db_field = 'float'
-#
-#     def coerce(self, value):
-#         return float(value)
-#
-#
-# class CharField(Field):
-#     db_field = 'string'
-#     template = '%(column_type)s(%(max_length)s)'
-#
-#     def field_attributes(self):
-#         return {'max_length': 255}
-#
-#     def coerce(self, value):
-#         value = format_unicode(value or '')
-#         return value[:self.attributes['max_length']]
-#
-#
-# class IntegerField(Field):
-#     db_field = 'int'
-#
-#     def coerce(self, value):
-#         return int(value)
-#
-#
-# class TextField(Field):
-#     db_field = 'text'
-#
-#     def coerce(self, value):
-#         return format_unicode(value or '')
-#
-#
-# class BigIntegerField(IntegerField):
-#     db_field = 'bigint'
-#
-#
-# class PrimaryKeyField(IntegerField):
-#     db_field = 'primary_key'
-#
-#     def __init__(self, *args, **kwargs):
-#         kwargs['primary_key'] = True
-#         super(PrimaryKeyField, self).__init__(*args, **kwargs)
-#
-#
-# class RelationDescriptor(FieldDescriptor):
-#     def __init__(self, field, rel_model):
-#         self.rel_model = rel_model
-#         super(RelationDescriptor, self).__init__(field)
-#
-#     def get_object_or_id(self, instance):
-#         rel_id = instance._data.get(self.att_name)
-#         if rel_id is not None or self.att_name in instance._obj_cache:
-#             if self.att_name not in instance._obj_cache:
-#                 obj = self.rel_model.get(self.rel_model._meta.primary_key == rel_id)
-#                 instance._obj_cache[self.att_name] = obj
-#             return instance._obj_cache[self.att_name]
-#         elif not self.field.null:
-#             raise self.rel_model.DoesNotExist
-#         return rel_id
-#
-#     def __get__(self, instance, instance_type=None):
-#         if instance:
-#             return self.get_object_or_id(instance)
-#         return self.field
-#
-#     def __set__(self, instance, value):
-#         if isinstance(value, self.rel_model):
-#             instance._data[self.att_name] = value.get_id()
-#             instance._obj_cache[self.att_name] = value
-#         else:
-#             instance._data[self.att_name] = value
-#
-#
-# class ReverseRelationDescriptor(object):
-#     def __init__(self, field):
-#         self.field = field
-#         self.rel_model = field.model_class
-#
-#     def __get__(self, instance, instance_type=None):
-#         if instance:
-#             return self.rel_model.select().where(self.field == instance.get_id())
-#         return self
-#
-# class ForeignKeyField(IntegerField):
-#     def __init__(self, rel_model, related_name=None, on_delete=None,
-#                      on_update=None, extra=None,to_field=None,
-#                      object_id_name=None, *args, **kwargs):
-#
-#         self.rel_model = rel_model
-#         self._related_name = related_name
-#         self.on_delete = on_delete
-#         self.on_update = on_update
-#         self.extra = extra
-#         self.to_field = to_field
-#         self.object_id_name = object_id_name
-#
-#         super(ForeignKeyField, self).__init__( *args, **kwargs)
-#
-#     def add_to_class(self, model_class, name):
-#         self.name = name
-#         self.model_class = model_class
-#         self.db_column = self.db_column or '%s_id' % self.name
-#         self.verbose_name = self.verbose_name or re.sub('_+', ' ', name).title()
-#
-#         model_class._meta.fields[self.name] = self
-#         model_class._meta.columns[self.db_column] = self
-#
-#         self.related_name = self._related_name or '%s_set' % (model_class._meta.name)
-#
-#         if self.rel_model == 'self':
-#             self.rel_model = self.model_class
-#         if self.related_name in self.rel_model._meta.fields:
-#             raise AttributeError('Foreign key: %s.%s related name "%s" collision with field of same name' % (
-#                 self.model_class._meta.name, self.name, self.related_name))
-#
-#         setattr(model_class, name, RelationDescriptor(self, self.rel_model))
-#         setattr(self.rel_model, self.related_name, ReverseRelationDescriptor(self))
-#
-#         model_class._meta.rel[self.name] = self
-#         self.rel_model._meta.reverse_rel[self.related_name] = self
-#
-#     def get_db_field(self):
-#         if not isinstance(self.to_field, PrimaryKeyField):
-#             return self.to_field.get_db_field()
-#         return super(ForeignKeyField, self).get_db_field()
-#
-#     def get_modifiers(self):
-#         if not isinstance(self.to_field, PrimaryKeyField):
-#             return self.to_field.get_modifiers()
-#         return super(ForeignKeyField, self).get_modifiers()
-#     def coerce(self, value):
-#         return self.to_field.coerce(value)
-#
-#     def db_value(self, value):
-#         if isinstance(value, self.rel_model):
-#             value = value.get_id()
-#         return self.rel_model._meta.primary_key.db_value(value)
-#
-#
-# class TimeField(Field):
-#     db_field = 'time'
-#
-#     def field_attributes(self):
-#         return {
-#             'formats': [
-#                 '%H:%M:%S.%f',
-#                 '%H:%M:%S',
-#                 '%H:%M',
-#                 '%Y-%m-%d %H:%M:%S.%f',
-#                 '%Y-%m-%d %H:%M:%S',
-#             ]
-#         }
-#
-#     def python_value(self, value):
-#         if value and isinstance(value, basestring):
-#             pp = lambda x: x.time()
-#             return format_date_time(value, self.attributes['formats'], pp)
-#         elif value and isinstance(value, datetime):
-#             return value.time()
-#         return value
-#
-#
-# class DateTimeField(Field):
-#     db_field = 'datetime'
-#
-#     def field_attributes(self):
-#         return {
-#             'formats': [
-#                 '%Y-%m-%d %H:%M:%S.%f',
-#                 '%Y-%m-%d %H:%M:%S',
-#                 '%Y-%m-%d',
-#             ]
-#         }
-#
-#     def python_value(self, value):
-#         if value and isinstance(value, basestring):
-#             return format_date_time(value, self.attributes['formats'])
-#         return value
-#
-# class DateField(Field):
-#     db_field = 'date'
-#
-#     def field_attributes(self):
-#         return {
-#             'formats': [
-#                 '%Y-%m-%d',
-#                 '%Y-%m-%d %H:%M:%S',
-#                 '%Y-%m-%d %H:%M:%S.%f',
-#             ]
-#         }
-#
-#     def python_value(self, value):
-#         if value and isinstance(value, basestring):
-#             pp = lambda x: x.date()
-#             return format_date_time(value, self.attributes['formats'], pp)
-#         elif value and isinstance(value, datetime.datetime):
-#             return value.date()
-#         return value
-#
-# class BooleanField(Field):
-#     db_field = 'bool'
-#
-#     def coerce(self, value):
-#         return bool(value)
-# class ManyToManyFieldAccessor(FieldDescriptor):
-#     def __init__(self,  field):
-#         super(ManyToManyFieldAccessor, self).__init__( field)
-#         self.model = field.model
-#         self.rel_model = field.rel_model
-#         self.through_model = field.through_model
-#         src_fks = self.through_model._meta.model_refs[self.model]
-#         dest_fks = self.through_model._meta.model_refs[self.rel_model]
-#         if not src_fks:
-#             raise ValueError('Cannot find foreign-key to "%s" on "%s" model.' %
-#                              (self.model, self.through_model))
-#         elif not dest_fks:
-#             raise ValueError('Cannot find foreign-key to "%s" on "%s" model.' %
-#                              (self.rel_model, self.through_model))
-#         self.src_fk = src_fks[0]
-#         self.dest_fk = dest_fks[0]
-#
-#     def __get__(self, instance, instance_type=None, force_query=False):
-#         if instance is not None:
-#             if not force_query and self.src_fk.backref != '+':
-#                 backref = getattr(instance, self.src_fk.backref)
-#                 if isinstance(backref, list):
-#                     return [getattr(obj, self.dest_fk.name) for obj in backref]
-#
-#             src_id = getattr(instance, self.src_fk.rel_field.name)
-#             return (ManyToManyQuery(instance, self, self.rel_model)
-#                     .join(self.through_model)
-#                     .join(self.model)
-#                     .where(self.src_fk == src_id))
-#
-#         return self.field
-#
-#     def __set__(self, instance, value):
-#         query = self.__get__(instance, force_query=True)
-#         query.add(value, clear_existing=True)
-#
-#
-# class ManyToManyField(Field):
-#     accessor_class = ManyToManyFieldAccessor
-#
-#     def __init__(self, model, backref=None, through_model=None, on_delete=None,
-#                  on_update=None, _is_backref=False):
-#         if through_model is not None:
-#             if not (isinstance(through_model, DeferredThroughModel) or
-#                     is_model(through_model)):
-#                 raise TypeError('Unexpected value for through_model. Expected '
-#                                 'Model or DeferredThroughModel.')
-#             if not _is_backref and (on_delete is not None or on_update is not None):
-#                 raise ValueError('Cannot specify on_delete or on_update when '
-#                                  'through_model is specified.')
-#         self.rel_model = model
-#         self.backref = backref
-#         self._through_model = through_model
-#         self._on_delete = on_delete
-#         self._on_update = on_update
-#         self._is_backref = _is_backref
-#
-#     def _get_descriptor(self):
-#         return ManyToManyFieldAccessor(self)
-#
-#     def bind(self, model, name, set_attribute=True):
-#         if isinstance(self._through_model, DeferredThroughModel):
-#             self._through_model.set_field(model, self, name)
-#             return
-#
-#         super(ManyToManyField, self).bind(model, name, set_attribute)
-#
-#         if not self._is_backref:
-#             many_to_many_field = ManyToManyField(
-#                 self.model,
-#                 backref=name,
-#                 through_model=self.through_model,
-#                 on_delete=self._on_delete,
-#                 on_update=self._on_update,
-#                 _is_backref=True)
-#             self.backref = self.backref or model._meta.name + 's'
-#             self.rel_model._meta.add_field(self.backref, many_to_many_field)
-#
-#     def get_models(self):
-#         return [model for _, model in sorted((
-#             (self._is_backref, self.model),
-#             (not self._is_backref, self.rel_model)))]
-#
-#     @property
-#     def through_model(self):
-#         if self._through_model is None:
-#             self._through_model = self._create_through_model()
-#         return self._through_model
-#
-#     @through_model.setter
-#     def through_model(self, value):
-#         self._through_model = value
-#
-#     def _create_through_model(self):
-#         lhs, rhs = self.get_models()
-#         tables = [model._meta.table_name for model in (lhs, rhs)]
-#
-#         class Meta:
-#             database = self.model._meta.database
-#             schema = self.model._meta.schema
-#             table_name = '%s_%s_through' % tuple(tables)
-#             indexes = (
-#                 ((lhs._meta.name, rhs._meta.name),
-#                  True),)
-#
-#         params = {'on_delete': self._on_delete, 'on_update': self._on_update}
-#         attrs = {
-#             lhs._meta.name: ForeignKeyField(lhs, **params),
-#             rhs._meta.name: ForeignKeyField(rhs, **params),
-#             'Meta': Meta}
-#
-#         klass_name = '%s%sThrough' % (lhs.__name__, rhs.__name__)
-#         return type(klass_name, (Model,), attrs)
-#
-#     def get_through_model(self):
-#         # XXX: Deprecated. Just use the "through_model" property.
-#         return self.through_model
-#
-
-
-# Operators used in binary expressions.
-
-
-# class attrdict(dict):
-#     def __getattr__(self, attr):
-#         try:
-#             return self[attr]
-#         except KeyError:
-#             raise AttributeError(attr)
-#
-# JOIN = attrdict(
-#     INNER='INNER',
-#     LEFT_OUTER='LEFT OUTER',
-#     RIGHT_OUTER='RIGHT OUTER',
-#     FULL='FULL',
-#     CROSS='CROSS',
-# )
-# DJANGO_MAP = {
-#     'eq': OP.EQ,
-#     'lt': OP.LT,
-#     'lte': OP.LTE,
-#     'gt': OP.GT,
-#     'gte': OP.GTE,
-#     'ne': OP.NE,
-#     'in': OP.IN,
-#     'is': OP.IS,
-#     'like': OP.LIKE,
-#     'ilike': OP.ILIKE,
-#     'regexp': OP.REGEXP,
-# }
-
 class _CDescriptor(object):
     def __get__(self, instance, instance_type=None):
         if instance is not None:
@@ -1981,22 +1320,6 @@ class FieldDescriptor(object):
 
 
 #
-# class FieldAccessor(object):
-#     def __init__(self, model, field, name):
-#         self.model = model
-#         self.field = field
-#         self.name = name
-#
-#     def __get__(self, instance, instance_type=None):
-#         if instance is not None:
-#             return instance.__data__.get(self.name)
-#         return self.field
-#
-#     def __set__(self, instance, value):
-#         instance.__data__[self.name] = value
-#         instance._dirty.add(self.name)
-#
-
 class Field(Node):
     """A column on a table."""
     _field_counter = 0
@@ -2679,11 +2002,13 @@ class ForeignKeyField(IntegerField):
             self.verbose_name = re.sub('_+', ' ', name).title()
 
         model_class._meta.add_field(self)
+        model_class._meta.add_ref(self)
+
 
         self.related_name = self._get_related_name()
         if self.rel_model == 'self':
             self.rel_model = self.model_class
-
+        model_class._meta.add_ref(self)
         if self.to_field is not None:
             if not isinstance(self.to_field, Field):
                 self.to_field = getattr(self.rel_model, self.to_field)
@@ -2759,10 +2084,13 @@ class MetaField(Field):
 class ManyToManyFieldAccessor(FieldDescriptor):
     def __init__(self, field):
         super(ManyToManyFieldAccessor, self).__init__(field)
-        self.model = field.model
+        self.model = field.model_class
         self.rel_model = field.rel_model
+        print('self.rel_model ',self.rel_model)
         self.through_model = field.through_model
+        print('self.through_model',self.through_model)
         src_fks = self.through_model._meta.model_refs[self.model]
+        print('src_fks  ',src_fks,self.model)
         dest_fks = self.through_model._meta.model_refs[self.rel_model]
         if not src_fks:
             raise ValueError('Cannot find foreign-key to "%s" on "%s" model.' %
@@ -2775,14 +2103,14 @@ class ManyToManyFieldAccessor(FieldDescriptor):
 
     def __get__(self, instance, instance_type=None, force_query=False):
         if instance is not None:
-            if not force_query and self.src_fk.backref != '+':
-                backref = getattr(instance, self.src_fk.backref)
+            if not force_query and self.src_fk.related_name != '+':
+                backref = getattr(instance, self.src_fk.related_name)
                 if isinstance(backref, list):
                     return [getattr(obj, self.dest_fk.name) for obj in backref]
 
-            src_id = getattr(instance, self.src_fk.rel_field.name)
+            src_id = getattr(instance, self.src_fk.to_field.name)
             from brick.core.db.modelquerys import ManyToManyQuery
-            return (ManyToManyQuery(instance, self, self.rel_model)
+            return (ManyToManyQuery(instance,self,self.rel_model)
                     .join(self.through_model)
                     .join(self.model)
                     .where(self.src_fk == src_id))
@@ -2810,7 +2138,7 @@ class DeferredThroughModel(object):
 
 
 class ManyToManyField(MetaField):
-    accessor_class = ManyToManyFieldAccessor
+    # accessor_class = ManyToManyFieldAccessor
 
     def __init__(self, model, backref=None, through_model=None, on_delete=None,
                  on_update=None, _is_backref=False, verbose_name=None):
@@ -2834,6 +2162,12 @@ class ManyToManyField(MetaField):
 
     def _get_descriptor(self):
         return ManyToManyFieldAccessor(self)
+    def _get_related_name(self):
+        if self.backref and callable(self.backref):
+            return self.backref(self)
+        return self.backref or ('%s_set' % self.model_class._meta.name)
+    def _get_backref_descriptor(self):
+        return ReverseRelationDescriptor(self)
 
     def add_to_class(self, model, name):
         if isinstance(self._through_model, DeferredThroughModel):
@@ -2855,10 +2189,59 @@ class ManyToManyField(MetaField):
                 on_update=self._on_update,
                 _is_backref=True)
             many_to_many_field.name = self.backref or model._meta.name + 's'
-            self.rel_model._meta.add_field(many_to_many_field)
+            many_to_many_field.model_class= self.model_class
+            # self.rel_model._meta.add_field(many_to_many_field)
+            many_to_many_field.add_to_class(self.rel_model,many_to_many_field.name)
             # print(many_to_many_field.name)
-        model._meta.add_field(self)
+
+        # setattr(self.model_class, name, ManyToManyFieldAccessor(self))
         # print(self.name)
+
+
+
+        self.related_name = self._get_related_name()
+        if self.rel_model == 'self':
+            self.rel_model = self.model_class
+
+        # if self.to_field is not None:
+        #     if not isinstance(self.to_field, Field):
+        #         self.to_field = getattr(self.rel_model, self.to_field)
+        # else:
+        #     self.to_field = self.rel_model._meta.primary_key
+
+        # TODO: factor into separate method.
+        # if model._meta.validate_backrefs:
+        #     def invalid(msg, **context):
+        #         context.update(
+        #             field='%s.%s' % (model ._meta.name, name),
+        #             backref=self.related_name,
+        #             )
+        #         raise AttributeError(msg % context)
+        #
+        #     if self.related_name in self.rel_model._meta.fields:
+        #         invalid('The related_name of %(field)s ("%(backref)s") '
+        #                 'conflicts with a field of the same name.')
+        #     elif self.related_name in self.rel_model._meta.reverse_rel:
+        #         invalid('The related_name of %(field)s ("%(backref)s") '
+        #                 'is already in use by another foreign key.')
+        #
+        #     if obj_id_name in model_class._meta.fields:
+        #         invalid('The object id descriptor of %(field)s conflicts '
+        #                 'with a field named %(obj_id_name)s')
+        #     elif obj_id_name in model_class.__dict__:
+        #         invalid('Model attribute "%(obj_id_name)s" would be shadowed '
+        #                 'by the object id descriptor of %(field)s.')
+
+        setattr(model, name, self._get_descriptor())
+        # setattr(model, obj_id_name, self._get_id_descriptor())
+        setattr(self.rel_model,
+                self.related_name,
+                self._get_backref_descriptor())
+        self._is_bound = True
+
+        model._meta.rel[self.name] = self
+        self.rel_model._meta.reverse_rel[self.related_name] = self
+
 
     def get_models(self):
         return [model for _, model in sorted((

@@ -92,7 +92,7 @@ class Menu(BaseModel):
     菜单
     """
     name = CharField(max_length=30, unique=True, verbose_name="菜单名")  # unique=True, 这个字段在表中必须有唯一值.
-    parent = ForeignKeyField("self", null=True, on_delete="SET NULL", verbose_name="父菜单")
+    parent = ForeignKeyField('self', null=True, on_delete="SET NULL", verbose_name="父菜单")
     icon = CharField(max_length=50, null=True, verbose_name="图标")
     code = CharField(max_length=50, null=True, verbose_name="编码")
     url = CharField(max_length=128, unique=True, null=True)
@@ -113,7 +113,7 @@ class Role(BaseModel):
     角色：用于权限绑定
     """
     name = CharField(max_length=32, unique=True, verbose_name="角色")
-    permissions = ManyToManyField(Menu,backref='menu')
+    permissions = ManyToManyField(Menu)
     desc = CharField(max_length=50, null=True, verbose_name="描述")
 
 
@@ -124,7 +124,7 @@ class Structure(BaseModel):
     type_choices = (("unit", "单位"), ("department", "部门"))
     name =CharField(max_length=60, verbose_name="名称")
     type =CharField(max_length=20, choices=type_choices, default="department", verbose_name="类型")
-    parent = ForeignKeyField("self", null=True,   on_delete='SET NULL', verbose_name="父类架构")
+    parent = ForeignKeyField('self', null=True,   on_delete='SET NULL', verbose_name="父类架构")
 
     class Meta:
         verbose_name = "组织架构"
@@ -185,6 +185,7 @@ if __name__ == "__main__":
 #         for course in  permissions:
 #             print(course.name)
     m=Menu.get(Menu.name=="menu1")
-    Role.permissions.add(m.id)
+
     r=Role.get(Role.name=="role1")
-    print(m.id,r.id)
+    print(m.id, r.id)
+    r.permissions.add(m.id)
