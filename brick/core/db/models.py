@@ -17,141 +17,11 @@ from brick.core.db.exceptions import IntegrityError
 from brick.core.db.modelquerys import InsertQuery, UpdateQuery, DeleteQuery, SelectQuery, ModelAlias, RawQuery, \
     NoopSelectQuery
 from brick.core.db.felds import Field, PrimaryKeyField, FieldDescriptor, ForeignKeyField, CompositeKey, Entity, Node, \
-    MetaField, ManyToManyField
+    ManyToManyField
 from brick.core.db.utils import DeferredRelation
 
 _DictQueryResultWrapper = _ModelQueryResultWrapper = _SortedFieldList = \
     _TuplesQueryResultWrapper = None
-
-
-#
-# class ModelOptions(object):
-#     def __init__(self, cls, database=None, db_table=None, indexes=None,
-#                  order_by=None, primary_key=None):
-#         self.model_class = cls
-#         self.name = cls.__name__.lower()
-#         self.fields = {}
-#         self.columns = {}
-#         self.defaults = {}
-#
-#         self.database = database
-#         self.db_table = db_table
-#         self.indexes = indexes or []
-#         self.order_by = order_by
-#         self.primary_key = primary_key
-#
-#         self.auto_increment = None
-#         self.rel = {}
-#         self.reverse_rel = {}
-#         # 3.14增加的
-#         self.refs = {}
-#         self.backrefs = {}
-#         self.model_refs = collections.defaultdict(list)
-#         self.model_backrefs = collections.defaultdict(list)
-#         self.manytomany = {}
-#     def add_ref(self, field):
-#         rel = field.rel_model
-#         self.refs[field] = rel
-#         self.model_refs[rel].append(field)
-#         rel._meta.backrefs[field] = self.model
-#         rel._meta.model_backrefs[self.model].append(field)
-#
-#     def remove_ref(self, field):
-#         rel = field.rel_model
-#         del self.refs[field]
-#         self.model_refs[rel].remove(field)
-#         del rel._meta.backrefs[field]
-#         rel._meta.model_backrefs[self.model].remove(field)
-#
-#     def add_manytomany(self, field):
-#         self.manytomany[field.name] = field
-#
-#     def remove_manytomany(self, field):
-#         del self.manytomany[field.name]
-#     def prepared(self):
-#         """
-#         准备数据
-#         :return:
-#         """
-#         for field in self.fields.values():
-#             if field.default is not None:
-#                 self.defaults[field] = field.default
-#
-#         if self.order_by:
-#             norm_order_by = []
-#             for clause in self.order_by:
-#                 field = self.fields[clause.lstrip('-')]
-#                 if clause.startswith('-'):
-#                     norm_order_by.append(field.desc())
-#                 else:
-#                     norm_order_by.append(field.asc())
-#             self.order_by = norm_order_by
-#
-#     def add_field(self, field):
-#         self.remove_field(field.name)
-#         self.fields[field.name] = field
-#         self.columns[field.db_column] = field
-#
-#         self._sorted_field_list.insert(field)
-#         self._update_field_lists()
-#
-#         if field.default is not None:
-#             self.defaults[field] = field.default
-#             if callable(field.default):
-#                 self._default_callables[field] = field.default
-#                 self._default_callable_list.append((field.name, field.default))
-#             else:
-#                 self._default_dict[field] = field.default
-#                 self._default_by_name[field.name] = field.default
-#
-#     def remove_field(self, field_name):
-#         if field_name not in self.fields:
-#             return
-#         original = self.fields.pop(field_name)
-#         del self.columns[original.db_column]
-#         self._sorted_field_list.remove(original)
-#         self._update_field_lists()
-#
-#         if original.default is not None:
-#             del self.defaults[original]
-#             if self._default_callables.pop(original, None):
-#                 for i, (name, _) in enumerate(self._default_callable_list):
-#                     if name == field_name:
-#                         self._default_callable_list.pop(i)
-#                         break
-#             else:
-#                 self._default_dict.pop(original, None)
-#                 self._default_by_name.pop(original.name, None)
-#
-#     def get_default_dict(self):
-#         dd = {}
-#         for field, default in self.defaults.items():
-#             if callable(default):
-#                 dd[field.name] = default()
-#             else:
-#                 dd[field.name] = default
-#         return dd
-#
-#     def get_sorted_fields(self):
-#         return sorted(self.fields.items(), key=lambda kv: (kv[1] is self.primary_key and 1 or 2, kv[1]._order))
-#
-#     def get_field_names(self):
-#         return [f[0] for f in self.get_sorted_fields()]
-#
-#     def get_fields(self):
-#         return [f[1] for f in self.get_sorted_fields()]
-#
-#     def rel_for_model(self, model, field_obj=None):
-#         for field in self.get_fields():
-#             if isinstance(field, ForeignKeyField) and field.rel_model == model:
-#                 if field_obj is None or field_obj.name == field.name:
-#                     return field
-#
-#     def reverse_rel_for_model(self, model):
-#         return model._meta.rel_for_model(self.model_class)
-#
-#     def rel_exists(self, model):
-#         return self.rel_for_model(model) or self.reverse_rel_for_model(model)
 
 
 class DoesNotExist(Exception):
@@ -192,14 +62,15 @@ class _SortedFieldList(object):
         del self._keys[idx]
 
 
+
 class ModelOptions(object):
-    def __init__(self, model, database=None, db_table=None, db_table_func=None,
+    def __init__(self, cls, database=None, db_table=None, db_table_func=None,
                  indexes=None, order_by=None, primary_key=None,
                  table_alias=None, constraints=None, schema=None,
                  validate_backrefs=True, only_save_dirty=False,
                  depends_on=None, **kwargs):
-        self.model_class = model
-        self.name = model.__name__.lower()
+        self.model_class = cls
+        self.name = cls.__name__.lower()
         self.fields = {}
         self.columns = {}
         self.defaults = {}
@@ -210,10 +81,10 @@ class ModelOptions(object):
         self._sorted_field_list = _SortedFieldList()
         self.sorted_fields = []
         self.sorted_field_names = []
-        self.valid_fields = set()  # 有效字段
+        self.valid_fields = set()
         self.declared_fields = []
 
-        self.database = database  # if database is not None else default_database
+        self.database = database #if database is not None else default_database
         self.db_table = db_table
         self.db_table_func = db_table_func
         self.indexes = list(indexes or [])
@@ -228,44 +99,15 @@ class ModelOptions(object):
 
         self.auto_increment = None
         self.composite_key = False
-
         self.rel = {}
         self.reverse_rel = {}
-        self.refs = {}
-        self.backrefs = {}
-        self.model_refs = collections.defaultdict(list)
-        self.model_backrefs = collections.defaultdict(list)
-        self.manytomany = {}
-        self.combined = {}
 
         for key, value in kwargs.items():
             setattr(self, key, value)
         self._additional_keys = set(kwargs.keys())
 
         if self.db_table_func and not self.db_table:
-            self.db_table = self.db_table_func(model)
-
-    def add_ref(self, field):
-        rel = self.model_class   if field.rel_model == 'self' else  field.rel_model
-        self.refs[field] = rel
-        self.model_refs[rel].append(field)
-        print('model_refs ',self.model_refs)
-        print(rel)
-        rel._meta.backrefs[field] = self.model_class
-        rel._meta.model_backrefs[self.model_class].append(field)
-
-    def remove_ref(self, field):
-        rel = field.rel_model
-        del self.refs[field]
-        self.model_refs[rel].remove(field)
-        del rel._meta.backrefs[field]
-        rel._meta.model_backrefs[self.model].remove(field)
-
-    def add_manytomany(self, field):
-        self.manytomany[field.name] = field
-
-    def remove_manytomany(self, field):
-        del self.manytomany[field.name]
+            self.db_table = self.db_table_func(cls)
 
     def __repr__(self):
         return '<%s: %s>' % (self.__class__.__name__, self.name)
@@ -293,45 +135,28 @@ class ModelOptions(object):
         self.declared_fields = [field for field in self.sorted_fields
                                 if not field.undeclared]
 
-
     def add_field(self, field):
-        if field.name in self.fields:
-            self.remove_field(field.name)
-        elif field.name in self.manytomany:
-            self.remove_manytomany(self.manytomany[field.name])
-        if not isinstance(field, MetaField):
-            self.fields[field.name] = field
-            self.columns[field.db_column] = field
+        self.remove_field(field.name)
+        self.fields[field.name] = field
+        self.columns[field.db_column] = field
 
-            self._sorted_field_list.insert(field)
-            self._update_field_lists()
+        self._sorted_field_list.insert(field)
+        self._update_field_lists()
 
-            self.combined[field.name] = field
-            self.combined[field.db_column] = field
+        if field.default is not None:
+            self.defaults[field] = field.default
+            if callable(field.default):
+                self._default_callables[field] = field.default
+                self._default_callable_list.append((field.name, field.default))
+            else:
+                self._default_dict[field] = field.default
+                self._default_by_name[field.name] = field.default
 
-            if field.default is not None:
-                self.defaults[field] = field.default
-                if callable(field.default):
-                    self._default_callables[field] = field.default
-                    self._default_callable_list.append((field.name, field.default))
-                else:
-                    self._default_dict[field] = field.default
-                    self._default_by_name[field.name] = field.default
-        # if isinstance(field, ForeignKeyField):
-        #     self.add_ref(field)
-        elif isinstance(field, ManyToManyField) and field.name:
-            # self.add_ref(field)
-            self.add_manytomany(field)
     def remove_field(self, field_name):
         if field_name not in self.fields:
             return
         original = self.fields.pop(field_name)
         del self.columns[original.db_column]
-        del self.combined[field_name]
-        try:
-            del self.combined[original.db_column]
-        except KeyError:
-            pass
         self._sorted_field_list.remove(original)
         self._update_field_lists()
 
@@ -345,6 +170,7 @@ class ModelOptions(object):
             else:
                 self._default_dict.pop(original, None)
                 self._default_by_name.pop(original.name, None)
+
     def get_default_dict(self):
         dd = self._default_by_name.copy()
         for field_name, default in self._default_callable_list:
@@ -379,10 +205,7 @@ class ModelOptions(object):
                     if not multi:
                         return field
                     accum.append(field)
-                    # self.add_ref(field)
-                    print('accum',accum)
         if multi:
-            print('accum1 ', accum)
             return accum
 
     def reverse_rel_for_model(self, model, field_obj=None, multi=False):
@@ -405,7 +228,6 @@ class ModelOptions(object):
                 for fk in model._meta.reverse_rel.values():
                     stack.append(fk.model_class)
         return models
-
 
 class ModelMetaclass(type):
     # 定义可以继承的属性

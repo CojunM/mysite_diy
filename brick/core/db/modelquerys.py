@@ -1425,72 +1425,76 @@ def ensure_tuple(value):
     if value is not None:
         return value if isinstance(value, (list, tuple)) else (value,)
 
-
 class ManyToManyQuery(SelectQuery):
-    def __init__(self, instance, accessor, rel, *args, **kwargs):
+    def __init__(self, instance, field_descriptor, *args, **kwargs):
         self._instance = instance
-        self._accessor = accessor
-        self._src_attr = accessor.src_fk.to_field.name
-        self._dest_attr = accessor.dest_fk.to_field.name
-        # super(ManyToManyQuery, self).__init__(rel, (rel,), *args, **kwargs)
-        super(ManyToManyQuery, self).__init__(rel, (rel,), *args, **kwargs)
+        self._field_descriptor = field_descriptor
+        super(ManyToManyQuery, self).__init__(*args, **kwargs)
+
+    def clone(self):
+        query = type(self)(
+            self._instance,
+            self._field_descriptor,
+            self.model_class)
+        query.database = self.database
+        return self._clone_attributes(query)
 
     def _id_list(self, model_or_id_list):
         from brick.core.db.models import Model
         if isinstance(model_or_id_list[0], Model):
-            return [getattr(obj, self._dest_attr) for obj in model_or_id_list]
+            return [obj.get_id() for obj in model_or_id_list]
         return model_or_id_list
 
     def add(self, value, clear_existing=False):
         if clear_existing:
             self.clear()
 
-        accessor = self._accessor
-        src_id = getattr(self._instance, self._src_attr)
+        fd = self._field_descriptor
         if isinstance(value, SelectQuery):
-            query = value(Value(src_id), accessor.dest_fk.rel_field)
-            accessor.through_model.insert_from(
-                fields=[accessor.src_fk, accessor.dest_fk],
+            query = value.select(
+                SQL(str(self._instance.get_id())),
+                fd.rel_model._meta.primary_key)
+            fd.through_model.insert_from(
+                fields=[fd.src_fk, fd.dest_fk],
                 query=query).execute()
         else:
-            value = ensure_tuple(value)
-            if not value: return
-
-            inserts = [{
-                accessor.src_fk.name: src_id,
-                accessor.dest_fk.name: rel_id}
-                for rel_id in self._id_list(value)]
-            accessor.through_model.insert_many(inserts).execute()
-
-    def remove(self, value):
-        src_id = getattr(self._instance, self._src_attr)
-        if isinstance(value, SelectQuery):
-            column = getattr(value.model, self._dest_attr)
-            subquery = value.columns(column)
-            return (self._accessor.through_model
-                    .delete()
-                    .where(
-                (self._accessor.dest_fk << subquery) &
-                (self._accessor.src_fk == src_id))
-                    .execute())
-        else:
-            value = ensure_tuple(value)
+            if not isinstance(value, (list, tuple)):
+                value = [value]
             if not value:
                 return
-            return (self._accessor.through_model
+            inserts = [{
+                fd.src_fk.name: self._instance.get_id(),
+                fd.dest_fk.name: rel_id}
+                for rel_id in self._id_list(value)]
+            fd.through_model.insert_many(inserts).execute()
+
+    def remove(self, value):
+        fd = self._field_descriptor
+        if isinstance(value, SelectQuery):
+            subquery = value.select(value.model_class._meta.primary_key)
+            return (fd.through_model
                     .delete()
                     .where(
-                (self._accessor.dest_fk << self._id_list(value)) &
-                (self._accessor.src_fk == src_id))
+                        (fd.dest_fk << subquery) &
+                        (fd.src_fk == self._instance.get_id()))
+                    .execute())
+        else:
+            if not isinstance(value, (list, tuple)):
+                value = [value]
+            if not value:
+                return
+            return (fd.through_model
+                    .delete()
+                    .where(
+                        (fd.dest_fk << self._id_list(value)) &
+                        (fd.src_fk == self._instance.get_id()))
                     .execute())
 
     def clear(self):
-        src_id = getattr(self._instance, self._src_attr)
-        return (self._accessor.through_model
+        return (self._field_descriptor.through_model
                 .delete()
-                .where(self._accessor.src_fk == src_id)
+                .where(self._field_descriptor.src_fk == self._instance)
                 .execute())
-
 
 JoinMetadata = namedtuple('JoinMetadata', (
     'src_model',  # Source Model class.

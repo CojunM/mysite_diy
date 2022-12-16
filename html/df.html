@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<!--<STYLE>-->
+<!--td{width:20%;height:20px;border-bottom:1px solid black;border-right:1px solid black;cursor:default;}-->
+<!--div{font-size:13px;}-->
+<!--th{height:20px;font-size:12px;font-weight:normal;border-bottom:2px solid black;background-color:#CCCCCC}-->
+<!--table{border:1px solid black;font-size:13px;}-->
+<!--</STYLE>-->
+<!--<script language="javascript">-->
+<!--/************************************ dragedTableData.js *******************************/-->
+<!--/************************************ dragedTableData.js *******************************/-->
+<!--/*-->
+ <!--* created by yzh 2002.4.12-->
+ <!--* 可以实现表格内容的内部拖动-->
+ <!--* 确保中间过度层的存在，id为指定-->
+ <!--* 请大家引用时保留这段作者声明，此代码为开源代码；使用不受限制，欢迎大家采用本人所写JS动态拖动表格实现代码。-->
+ <!--*/-->
+
+<!--/*&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;全局变量-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;*/-->
+<!--var dragedTable_x0,dragedTable_y0,dragedTable_x1,dragedTable_y1;-->
+<!--var dragedTable_movable = false;-->
+<!--var dragedTable_preCell = null;-->
+<!--var dragedTable_normalColor = null;-->
+<!--//起始单元格的颜色-->
+<!--var dragedTable_preColor = "lavender";-->
+<!--//目标单元格的颜色-->
+<!--var dragedTable_endColor = "#FFCCFF";-->
+<!--var dragedTable_movedDiv = "dragedTable_movedDiv";-->
+<!--var dragedTable_tableId = "";-->
+<!--/*&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;全局变量-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;*/-->
+
+<!--function DragedTable(tableId)-->
+<!--{-->
+    <!--dragedTable_tableId = tableId;-->
+    <!--var oTempDiv = document.createElement("div");-->
+    <!--oTempDiv.id = dragedTable_movedDiv;-->
+    <!--oTempDiv.onselectstart = function(){return false};-->
+    <!--oTempDiv.style.cursor = "hand";-->
+    <!--oTempDiv.style.position = "absolute";-->
+    <!--oTempDiv.style.border = "1px solid black";-->
+    <!--oTempDiv.style.backgroundColor = dragedTable_endColor;-->
+    <!--oTempDiv.style.display = "none";-->
+    <!--document.body.appendChild(oTempDiv);-->
+    <!--document.all(tableId).onmousedown = showDiv;-->
+<!--}-->
+
+<!--//得到控件的绝对位置-->
+<!--function getPos(cell)-->
+<!--{-->
+    <!--var pos = new Array();-->
+    <!--var t=cell.offsetTop;-->
+    <!--var l=cell.offsetLeft;-->
+    <!--while(cell=cell.offsetParent)-->
+    <!--{-->
+        <!--t+=cell.offsetTop;-->
+        <!--l+=cell.offsetLeft;-->
+    <!--}-->
+    <!--pos[0] = t;-->
+    <!--pos[1] = l;-->
+    <!--return pos;-->
+<!--}-->
+
+<!--//显示图层-->
+<!--function showDiv()-->
+<!--{-->
+    <!--var obj = event.srcElement;-->
+    <!--var pos = new Array();-->
+    <!--//获取过度图层-->
+    <!--var oDiv = document.all(dragedTable_movedDiv);-->
+    <!--if(obj.tagName.toLowerCase() == "td")-->
+    <!--{-->
+        <!--obj.style.cursor = "hand";-->
+        <!--pos = getPos(obj);-->
+        <!--//计算中间过度层位置，赋值-->
+        <!--oDiv.style.width = obj.offsetWidth;-->
+        <!--oDiv.style.height = obj.offsetHeight;-->
+        <!--oDiv.style.top = pos[0];-->
+        <!--oDiv.style.left = pos[1];-->
+        <!--oDiv.innerHTML = obj.innerHTML;-->
+        <!--oDiv.style.display = "";-->
+        <!--dragedTable_x0 = pos[1];-->
+        <!--dragedTable_y0 = pos[0];-->
+        <!--dragedTable_x1 = event.clientX;-->
+        <!--dragedTable_y1 = event.clientY;-->
+        <!--//记住原td-->
+        <!--dragedTable_normalColor = obj.style.backgroundColor;-->
+        <!--obj.style.backgroundColor = dragedTable_preColor;-->
+        <!--dragedTable_preCell = obj;-->
+
+        <!--dragedTable_movable = true;-->
+    <!--}-->
+<!--}-->
+<!--function dragDiv()-->
+<!--{-->
+    <!--if(dragedTable_movable)-->
+    <!--{-->
+        <!--var oDiv = document.all(dragedTable_movedDiv);-->
+        <!--var pos = new Array();-->
+        <!--oDiv.style.top = event.clientY - dragedTable_y1 + dragedTable_y0;-->
+        <!--oDiv.style.left = event.clientX - dragedTable_x1 + dragedTable_x0;-->
+        <!--var oTable = document.all(dragedTable_tableId);-->
+        <!--for(var i=0; i<oTable.cells.length; i++)-->
+        <!--{-->
+            <!--if(oTable.cells[i].tagName.toLowerCase() == "td")-->
+            <!--{-->
+                <!--pos = getPos(oTable.cells[i]);-->
+                <!--if(event.x>pos[1]&&event.x<pos[1]+oTable.cells[i].offsetWidth-->
+                   <!--&& event.y>pos[0]&& event.y<pos[0]+oTable.cells[i].offsetHeight)-->
+                <!--{-->
+                    <!--if(oTable.cells[i] != dragedTable_preCell)-->
+                        <!--oTable.cells[i].style.backgroundColor = dragedTable_endColor;-->
+                <!--}-->
+                <!--else-->
+                <!--{-->
+                    <!--if(oTable.cells[i] != dragedTable_preCell)-->
+                        <!--oTable.cells[i].style.backgroundColor = dragedTable_normalColor;-->
+                <!--}-->
+            <!--}-->
+        <!--}-->
+    <!--}-->
+<!--}-->
+
+<!--function hideDiv()-->
+<!--{-->
+    <!--if(dragedTable_movable)-->
+    <!--{-->
+        <!--var oTable = document.all(dragedTable_tableId);-->
+        <!--var pos = new Array();-->
+        <!--if(dragedTable_preCell != null)-->
+        <!--{-->
+            <!--for(var i=0; i<oTable.cells.length; i++)-->
+            <!--{-->
+                <!--pos = getPos(oTable.cells[i]);-->
+                <!--//计算鼠标位置，是否在某个单元格的范围之内-->
+                <!--if(event.x>pos[1]&&event.x<pos[1]+oTable.cells[i].offsetWidth-->
+                    <!--&& event.y>pos[0]&& event.y<pos[0]+oTable.cells[i].offsetHeight)-->
+                <!--{-->
+                    <!--if(oTable.cells[i].tagName.toLowerCase() == "td")-->
+                    <!--{-->
+                        <!--//交换文本-->
+                        <!--dragedTable_preCell.innerHTML = oTable.cells[i].innerHTML;-->
+                        <!--oTable.cells[i].innerHTML = document.all(dragedTable_movedDiv).innerHTML;-->
+                        <!--//清除原单元格和目标单元格的样式-->
+                        <!--dragedTable_preCell.style.backgroundColor = dragedTable_normalColor;-->
+                        <!--oTable.cells[i].style.backgroundColor = dragedTable_normalColor;-->
+                        <!--oTable.cells[i].style.cursor = "";-->
+                        <!--dragedTable_preCell.style.cursor = "";-->
+                        <!--dragedTable_preCell.style.backgroundColor = dragedTable_normalColor;-->
+                    <!--}-->
+                <!--}-->
+            <!--}-->
+        <!--}-->
+        <!--dragedTable_movable = false;-->
+        <!--//清除提示图层-->
+        <!--document.all(dragedTable_movedDiv).style.display = "none";-->
+    <!--}-->
+<!--}-->
+
+<!--document.onmouseup = function()-->
+<!--{-->
+    <!--hideDiv();-->
+    <!--var oTable = document.all(dragedTable_tableId);-->
+    <!--for(var i=0; i<oTable.cells.length; i++)-->
+        <!--oTable.cells[i].style.backgroundColor = dragedTable_normalColor;-->
+<!--}-->
+
+<!--document.onmousemove = function()-->
+<!--{-->
+    <!--dragDiv();-->
+<!--}-->
+
+<!--/************************************ dragedTableData.js 结束 *******************************/-->
+<!--/************************************ dragedTableData.js 结束 *******************************/-->
+<!--</script>-->
+<!--<script language="javascript">-->
+<!--function init()-->
+<!--{-->
+ <!--//注册可拖拽表格-->
+ <!--new DragedTable("tableId");-->
+<!--}-->
+<!--</script>-->
+<!--</HEAD>-->
+<!--<BODY οncοntextmenu="return false;" οnlοad="init()">-->
+<!--<TABLE id="tableId" width="70%" align="center" cellpadding="0" cellspacing="0">-->
+  <!--<TR>-->
+    <!--<TH colspan="4" style="">拖动交换单元格内容</TH>-->
+  <!--</TR>-->
+  <!--<TR>-->
+    <!--<TD>Java</TD>-->
+    <!--<TD>Java One </TD>-->
+    <!--<TD>JBuilder</TD>-->
+    <!--<TD>Stuts</TD>-->
+  <!--</TR>-->
+  <!--<TR>-->
+    <!--<TD>C++</TD>-->
+    <!--<TD>Visual Studio</TD>-->
+    <!--<TD>Office</TD>-->
+    <!--<TD>Windows</TD>-->
+  <!--</TR>-->
+<!--</TABLE>-->
+
+<STYLE>
+td{width:20%;height:20px;border-bottom:1px solid black;border-right:1px solid black;cursor:default;}
+div{font-size:13px;}
+th{height:20px;font-size:12px;font-weight:normal;border-bottom:2px solid black;background-color:#CCCCCC}
+table{border:1px solid black;font-size:13px;}
+</STYLE>
+<script language="javascript">
+/************************************ dragedTableData.js *******************************/
+/************************************ dragedTableData.js *******************************/
+/*
+ * created by yzh 2002.4.12
+ * 可以实现表格内容的内部拖动
+ * 确保中间过度层的存在，id为指定
+ * 请大家引用时保留这段作者声明，此代码为开源代码；使用不受限制，欢迎大家采用本人所写JS动态拖动表格实现代码。
+ */
+
+/*--------全局变量-----------*/
+var dragedTable_x0,dragedTable_y0,dragedTable_x1,dragedTable_y1;
+var dragedTable_movable = false;
+var dragedTable_preCell = null;
+var dragedTable_normalColor = null;
+//起始单元格的颜色
+var dragedTable_preColor = "lavender";
+//目标单元格的颜色
+var dragedTable_endColor = "#FFCCFF";
+var dragedTable_movedDiv = "dragedTable_movedDiv";
+var dragedTable_tableId = "";
+/*--------全局变量-----------*/
+
+function DragedTable(tableId)
+{
+    dragedTable_tableId = tableId;
+    var oTempDiv = document.createElement("div");
+    oTempDiv.id = dragedTable_movedDiv;
+    oTempDiv.onselectstart = function(){return false};
+    oTempDiv.style.cursor = "hand";
+    oTempDiv.style.position = "absolute";
+    oTempDiv.style.border = "1px solid black";
+    oTempDiv.style.backgroundColor = dragedTable_endColor;
+    oTempDiv.style.display = "none";
+    document.body.appendChild(oTempDiv);
+    document.all(tableId).onmousedown = showDiv;
+}
+
+//得到控件的绝对位置
+function getPos(cell)
+{
+    var pos = new Array();
+    var t=cell.offsetTop;
+    var l=cell.offsetLeft;
+    while(cell=cell.offsetParent)
+    {
+        t+=cell.offsetTop;
+        l+=cell.offsetLeft;
+    }
+    pos[0] = t;
+    pos[1] = l;
+    return pos;
+}
+
+//显示图层
+function showDiv()
+{
+    var obj = event.srcElement;
+    var pos = new Array();
+    //获取过度图层
+    var oDiv = document.all(dragedTable_movedDiv);
+    if(obj.tagName.toLowerCase() == "td")
+    {
+        obj.style.cursor = "hand";
+        pos = getPos(obj);
+        //计算中间过度层位置，赋值
+        oDiv.style.width = obj.offsetWidth;
+        oDiv.style.height = obj.offsetHeight;
+        oDiv.style.top = pos[0];
+        oDiv.style.left = pos[1];
+        oDiv.innerHTML = obj.innerHTML;
+        oDiv.style.display = "";
+        dragedTable_x0 = pos[1];
+        dragedTable_y0 = pos[0];
+        dragedTable_x1 = event.clientX;
+        dragedTable_y1 = event.clientY;
+        //记住原td
+        dragedTable_normalColor = obj.style.backgroundColor;
+        obj.style.backgroundColor = dragedTable_preColor;
+        dragedTable_preCell = obj;
+
+        dragedTable_movable = true;
+    }
+}
+function dragDiv()
+{
+    if(dragedTable_movable)
+    {
+        var oDiv = document.all(dragedTable_movedDiv);
+        var pos = new Array();
+        oDiv.style.top = event.clientY - dragedTable_y1 + dragedTable_y0;
+        oDiv.style.left = event.clientX - dragedTable_x1 + dragedTable_x0;
+        var oTable = document.all(dragedTable_tableId);
+        for(var i=0; i<oTable.cells.length; i++)
+        {
+            if(oTable.cells[i].tagName.toLowerCase() == "td")
+            {
+                pos = getPos(oTable.cells[i]);
+                if(event.x>pos[1]&&event.x<pos[1]+oTable.cells[i].offsetWidth
+                   && event.y>pos[0]&& event.y<pos[0]+oTable.cells[i].offsetHeight)
+                {
+                    if(oTable.cells[i] != dragedTable_preCell)
+                        oTable.cells[i].style.backgroundColor = dragedTable_endColor;
+                }
+                else
+                {
+                    if(oTable.cells[i] != dragedTable_preCell)
+                        oTable.cells[i].style.backgroundColor = dragedTable_normalColor;
+                }
+            }
+        }
+    }
+}
+
+function hideDiv()
+{
+    if(dragedTable_movable)
+    {
+        var oTable = document.all(dragedTable_tableId);
+        var pos = new Array();
+        if(dragedTable_preCell != null)
+        {
+            for(var i=0; i<oTable.cells.length; i++)
+            {
+                pos = getPos(oTable.cells[i]);
+                //计算鼠标位置，是否在某个单元格的范围之内
+                if(event.x>pos[1]&&event.x<pos[1]+oTable.cells[i].offsetWidth
+                    && event.y>pos[0]&& event.y<pos[0]+oTable.cells[i].offsetHeight)
+                {
+                    if(oTable.cells[i].tagName.toLowerCase() == "td")
+                    {
+                        //交换文本
+                        dragedTable_preCell.innerHTML = oTable.cells[i].innerHTML;
+                        oTable.cells[i].innerHTML = document.all(dragedTable_movedDiv).innerHTML;
+                        //清除原单元格和目标单元格的样式
+                        dragedTable_preCell.style.backgroundColor = dragedTable_normalColor;
+                        oTable.cells[i].style.backgroundColor = dragedTable_normalColor;
+                        oTable.cells[i].style.cursor = "";
+                        dragedTable_preCell.style.cursor = "";
+                        dragedTable_preCell.style.backgroundColor = dragedTable_normalColor;
+                    }
+                }
+            }
+        }
+        dragedTable_movable = false;
+        //清除提示图层
+        document.all(dragedTable_movedDiv).style.display = "none";
+    }
+}
+
+document.onmouseup = function()
+{
+    hideDiv();
+    var oTable = document.all(dragedTable_tableId);
+    for(var i=0; i<oTable.cells.length; i++)
+        oTable.cells[i].style.backgroundColor = dragedTable_normalColor;
+}
+
+document.onmousemove = function()
+{
+    dragDiv();
+}
+
+/************************************ dragedTableData.js 结束 *******************************/
+/************************************ dragedTableData.js 结束 *******************************/
+</script>
+<script language="javascript">
+function init()
+{
+ //注册可拖拽表格
+ new DragedTable("tableId");
+}
+</script>
+</HEAD>
+<BODY οncοntextmenu="return false;" onload="init()">
+<TABLE id="tableId" width="70%" align="center" cellpadding="0" cellspacing="0">
+  <TR>
+    <TH colspan="4" style="">拖动交换单元格内容</TH>
+  </TR>
+  <TR>
+    <TD>Java</TD>
+    <TD>Java One </TD>
+    <TD>JBuilder</TD>
+    <TD>Stuts</TD>
+  </TR>
+  <TR>
+    <TD>C++</TD>
+    <TD>Visual Studio</TD>
+    <TD>Office</TD>
+    <TD>Windows</TD>
+  </TR>
+</TABLE>
+</body>
+</html>

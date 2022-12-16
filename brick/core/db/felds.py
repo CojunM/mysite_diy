@@ -15,9 +15,10 @@ import uuid
 import weakref
 from collections import namedtuple
 from functools import wraps, reduce
-from inspect import isclass
+# from inspect import isclass
 
 from brick.core.db.constants import unicode_type, string_type, long
+
 
 from brick.core.db.utils import basestring, format_date_time, datetime, returns_clone, OP, binary_construct, \
     DeferredRelation
@@ -1928,6 +1929,7 @@ class ObjectIdDescriptor(object):
         setattr(instance, self.attr_name, value)
 
 
+
 class ForeignKeyField(IntegerField):
     def __init__(self, rel_model, related_name=None, on_delete=None,
                  on_update=None, extra=None, to_field=None,
@@ -2002,13 +2004,11 @@ class ForeignKeyField(IntegerField):
             self.verbose_name = re.sub('_+', ' ', name).title()
 
         model_class._meta.add_field(self)
-        model_class._meta.add_ref(self)
-
 
         self.related_name = self._get_related_name()
         if self.rel_model == 'self':
             self.rel_model = self.model_class
-        model_class._meta.add_ref(self)
+
         if self.to_field is not None:
             if not isinstance(self.to_field, Field):
                 self.to_field = getattr(self.rel_model, self.to_field)
@@ -2076,210 +2076,115 @@ class ForeignKeyField(IntegerField):
         return self.to_field.python_value(value)
 
 
-class MetaField(Field):
-    db_column = default = name = None
-    primary_key = False
-
-
-class ManyToManyFieldAccessor(FieldDescriptor):
-    def __init__(self, field):
-        super(ManyToManyFieldAccessor, self).__init__(field)
-        self.model = field.model_class
-        self.rel_model = field.rel_model
-        print('self.rel_model ',self.rel_model)
-        self.through_model = field.through_model
-        print('self.through_model',self.through_model)
-        src_fks = self.through_model._meta.model_refs[self.model]
-        print('src_fks  ',src_fks,self.model)
-        dest_fks = self.through_model._meta.model_refs[self.rel_model]
-        if not src_fks:
-            raise ValueError('Cannot find foreign-key to "%s" on "%s" model.' %
-                             (self.model, self.through_model))
-        elif not dest_fks:
-            raise ValueError('Cannot find foreign-key to "%s" on "%s" model.' %
-                             (self.rel_model, self.through_model))
-        self.src_fk = src_fks[0]
-        self.dest_fk = dest_fks[0]
-
-    def __get__(self, instance, instance_type=None, force_query=False):
-        if instance is not None:
-            if not force_query and self.src_fk.related_name != '+':
-                backref = getattr(instance, self.src_fk.related_name)
-                if isinstance(backref, list):
-                    return [getattr(obj, self.dest_fk.name) for obj in backref]
-
-            src_id = getattr(instance, self.src_fk.to_field.name)
-            from brick.core.db.modelquerys import ManyToManyQuery
-            return (ManyToManyQuery(instance,self,self.rel_model)
-                    .join(self.through_model)
-                    .join(self.model)
-                    .where(self.src_fk == src_id))
-
-        return self.field
-
-    def __set__(self, instance, value):
-        query = self.__get__(instance, force_query=True)
-        query.add(value, clear_existing=True)
 
 
 class DeferredThroughModel(object):
     '''延迟吞吐量模型'''
-
-    def __init__(self):
-        self._refs = []
-
-    def set_field(self, model, field, name):
-        self._refs.append((model, field, name))
+    def set_field(self, model_class, field, name):
+        self.model_class = model_class
+        self.field = field
+        self.name = name
 
     def set_model(self, through_model):
-        for src_model, m2mfield, name in self._refs:
-            m2mfield.through_model = through_model
-            src_model._meta.add_field(name, m2mfield)
+        self.field._through_model = through_model
+        self.field.add_to_class(self.model_class, self.name)
 
-
-class ManyToManyField(MetaField):
-    # accessor_class = ManyToManyFieldAccessor
-
-    def __init__(self, model, backref=None, through_model=None, on_delete=None,
-                 on_update=None, _is_backref=False, verbose_name=None):
-        if through_model is not None:
-            from brick.core.db.models import Model
-            if not (isinstance(through_model, DeferredThroughModel) or isclass(through_model) and issubclass(
-                    through_model, Model)):
-                raise TypeError('Unexpected value for through_model. Expected '
-                                'Model or DeferredThroughModel.')
-            if not _is_backref and (on_delete is not None or on_update is not None):
-                raise ValueError('Cannot specify on_delete or on_update when '
-                                 'through_model is specified.')
-        self.rel_model = model
-        self.backref = backref
+class ManyToManyField(Field):
+    def __init__(self, rel_model, related_name=None, through_model=None,
+                 _is_backref=False, verbose_name = None):
+        from brick.core.db.models import Model
+        if through_model is not None and not (
+                isinstance(through_model, (Proxy, DeferredThroughModel)) or
+                issubclass(through_model, Model)):
+            raise TypeError('Unexpected value for `through_model`.  Expected '
+                            '`Model`, `Proxy` or `DeferredThroughModel`.')
+        self.rel_model = rel_model
+        self._related_name = related_name
         self._through_model = through_model
-        self._on_delete = on_delete
-        self._on_update = on_update
         self._is_backref = _is_backref
+        self.primary_key = False
         self.verbose_name = verbose_name
-        # super(ManyToManyField, self).__init__(*args, **kwargs)
 
     def _get_descriptor(self):
-        return ManyToManyFieldAccessor(self)
-    def _get_related_name(self):
-        if self.backref and callable(self.backref):
-            return self.backref(self)
-        return self.backref or ('%s_set' % self.model_class._meta.name)
-    def _get_backref_descriptor(self):
-        return ReverseRelationDescriptor(self)
+        return ManyToManyFieldDescriptor(self)
 
-    def add_to_class(self, model, name):
-        if isinstance(self._through_model, DeferredThroughModel):
-            self._through_model.set_field(model, self, name)
+    def add_to_class(self, model_class, name):
+        if isinstance(self._through_model, Proxy):
+            def callback(through_model):
+                self._through_model = through_model
+                self.add_to_class(model_class, name)
+            self._through_model.attach_callback(callback)
+            return
+        elif isinstance(self._through_model, DeferredThroughModel):
+            self._through_model.set_field(model_class, self, name)
             return
 
-        # super(ManyToManyField, self).add_to_class(model, name)
         self.name = name
-        self.model_class = model
-        self.db_column = self.db_column or name
-        # print(self.model_class)
-        # print(self.rel_model)
+        self.model_class = model_class
+        if not self.verbose_name:
+            self.verbose_name = re.sub('_+', ' ', name).title()
+        setattr(model_class, name, self._get_descriptor())
+
         if not self._is_backref:
-            many_to_many_field = ManyToManyField(
+            backref = ManyToManyField(
                 self.model_class,
-                backref=name,
-                through_model=self.through_model,
-                on_delete=self._on_delete,
-                on_update=self._on_update,
+                through_model=self._through_model,
                 _is_backref=True)
-            many_to_many_field.name = self.backref or model._meta.name + 's'
-            many_to_many_field.model_class= self.model_class
-            # self.rel_model._meta.add_field(many_to_many_field)
-            many_to_many_field.add_to_class(self.rel_model,many_to_many_field.name)
-            # print(many_to_many_field.name)
-
-        # setattr(self.model_class, name, ManyToManyFieldAccessor(self))
-        # print(self.name)
-
-
-
-        self.related_name = self._get_related_name()
-        if self.rel_model == 'self':
-            self.rel_model = self.model_class
-
-        # if self.to_field is not None:
-        #     if not isinstance(self.to_field, Field):
-        #         self.to_field = getattr(self.rel_model, self.to_field)
-        # else:
-        #     self.to_field = self.rel_model._meta.primary_key
-
-        # TODO: factor into separate method.
-        # if model._meta.validate_backrefs:
-        #     def invalid(msg, **context):
-        #         context.update(
-        #             field='%s.%s' % (model ._meta.name, name),
-        #             backref=self.related_name,
-        #             )
-        #         raise AttributeError(msg % context)
-        #
-        #     if self.related_name in self.rel_model._meta.fields:
-        #         invalid('The related_name of %(field)s ("%(backref)s") '
-        #                 'conflicts with a field of the same name.')
-        #     elif self.related_name in self.rel_model._meta.reverse_rel:
-        #         invalid('The related_name of %(field)s ("%(backref)s") '
-        #                 'is already in use by another foreign key.')
-        #
-        #     if obj_id_name in model_class._meta.fields:
-        #         invalid('The object id descriptor of %(field)s conflicts '
-        #                 'with a field named %(obj_id_name)s')
-        #     elif obj_id_name in model_class.__dict__:
-        #         invalid('Model attribute "%(obj_id_name)s" would be shadowed '
-        #                 'by the object id descriptor of %(field)s.')
-
-        setattr(model, name, self._get_descriptor())
-        # setattr(model, obj_id_name, self._get_id_descriptor())
-        setattr(self.rel_model,
-                self.related_name,
-                self._get_backref_descriptor())
-        self._is_bound = True
-
-        model._meta.rel[self.name] = self
-        self.rel_model._meta.reverse_rel[self.related_name] = self
-
+            related_name = self._related_name or model_class._meta.name + 's'
+            backref.add_to_class(self.rel_model, related_name)
 
     def get_models(self):
         return [model for _, model in sorted((
             (self._is_backref, self.model_class),
             (not self._is_backref, self.rel_model)))]
 
-    @property
-    def through_model(self):
-        if self._through_model is None:
-            self._through_model = self._create_through_model()
+    def get_through_model(self):
+        if not self._through_model:
+            lhs, rhs = self.get_models()
+            tables = [model._meta.db_table for model in (lhs, rhs)]
+
+            class Meta:
+                database = self.model_class._meta.database
+                db_table = '%s_%s_through' % tuple(tables)
+                indexes = (
+                    ((lhs._meta.name, rhs._meta.name),
+                     True),)
+                validate_backrefs = False
+
+            attrs = {
+                lhs._meta.name: ForeignKeyField(rel_model=lhs),
+                rhs._meta.name: ForeignKeyField(rel_model=rhs)}
+            attrs['Meta'] = Meta
+
+            from brick.core.db.models import Model
+            self._through_model = type(
+                '%s%sThrough' % (lhs.__name__, rhs.__name__),
+                (Model,),
+                attrs)
+
         return self._through_model
 
-    @through_model.setter
-    def through_model(self, value):
-        self._through_model = value
 
-    def _create_through_model(self):
-        lhs, rhs = self.get_models()
-        tables = [model._meta.db_table for model in (lhs, rhs)]
+class ManyToManyFieldDescriptor(FieldDescriptor):
+    def __init__(self, field):
+        super(ManyToManyFieldDescriptor, self).__init__(field)
+        self.model_class = field.model_class
+        self.rel_model = field.rel_model
+        self.through_model = field.get_through_model()
+        self.src_fk = self.through_model._meta.rel_for_model(self.model_class)
+        self.dest_fk = self.through_model._meta.rel_for_model(self.rel_model)
 
-        class Meta:
-            database = self.model_class._meta.database
-            schema = self.model_class._meta.schema
-            db_table = '%s_%s_through' % tuple(tables)
-            indexes = (
-                ((lhs._meta.name, rhs._meta.name),
-                 True),)
+    def __get__(self, instance, instance_type=None):
+        if instance is not None:
+            from brick.core.db.modelquerys import ManyToManyQuery
+            return (ManyToManyQuery(instance, self, self.rel_model)
+                    .select()
+                    .join(self.through_model)
+                    .join(self.model_class)
+                    .where(self.src_fk == instance))
+        return self.field
 
-        params = {'on_delete': self._on_delete, 'on_update': self._on_update}
-        attrs = {
-            lhs._meta.name: ForeignKeyField(lhs, **params),
-            rhs._meta.name: ForeignKeyField(rhs, **params),
-            'Meta': Meta}
+    def __set__(self, instance, value):
+        query = self.__get__(instance)
+        query.add(value, clear_existing=True)
 
-        klass_name = '%s%sThrough' % (lhs.__name__, rhs.__name__)
-        from brick.core.db.models import Model
-        return type(klass_name, (Model,), attrs)
-
-    def get_through_model(self):
-        # XXX: Deprecated. Just use the "through_model" property.
-        return self.through_model
