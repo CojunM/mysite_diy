@@ -27,7 +27,6 @@ import os
 import sys
 import urllib.parse
 
-from brick.core.wsgiapp import route, hook, server_run, default_app, static_file, get
 # 导入工具函数包
 # from common import web_helper, log_helper
 # 导入api代码模块（初始化api文件夹里的各个访问路由，这一句不能删除，删除后将无法访问api文件夹里的各个接口）
@@ -36,7 +35,8 @@ from brick.contrib import web_helper, log_helper
 from brick.contrib.sessions.middleware import SessionMiddleware
 from brick.core.httphelper import response
 from brick.core.httphelper.request import request, BaseRequest
-from brick.core .simpletemplate import template
+from brick.core.simpletemplate import template
+from brick.core.wsgiapp import route, hook, server_run, default_app, static_file, get
 
 #############################################
 # 初始化框架相关参数
@@ -67,7 +67,7 @@ logging.basicConfig(level=logging.INFO,
 session_opts = {
     'session.type': 'file',
     'session.cookie_expires': 3600,
-    'session.data_dir': '/tmp/sessions/simple',
+    'session.data_dir': './tmp/sessions/simple',
     'session.auto': True
 }
 
@@ -114,11 +114,12 @@ def validate():
         request.environ['REQUEST_METHOD'] = request.POST.get('_method', '')
 
     # 过滤不用进行登录权限判断的路由（登录与退出登录不用检查是否已经登录）
-    url_list = ["/api/login/","/api/login1/", "/api/logout/"]
+    url_list = ["/api/login/", "/api/login1/", "/api/logout/"]
     if path_info in url_list:
         pass
-
+        # print('0112332')
     else:
+        # print('112332')
         # 已经登录成功的用户session肯定有值，没有值的就是未登录
         session = web_helper.get_session()
         # 获取用户id
@@ -167,22 +168,32 @@ def hel():
 def hel():
     return template('main')
 
+
 @route('/api/login1/desk')
 def hel():
     return template('desk')
 
+
 @get('/api/products')
 def hel():
     return template('products')
+
+
 @get('/contact_us')
 def hel():
     return template('contact_us')
+
+
 @get('/products')
 def hel():
     return template('products')
+
+
 @get('/about')
 def hel():
     return template('about')
+
+
 @route('/api/login/welcome')
 @route('/api/login1/welcome')
 def hel():
@@ -205,14 +216,22 @@ def hel():
 def helo():
     return template('login1')
 
+
+@get('/api/login2/')
+def helo():
+    return template('login1')
+
+
 @get('/api/login/')
 def helo():
     return template('login')
+
 
 @get('/api/login/manager_edit')
 @get('/api/login1/manager_edit')
 def helo():
     return template('manager_edit')
+
 
 @get('/api/login/positions')
 @get('/api/login1/positions')

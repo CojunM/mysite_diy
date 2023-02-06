@@ -54,7 +54,7 @@ def callback():
                     <dl id="menu-%(id)s">
                         <dt><i class="Hui-iconfont">%(icon)s</i> %(name)s<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
                         <dd>
-                            <ul>
+                             <ul>
                     """ % {'id': getattr(model, 'id'), 'icon': getattr(model, 'icon'), 'name': getattr(model, 'name')}
                     html = html + temp
                     # print('html0', html)

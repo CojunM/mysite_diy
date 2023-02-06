@@ -22,88 +22,89 @@
                   ┃┫┫  ┃┫┫
                   ┗┻┛  ┗┻┛
 """
-import threading
 import warnings
 
-try:
-    # from paste.registry import StackedObjectProxy
-    # beaker_session = StackedObjectProxy(name="Beaker Session")
-    # beaker_cache = StackedObjectProxy(name="Cache Manager")
-    web_session = threading.local()
-    # beaker_cache = threading.local()
-except:
-    beaker_cache = None
-    beaker_session = None
-
-# from brick.contrib.sessions.cache import CacheManager
+from brick.contrib.sessions.cache import CacheManager
 from brick.contrib.sessions.session import Session, SessionObject
-from brick.contrib.sessions.util import coerce_cache_params, coerce_session_params, \
+from brick.contrib.sessions.util import coerce_session_params, \
     parse_cache_config_options
 
-#
-# class CacheMiddleware(object):
-#     cache = beaker_cache
-#
-#     def __init__(self, app, config=None, environ_key='beaker.cache', **kwargs):
-#         """Initialize the Cache Middleware
-#
-#         The Cache middleware will make a CacheManager instance available
-#         every request under the ``environ['beaker.cache']`` key by
-#         default. The location in environ can be changed by setting
-#         ``environ_key``.
-#
-#         ``config``
-#             dict  All settings should be prefixed by 'cache.'. This
-#             method of passing variables is intended for Paste and other
-#             setups that accumulate multiple component settings in a
-#             single dictionary. If config contains *no cache. prefixed
-#             args*, then *all* of the config options will be used to
-#             intialize the Cache objects.
-#
-#         ``environ_key``
-#             Location where the Cache instance will keyed in the WSGI
-#             environ
-#
-#         ``**kwargs``
-#             All keyword arguments are assumed to be cache settings and
-#             will override any settings found in ``config``
-#
-#         """
-#         self.app = app
-#         config = config or {}
-#
-#         self.options = {}
-#
-#         # Update the options with the parsed config
-#         self.options.update(parse_cache_config_options(config))
-#
-#         # Add any options from kwargs, but leave out the defaults this
-#         # time
-#         self.options.update(
-#             parse_cache_config_options(kwargs, include_defaults=False))
-#
-#         # Assume all keys are intended for cache if none are prefixed with
-#         # 'cache.'
-#         if not self.options and config:
-#             self.options = config
-#
-#         self.options.update(kwargs)
-#         self.cache_manager = CacheManager(**self.options)
-#         self.environ_key = environ_key
-#
-#     def __call__(self, environ, start_response):
-#         if environ.get('paste.registry'):
-#             if environ['paste.registry'].reglist:
-#                 environ['paste.registry'].register(self.cache,
-#                                                    self.cache_manager)
-#         environ[self.environ_key] = self.cache_manager
-#         return self.app(environ, start_response)
+
+# try:
+#     # from paste.registry import StackedObjectProxy
+#     # beaker_session = StackedObjectProxy(name="Beaker Session")
+#     # beaker_cache = StackedObjectProxy(name="Cache Manager")
+#     web_session = threading.local()
+#     # beaker_cache = threading.local()
+# except:
+#     beaker_cache = None
+#     beaker_session = None
+
+
+class CacheMiddleware(object):
+    cache = beaker_cache = None
+
+    def __init__(self, app, config=None, environ_key='brick.cache', **kwargs):
+        """Initialize the Cache Middleware
+
+        The Cache middleware will make a CacheManager instance available
+        every request under the ``environ['beaker.cache']`` key by
+        default. The location in environ can be changed by setting
+        ``environ_key``.
+
+        ``config``
+            dict  All settings should be prefixed by 'cache.'. This
+            method of passing variables is intended for Paste and other
+            setups that accumulate multiple component settings in a
+            single dictionary. If config contains *no cache. prefixed
+            args*, then *all* of the config options will be used to
+            intialize the Cache objects.
+
+        ``environ_key``
+            Location where the Cache instance will keyed in the WSGI
+            environ
+
+        ``**kwargs``
+            All keyword arguments are assumed to be cache settings and
+            will override any settings found in ``config``
+
+        """
+        self.app = app
+        config = config or {}
+
+        self.options = {}
+
+        # Update the options with the parsed config
+        self.options.update(parse_cache_config_options(config))
+
+        # Add any options from kwargs, but leave out the defaults this
+        # time
+        self.options.update(
+            parse_cache_config_options(kwargs, include_defaults=False))
+
+        # Assume all keys are intended for cache if none are prefixed with
+        # 'cache.'
+        if not self.options and config:
+            self.options = config
+
+        self.options.update(kwargs)
+        self.cache_manager = CacheManager(**self.options)
+        self.environ_key = environ_key
+
+    def __call__(self, environ, start_response):
+        # if environ.get('paste.registry'):
+        #     if environ['paste.registry'].reglist:
+        #         environ['paste.registry'].register(self.cache,
+        #                                            self.cache_manager)
+        environ[self.environ_key] = self.cache_manager
+        return self.app(environ, start_response)
 
 
 class SessionMiddleware(object):
-    session = web_session
+    # session = web_session
+    session = None
 
-    def __init__(self, wrap_app, config=None, environ_key='web.session',
+    def __init__(self, wrap_app, config=None, environ_key='brick.session',
                  **kwargs):
         """Initialize the Session Middleware
 
@@ -133,7 +134,7 @@ class SessionMiddleware(object):
 
         # Load up the default params
         self.options = dict(invalidate_corrupt=True, type=None,
-                            data_dir=None, key='web.session.id',
+                            data_dir=None, key='brick.session.id',
                             timeout=None, save_accessed_time=True, secret=None,
                             log_file=None)
         # ##print('config:',config)
@@ -142,8 +143,8 @@ class SessionMiddleware(object):
         for dct in [config, kwargs]:
             ##print('dct:', dct)
             for key, val in dct.items():
-                if key.startswith('web.session.'):
-                    self.options[key[12:]] = val
+                if key.startswith('brick.session.'):
+                    self.options[key[14:]] = val
                 if key.startswith('session.'):
                     self.options[key[8:]] = val
                 if key.startswith('session_'):
@@ -154,7 +155,7 @@ class SessionMiddleware(object):
         ##print('self.options:', self.options)
         # Coerce and validate session params
         # 强制和验证会话参数
-        coerce_session_params(self.options)#可以不返回
+        coerce_session_params(self.options)  # 可以不返回
 
         # Assume all keys are intended for session if none are prefixed with
         # 假设所有密钥都是用于会话的，如果没有任何密钥的前缀是
@@ -165,6 +166,7 @@ class SessionMiddleware(object):
         self.options.update(kwargs)
         self.wrap_app = self.app = wrap_app
         self.environ_key = environ_key
+        # print('0011')
 
     def __call__(self, environ, start_response):
         session = SessionObject(environ, **self.options)
@@ -172,19 +174,22 @@ class SessionMiddleware(object):
         #     if environ['paste.registry'].reglist:
         #         environ['paste.registry'].register(self.session, session)
         environ[self.environ_key] = session
-        environ['web.get_session'] = self._get_session
+        environ['brick.get_session'] = self._get_session
 
+        # print('011', session)
         # if 'paste.testing_variables' in environ and 'webtest_varname' in self.options:
         #     environ['paste.testing_variables'][self.options['webtest_varname']] = session
 
         def session_start_response(status, headers, exc_info=None):
-            if session.accessed():
+            if session.accessed():  # 第一次flase
                 session.persist()
+                print('000011')
                 if session.__dict__['_headers']['set_cookie']:
                     cookie = session.__dict__['_headers']['cookie_out']
                     if cookie:
                         headers.append(('Set-cookie', cookie))
             return start_response(status, headers, exc_info)
+
         return self.wrap_app(environ, session_start_response)
 
     def _get_session(self):
@@ -194,6 +199,7 @@ class SessionMiddleware(object):
 def session_filter_factory(global_conf, **kwargs):
     def filter(app):
         return SessionMiddleware(app, global_conf, **kwargs)
+
     return filter
 
 

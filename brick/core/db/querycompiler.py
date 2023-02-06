@@ -12,15 +12,15 @@ from inspect import isclass
 
 from brick.core.db.felds import ForeignKeyField, Field, CommaClause, Node, Clause, Expression, Func, \
     Entity, _StripParens, SQL, EnclosedClause, Param
-from brick.core.db.modelquerys import SelectQuery, ModelAlias, CompoundSelect
+from brick.core.db.modelquerys import ModelAlias, CompoundSelect
 from brick.core.db.models import Model
-from brick.core.db.utils import dict_update, OP, merge_dict, strip_parens, JOIN
+from brick.core.db.utils import OP, merge_dict, strip_parens, JOIN
 
 
 
 class AliasMap(object):
     '''别名'''
-    prefix = 't'#前缀
+    prefix = 't'  # 前缀
 
     def __init__(self, start=0):
         self._alias_map = {}
@@ -49,8 +49,6 @@ class AliasMap(object):
                 if obj not in self:
                     self._alias_map[obj] = alias
         return self
-
-
 
 
 class QueryCompiler(object):
@@ -197,7 +195,7 @@ class QueryCompiler(object):
         return sql, params
 
     def _parse_entity(self, node, alias_map, conv):
-        return '.'.join(map(self.quote, node.path)), [] #map() 会根据提供的函数对指定序列做映射。
+        return '.'.join(map(self.quote, node.path)), []  # map() 会根据提供的函数对指定序列做映射。
 
     def _parse_sql(self, node, alias_map, conv):
         return node.value, list(node.params)

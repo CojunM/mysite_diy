@@ -22,45 +22,49 @@
                   ┃┫┫  ┃┫┫
                   ┗┻┛  ┗┻┛
 """
-from brick.contrib.sessions import container
 
-"""This package contains the "front end" classes and functions
-for Beaker caching.
-
-Included are the :class:`.Cache` and :class:`.CacheManager` classes,
-as well as the function decorators :func:`.region_decorate`,
-:func:`.region_invalidate`.
-
-"""
 import warnings
+from hashlib import sha1
+
+import brick.contrib.sessions.util as util
+from brick.contrib.sessions import container
+# from webcore.contrib.sessions.crypto.util import sha1
+from brick.contrib.sessions.exceptions import BeakerException, InvalidCacheBackendError
+from brick.contrib.sessions.synchronization import _threading
+# Initialize the cache region dict
+from brick.core.db.utils import unicode
+
 #
 # import beaker.container as container
 # import beaker.ext.database as database
 # import beaker.ext.google as google
 # import beaker.ext.memcached as memcached
 # import beaker.ext.sqla as sqla
-
-import brick.contrib.sessions.util as util
-# from webcore.contrib.sessions.crypto.util import sha1
-from brick.contrib.sessions.exceptions import BeakerException, InvalidCacheBackendError
-from brick.contrib.sessions.synchronization import _threading
-
-
 # try:
 #     from inspect import signature as func_signature
 # except ImportError:
 #     from funcsigs import signature as func_signature
 
-
-# Initialize the cache region dict
 cache_regions = {}
+
+"""
+此包包含“前端”类和函数
+用于Beaker缓存。
+包括：class:`.Cache`和：class:`.CacheManager`类，
+以及函数修饰符：func:`.region_decorate`，
+：func:`.region_ivalidate`。
+"""
 """Dictionary of 'region' arguments.
 
 A "region" is a string name that refers to a series of cache
 configuration arguments.    An application may have multiple
 "regions" - one which stores things in a memory cache, one
 which writes data to files, etc.
-
+“region”参数的字典。
+“region”是指一系列缓存的字符串名称
+配置参数。一个应用程序可能有多个
+“区域”-一个将内容存储在内存缓存中的区域，一个
+其将数据写入文件等。
 The dictionary stores string key names mapped to dictionaries
 of configuration arguments.  Example::
 
@@ -78,18 +82,25 @@ of configuration arguments.  Example::
     })
 """
 
+cache_managers = {}  # 缓存管理器
 
-cache_managers = {}
 
-
-class _backends(object):
+class _BackEnds(object):
     initialized = False
 
-    def __init__(self, clsmap):
-        self._clsmap = clsmap
+    def __init__(self, cls_map):
+        """
+
+        :param cls_map:
+        """
+        self._clsmap = cls_map
         self._mutex = _threading.Lock()
 
     def __getitem__(self, key):
+        """
+        @return:
+        @param key:
+            """
         try:
             return self._clsmap[key]
         except KeyError as e:
@@ -107,6 +118,9 @@ class _backends(object):
             raise e
 
     def _init(self):
+        """
+
+        """
         try:
             import pkg_resources
 
@@ -134,28 +148,30 @@ class _backends(object):
                         warnings.warn(
                             "Unable to load NamespaceManager "
                             "entry point: '%s': %s" % (
-                                        entry_point,
-                                        tb.getvalue()),
-                                        RuntimeWarning, 2)
+                                entry_point,
+                                tb.getvalue()),
+                            RuntimeWarning, 2)
         except ImportError:
             pass
 
+
 # Initialize the basic available backends
 # 初始化基本的可用后端
-clsmap = _backends({
-          'memory': container.MemoryNamespaceManager,
-          'dbm': container.DBMNamespaceManager,
-          'file': container.FileNamespaceManager,
-          # 'ext:memcached': memcached.MemcachedNamespaceManager,
-          # 'ext:database': database.DatabaseNamespaceManager,
-          # 'ext:sqla': sqla.SqlaNamespaceManager,
-          # 'ext:google': google.GoogleNamespaceManager,
-          })
+cls_maps = _BackEnds({
+    'memory': container.MemoryNamespaceManager,
+    'dbm': container.DBMNamespaceManager,
+    'file': container.FileNamespaceManager,
+    # 'ext:memcached': memcached.MemcachedNamespaceManager,
+    # 'ext:database': database.DatabaseNamespaceManager,
+    # 'ext:sqla': sqla.SqlaNamespaceManager,
+    # 'ext:google': google.GoogleNamespaceManager,
+})
 
 
 def cache_region(region, *args):
     """Decorate a function such that its return result is cached,
-    using a "region" to indicate the cache arguments.
+    using a "region" to indicate the cache arguments.“
+    修饰函数，使其返回结果被缓存,使用“区域”指示缓存参数。
 
     Example::
 
@@ -285,7 +301,7 @@ def region_invalidate(namespace, region, *args):
 
     if not region:
         raise BeakerException("Region or callable function "
-                                    "namespace is required")
+                              "namespace is required")
     else:
         region = cache_regions[region]
 
@@ -295,6 +311,7 @@ def region_invalidate(namespace, region, *args):
 
 class Cache(object):
     """Front-end to the containment API implementing a data cache.
+    实现数据缓存的包含API的前端。
 
     :param namespace: the namespace of this Cache
 
@@ -307,10 +324,11 @@ class Cache(object):
     :param starttime: time when cache was cache was
 
     """
+
     def __init__(self, namespace, type='memory', expiretime=None,
                  starttime=None, expire=None, **nsargs):
         try:
-            cls = clsmap[type]
+            cls = cls_maps[type]
             if isinstance(cls, InvalidCacheBackendError):
                 raise cls
         except KeyError:
@@ -332,21 +350,25 @@ class Cache(object):
 
     def put(self, key, value, **kw):
         self._get_value(key, **kw).set_value(value)
+
     set_value = put
 
     def get(self, key, **kw):
         """Retrieve a cached value from the container"""
         return self._get_value(key, **kw).get_value()
+
     get_value = get
 
     def remove_value(self, key, **kw):
         mycontainer = self._get_value(key, **kw)
         mycontainer.clear_value()
+
     remove = remove_value
 
     def _get_value(self, key, **kw):
         if isinstance(key, unicode):
             key = key.encode('ascii', 'backslashreplace')
+            # 'backslashreplace' - 使用反斜杠代替无法编码的字符
 
         if 'type' in kw:
             return self._legacy_get_value(key, **kw)
@@ -357,10 +379,17 @@ class Cache(object):
         return container.Value(key, self.namespace, **kw)
 
     @util.deprecated("Specifying a "
-            "'type' and other namespace configuration with cache.get()/put()/etc. "
-            "is deprecated. Specify 'type' and other namespace configuration to "
-            "cache_manager.get_cache() and/or the Cache constructor instead.")
+                     "'type' and other namespace configuration with cache.get()/put()/etc. "
+                     "is deprecated. Specify 'type' and other namespace configuration to "
+                     "cache_manager.get_cache() and/or the Cache constructor instead.")
     def _legacy_get_value(self, key, type, **kw):
+        """
+        默认值
+        :param key:
+        :param type:
+        :param kw:
+        :return:
+        """
         expiretime = kw.pop('expiretime', self.expiretime)
         starttime = kw.pop('starttime', None)
         createfunc = kw.pop('createfunc', None)
@@ -394,6 +423,7 @@ class Cache(object):
 class CacheManager(object):
     def __init__(self, **kwargs):
         """Initialize a CacheManager object with a set of options
+        使用一组选项初始化CacheManager对象
 
         Options should be parsed with the
         :func:`~beaker.util.parse_cache_config_options` function to
@@ -409,7 +439,7 @@ class CacheManager(object):
     def get_cache(self, name, **kwargs):
         kw = self.kwargs.copy()
         kw.update(kwargs)
-        return Cache._get_cache(name, kw)
+        return Cache._get_cache(name, kw)  # 实例化一个缓存
 
     def get_cache_region(self, name, region):
         if region not in self.regions:
@@ -424,6 +454,8 @@ class CacheManager(object):
         two of the same named function, in the same module. This is
         because the namespace used for the functions cache is based on
         the functions name and the module.
+        修饰函数以使用缓存区域缓存自身如果大于同一模块中的两个同名函数。
+        这是因为用于函数缓存的命名空间基于函数名称和模块。
 
 
         Example::
@@ -559,7 +591,8 @@ class CacheManager(object):
 
 
 def _cache_decorate(deco_args, manager, kwargs, region):
-    """Return a caching function decorator."""
+    """Return a caching function decorator.“
+    返回缓存函数修饰符。”"""
 
     cache = [None]
 
@@ -568,11 +601,11 @@ def _cache_decorate(deco_args, manager, kwargs, region):
         skip_self = util.has_self_arg(func)
 
         def cached(*args):
-            if not cache[0]:
+            if not cache[0]:#列表有内容走这里
                 if region is not None:
                     if region not in cache_regions:
                         raise BeakerException(
-                            'Cache region not configured: %s' % region)
+                            'Cache region not configured: %s' % region)  # 未配置缓存区域
                     reg = cache_regions[region]
                     if not reg.get('enabled', True):
                         return func(*args)
@@ -604,15 +637,18 @@ def _cache_decorate(deco_args, manager, kwargs, region):
                 return func(*args)
 
             return cache[0].get_value(cache_key, createfunc=go)
+
         cached._arg_namespace = namespace
         if region is not None:
             cached._arg_region = region
         return cached
+
     return decorate
 
 
 def _cache_decorator_invalidate(cache, key_length, args):
-    """Invalidate a cache key based on function arguments."""
+    """Invalidate a cache key based on function arguments.
+    基于函数参数使缓存密钥无效。"""
 
     try:
         cache_key = " ".join(map(str, args))
@@ -621,3 +657,37 @@ def _cache_decorator_invalidate(cache, key_length, args):
     if len(cache_key) + len(cache.namespace_name) > key_length:
         cache_key = sha1(cache_key).hexdigest()
     cache.remove_value(cache_key)
+
+
+# 1. 实例化CacheManager
+cache_opts = {
+    'cache.type': 'file',
+    'cache.data_dir': '../../../tmp/cache/data',
+    'cache.lock_dir': '../../../tmp/cache/lock'
+}
+
+cache = CacheManager(**util.parse_cache_config_options(cache_opts))
+
+
+def get_data(filename):
+    '''获取数据的方式'''
+    print(filename)
+    with open(filename) as f:
+        return f.read()
+
+
+# 2. 通过装饰器使用缓存
+@cache.cache('temp', type='file', expire=10)
+def get_results(filename):
+    '''要缓存的函数'''
+    data = get_data(filename)
+    return data
+
+
+if __name__ == '__main__':
+    # 3. 创建&读取缓存
+    filename = '../../../tmp/test.txt'
+    results = get_results(filename)
+    print(results)
+
+    # cache.invalidate(get_results, 'temp', filename, type='file')  # 删除特定缓存

@@ -20,7 +20,7 @@ from brick.core.httphelper.response import HTTPError
 from brick.core.httphelper.util import WSGIHeaderDict, cookie_decode, FileUpload, json_loads, \
     local_property, FormsDict
 from brick.utils.dicthelper import DictProperty
-from brick.utils.encode import tobytes, tounicode
+from brick.utils.encode import tobytes, tounicode, parse_auth
 
 
 def _parse_qsl(qs):
@@ -158,7 +158,7 @@ class BaseRequest(object):
             params[key] = value
         for key, value in self.forms.allitems():
             params[key] = value
-        print('gfff',params )
+        # print('gfff',params )
         return params
 
     @DictProperty('environ', 'brick.request.files', read_only=True)

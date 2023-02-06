@@ -29,17 +29,17 @@ import os
 import time
 from base64 import b64encode, b64decode
 from datetime import datetime, timedelta
-# from beaker.crypto import hnac as hnac, hmac_sha1 as SHA1, sha1, get_nonce_size, DEFAULT_NONCE_BITS, get_crypto_module
-# from beaker import crypto, util
-# from brick.contrib.sessions.cache import clsmap
-
 from hashlib import sha1, pbkdf2_hmac
 # hmac_sha1 = sha1
 from http.cookies import SimpleCookie, BaseCookie, CookieError
 
 from brick.contrib.sessions import util, noencryption
-from brick.contrib.sessions.cache import clsmap
+from brick.contrib.sessions.cache import cls_maps
 from brick.contrib.sessions.exceptions import BeakerException, InvalidCryptoBackendError
+
+# from beaker.crypto import hnac as hnac, hmac_sha1 as SHA1, sha1, get_nonce_size, DEFAULT_NONCE_BITS, get_crypto_module
+# from beaker import crypto, util
+# from brick.contrib.sessions.cache import clsmap
 
 # from beaker.cookie import SimpleCookie
 # from brick.contrib.sessions.util import sha1
@@ -54,7 +54,7 @@ CRYPTO_MODULES = {}
 months = (None, "Jan", "Feb", "Mar", "Apr", "May", "Jun",
           "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
 weekdays = ("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
-__all__ = ['SignedCookie', 'Session', 'InvalidSignature']
+__all__ = ['SignedCookie', 'Session', 'InvalidSignature', 'SessionObject']
 
 
 #
@@ -94,6 +94,9 @@ def dictkeyslist(d):
 
 def pbkdf2(password, salt, iterations, dklen=0, digest=None):
     """
+        使用stdlib实现PBKDF2。这在Python 2.7.8+和3.4+中使用。HMAC+SHA256用作默认伪随机函数。
+        截至2014年，100000次迭代是推荐的默认值在2.7Ghz Intel i7上运行100ms，优化实现。这是
+        在1000次迭代中，安全性的最低限度可能是2001年建议。
         Implements PBKDF2 using the stdlib. This is used in Python 2.7.8+ and 3.4+.
 
         HMAC+SHA256 is used as the default pseudo random function.
@@ -161,11 +164,19 @@ def get_crypto_module(name):
 
 
 def generateCryptoKeys(master_key, salt, iterations, keylen):
+    """
+     注意：我们将密钥流的部分异或到随机生成的部分中，只是以防操作系统。
+    :param master_key:
+    :param salt:
+    :param iterations:
+    :param keylen:
+    :return:
+    """
     # NB: We XOR parts of the keystream into the randomly-generated parts, just
     # in case os.urandom() isn't as random as it should be.  Note that if
     # os.urandom() returns truly random data, this will have no effect on the
     # overall security.
-    # 注意：我们将密钥流的部分异或到随机生成的部分中，只是以防操作系统。
+    #
     # Uradom（）并不像它应该的那样随机。注意，如果操作系统。
     # Uradom（）返回真正随机的数据，这对整体安全。
     return pbkdf2(master_key, salt, iterations=iterations, dklen=keylen)
@@ -197,7 +208,7 @@ except ImportError():
     import random
 
     if hasattr(os, 'getpid'):
-        getpid = os.getpid# os.getpid()获取当前进程id   os.getppid()获取父进程id
+        getpid = os.getpid  # os.getpid()获取当前进程id   os.getppid()获取父进程id
     else:
         def getpid():
             return ''
@@ -236,15 +247,16 @@ class SignedCookie(SimpleCookie):
         if not val:
             return None, val
 
-        sig = hmac.new(self.secret, val[40:].encode('utf-8'), sha1).hexdigest()
+        sig = hmac.new(self.secret, val[40:].encode('utf-8'), sha1).hexdigest()  # 返回十六进制哈希值
 
         # Avoid timing attacks
+        # 避免定时攻击
         invalid_bits = 0
         input_sig = val[:40]
         if len(sig) != len(input_sig):
             return InvalidSignature, val
 
-        for a, b in zip(sig, input_sig):
+        for a, b in zip(sig, input_sig):  # 打包为元组的列表
             invalid_bits += a != b  # 先计算a != b，再计算invalid_bits +=
 
         if invalid_bits:
@@ -274,9 +286,12 @@ class _ConfigurableSession(dict):
         }
 
     def clear(self):
-        """Clears Session data. Preserves session configuration."""
+        """Clears Session data. Preserves session configuration.
+        清除会话数据。保留会话配置"""
         super(_ConfigurableSession, self).clear()
+        # print(self._config)
         self.update(self._config)
+        # print(self)
 
 
 class Session(_ConfigurableSession):
@@ -367,7 +382,7 @@ class Session(_ConfigurableSession):
 
     def __init__(self, request, id=None, invalidate_corrupt=False,
                  use_cookies=True, type=None, data_dir=None,
-                 key='web.session.id', timeout=None, save_accessed_time=True,
+                 key='brick.session.id', timeout=None, save_accessed_time=True,
                  cookie_expires=True, cookie_domain=None, cookie_path='/',
                  data_serializer='pickle', secret=None,
                  secure=False, namespace_class=None, httponly=False,
@@ -379,7 +394,7 @@ class Session(_ConfigurableSession):
             cookie_domain=cookie_domain,  # domain 领域
             cookie_path=cookie_path
         )
-        #print("session  request: ", request)
+        # print("session  request: ", request)
         self.clear()
         if not type:
             if data_dir:
@@ -389,11 +404,11 @@ class Session(_ConfigurableSession):
         else:
             self.type = type
 
-        self.namespace_class = namespace_class or clsmap[self.type]
+        self.namespace_class = namespace_class or cls_maps[self.type]
 
         self.namespace_args = namespace_args
 
-        self.request = request
+        self.request = request  # environ {'cookie_out': None，'cookie': None}
         self.data_dir = data_dir
         self.key = key
 
@@ -416,7 +431,7 @@ class Session(_ConfigurableSession):
         self.save_atime = save_accessed_time
         self.use_cookies = use_cookies
         self.cookie_expires = cookie_expires
-
+        # 设置序列化类型
         self._set_serializer(data_serializer)
 
         # Default cookie domain/path
@@ -424,18 +439,18 @@ class Session(_ConfigurableSession):
         self.secret = secret
         self.secure = secure
         self.httponly = httponly
-        self.samesite = samesite
+        self.samesite = samesite  # 用来防止 CSRF 攻击 和用户追踪
         self.encrypt_key = encrypt_key
         self.validate_key = validate_key
-        self.encrypt_nonce_size = get_nonce_size(encrypt_nonce_bits)
-        self.crypto_module = get_crypto_module(crypto_type)
+        self.encrypt_nonce_size = get_nonce_size(encrypt_nonce_bits)  # 返回（ bytes, b64bytes )默认随机数位=128
+        self.crypto_module = get_crypto_module(crypto_type)  # 加密模块
         self.id = id
         self.accessed_dict = {}
-        self.invalidate_corrupt = invalidate_corrupt
+        self.invalidate_corrupt = invalidate_corrupt  # 无效损坏
 
         if self.use_cookies:
             cookieheader = request.get('cookie', '')
-            #print('cookieheader: ', cookieheader)
+            # print('cookieheader: ', cookieheader)
             if secret:
                 try:
                     self.cookie = SignedCookie(
@@ -449,21 +464,22 @@ class Session(_ConfigurableSession):
                     )
             else:
                 self.cookie = SimpleCookie(input=cookieheader)
-            #print('self.cookie：', self.cookie)
+            # print('self.cookie：', self.cookie)
 
             if not self.id and self.key in self.cookie:
                 cookie_data = self.cookie[self.key].value
                 # Should we check invalidate_corrupt here?
                 # 我们应该在这里检查失效吗
-                #print('cookie_data :', cookie_data)
-                if cookie_data is InvalidSignature:
+                # print('cookie_data :', cookie_data)
+                if cookie_data is InvalidSignature:  # 值的签名无效
                     cookie_data = None
                 self.id = cookie_data
-        #print('  self.namespace_class: ',self.namespace_class)
+        # print('  self.namespace_class: ',self.namespace_class)
         self.is_new = self.id is None
         if self.is_new:
-            #print('第一次访问')
+            # print('第一次访问')
             self._create_id()
+            # 访问的时间   创建时间
             self['_accessed_time'] = self['_creation_time'] = time.time()
             # Python time.time()返回当前时间的时间戳（1970纪元后经过的浮点秒数）。
             # #print("session  request2: ", request)
@@ -480,9 +496,7 @@ class Session(_ConfigurableSession):
                     self.invalidate()
                 else:
                     raise
-        # #print("session  request3: ", request)
-
-
+        # ###print("session  request3: ", request)
 
     def _set_serializer(self, data_serializer):
         self.data_serializer = data_serializer
@@ -593,7 +607,8 @@ class Session(_ConfigurableSession):
         对会话指令进行序列化、加密和base64"""
         session_data = session_data or self.copy()
         if self.encrypt_key:
-            nonce_len, nonce_b64len = self.encrypt_nonce_size
+            nonce_len, nonce_b64len = self.encrypt_nonce_size  # 随机长度
+            # os.urandom返回一个有n个byte那么长的一个string，然后很适合用于加密。
             nonce = b64encode(os.urandom(nonce_len))[:nonce_b64len]
             encrypt_key = generateCryptoKeys(self.encrypt_key,
                                              self.validate_key + nonce,
@@ -644,7 +659,8 @@ class Session(_ConfigurableSession):
         self.load()
 
     def load(self):
-        "Loads the data from this session from persistent storage"
+        """Loads the data from this session from persistent storage
+        从永久存储加载此会话中的数据"""
         self.namespace = self.namespace_class(self.id,
                                               data_dir=self.data_dir,
                                               digest_filenames=False,
@@ -656,11 +672,13 @@ class Session(_ConfigurableSession):
         self.namespace.acquire_read_lock()
         timed_out = False
         try:
+            # #print('self ', self)
             self.clear()
+            # #print('self1 ', self.namespace)
             try:
                 session_data = self.namespace['session']
 
-                if (session_data is not None and self.encrypt_key):
+                if session_data is not None and self.encrypt_key:
                     session_data = self._decrypt_data(session_data)
 
                 # Memcached always returns a key, its None when its not
@@ -716,10 +734,13 @@ class Session(_ConfigurableSession):
         如果accessed_only为True，则仅加载原始数据
         请求开始时将被保存，并更新上次。
         """
+        # #print("save1")
         # Look to see if its a new session that was only accessed
         # Don't save it under that case
+        # 查看它是否是仅被访问的新会话
+        # 不要在这种情况下保存它
         if accessed_only and (self.is_new or not self.save_atime):
-            #print("accessed_only仅访问为True，则仅加载原始数据")
+            # #print("accessed_only仅访问为True，则仅加载原始数据")
             return None
 
         # this session might not have a namespace yet or the session id
@@ -727,23 +748,23 @@ class Session(_ConfigurableSession):
         # 此会话可能还没有命名空间或会话id
         # 可能已经再生了
         if not hasattr(self, 'namespace') or self.namespace.namespace != self.id:
-            #print('no namespace')
+            # #print('no namespace')
             self.namespace = self.namespace_class(
                 self.id,
                 data_dir=self.data_dir,
                 digest_filenames=False,
                 **self.namespace_args)
-        #print(' self.id:',self.id)
+        # print(' self.id:',self.id)
         self.namespace.acquire_write_lock(replace=True)
-        #print('  self.namespace: ',self.namespace)
+        # #print('  self.namespace: ',self.namespace)
         try:
             if accessed_only:
                 data = dict(self.accessed_dict.items())
             else:
-                data = dict(self.items())#session中的数据
-            #print(' acquire_write_lock data:',data)
+                data = dict(self.items())  # session中的数据
+            # print(' acquire_write_lock data:',data)
 
-            if self.encrypt_key:#有密钥就加密
+            if self.encrypt_key:  # 有密钥就加密
                 data = self._encrypt_data(data)
 
             # Save the data
@@ -752,6 +773,7 @@ class Session(_ConfigurableSession):
             else:
                 self.namespace['session'] = data
         finally:
+            ##print('hhj')
             self.namespace.release_write_lock()
         if self.use_cookies and self.is_new:
             self.request['set_cookie'] = True
@@ -1025,7 +1047,7 @@ class SessionObject(object):
     """
 
     def __init__(self, environ, **params):
-        self.__dict__['_params'] = params
+        self.__dict__['_params'] = params  # 避免调用__setattr__ __setitem__
         self.__dict__['_environ'] = environ
         self.__dict__['_sess'] = None
         self.__dict__['_headers'] = {}
@@ -1039,27 +1061,29 @@ class SessionObject(object):
             self.__dict__['_headers'] = req = {'cookie_out': None}
             req['cookie'] = environ.get('HTTP_COOKIE')
             session_cls = params.get('session_class', None)
-            #print('session_cls :', session_cls)
+            # print('session_cls :', session_cls)
             if session_cls is None:
                 if params.get('type') == 'cookie':
                     session_cls = CookieSession
                 else:
                     session_cls = Session
             else:
+                # 条件为 true 正常执行，条件为 false 触发异常
                 assert issubclass(session_cls, Session), \
                     "Not a Session: " + session_cls
-            #print('req:', req)
+            # print('req:', req)
             self.__dict__['_sess'] = session_cls(req, **params)
-            #print('req1:', req)
-            # #print('session_cls1 :', session_cls)
-            # #print('params:', params)
-            #print('_ses:', self.__dict__['_sess'])
+            # print('req1:', req)
+            # print('session_cls1 :', session_cls)
+            # print('params:', params)
+            # print('_ses:', self.__dict__['_sess'])
         return self.__dict__['_sess']
 
     def __getattr__(self, attr):
         return getattr(self._session(), attr)
 
     def __setattr__(self, attr, value):
+        #  s.age = 1  调用__setattr__ 方法
         setattr(self._session(), attr, value)
 
     def __delattr__(self, name):
@@ -1069,13 +1093,14 @@ class SessionObject(object):
         return self._session()[key]
 
     def __setitem__(self, key, value):
+        # s['name'] = 'tom'  调用 __setitem__ 方法
         self._session()[key] = value
 
     def __delitem__(self, key):
         self._session().__delitem__(key)
 
     def __repr__(self):
-        #print(self._session())
+        # print(self._session())
         return self._session().__repr__()
 
     def __iter__(self):
@@ -1098,7 +1123,7 @@ class SessionObject(object):
 
     def save(self):
         self.__dict__['_dirty'] = True
-        #print("save")
+        ##print("save")
 
     def delete(self):
         self.__dict__['_dirty'] = True
@@ -1121,7 +1146,7 @@ class SessionObject(object):
         -如果save_accessed_time设置为false，则不保存任何内容。
         """
         if self.__dict__['_params'].get('auto'):
-            #print("get('auto')")
+            # #print("get('auto')")
             self._session().save()
         elif self.__dict__['_params'].get('save_accessed_time', True):
             if self.dirty():

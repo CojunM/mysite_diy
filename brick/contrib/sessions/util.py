@@ -26,37 +26,32 @@
 import binascii
 # import hashlib
 import json
+import os
 import pickle
+import re
 import socket
 import threading as _threading
-import zlib
-
-from datetime import datetime, timedelta
-import os
-import re
-
-import weakref
 import warnings
+import weakref
+import zlib
+from base64 import b64decode as _b64decode, b64encode as _b64encode
+from datetime import datetime, timedelta
 from hashlib import md5
-
 from inspect import signature as func_signature, getsourcefile
-#
-# py3k = getattr(sys, 'py3kwarning', False) or sys.version_info >= (3, 0)
-# py24 = sys.version_info < (2, 5)
-# jython = sys.platform.startswith('java')
-
-
-# if py3k or jython:
-#     import pickle
-# else:
-#     import cPickle as pickle
-
+from threading import local as _tlocal
 # from beaker.converters import asbool
 from unittest import SkipTest
 
 from brick.contrib.sessions import exceptions
-from threading import local as _tlocal
-from base64 import b64decode as _b64decode, b64encode as _b64encode
+
+#
+# py3k = getattr(sys, 'py3kwarning', False) or sys.version_info >= (3, 0)
+# py24 = sys.version_info < (2, 5)
+# jython = sys.platform.startswith('java')
+# if py3k or jython:
+#     import pickle
+# else:
+#     import cPickle as pickle
 
 xrange_ = range
 NoneType = type(None)
@@ -110,8 +105,8 @@ def dictkeyslist(d):
 
 
 __all__ = ["ThreadLocal", "WeakValuedRegistry", "SyncDict", "encoded_path",
-           "verify_directory",
-           "serialize", "deserialize"]
+           "verify_directory", 'parse_cache_config_options',
+           "serialize", "deserialize", 'coerce_session_params']
 
 
 def function_named(fn, name):
@@ -167,18 +162,20 @@ def verify_directory(dir):
     验证并创建目录。尝试忽略与其他线程和进程的冲突。"""
 
     tries = 0
-    while not os.access(dir, os.F_OK):
+    while not os.access(dir, os.F_OK):  # 用来检测是否有访问权限的路径
         try:
             tries += 1
-            os.makedirs(dir)
+            os.makedirs(dir)  # 用于递归创建目录
+            print(tries)
         except:
             if tries > 5:
                 raise
 
 
 def has_self_arg(func):
-    """Return True if the given function has a 'self' argument."""
-    args = list(func_signature(func).parameters)
+    """Return True if the given function has a 'self' argument.
+    如果给定函数具有“self”参数，则返回true。"""
+    args = list(func_signature(func).parameters)# 获取函数签名
     if args and args[0] in ('self', 'cls'):
         return True
     else:
@@ -219,6 +216,10 @@ class ThreadLocal(object):
         self._tlocal.value = value
 
     def has(self):
+        """
+        是否有值
+        :return: bool
+        """
         return hasattr(self._tlocal, 'value')
 
     def get(self, default=None):
@@ -229,7 +230,7 @@ class ThreadLocal(object):
 
 
 class SyncDict(object):
-    """
+    """同步字典
     An efficient/threadsafe singleton map algorithm, a.k.a.
     "get a value based on this key, and create if not found or not
     valid" paradigm:
@@ -264,16 +265,16 @@ class SyncDict(object):
 
     def sync_get(self, key, createfunc, *args, **kwargs):
         self.mutex.acquire()
-        #print('key: ',key)
-        #print('createfunc: ', createfunc)
+        # print('key: ',key)
+        # print('createfunc: ', createfunc)
         try:
             try:
                 if key in self.dict:
-                    #print('key in self.dict')
+                    # print('key in self.dict')
                     return self.dict[key]
                 else:
-                    #print('_create')
-                    return self._create(key, createfunc, *args, **kwargs)#返回ConditionSynchronizer实列
+                    # print('_create')
+                    return self._create(key, createfunc, *args, **kwargs)  # createfunc  返回ConditionSynchronizer实列
             except KeyError:
                 return self._create(key, createfunc, *args, **kwargs)
         finally:
@@ -303,6 +304,10 @@ class SyncDict(object):
 
 
 class WeakValuedRegistry(SyncDict):
+    """
+    弱值注册
+    """
+
     def __init__(self):
         super().__init__()
         self.mutex = _threading.RLock()
@@ -321,27 +326,30 @@ def encoded_path(root, identifiers, extension=".enc", depth=3,
     identifiers starting at the given root directory.
     从给定的文件列表中生成唯一的文件可访问路径从给定根目录开始的标识符"""
     ident = "_".join(identifiers)
-    #print('ident: ', ident)
+    # print('ident: ', ident)
     global sha1
     if sha1 is None:
         from hashlib import sha1
 
-    if digest_filenames:
+    if digest_filenames:  # 摘要文件名
         if isinstance(ident, unicode_text):
             ident = sha1(ident.encode('utf-8')).hexdigest()  # 返回摘要，作为十六进制数据字符串值
         else:
             ident = sha1(ident).hexdigest()
-    #print('ident1: ', ident)
-    ident = os.path.basename(ident)
 
+    # os.path.basename()
+    # 返回path最后的文件名。若path以 / 或\结尾，则返回空值。 即os.path.split(path)
+    # 的第二个元素。
+    ident = os.path.basename(ident)
+    print('ident1: ', ident)
     tokens = []
     for d in range(1, depth):
         tokens.append(ident[0:d])
-        #print('ident[0:d]: ', ident[0:d])
+        print('ident[0:d]: ', ident[0:d])
     dir = os.path.join(root, *tokens)
-    #print('dir: ', dir)
+    print('dir: ', dir)
     verify_directory(dir)
-    #print(os.path.join(dir, ident + extension))
+    print(os.path.join(dir, ident + extension))
     return os.path.join(dir, ident + extension)
 
 
@@ -443,7 +451,7 @@ def coerce_session_params(params):
 
     if opts.get('timeout') is not None and not opts.get('save_accessed_time', True):
         raise Exception("save_accessed_time must be true to use timeout")
-    #print("opts:", opts)
+    # print("opts:", opts)
     return opts
 
 
@@ -561,7 +569,9 @@ def parse_memcached_behaviors(config):
 
 
 def func_namespace(func):
-    """Generates a unique namespace for a function"""
+    """Generates a unique namespace for a function
+    为函数生成唯一的命名空间
+    """
     kls = None
     if hasattr(func, 'im_func') or hasattr(func, '__func__'):
         kls = im_class(func)
@@ -570,7 +580,7 @@ def func_namespace(func):
     if kls:
         return '%s.%s' % (kls.__module__, kls.__name__)
     else:
-        return '%s|%s' % (getsourcefile(func), func.__name__)
+        return '%s|%s' % (getsourcefile(func), func.__name__)  # getsourcefile 返回object的python源文件名
 
 
 class PickleSerializer(object):
@@ -585,6 +595,7 @@ class JsonSerializer(object):
     def loads(self, data_string):
         return json.loads(zlib.decompress(data_string).decode('utf-8'))
 
+    # zlib.compress返回的是压缩后的字节
     def dumps(self, data):
         return zlib.compress(json.dumps(data).encode('utf-8'))
 
@@ -613,6 +624,13 @@ def machine_identifier():
 
 
 def safe_write(filepath, contents):
+    """
+    创建并写入文件
+    :param filepath:
+    :param contents:
+    :return:
+    """
+    # print('wb')
     if os.name == 'posix':
         tempname = '%s.temp' % (filepath)
         fh = open(tempname, 'wb')

@@ -22,12 +22,6 @@
                   ┃┫┫  ┃┫┫
                   ┗┻┛  ┗┻┛
 """
-from bisect import bisect_left
-from bisect import bisect_right
-from contextlib import contextmanager
-from copy import deepcopy
-from functools import wraps
-from inspect import isclass
 import calendar
 import collections
 import datetime
@@ -44,6 +38,12 @@ import threading
 import time
 import uuid
 import warnings
+from bisect import bisect_left
+from bisect import bisect_right
+from contextlib import contextmanager
+from copy import deepcopy
+from functools import wraps
+from inspect import isclass
 
 try:
     from collections.abc import Mapping
@@ -5631,9 +5631,6 @@ class ManyToManyFieldAccessor(FieldAccessor):
         self.through_model = field.through_model
         src_fks = self.through_model._meta.model_refs[self.model]
         dest_fks = self.through_model._meta.model_refs[self.rel_model]
-        print('self.rel_model ', self.rel_model);
-        print('self.through_model', self.through_model);
-        print('src_fks  ', src_fks, self.model)
         if not src_fks:
             raise ValueError('Cannot find foreign-key to "%s" on "%s" model.' %
                              (self.model, self.through_model))
@@ -6202,7 +6199,7 @@ class Metadata(object):
                 for fk, model in curr.backrefs.items():
                     accum.append((fk, model, True))
                     queue.append(model._meta)
-        print('accum', accum)
+
         return accum
 
     def add_ref(self, field):
@@ -6211,8 +6208,6 @@ class Metadata(object):
         self.model_refs[rel].append(field)
         rel._meta.backrefs[field] = self.model
         rel._meta.model_backrefs[self.model].append(field)
-
-        print('model_refs ', self.model_refs)
 
     def remove_ref(self, field):
         rel = field.rel_model
@@ -6271,7 +6266,6 @@ class Metadata(object):
             model = model.model
         forwardrefs = self.model_refs.get(model, [])
         backrefs = self.model_backrefs.get(model, [])
-        print('backrefs ',backrefs)
         return (forwardrefs, backrefs)
 
     def add_field(self, field_name, field, set_attribute=True):
@@ -6306,8 +6300,8 @@ class Metadata(object):
 
         if isinstance(field, ForeignKeyField):
             self.add_ref(field)
-        # elif isinstance(field, ManyToManyField) and field.name:
-            # self.add_manytomany(field)
+        elif isinstance(field, ManyToManyField) and field.name:
+            self.add_manytomany(field)
 
     def remove_field(self, field_name):
         if field_name not in self.fields:
@@ -8186,14 +8180,15 @@ class Menu(BaseMode):
         return dict(menu=Menu.objects.get(url=url))
 
 
-# MenuThrough= DeferredThroughModel()
+MenuThrough = DeferredThroughModel()
+
 
 class Role(BaseMode):
     """
     角色：用于权限绑定
     """
     name = CharField(max_length=32, unique=True, verbose_name="角色")
-    permissions = ManyToManyField(Menu)
+    permissions = ManyToManyField(Menu, backref='roles')
     desc = CharField(max_length=50, null=True, verbose_name="描述")
 
 
@@ -8220,83 +8215,80 @@ if __name__ == "__main__":
     # print(permissions)
     # for course in  permissions:
     #     print(course.name)
-    m = Menu.get(Menu.name == "menu2")
+    m = Menu.get(Menu.name == "menu1")
+    # Role.permissions.add(m.id)
     print('01', Role.permissions.get_through_model())
-    r1 = Role.get(Role.name == "role1")
-    print('010', r1)
-    # r=Role()
-    print(r1.permissions)
-    r1.permissions.add('3')
-    #
     # for each in Role.get(Role.name=="role1"):
     #     print(each)
 
-    # database = SqliteDatabase('db.sqlite3')
-    # class BaseModel(Model):
-    #     class Meta:
-    #         database = database
-    #
-    #
-    # class User(BaseModel):
-    #     username = CharField(unique=True)
-    #     password = CharField()
-    #
-    #
-    # TeacherThroughDeferred = DeferredThroughModel()
-    # StudentThroughDeferred = DeferredThroughModel()
-    #
-    #
-    # class Team(BaseModel):
-    #     title = CharField()
-    #     teachers = ManyToManyField(User, backref='lead_teams', through_model=TeacherThroughDeferred)
-    #     students = ManyToManyField(User, backref='join_teams', through_model=StudentThroughDeferred)
-    #
-    #
-    # class TeacherThrough(BaseModel):
-    #     team = ForeignKeyField(Team)
-    #     user = ForeignKeyField(User)
-    #
-    #
-    # TeacherThroughDeferred.set_model(TeacherThrough)
-    #
-    #
-    # class StudentThrough(BaseModel):
-    #     team = ForeignKeyField(Team)
-    #     user = ForeignKeyField(User)
-    #
-    #
-    # StudentThroughDeferred.set_model(StudentThrough)
-    #
-    # database.create_tables([
-    #     User, Team,
-    #     TeacherThrough,
-    #     StudentThrough,
-    # ])
-    #
-    # for k in range(10):
-    #     usr = User()
-    #     usr.username = f'Alex_{k}'
-    #     usr.password = 'dsklf'
-    #     try:
-    #         usr.save()
-    #     except:
-    #         pass
-    # team = Team()
-    # team.title = "test"
-    # team.save()
-    # team.teachers.add([
-    #     User.get(User.username == 'Alex_0'),
-    #     User.get(User.username == 'Alex_1'),
-    #     User.get(User.username == 'Alex_2'),
-    # ])
-    # print('1',team.teachers)
-    # print('12',team.teachers.add)
-    # team.students.add([
-    #     User.get(User.username == 'Alex_3'),
-    #     User.get(User.username == 'Alex_4'),
-    #     User.get(User.username == 'Alex_5'),
-    #     User.get(User.username == 'Alex_6')
-    # ])
+    database = SqliteDatabase('db.sqlite3')
+
+
+    class BaseModel(Model):
+        class Meta:
+            database = database
+
+
+    class User(BaseModel):
+        username = CharField(unique=True)
+        password = CharField()
+
+
+    TeacherThroughDeferred = DeferredThroughModel()
+    StudentThroughDeferred = DeferredThroughModel()
+
+
+    class Team(BaseModel):
+        title = CharField()
+        teachers = ManyToManyField(User, backref='lead_teams', through_model=TeacherThroughDeferred)
+        students = ManyToManyField(User, backref='join_teams', through_model=StudentThroughDeferred)
+
+
+    class TeacherThrough(BaseModel):
+        team = ForeignKeyField(Team)
+        user = ForeignKeyField(User)
+
+
+    TeacherThroughDeferred.set_model(TeacherThrough)
+
+
+    class StudentThrough(BaseModel):
+        team = ForeignKeyField(Team)
+        user = ForeignKeyField(User)
+
+
+    StudentThroughDeferred.set_model(StudentThrough)
+
+    database.create_tables([
+        User, Team,
+        TeacherThrough,
+        StudentThrough,
+    ])
+
+    for k in range(10):
+        usr = User()
+        usr.username = f'Alex_{k}'
+        usr.password = 'dsklf'
+        try:
+            usr.save()
+        except:
+            pass
+    team = Team()
+    team.title = "test"
+    team.save()
+    team.teachers.add([
+        User.get(User.username == 'Alex_0'),
+        User.get(User.username == 'Alex_1'),
+        User.get(User.username == 'Alex_2'),
+    ])
+    print('1', team.teachers)
+    print('12', team.teachers.add)
+    team.students.add([
+        User.get(User.username == 'Alex_3'),
+        User.get(User.username == 'Alex_4'),
+        User.get(User.username == 'Alex_5'),
+        User.get(User.username == 'Alex_6')
+    ])
     # team.save()
     # for each in User.get(User.username == 'Alex_0').lead_teams:
     #     print(each)

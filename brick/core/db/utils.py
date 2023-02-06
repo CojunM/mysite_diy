@@ -46,15 +46,15 @@ class attrdict(dict):
             raise AttributeError(attr)
 
 OP = attrdict(
-    AND='and',
-    OR='or',
+    AND='AND',
+    OR='OR',
     ADD='+',
     SUB='-',
     MUL='*',
     DIV='/',
     BIN_AND='&',
     BIN_OR='|',
-    XOR='^',
+    XOR='#',
     MOD='%',
     EQ='=',
     LT='<',
@@ -62,15 +62,17 @@ OP = attrdict(
     GT='>',
     GTE='>=',
     NE='!=',
-    IN='in',
-    NOT_IN='not in',
-    IS='is',
-    IS_NOT='is not',
-    LIKE='like',
-    ILIKE='ilike',
-    BETWEEN='between',
-    REGEXP='regexp',
+    IN='IN',
+    NOT_IN='NOT IN',
+    IS='IS',
+    IS_NOT='IS NOT',
+    LIKE='LIKE',
+    ILIKE='ILIKE',
+    BETWEEN='BETWEEN',
+    REGEXP='REGEXP',
+    IREGEXP='IREGEXP',
     CONCAT='||',
+    BITWISE_NEGATION='~'
 )
 
 JOIN = attrdict(

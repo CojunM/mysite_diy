@@ -11,29 +11,23 @@ import functools
 import itertools
 import mimetypes
 import os
-
 import sys
 import time
-
 from inspect import getfullargspec
-
 from traceback import print_exc, format_exc
 from urllib.parse import urljoin
 
-
-
+from brick.core.baseserver import WSGIRefServer, FileCheckerThread
 from brick.core.httphelper.request import request
 from brick.core.httphelper.response import response, HTTPError, HTTPResponse, parse_date
-from brick.core.routes import Router, RouteReset
 from brick.core.routes import Route
-from brick.core.baseserver import WSGIRefServer, FileCheckerThread
+from brick.core.routes import Router, RouteReset
 from brick.core.simpletemplate import template
-
 from brick.utils.cachehelper import cached_property
 from brick.utils.dicthelper import DictProperty, ConfigDict
 from brick.utils.encode import tobytes
 from brick.utils.htmlescape import html_escape
-from brick.utils.loadhelper import load_module, load_app
+from brick.utils.loadhelper import load, load_app
 from brick.utils.sysinfo import _e
 
 
@@ -120,7 +114,7 @@ class DefaultApp(object):
         return dict((name, []) for name in self.__hook_names)
 
     def add_hook(self, name, func):
-        ''' Attach a callback to a hook. Three hooks are currently implemented:
+        """ Attach a callback to a hook. Three hooks are currently implemented:
 
             before_request
                 Executed once before each request. The request context is
@@ -137,21 +131,21 @@ class DefaultApp(object):
                 在每个请求之后执行一次，无论其结果如何。
                 应用程序重置
                 什么时候叫：冰毒：瓶子。重置`被调用。
-        '''
+        """
         if name in self.__hook_reversed:
             self._hooks[name].insert(0, func)
         else:
             self._hooks[name].append(func)
 
     def remove_hook(self, name, func):
-        ''' Remove a callback from a hook. 从钩子中移除回调。'''
+        """ Remove a callback from a hook. 从钩子中移除回调。"""
         if name in self._hooks and func in self._hooks[name]:
             self._hooks[name].remove(func)
             return True
 
     def trigger_hook(self, __name, *args, **kwargs):
-        ''' Trigger a hook and return a list of results.
-         触发钩子并返回结果列表 '''
+        """ Trigger a hook and return a list of results.
+         触发钩子并返回结果列表 """
         return [hook(*args, **kwargs) for hook in self._hooks[__name][:]]
 
     def hook(self, name):
@@ -314,6 +308,10 @@ class DefaultApp(object):
                     or environ['REQUEST_METHOD'] == 'HEAD':
                 if hasattr(out, 'close'): out.close()
                 out = []
+            # exc_info = environ.get('brick.exc_info')
+            # if exc_info is not None:
+            #     del environ['brick.exc_info']
+            # print('response._status_line', response._status_line)
             start_response(response._status_line, response.headerlist)
             return out
         except (KeyboardInterrupt, SystemExit, MemoryError):
@@ -360,7 +358,7 @@ class DefaultApp(object):
         def decorator(func):
             # TODO: Documentation and tests
             if isinstance(func, str):
-                func = load_module(func)
+                func = load(func)
             for rule in makelist(path) or yieldroutes(func):
                 for verb in makelist(method):
                     verb = verb.upper()
@@ -544,7 +542,7 @@ ERROR_PAGE_TEMPLATE = """
             %%end
         </body>
     </html>
-%%except ImportError
+%%except ImportError:
     <b>ImportError:</b> Could not generate the error page. Please add :brick to
     the import path. %s
 %%end

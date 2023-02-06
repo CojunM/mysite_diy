@@ -9,7 +9,7 @@
 
 /*
  * The Highcharts Data plugin is a utility to ease parsing of input sources like
- * CSV, HTML tables or grid views into basic configuration options for use 
+ * CSV, HTML tables or grid views into basic configuration options for use
  * directly in the Highcharts constructor.
  *
  * Demo: http://jsfiddle.net/highcharts/SnLFj/

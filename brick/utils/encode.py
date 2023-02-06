@@ -6,6 +6,7 @@
 # @File    : encode.py
 # @Project : mysite_diy
 # @Software: PyCharm
+import base64
 
 
 def tounicode(s, enc='utf8', err='strict'):
@@ -20,3 +21,14 @@ def tobytes(s, enc='utf8'):
     if isinstance(s, str):
         return s.encode(enc)
     return bytes("" if s is None else s)
+
+
+def parse_auth(header):
+    """ Parse rfc2617 HTTP authentication header string (basic) and return (user,pass) tuple or None"""
+    try:
+        method, data = header.split(None, 1)
+        if method.lower() == 'basic':
+            user, pwd = tounicode(base64.b64decode(tobytes(data))).split(':', 1)
+            return user, pwd
+    except (KeyError, ValueError):
+        return None

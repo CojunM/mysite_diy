@@ -5,7 +5,6 @@ import json
 import re
 import urllib.parse
 
-
 from brick.contrib import json_helper
 from brick.core.httphelper.request import request
 from brick.core.httphelper.response import response, HTTPResponse
@@ -27,7 +26,7 @@ def get_ip():
 
 def get_session():
     """获取当前用户session"""
-    return request.environ.get('web.session')
+    return request.environ.get('brick.session')
 
 
 def return_msg(state, msg, data={}):

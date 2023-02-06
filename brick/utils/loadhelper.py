@@ -14,10 +14,17 @@ def load_app(target):
         不影响当前默认应用程序，但返回一个单独的
         应用程序对象。有关目标参数，请参见：func:`load'。 """
     global NORUN;
+    NORUN, nr_old = True, NORUN
+    # tmp = default_app.push()  # Create a new "default application"
+    try:
+        rv = load(target)  # Import the target module
+        return rv if callable(rv) else tmp
+    finally:
+        # default_app.remove(tmp)  # Remove the temporary added default application
+        NORUN = nr_old
 
 
-
-def load_module(target, **namespace):
+def load(target, **namespace):
     """导入模块或从模块中获取对象。
         * ``包.模块``将“module”作为module对象返回。
         * ``包装型号：name``从中返回模块变量'name'`包装型号`.

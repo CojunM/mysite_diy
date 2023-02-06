@@ -11,11 +11,10 @@ import re
 import threading
 from collections import namedtuple
 
-
 # By default, peewee supports Sqlite, MySQL and Postgresql.
 from brick.core.db.felds import TuplesQueryResultWrapper, transaction_sqlite, savepoint_sqlite, fn, Clause, SQL, \
     EnclosedClause, R, NaiveQueryResultWrapper, DictQueryResultWrapper, NamedTupleQueryResultWrapper, \
-    AggregateQueryResultWrapper, ModelQueryResultWrapper, transaction
+    AggregateQueryResultWrapper, ModelQueryResultWrapper, transaction, _atomic, savepoint
 
 try:
     from pysqlite2 import dbapi2 as pysq3
@@ -48,7 +47,6 @@ except ImportError:
     except ImportError:
         mysql = None
 
-
 from brick.core.db.constants import DATETIME_LOOKUPS, SQLITE_DATETIME_FORMATS, RESULTS_NAIVE, RESULTS_MODELS, \
     RESULTS_TUPLES, RESULTS_DICTS, RESULTS_NAMEDTUPLES, RESULTS_AGGREGATE_MODELS, SQLITE_DATE_TRUNC_MAPPING, basestring, \
     MYSQL_DATE_TRUNC_MAPPING
@@ -60,14 +58,18 @@ from brick.core.db.utils import merge_dict, format_date_time, OP, binary_constru
 
 # NullHandler是出于某种原因方便使用日志处理程序的情况，但实际上并不想执行任何日志记录。
 from logging import NullHandler
+
 logger = logging.getLogger('peewee')
 logger.addHandler(NullHandler())
+
+
 def _sqlite_date_part(lookup_type, datetime_string):
     assert lookup_type in DATETIME_LOOKUPS
     if not datetime_string:
         return
     dt = format_date_time(datetime_string, SQLITE_DATETIME_FORMATS)
     return getattr(dt, lookup_type)
+
 
 def _sqlite_date_trunc(lookup_type, datetime_string):
     assert lookup_type in SQLITE_DATE_TRUNC_MAPPING
@@ -80,6 +82,7 @@ def _sqlite_date_trunc(lookup_type, datetime_string):
 def _sqlite_regexp(regex, value, case_sensitive=False):
     flags = 0 if case_sensitive else re.I
     return re.search(regex, value, flags) is not None
+
 
 #
 # OP_LIKE = 28
@@ -397,32 +400,32 @@ class _ConnectionLocal(_BaseConnectionLocal, threading.local):
 
 
 def sort_models_topologically(models):
-        """Sort model topologically so that parents will precede children."""
-        models = set(models)
-        seen = set()
-        ordering = []
+    """Sort model topologically so that parents will precede children."""
+    models = set(models)
+    seen = set()
+    ordering = []
 
-        def dfs(model):
-            # Omit model which are already sorted
-            # or should not be in the list at all
-            if model in models and model not in seen:
-                seen.add(model)
+    def dfs(model):
+        # Omit model which are already sorted
+        # or should not be in the list at all
+        if model in models and model not in seen:
+            seen.add(model)
 
-                # First create model on which current model depends
-                # (either through foreign keys or through depends_on),
-                # then create current model itself
-                for foreign_key in model._meta.rel.values():
-                    dfs(foreign_key.rel_model)
-                if model._meta.depends_on:
-                    for dependency in model._meta.depends_on:
-                        dfs(dependency)
-                ordering.append(model)
+            # First create model on which current model depends
+            # (either through foreign keys or through depends_on),
+            # then create current model itself
+            for foreign_key in model._meta.rel.values():
+                dfs(foreign_key.rel_model)
+            if model._meta.depends_on:
+                for dependency in model._meta.depends_on:
+                    dfs(dependency)
+            ordering.append(model)
 
-        # Order model by name and table initially to guarantee total ordering.
-        names = lambda m: (m._meta.name, m._meta.db_table)
-        for m in sorted(models, key=names):
-            dfs(m)
-        return ordering
+    # Order model by name and table initially to guarantee total ordering.
+    names = lambda m: (m._meta.name, m._meta.db_table)
+    for m in sorted(models, key=names):
+        dfs(m)
+    return ordering
 
 
 def create_model_tables(models, **create_table_kwargs):
@@ -435,6 +438,7 @@ def drop_model_tables(models, **drop_table_kwargs):
     """Drop tables for all given model (in the right order)."""
     for m in reversed(sort_models_topologically(models)):
         m.drop_table(**drop_table_kwargs)
+
 
 class Database(object):
     commit_select = False
@@ -560,12 +564,12 @@ class Database(object):
         if wrapper_type == RESULTS_NAIVE:
             # return (_ModelQueryResultWrapper if self.use_speedups
             #         else NaiveQueryResultWrapper)
-            return (NaiveQueryResultWrapper)
+            return NaiveQueryResultWrapper
         elif wrapper_type == RESULTS_MODELS:
             return ModelQueryResultWrapper
         elif wrapper_type == RESULTS_TUPLES:
             # return (_TuplesQueryResultWrapper if self.use_speedups
-        #         #             #         else TuplesQueryResultWrapper)
+            #         #             #         else TuplesQueryResultWrapper)
             return (TuplesQueryResultWrapper)
         elif wrapper_type == RESULTS_DICTS:
             # return (_DictQueryResultWrapper if self.use_speedups
@@ -576,7 +580,7 @@ class Database(object):
         elif wrapper_type == RESULTS_AGGREGATE_MODELS:
             return AggregateQueryResultWrapper
         else:
-            return ( NaiveQueryResultWrapper)
+            return (NaiveQueryResultWrapper)
 
     def last_insert_id(self, cursor, model):
         if model._meta.auto_increment:
@@ -758,7 +762,10 @@ class Database(object):
     def get_binary_type(self):
         return binary_construct
 
+
 SENTINEL = object()
+
+
 def __pragma__(name):
     def __get__(self):
         return self.pragma(name)
@@ -767,6 +774,8 @@ def __pragma__(name):
         return self.pragma(name, value)
 
     return property(__get__, __set__)
+
+
 ColumnMetadata = namedtuple(
     'ColumnMetadata',
     ('name', 'data_type', 'null', 'primary_key', 'table'))
@@ -776,6 +785,7 @@ ForeignKeyMetadata = namedtuple(
 IndexMetadata = namedtuple(
     'IndexMetadata',
     ('name', 'sql', 'columns', 'unique', 'table'))
+
 
 class SqliteDatabase(Database):
     compiler_class = SqliteQueryCompiler

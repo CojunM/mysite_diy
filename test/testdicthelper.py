@@ -33,6 +33,7 @@ class DictProperty(object):
         self.attr, self.key, self.read_only = attr, key, read_only
         print(attr)
         print(key)
+
     def __call__(self, func):
         functools.update_wrapper(self, func, updated=[])
         self.getter, self.key = func, self.key or func.__name__
@@ -60,14 +61,17 @@ class DictProperty(object):
     def __delete__(self, obj):
         if self.read_only: raise AttributeError("Read-Only property.")
         del getattr(obj, self.attr)[self.key]
+
+
 class MultiDict(MutableMapping):
     """ 此dict为每个键存储多个值，但其行为与普通dict，
     它只返回任何给定键的最新值。有一些特殊的方法可以访问完整的值列表。
     """
 
     def __init__(self, *a, **k):
-        self.dict = dict((k, [v]) for (k, v) in dict(*a,**k).items())
+        self.dict = dict((k, [v]) for (k, v) in dict(*a, **k).items())
         print(self.dict)
+
     def __len__(self):
         return len(self.dict)
 
@@ -97,15 +101,32 @@ class MultiDict(MutableMapping):
 
     def allitems(self):
         return ((k, v) for k, vl in self.dict.items() for v in vl)
-if __name__== '__main__':
+
+
+class SubDict(dict):
+    def __init__(self, a=None):
+        self.a = a
+
+
+def test_subdict():
+    b = SubDict(10)
+    b.update({'c': 12})
+    print(b)
+    b.clear()
+    print(b)
+    print(b.a)
+
+
+if __name__ == '__main__':
     # catchall = DictProperty('config', 'catchall')
     # pairs=[(1,2),(3,4)]
     # for key, value in pairs:
     #         # get[key] = value
     #      print(10*"*")
     #      print(key, value)
-    a=('a','2','3')
-    k={'c':12,'d':34}
-    dt = MultiDict(a,k)
-    # dt = dict((k, [v]) for (k, v) in dict(*a, **k).items())
-    print(dt)
+    # a = ('a', '2', '3')
+    # k = {'c': 12, 'd': 34}
+    # dt = MultiDict(a, k)
+    # # dt = dict((k, [v]) for (k, v) in dict(*a, **k).items())
+    # print(dt)
+    test_subdict()

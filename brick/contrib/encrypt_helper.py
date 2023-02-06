@@ -3,6 +3,7 @@
 
 import hashlib
 
+
 def md5(text):
     """md5加密函数"""
     md5 = hashlib.md5()

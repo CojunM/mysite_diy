@@ -1,19 +1,367 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3d0953a8-c3eb-40b0-97f7-7b4d1fc1361f" name="Default Changelist" comment="12.1">
-      <change afterPath="$PROJECT_DIR$/html/df.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/tuodong.html" afterDir="false" />
+    <list default="true" id="3d0953a8-c3eb-40b0-97f7-7b4d1fc1361f" name="Default Changelist" comment="12.10">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vagrant.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/brick/contrib/caches/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/brick/contrib/caches/_compat.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/brick/contrib/caches/cache.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/brick/contrib/caches/container.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/brick/contrib/caches/exceptions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/brick/contrib/caches/synchronization.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/brick/contrib/caches/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/brick/utils/baseconv.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/brick/utils/cache.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/brick/utils/datetime_safe.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/brick/utils/inspect.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/admin_base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/admin_index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/admin_login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/admin_main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/css/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/css/style1.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/icons-bootstrap.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/js/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/js/main1.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/table-advance-tables.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/tables-data.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/tables-general.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/test.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/apexcharts.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/ar.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/ca.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/cs.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/de.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/el.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/en.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/es.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/fa.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/fi.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/fr.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/he.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/hi.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/hr.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/hu.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/hy.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/id.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/it.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/ja.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/ka.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/ko.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/lt.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/nb.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/nl.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/pl.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/pt-br.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/pt.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/rs.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/ru.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/se.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/sk.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/sl.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/sq.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/th.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/tr.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/ua.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/apexcharts/locales/zh-cn.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/bootstrap-icons/bootstrap-icons.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/bootstrap-icons/bootstrap-icons.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/bootstrap-icons/fonts/bootstrap-icons.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/bootstrap-icons/fonts/bootstrap-icons.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/bootstrap-icons/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/boxicons/css/animations.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/boxicons/css/boxicons.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/boxicons/css/boxicons.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/boxicons/css/transformations.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/boxicons/fonts/boxicons.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/boxicons/fonts/boxicons.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/boxicons/fonts/boxicons.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/boxicons/fonts/boxicons.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/boxicons/fonts/boxicons.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/chart.js/chart.esm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/chart.js/chart.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/chart.js/chart.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/chart.js/chunks/helpers.segment.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/chart.js/helpers.esm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/echarts/echarts.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/echarts/extension/bmap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/echarts/extension/bmap.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/echarts/extension/bmap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/echarts/extension/dataTool.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/echarts/extension/dataTool.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/echarts/extension/dataTool.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/php-email-form/validate.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/quill/quill.bubble.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/quill/quill.core.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/quill/quill.core.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/quill/quill.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/quill/quill.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/quill/quill.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/quill/quill.snow.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/remixicon/remixicon.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/remixicon/remixicon.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/remixicon/remixicon.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/remixicon/remixicon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/remixicon/remixicon.symbol.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/remixicon/remixicon.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/remixicon/remixicon.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/remixicon/remixicon.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/simple-datatables/simple-datatables.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/simple-datatables/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tables-data.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/CHANGELOG.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/bower.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/composer.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/icons/default/icons.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/icons/default/icons.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/icons/default/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/jquery.tinymce.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/jquery.tinymce.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/license.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/advlist/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/advlist/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/advlist/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/anchor/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/anchor/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/anchor/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/autolink/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/autolink/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/autolink/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/autoresize/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/autoresize/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/autoresize/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/autosave/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/autosave/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/autosave/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/bbcode/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/bbcode/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/bbcode/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/charmap/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/charmap/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/charmap/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/code/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/code/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/code/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/codesample/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/codesample/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/codesample/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/colorpicker/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/colorpicker/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/colorpicker/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/contextmenu/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/contextmenu/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/contextmenu/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/directionality/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/directionality/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/directionality/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/emoticons/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/emoticons/js/emojiimages.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/emoticons/js/emojiimages.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/emoticons/js/emojis.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/emoticons/js/emojis.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/emoticons/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/emoticons/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/fullpage/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/fullpage/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/fullpage/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/fullscreen/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/fullscreen/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/fullscreen/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/help/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/help/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/help/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/hr/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/hr/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/hr/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/image/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/image/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/image/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/imagetools/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/imagetools/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/imagetools/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/importcss/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/importcss/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/importcss/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/insertdatetime/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/insertdatetime/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/insertdatetime/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/legacyoutput/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/legacyoutput/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/legacyoutput/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/link/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/link/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/link/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/lists/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/lists/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/lists/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/media/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/media/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/media/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/nonbreaking/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/nonbreaking/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/nonbreaking/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/noneditable/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/noneditable/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/noneditable/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/pagebreak/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/pagebreak/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/pagebreak/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/paste/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/paste/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/paste/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/preview/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/preview/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/preview/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/print/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/print/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/print/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/quickbars/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/quickbars/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/quickbars/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/save/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/save/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/save/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/searchreplace/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/searchreplace/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/searchreplace/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/spellchecker/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/spellchecker/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/spellchecker/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/tabfocus/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/tabfocus/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/tabfocus/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/table/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/table/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/table/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/template/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/template/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/template/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/textcolor/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/textcolor/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/textcolor/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/textpattern/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/textpattern/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/textpattern/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/toc/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/toc/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/toc/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/visualblocks/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/visualblocks/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/visualblocks/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/visualchars/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/visualchars/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/visualchars/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/wordcount/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/wordcount/plugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/plugins/wordcount/plugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/content/dark/content.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/content/dark/content.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/content/default/content.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/content/default/content.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/content/document/content.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/content/document/content.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/content/writer/content.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/content/writer/content.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/ui/oxide-dark/content.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/ui/oxide-dark/content.inline.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/ui/oxide-dark/content.inline.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/ui/oxide-dark/content.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/ui/oxide-dark/content.mobile.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/ui/oxide-dark/content.mobile.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/ui/oxide-dark/fonts/tinymce-mobile.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/ui/oxide-dark/skin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/ui/oxide-dark/skin.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/ui/oxide-dark/skin.mobile.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/ui/oxide-dark/skin.mobile.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/ui/oxide-dark/skin.shadowdom.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/ui/oxide-dark/skin.shadowdom.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/ui/oxide/content.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/ui/oxide/content.inline.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/ui/oxide/content.inline.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/ui/oxide/content.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/ui/oxide/content.mobile.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/ui/oxide/content.mobile.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/ui/oxide/fonts/tinymce-mobile.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/ui/oxide/skin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/ui/oxide/skin.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/ui/oxide/skin.mobile.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/ui/oxide/skin.mobile.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/ui/oxide/skin.shadowdom.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/skins/ui/oxide/skin.shadowdom.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/themes/mobile/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/themes/mobile/theme.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/themes/mobile/theme.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/themes/silver/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/themes/silver/theme.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/themes/silver/theme.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/tinymce.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/tinymce.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/admin/vendor/tinymce/tinymce.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/img/auth-img-7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/html/img/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/converts.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/encrypts.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/exceptions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/loger.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/securities.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/admin/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/admin/adminModels.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/admin/admin_login.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/admin/admin_main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/auth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/94d652a1-612b-4a5c-9b1d-ec300a9f499d.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/94d652a1-612b-4a5c-9b1d-ec300a9f499d/storage_v2/_src_/database/simple_db.K4pggQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/94d652a1-612b-4a5c-9b1d-ec300a9f499d/storage_v2/_src_/database/simple_db.K4pggQ/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/mysite_diy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mysite_diy.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/11_30.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/11_30.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brick/core/db/Pools.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/core/db/Pools.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brick/contrib/encrypt_helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/contrib/encrypt_helper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brick/contrib/except_helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/contrib/except_helper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brick/contrib/sessions/cache.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/contrib/sessions/cache.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brick/contrib/sessions/container.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/contrib/sessions/container.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brick/contrib/sessions/middleware.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/contrib/sessions/middleware.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brick/contrib/sessions/session.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/contrib/sessions/session.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brick/contrib/sessions/synchronization.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/contrib/sessions/synchronization.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brick/contrib/sessions/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/contrib/sessions/util.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brick/contrib/web_helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/contrib/web_helper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brick/core/db/databases.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/core/db/databases.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/brick/core/db/felds.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/core/db/felds.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/brick/core/db/modelquerys.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/core/db/modelquerys.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/brick/core/db/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/core/db/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/brick/core/db/querycompiler.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/core/db/querycompiler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brick/core/db/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/core/db/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brick/core/httphelper/request.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/core/httphelper/request.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brick/core/httphelper/response.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/core/httphelper/response.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brick/core/httphelper/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/core/httphelper/util.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brick/core/simpletemplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/core/simpletemplate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brick/core/wsgiapp.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/core/wsgiapp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brick/orm/orm0/peewee 3.15.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/orm/orm0/peewee 3.15.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brick/orm/orm0/peewee2.10.2.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/orm/orm0/peewee2.10.2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brick/utils/cachehelper.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/utils/cachehelper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brick/utils/encode.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/utils/encode.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brick/utils/loadhelper.py" beforeDir="false" afterPath="$PROJECT_DIR$/brick/utils/loadhelper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/html/desk.html" beforeDir="false" afterPath="$PROJECT_DIR$/html/desk.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/highcharts/modules/data.src.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/lib/ueditor/1.4.3/third-party/highcharts/modules/data.src.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/html/login1.html" beforeDir="false" afterPath="$PROJECT_DIR$/html/login1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/html/theme/blank.html" beforeDir="false" afterPath="$PROJECT_DIR$/html/theme/blank.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/html/theme/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/html/theme/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/info.log" beforeDir="false" afterPath="$PROJECT_DIR$/log/info.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/menu_info_logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/logic/menu_info_logic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/testbottle.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/testbottle.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/testdicthelper.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/testdicthelper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/login.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/system/menu_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/system/menu_info.py" afterDir="false" />
     </list>
-    <ignored path="E:\mysite_diy\.idea\shelf/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,16 +372,15 @@
     <SUITE FILE_PATH="coverage/mysite_diy$peewee3_14.coverage" NAME="peewee3.14 Coverage Results" MODIFIED="1669861653212" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/brick/orm/orm0" />
     <SUITE FILE_PATH="coverage/mysite_diy$peewee206.coverage" NAME="peewee206 Coverage Results" MODIFIED="1653615008696" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/brick/orm/orm0" />
     <SUITE FILE_PATH="coverage/mysite_diy$verify_helper.coverage" NAME="verify_helper Coverage Results" MODIFIED="1655987515403" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/brick/contrib" />
-    <SUITE FILE_PATH="coverage/mysite_diy$models__1_.coverage" NAME="models (1) Coverage Results" MODIFIED="1670323659445" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/brick/core/db" />
     <SUITE FILE_PATH="coverage/mysite_diy$menu_info.coverage" NAME="menu_info Coverage Results" MODIFIED="1653057701516" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/views/system" />
     <SUITE FILE_PATH="coverage/mysite_diy$__init__.coverage" NAME="__init__ Coverage Results" MODIFIED="1653057017108" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/views" />
     <SUITE FILE_PATH="coverage/mysite_diy$email_validcode.coverage" NAME="email_validcode Coverage Results" MODIFIED="1655807998407" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/brick/contrib" />
-    <SUITE FILE_PATH="coverage/mysite_diy$peewee_3_15.coverage" NAME="peewee 3.15 Coverage Results" MODIFIED="1670926781447" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/brick/orm/orm0" />
+    <SUITE FILE_PATH="coverage/mysite_diy$peewee_3_15.coverage" NAME="peewee 3.15 Coverage Results" MODIFIED="1669882749491" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/brick/orm/orm0" />
     <SUITE FILE_PATH="coverage/mysite_diy$test.coverage" NAME="test Coverage Results" MODIFIED="1650364516287" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/brick/orm" />
     <SUITE FILE_PATH="coverage/mysite_diy$about.coverage" NAME="about Coverage Results" MODIFIED="1648452113041" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/mysite_diy$index.coverage" NAME="index Coverage Results" MODIFIED="1648610507635" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/mysite_diy$models.coverage" NAME="models Coverage Results" MODIFIED="1671158722680" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/views" />
-    <SUITE FILE_PATH="coverage/mysite_diy$peewee2_10_2.coverage" NAME="peewee2.10.2 Coverage Results" MODIFIED="1670319961267" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/brick/orm/orm0" />
+    <SUITE FILE_PATH="coverage/mysite_diy$models.coverage" NAME="models Coverage Results" MODIFIED="1669860731035" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/views" />
+    <SUITE FILE_PATH="coverage/mysite_diy$peewee2_10_2.coverage" NAME="peewee2.10.2 Coverage Results" MODIFIED="1650587088649" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/brick/orm/orm0" />
     <SUITE FILE_PATH="coverage/mysite_diy$testdicthelper.coverage" NAME="testdicthelper Coverage Results" MODIFIED="1650327334916" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/mysite_diy$main.coverage" NAME="main Coverage Results" MODIFIED="1669855879519" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
@@ -96,102 +443,36 @@
       <favorite_root url="file://$PROJECT_DIR$/brick/contrib/convert_helper.py" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
     </favorites_list>
   </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/views/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="245">
-              <caret line="99" column="49" lean-forward="true" selection-start-line="99" selection-start-column="49" selection-end-line="99" selection-end-column="49" />
-              <folding>
-                <element signature="e#1054#1153#0" />
-                <element signature="e#2377#3114#0" />
-                <element signature="e#3149#3552#0" />
-                <element signature="e#4091#5399#0" />
-                <element signature="e#6256#7216#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="das://94d652a1-612b-4a5c-9b1d-ec300a9f499d/database/simple_db/schema/public/table/manager">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="das://94d652a1-612b-4a5c-9b1d-ec300a9f499d/database/simple_db/schema/public/table/department">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="das://94d652a1-612b-4a5c-9b1d-ec300a9f499d/database/simple_db/schema/public/table/positions">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="das://94d652a1-612b-4a5c-9b1d-ec300a9f499d/database/simple_db/schema/public/table/menu_info">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="das://94d652a1-612b-4a5c-9b1d-ec300a9f499d/database/simple_db/schema/public/table/role">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/simple_db_public_department.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="407" column="30" selection-start-line="407" selection-start-column="28" selection-end-line="407" selection-end-column="32" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/brick/core/db/felds.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="104">
-              <caret line="1950" selection-start-line="1950" selection-end-line="1950" />
-              <folding>
-                <element signature="e#185#200#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Stub" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
+      <find>get_page_power</find>
+      <find>get_url</find>
+      <find>url</find>
+      <find>order_by</find>
+      <find>_max_alias</find>
+      <find>model = query.model_classs</find>
+      <find>SelectQuery</find>
+      <find>parse_select_query</find>
+      <find>FieldDescriptor</find>
+      <find>__get__</find>
+      <find>print(' interface_url: ',interface_url)</find>
+      <find>interface_url</find>
+      <find>_cache_list</find>
+      <find>where</find>
+      <find>msg</find>
+      <find>menu</find>
+      <find>dict</find>
+      <find>dict()</find>
+      <find>dicts()</find>
       <find>d</find>
       <find>dicts</find>
       <find>_model_shorthand</find>
@@ -199,39 +480,18 @@
       <find>tree_ok</find>
       <find>ename</find>
       <find>many</find>
-      <find>add</find>
-      <find>execute</find>
-      <find>_get_descriptor</find>
-      <find>add_to_class</find>
-      <find>_create_through_model</find>
-      <find>model_refs</find>
-      <find>get_rel_for_model</find>
-      <find>rel_for_model</find>
-      <find>related_models</find>
-      <find>add_manytomany</find>
-      <find>manytomany</find>
-      <find>self.manytomany</find>
-      <find>add_ref</find>
-      <find>tr</find>
-      <find>rel_field</find>
-      <find>ModelAlias</find>
       <find>ManyToManyField</find>
-      <find>add_field</find>
-      <find>ForeignKeyField</find>
-      <find>ModelOptions</find>
       <find>ManyToMany</find>
-      <find>default_database</find>
-      <find>self.choices</find>
+      <find>add</find>
+      <find>_get_descriptor</find>
     </findStrings>
     <replaceStrings>
       <replace>request</replace>
       <replace>response</replace>
       <replace>#print</replace>
-      <replace>tr</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
-    <option name="UPDATE_TYPE" value="MERGE" />
     <option name="ROOT_SYNC" value="SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <favorite-branches>
@@ -248,9 +508,28 @@
       </branch-storage>
     </favorite-branches>
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39/Lib/site-packages/playhouse/signals.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39/Lib/site-packages/playhouse/pool.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39/Lib/site-packages/playhouse/fields.py" root0="SKIP_INSPECTION" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/test/testbottle.py" />
+        <option value="$PROJECT_DIR$/brick/apps/wsgiapp.py" />
+        <option value="$PROJECT_DIR$/brick/httphandles/request.py" />
+        <option value="$PROJECT_DIR$/brick/contrib/string_helper.py" />
+        <option value="$PROJECT_DIR$/views/system/department.py" />
+        <option value="$PROJECT_DIR$/views/login.py" />
         <option value="$PROJECT_DIR$/views/system/manager_operation_log.py" />
         <option value="$PROJECT_DIR$/views/__init__.py" />
         <option value="$PROJECT_DIR$/brick/contrib/log_helper.py" />
@@ -262,6 +541,7 @@
         <option value="$PROJECT_DIR$/brick/contrib/cache_helper.py" />
         <option value="$PROJECT_DIR$/html/main.html" />
         <option value="$PROJECT_DIR$/html/static/h-ui.admin/js/H-ui.admin.js" />
+        <option value="$PROJECT_DIR$/brick/orm/orm0/peewee2.10.2.py" />
         <option value="$PROJECT_DIR$/brick/orm/databases.py" />
         <option value="$PROJECT_DIR$/brick/orm/felds.py" />
         <option value="$PROJECT_DIR$/brick/orm/querycompiler.py" />
@@ -271,6 +551,7 @@
         <option value="$PROJECT_DIR$/html/menu_info.html" />
         <option value="$PROJECT_DIR$/html/menu_info_edit.html" />
         <option value="$PROJECT_DIR$/brick/orm/modelquerys.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
         <option value="$PROJECT_DIR$/html/products_class.html" />
         <option value="$PROJECT_DIR$/html/products_edit.html" />
         <option value="$PROJECT_DIR$/html/products_list.html" />
@@ -290,27 +571,20 @@
         <option value="$PROJECT_DIR$/brick/contrib/email_validcode.py" />
         <option value="$PROJECT_DIR$/brick/contrib/verify_helper.py" />
         <option value="$PROJECT_DIR$/html/verify.html" />
-        <option value="$PROJECT_DIR$/brick/orm/orm0/peewee3.14.py" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
-        <option value="$PROJECT_DIR$/brick/orm/orm0/peewee2.10.2.py" />
-        <option value="$PROJECT_DIR$/brick/orm/orm0/peewee 3.15.py" />
-        <option value="$PROJECT_DIR$/html/tuodong.html" />
-        <option value="$PROJECT_DIR$/html/df.html" />
-        <option value="$PROJECT_DIR$/brick/core/db/models.py" />
         <option value="$PROJECT_DIR$/brick/core/db/modelquerys.py" />
-        <option value="$PROJECT_DIR$/brick/core/db/querycompiler.py" />
-        <option value="$PROJECT_DIR$/brick/core/db/Pools.py" />
-        <option value="$PROJECT_DIR$/brick/core/db/felds.py" />
         <option value="$PROJECT_DIR$/views/models.py" />
+        <option value="$PROJECT_DIR$/brick/orm/orm0/peewee3.14.py" />
+        <option value="$PROJECT_DIR$/brick/orm/orm0/peewee 3.15.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
   </component>
+  <component name="ProjectId" id="2J1GT4BX6XSjbT6OnabunfTTbsz" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -325,6 +599,42 @@
             </path>
             <path>
               <item name="mysite_diy" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mysite_diy" type="462c0819:PsiDirectoryNode" />
+              <item name="brick" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mysite_diy" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mysite_diy" type="462c0819:PsiDirectoryNode" />
+              <item name="brick" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mysite_diy" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mysite_diy" type="462c0819:PsiDirectoryNode" />
+              <item name="brick" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="db" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mysite_diy" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mysite_diy" type="462c0819:PsiDirectoryNode" />
+              <item name="brick" type="462c0819:PsiDirectoryNode" />
+              <item name="orm" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mysite_diy" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mysite_diy" type="462c0819:PsiDirectoryNode" />
+              <item name="brick" type="462c0819:PsiDirectoryNode" />
+              <item name="orm" type="462c0819:PsiDirectoryNode" />
+              <item name="orm0" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mysite_diy" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mysite_diy" type="462c0819:PsiDirectoryNode" />
+              <item name="html" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mysite_diy" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
             <path>
@@ -337,37 +647,6 @@
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
               <item name="&lt; Python 3.7 (mysite_diy) &gt;" type="70bed36:NamedLibraryElementNode" />
               <item name="site-packages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mysite_diy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (mysite_diy) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
-              <item name="django" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mysite_diy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (mysite_diy) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
-              <item name="django" type="462c0819:PsiDirectoryNode" />
-              <item name="contrib" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mysite_diy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (mysite_diy) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
-              <item name="django" type="462c0819:PsiDirectoryNode" />
-              <item name="contrib" type="462c0819:PsiDirectoryNode" />
-              <item name="auth" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mysite_diy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (mysite_diy) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
-              <item name="playhouse" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="mysite_diy" type="b2602c69:ProjectViewProjectNode" />
@@ -380,48 +659,43 @@
       <pane id="Scope" />
     </panes>
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="postgresql" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="database.console.LAST_STATE" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../我的第一个python web开发框架（40）——后台日志与异常处理" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/brick/contrib/caches" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="settings.github" />
+    <property name="settings.editor.selected.configurable" value="fileTemplates" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\mysite_diy\views\system" />
-      <recent name="E:\mysite_diy\views" />
-      <recent name="E:\mysite_diy\webcore\contrib" />
-      <recent name="E:\mysite_diy" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\mcj\python\mysite_diy\brick\contrib\caches" />
+      <recent name="D:\mcj\python\mysite_diy\brick\utils" />
+      <recent name="D:\mcj\python\mysite_diy\views\admin" />
+      <recent name="D:\mcj\python\mysite_diy\html\admin" />
+      <recent name="D:\mcj\python\mysite_diy\html\admin\vendor" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\mcj\python\mysite_diy\brick\core" />
+      <recent name="D:\mcj\python\mysite_diy\html\admin\css" />
+      <recent name="D:\mcj\python\mysite_diy\html\admin" />
+      <recent name="D:\mcj\python\mysite_diy\views" />
       <recent name="E:\mysite_diy\views\system" />
-      <recent name="E:\mysite_diy\views" />
-      <recent name="E:\mysite_diy\webcore\contrib" />
-      <recent name="E:\mysite_diy" />
-      <recent name="E:\mysite_diy\webcore\configs" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="Python.models">
-    <configuration name="tuodong.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/mysite_diy/html/tuodong.html" useBuiltInWebServerPort="true">
-      <method v="2" />
-    </configuration>
-    <configuration name="models (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.cache">
+    <configuration name="cache" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="mysite_diy" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -429,12 +703,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/brick/core/db" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/brick/contrib/sessions" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/brick/core/db/models.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/brick/contrib/sessions/cache.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -443,7 +717,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="models" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="container" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="mysite_diy" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -451,12 +725,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/views" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/brick/contrib/sessions" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/views/models.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/brick/contrib/sessions/container.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -465,7 +739,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="peewee 3.15" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="mysite_diy" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -473,12 +747,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/brick/orm/orm0" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/brick/orm/orm0/peewee 3.15.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -487,7 +761,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="peewee2.10.2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="session" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="mysite_diy" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -495,12 +769,34 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/brick/orm/orm0" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/brick/contrib/sessions" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/brick/orm/orm0/peewee2.10.2.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/brick/contrib/sessions/session.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="util" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="mysite_diy" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/brick/core/sessions" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/brick/core/sessions/util.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -511,14 +807,15 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.models" />
-        <item itemvalue="Python.peewee 3.15" />
-        <item itemvalue="JavaScript Debug.tuodong.html" />
-        <item itemvalue="Python.models (1)" />
-        <item itemvalue="Python.peewee2.10.2" />
+        <item itemvalue="Python.cache" />
+        <item itemvalue="Python.main" />
+        <item itemvalue="Python.container" />
+        <item itemvalue="Python.session" />
+        <item itemvalue="Python.util" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -611,17 +908,52 @@
       <workItem from="1656512000781" duration="1259000" />
       <workItem from="1662004025260" duration="7904000" />
       <workItem from="1663312533572" duration="3160000" />
-      <workItem from="1669947372682" duration="964000" />
-      <workItem from="1669948366595" duration="3644000" />
-      <workItem from="1670204313955" duration="8411000" />
-      <workItem from="1670290288047" duration="15995000" />
-      <workItem from="1670393813863" duration="1103000" />
-      <workItem from="1670467614468" duration="6492000" />
-      <workItem from="1670887761164" duration="13267000" />
-      <workItem from="1670974115998" duration="7637000" />
-      <workItem from="1671000664382" duration="3873000" />
-      <workItem from="1671061012162" duration="7528000" />
-      <workItem from="1671157590928" duration="5808000" />
+      <workItem from="1671238185857" duration="29390000" />
+      <workItem from="1671288243332" duration="630000" />
+      <workItem from="1671326898377" duration="11822000" />
+      <workItem from="1671437095228" duration="533000" />
+      <workItem from="1671502447636" duration="7391000" />
+      <workItem from="1671593940807" duration="20865000" />
+      <workItem from="1671690767306" duration="18357000" />
+      <workItem from="1671760504136" duration="3878000" />
+      <workItem from="1671803048503" duration="2938000" />
+      <workItem from="1671887141983" duration="8397000" />
+      <workItem from="1672024021919" duration="16855000" />
+      <workItem from="1672109198755" duration="22794000" />
+      <workItem from="1672194192685" duration="10207000" />
+      <workItem from="1672219284720" duration="19614000" />
+      <workItem from="1672282154447" duration="701000" />
+      <workItem from="1672282884861" duration="18023000" />
+      <workItem from="1672370632260" duration="4440000" />
+      <workItem from="1672380764936" duration="2112000" />
+      <workItem from="1672382912265" duration="795000" />
+      <workItem from="1672406794185" duration="12854000" />
+      <workItem from="1672455214163" duration="7609000" />
+      <workItem from="1672486025443" duration="1228000" />
+      <workItem from="1672630469997" duration="2529000" />
+      <workItem from="1672642879144" duration="3433000" />
+      <workItem from="1672715223466" duration="11044000" />
+      <workItem from="1672815443714" duration="9252000" />
+      <workItem from="1672897040449" duration="4855000" />
+      <workItem from="1672927589780" duration="3608000" />
+      <workItem from="1672972578129" duration="12349000" />
+      <workItem from="1673064650258" duration="21709000" />
+      <workItem from="1673159463631" duration="12364000" />
+      <workItem from="1673230017977" duration="23225000" />
+      <workItem from="1673316706454" duration="14062000" />
+      <workItem from="1673401542850" duration="12964000" />
+      <workItem from="1673575976800" duration="22094000" />
+      <workItem from="1673615747290" duration="10254000" />
+      <workItem from="1673673680252" duration="17391000" />
+      <workItem from="1673752147763" duration="11650000" />
+      <workItem from="1673857533530" duration="2432000" />
+      <workItem from="1673964131985" duration="341000" />
+      <workItem from="1674049424426" duration="3069000" />
+      <workItem from="1674134031687" duration="1416000" />
+      <workItem from="1674213753680" duration="8999000" />
+      <workItem from="1674906627072" duration="2268000" />
+      <workItem from="1675491979687" duration="3695000" />
+      <workItem from="1675601798242" duration="2551000" />
     </task>
     <task id="LOCAL-00001" summary="626">
       <created>1656301574449</created>
@@ -658,25 +990,11 @@
       <option name="project" value="LOCAL" />
       <updated>1669856860666</updated>
     </task>
-    <task id="LOCAL-00006" summary="12.1">
-      <created>1669947470508</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1669947470508</updated>
-    </task>
-    <task id="LOCAL-00007" summary="12.13">
-      <created>1670927818565</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1670927818566</updated>
-    </task>
-    <option name="localTasksCounter" value="8" />
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="674255000" />
+    <option name="totallyTimeSpent" value="599533000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -689,39 +1007,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.48907104" visible="true" weight="0.19007634" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.48907104" visible="true" weight="0.22671756" />
       <window_info id="Structure" order="1" sideWeight="0.510929" side_tool="true" weight="0.31603053" />
       <window_info id="Favorites" order="2" sideWeight="0.5093333" side_tool="true" weight="0.3038168" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3291592" />
-      <window_info anchor="bottom" id="Debug" order="2" weight="0.40250447" />
-      <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="5" sideWeight="0.49923664" weight="0.3291592" />
-      <window_info anchor="bottom" id="Docker" order="6" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="7" sideWeight="0.49618322" visible="true" weight="0.32737032" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49923664" weight="0.3452594" />
-      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" sideWeight="0.49923664" weight="0.3291592" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5038168" side_tool="true" weight="0.36314848" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4984733" weight="0.2647585" />
-      <window_info anchor="bottom" id="Database Console" order="12" weight="0.3255814" />
-      <window_info anchor="bottom" x="28" y="272" width="1310" height="184" id="Python Console" order="13" weight="0.3291592" />
-      <window_info anchor="bottom" id="SQL Generator" order="14" weight="0.3291592" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" anchor="right" id="Database" order="3" visible="true" weight="0.3610687" />
-      <window_info anchor="right" id="SciView" order="4" weight="0.32977098" />
-    </layout>
-    <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.48907104" visible="true" weight="0.18625954" />
-      <window_info id="Structure" order="1" sideWeight="0.510929" side_tool="true" weight="0.31603053" />
-      <window_info id="Favorites" order="2" sideWeight="0.5093333" side_tool="true" weight="0.3038168" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3291592" />
-      <window_info anchor="bottom" id="Debug" order="2" weight="0.40250447" />
+      <window_info anchor="bottom" id="Debug" order="2" weight="0.39892665" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="5" sideWeight="0.49923664" weight="0.3291592" />
@@ -737,12 +1029,37 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" anchor="right" id="Database" order="3" visible="true" weight="0.3610687" />
+      <window_info anchor="right" id="Database" order="3" weight="0.3610687" />
+      <window_info anchor="right" id="SciView" order="4" weight="0.32977098" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.48907104" visible="true" weight="0.2129771" />
+      <window_info id="Structure" order="1" sideWeight="0.510929" side_tool="true" weight="0.31603053" />
+      <window_info id="Favorites" order="2" sideWeight="0.5093333" side_tool="true" weight="0.3038168" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3291592" />
+      <window_info anchor="bottom" id="Debug" order="2" weight="0.39892665" />
+      <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="5" sideWeight="0.49923664" weight="0.3291592" />
+      <window_info anchor="bottom" id="Docker" order="6" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="7" sideWeight="0.49618322" weight="0.3470483" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49923664" weight="0.3452594" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" sideWeight="0.49923664" weight="0.3291592" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5038168" side_tool="true" weight="0.36314848" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4984733" weight="0.2647585" />
+      <window_info anchor="bottom" id="Database Console" order="12" weight="0.3255814" />
+      <window_info anchor="bottom" x="28" y="272" width="1310" height="184" id="Python Console" order="13" weight="0.3291592" />
+      <window_info anchor="bottom" id="SQL Generator" order="14" weight="0.3291592" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info active="true" anchor="right" id="Database" order="3" visible="true" weight="0.17251909" />
       <window_info anchor="right" id="SciView" order="4" weight="0.32977098" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.History.Properties">
     <option name="COLUMN_ORDER">
@@ -759,22 +1076,7 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
-              <option name="COLUMN_ORDER">
-                <list>
-                  <option value="0" />
-                  <option value="1" />
-                  <option value="2" />
-                  <option value="3" />
-                </list>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -793,14 +1095,14 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="626" />
     <MESSAGE value="7.1" />
     <MESSAGE value="9.1" />
     <MESSAGE value="12.1" />
-    <MESSAGE value="12.13" />
-    <option name="LAST_COMMIT_MESSAGE" value="12.13" />
+    <option name="LAST_COMMIT_MESSAGE" value="12.1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -809,6 +1111,11 @@
           <url>file://$PROJECT_DIR$/brick/orm/orm0/peewee3.14.py</url>
           <line>1623</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/html/admin/admin_index.html</url>
+          <line>177</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -820,9 +1127,167 @@
       </default-breakpoints>
     </breakpoint-manager>
   </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/mysite_diy$testdicthelper.coverage" NAME="testdicthelper Coverage Results" MODIFIED="1673415627747" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
+    <SUITE FILE_PATH="coverage/mysite_diy$main.coverage" NAME="main Coverage Results" MODIFIED="1673691040166" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/mysite_diy$ormlearn.coverage" NAME="ormlearn Coverage Results" MODIFIED="1667483575765" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
+    <SUITE FILE_PATH="coverage/mysite_diy$index.coverage" NAME="index Coverage Results" MODIFIED="1644710796430" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/mysite_diy$models.coverage" NAME="models Coverage Results" MODIFIED="1672755498181" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/views" />
+    <SUITE FILE_PATH="coverage/mysite_diy$cache.coverage" NAME="cache Coverage Results" MODIFIED="1673794704041" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/brick/contrib/sessions" />
+    <SUITE FILE_PATH="coverage/mysite_diy$peewee206.coverage" NAME="peewee206 Coverage Results" MODIFIED="1667918727942" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/brick/orm/orm0" />
+    <SUITE FILE_PATH="coverage/mysite_diy$container.coverage" NAME="container Coverage Results" MODIFIED="1673676633794" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/brick/contrib/sessions" />
+    <SUITE FILE_PATH="coverage/mysite_diy$middleware.coverage" NAME="middleware Coverage Results" MODIFIED="1643265484258" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/webcore/contrib/sessions" />
+    <SUITE FILE_PATH="coverage/mysite_diy$session.coverage" NAME="session Coverage Results" MODIFIED="1673675689660" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/brick/contrib/sessions" />
+    <SUITE FILE_PATH="coverage/mysite_diy$util.coverage" NAME="util Coverage Results" MODIFIED="1673428254719" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/brick/core/sessions" />
+    <SUITE FILE_PATH="coverage/mysite_diy$peewee2_10_2.coverage" NAME="peewee2.10.2 Coverage Results" MODIFIED="1670741170819" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/brick/orm/orm0" />
+    <SUITE FILE_PATH="coverage/mysite_diy$peewee_3_15.coverage" NAME="peewee 3.15 Coverage Results" MODIFIED="1670740394079" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/brick/orm/orm0" />
+    <SUITE FILE_PATH="coverage/mysite_diy$peewee3_14.coverage" NAME="peewee3.14 Coverage Results" MODIFIED="1669550880521" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/brick/orm/orm0" />
+    <SUITE FILE_PATH="coverage/mysite_diy$orm.coverage" NAME="orm Coverage Results" MODIFIED="1667483701325" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
+    <SUITE FILE_PATH="coverage/mysite_diy$shudu.coverage" NAME="shudu Coverage Results" MODIFIED="1650698658079" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
+    <SUITE FILE_PATH="coverage/mysite_diy$myorm.coverage" NAME="myorm Coverage Results" MODIFIED="1667483512603" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/brick/servers/baseserver.py" />
-    <entry file="file://$PROJECT_DIR$/brick/orm/databases.py" />
+    <entry file="file://$PROJECT_DIR$/html/department.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="41" column="80" selection-start-line="41" selection-start-column="80" selection-end-line="41" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/manager_edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3496">
+          <caret line="176" column="37" selection-start-line="176" selection-start-column="37" selection-end-line="176" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/manager_operation_log.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-476">
+          <caret line="77" column="37" selection-start-line="77" selection-start-column="37" selection-end-line="77" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/department_edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="16" column="50" selection-start-line="16" selection-start-column="50" selection-end-line="16" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://a8e688f5-8f73-4c24-843e-52b7e556fc49/database/simple_db/schema/public/table/manager" />
+    <entry file="file://$PROJECT_DIR$/brick/contrib/json_helper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/lib/common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/system/menu_info.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2698">
+          <caret line="150" column="18" selection-start-line="150" selection-start-column="18" selection-end-line="150" selection-end-column="18" />
+          <folding>
+            <element signature="e#38#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/system/manager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="589">
+          <caret line="38" column="69" selection-start-line="38" selection-start-column="69" selection-end-line="38" selection-end-column="69" />
+          <folding>
+            <element signature="e#38#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brick/contrib/email_validcode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="39" column="34" lean-forward="true" selection-start-line="39" selection-start-column="34" selection-end-line="39" selection-end-column="34" />
+          <folding>
+            <element signature="e#639#653#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/verify.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="497">
+          <caret line="35" column="15" selection-start-line="35" selection-start-column="11" selection-end-line="35" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/site-packages/PIL/Image.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1102">
+          <caret line="2952" selection-start-line="2952" selection-end-line="2952" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://a8e688f5-8f73-4c24-843e-52b7e556fc49/database/simple_db/schema/public/table/menu_info" />
+    <entry file="file://$PROJECT_DIR$/html/menu_info_edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6080">
+          <caret line="320" column="3" selection-start-line="320" selection-end-line="323" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brick/contrib/verify_helper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2641">
+          <caret line="218" column="32" selection-start-line="218" selection-start-column="32" selection-end-line="218" selection-end-column="32" />
+          <folding>
+            <element signature="e#38#94#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/manager.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2394">
+          <caret line="126" column="34" selection-start-line="126" selection-start-column="34" selection-end-line="126" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/32e3409f-f4a5-4672-abf1-74e4fefb6f4b/console.sql">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/7822529f-393e-4f7d-b789-92075c1c119d/console.sql">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/extensions/com.intellij.database/schema/Generate POJOs.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-239">
+          <caret line="6" column="2" selection-start-line="5" selection-end-line="6" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/a2bad041-cad3-48db-85df-02a101d8b6c2/console.sql">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/verify.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7771">
+          <caret line="409" column="63" selection-start-line="409" selection-start-column="63" selection-end-line="409" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brick/servers/baseserver.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brick/orm/databases.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/site-packages/django/contrib/messages/middleware.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
@@ -847,9 +1312,23 @@
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/94d652a1-612b-4a5c-9b1d-ec300a9f499d/console.sql">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/brick/apps/wsgiapp.py" />
-    <entry file="file://$PROJECT_DIR$/brick/apps/utilities.py" />
-    <entry file="file://$PROJECT_DIR$/brick/orm/felds.py" />
+    <entry file="file://$PROJECT_DIR$/brick/apps/wsgiapp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="580" column="32" selection-start-line="580" selection-start-column="20" selection-end-line="580" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brick/apps/utilities.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brick/orm/felds.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2052">
+          <caret line="112" column="12" selection-start-line="112" selection-start-column="12" selection-end-line="112" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/html/menu_info.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
@@ -881,275 +1360,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/brick/core/baseserver.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/brick/orm/orm0/peewee3.14.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="8012" column="6" selection-start-line="8008" selection-end-line="8010" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21546">
-          <caret line="1134" selection-start-line="1134" selection-end-line="1134" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://94d652a1-612b-4a5c-9b1d-ec300a9f499d/database/simple_db/schema/public/table/menu">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/concurrent/futures/thread.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="24" selection-start-line="24" selection-end-line="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/threading.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27189">
-          <caret line="1438" column="11" selection-start-line="1438" selection-start-column="11" selection-end-line="1438" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/codecs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="311" column="19" selection-start-line="311" selection-start-column="18" selection-end-line="311" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/brick/core/db/databases.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11381">
-          <caret line="608" selection-start-line="608" selection-end-line="608" />
-        </state>
+        <state relative-caret-position="-855" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/brick/core/db/exceptions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1254">
-          <caret line="66" selection-start-line="66" selection-end-line="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/logging/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27151">
-          <caret line="1432" selection-start-line="1432" selection-end-line="1432" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/inspect.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1140">
-          <caret line="78" selection-start-line="78" selection-end-line="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/product_details.html">
+    <entry file="file://$PROJECT_DIR$/brick/core/baseserver.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/df.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="205" selection-start-line="205" selection-end-line="205" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/tuodong.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="12" column="52" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="55" />
-          <folding>
-            <element signature="e#33#416#0" />
-            <element signature="e#477#5393#0" />
-            <element signature="e#5395#5513#0" />
-            <element signature="e#5516#6427#0" />
-            <element signature="e#6802#7100#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/3/builtins.pyi">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/brick/orm/orm0/peewee 3.15.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="1006" selection-start-line="1006" selection-end-line="1006" />
-          <folding>
-            <element signature="e#635#665#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/site-packages/peewee.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="4925" column="9" selection-start-line="4925" selection-start-column="9" selection-end-line="4925" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/site-packages/playhouse/fields.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="150" column="19" selection-start-line="150" selection-start-column="19" selection-end-line="150" selection-end-column="19" />
-          <folding>
-            <element signature="e#1987#2276#0" />
-            <element signature="e#5164#6031#0" />
-            <element signature="e#6074#8554#0" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="das://94d652a1-612b-4a5c-9b1d-ec300a9f499d/database/simple_db/schema/public/table/role_menu_through">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/brick/orm/orm0/peewee2.10.2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="4846" column="15" selection-start-line="4846" selection-start-column="15" selection-end-line="4846" selection-end-column="15" />
-          <folding>
-            <element signature="e#44363#50069#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/brick/core/db/querycompiler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-          <folding>
-            <element signature="e#13960#14779#0" />
-            <element signature="e#14817#39594#0" />
-            <element signature="e#39643#39785#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/brick/core/db/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6">
-          <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/brick/core/db/modelquerys.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="1602" selection-start-line="1602" selection-end-line="1602" />
-          <folding>
-            <element signature="e#35990#37343#0" />
-            <element signature="e#37393#37621#0" />
-            <element signature="e#37654#47368#0" />
-            <element signature="e#37740#38346#0" />
-            <element signature="e#38396#39570#0" />
-            <element signature="e#39611#39959#0" />
-            <element signature="e#47400#47507#0" />
-            <element signature="e#50212#52739#0" />
-            <element signature="e#53443#56132#0" />
-            <element signature="e#56175#56396#0" />
-            <element signature="e#56438#57959#0" />
-            <element signature="e#57992#60541#0" />
-            <element signature="e#60580#61859#0" />
-            <element signature="e#61898#66446#0" />
-            <element signature="e#66485#66868#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/brick/core/db/Pools.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="294" selection-start-line="294" selection-end-line="294" />
-          <folding>
-            <element signature="e#11098#11194#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/site-packages/playhouse/pool.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="284" lean-forward="true" selection-start-line="80" selection-end-line="284" />
-          <folding>
-            <element signature="e#2839#2935#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/brick/core/db/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="401" column="8" selection-start-line="401" selection-start-column="8" selection-end-line="401" selection-end-column="8" />
-          <folding>
-            <element signature="e#185#203#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://94d652a1-612b-4a5c-9b1d-ec300a9f499d/database/simple_db/schema/public/table/manager_operation_log">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2018.3/system/python_stubs/-1007583135/builtins.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/site-packages/django/contrib/auth/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="202" column="4" selection-start-line="202" selection-start-column="4" selection-end-line="202" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-            <element signature="e#11358#11676#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/simple_db_public_department.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="407" column="30" selection-start-line="407" selection-start-column="28" selection-end-line="407" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/brick/core/db/felds.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="1950" selection-start-line="1950" selection-end-line="1950" />
-          <folding>
-            <element signature="e#185#200#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1160,44 +1382,103 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://94d652a1-612b-4a5c-9b1d-ec300a9f499d/database/simple_db/schema/public/table/manager">
+    <entry file="das://94d652a1-612b-4a5c-9b1d-ec300a9f499d/database/simple_db/schema/public/table/menu">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
         </state>
       </provider>
     </entry>
-    <entry file="das://94d652a1-612b-4a5c-9b1d-ec300a9f499d/database/simple_db/schema/public/table/department">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
+    <entry file="file://$PROJECT_DIR$/brick/core/db/felds.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-596">
+          <caret line="2814" column="8" selection-start-line="2814" selection-start-column="8" selection-end-line="2814" selection-end-column="8" />
+          <folding>
+            <element signature="e#673#693#0" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="das://94d652a1-612b-4a5c-9b1d-ec300a9f499d/database/simple_db/schema/public/table/positions">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
+    <entry file="file://$PROJECT_DIR$/brick/orm/orm0/peewee3.14.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="8012" column="6" selection-start-line="8008" selection-end-line="8010" selection-end-column="57" />
         </state>
       </provider>
     </entry>
-    <entry file="das://94d652a1-612b-4a5c-9b1d-ec300a9f499d/database/simple_db/schema/public/table/menu_info">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
+    <entry file="file://$PROJECT_DIR$/brick/core/db/modelquerys.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="883">
+          <caret line="1457" column="38" lean-forward="true" selection-start-line="1457" selection-start-column="38" selection-end-line="1457" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/site-packages/peewee.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-152">
+          <caret line="5512" column="8" selection-start-line="5512" selection-start-column="8" selection-end-line="5512" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="99" column="49" lean-forward="true" selection-start-line="99" selection-start-column="49" selection-end-line="99" selection-end-column="49" />
+        <state relative-caret-position="181">
+          <caret line="188" column="31" selection-start-line="188" selection-start-column="15" selection-end-line="188" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2018.3/system/python_stubs/-1007583135/builtins.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="4489" column="8" selection-start-line="4489" selection-start-column="8" selection-end-line="4489" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="1134" selection-start-line="1134" selection-end-line="1134" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/inspect.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="78" selection-start-line="78" selection-end-line="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/concurrent/futures/thread.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python39-32/Lib/threading.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="423">
+          <caret line="1438" column="11" lean-forward="true" selection-start-line="1438" selection-start-column="11" selection-end-line="1438" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brick/orm/orm0/peewee 3.15.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="8042" column="67" lean-forward="true" selection-start-line="8042" selection-start-column="67" selection-end-line="8042" selection-end-column="67" />
           <folding>
-            <element signature="e#1054#1153#0" />
-            <element signature="e#2377#3114#0" />
-            <element signature="e#3149#3552#0" />
-            <element signature="e#4091#5399#0" />
-            <element signature="e#6256#7216#0" />
+            <element signature="e#635#665#0" expanded="true" />
+            <element signature="e#182235#182972#0" />
+            <element signature="e#272913#274068#0" />
+            <element signature="e#274101#274504#0" />
+            <element signature="e#274532#275182#0" />
           </folding>
         </state>
       </provider>

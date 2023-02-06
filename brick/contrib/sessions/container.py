@@ -1,9 +1,6 @@
 """Container and Namespace classes"""
 # 该模块实现标准的 errno 系统符号，每一个对应于一个整数，名称和描述借鉴了 linux/include/errno.h
 import errno  # https://www.cnblogs.com/madsnotes/articles/5688008.html
-
-# from ._compat import pickle, anydbm, add_metaclass, PYVER, unicode_text
-
 # import beaker.util as util
 import logging
 import os
@@ -13,11 +10,13 @@ import time
 from brick.contrib.sessions._compat import add_metaclass
 from brick.contrib.sessions.exceptions import CreationAbortedError, MissingCacheParameter
 from brick.contrib.sessions.synchronization import _threading, file_synchronizer, \
-    mutex_synchronizer, NameLock, null_synchronizer
+    NameLock
+
+# from ._compat import pickle, anydbm, add_metaclass, PYVER, unicode_text
 
 try:
-    import dbm as anydbm
-except:
+    import dbm as anydbm  # DBM数据库(dbm.gnu 或 dbm.ndbm)的通用接口
+except ImportError:
     import dumbdbm as anydbm
 
 __all__ = ['Value', 'Container', 'ContainerContext',
@@ -27,6 +26,9 @@ __all__ = ['Value', 'Container', 'ContainerContext',
            'FileNamespaceManager', 'CreationAbortedError']
 
 from brick.contrib.sessions.util import verify_directory, encoded_path, SyncDict, safe_write
+
+# logging.basicConfig( format='%(asctime)s - %(name)s - %(levelname)s - %(lineno)d - %(module)s - %(message)s',
+# level=logging.DEBUG)
 
 logger = logging.getLogger('session.container')
 if logger.isEnabledFor(logging.DEBUG):
@@ -268,11 +270,13 @@ class OpenResourceNamespaceManager(NamespaceManager):
             self.access_lock.release_read_lock()
 
     def acquire_write_lock(self, wait=True, replace=False):
-        #print('acquire_write_lock  self.access_lock:', self.access_lock)
-        r = self.access_lock.acquire_write_lock(wait)#只是加了个锁
+        # print('acquire_write_lock  self.access_lock:', self.access_lock)
+        r = self.access_lock.acquire_write_lock(wait)  # 只是加了个锁
+        # print(r)
         try:
-            if (wait or r):
-                self.open('c', checkcount=True, replace=replace)#self.hash得到一个反序列化对象
+            if wait or r:
+                # dbm  c : 存在不创建，不存在则创建
+                self.open('c', checkcount=True, replace=replace)  # self.hash得到一个反序列化对象
             return r
         except:
             self.access_lock.release_write_lock()
@@ -367,7 +371,9 @@ class Value(object):
             self.namespace.release_read_lock()
 
     def _is_expired(self, storedtime, expiretime):
-        """Return true if this container's value is expired."""
+        """Return true if this container's value is expired.
+        “”“如果此容器的值已过期，则返回true。”“”"""
+
         return (
                 (
                         self.starttime is not None and
@@ -485,6 +491,7 @@ class Value(object):
 
 class AbstractDictionaryNSManager(NamespaceManager):
     """A subclassable NamespaceManager that places data in a dictionary.
+    在字典中放置数据的子类NamespaceManager。
 
     Subclasses should provide a "dictionary" attribute or descriptor
     which returns a dict-like object.   The dictionary will store keys
@@ -693,14 +700,14 @@ class FileNamespaceManager(OpenResourceNamespaceManager):
     def __init__(self, namespace, data_dir=None, file_dir=None, lock_dir=None,
                  digest_filenames=True, **kwargs):
         self.digest_filenames = digest_filenames  # 文件名摘要
-        #print('namespace:',(namespace))
+        # #print('namespace:',(namespace))
         if not file_dir and not data_dir:
             raise MissingCacheParameter("data_dir or file_dir is required")
         elif file_dir:
             self.file_dir = file_dir
         else:
             self.file_dir = data_dir + "/container_file"
-        verify_directory(self.file_dir)#验证并创建目录
+        verify_directory(self.file_dir)  # 验证并创建目录
 
         if not lock_dir and not data_dir:
             raise MissingCacheParameter("data_dir or lock_dir is required")
@@ -711,12 +718,13 @@ class FileNamespaceManager(OpenResourceNamespaceManager):
         verify_directory(self.lock_dir)
         # OpenResourceNamespaceManager.__init__(self, namespace)
         super().__init__(namespace)
+        # 创建文件夹
         self.file = encoded_path(root=self.file_dir,
-                                 identifiers=[self.namespace],
+                                 identifiers=[self.namespace],  # id
                                  extension='.cache',
                                  digest_filenames=self.digest_filenames)
         self.hash = {}
-
+        # print(os.access(self.file, os.F_OK), self.file)
         debug("data file %s", self.file)
 
     def get_access_lock(self):
@@ -726,7 +734,7 @@ class FileNamespaceManager(OpenResourceNamespaceManager):
     def get_creation_lock(self, key):
         identifier = "dbmcontainer/funclock/%s/%s" % (
             self.namespace, key)
-        #print('get cr identifier',identifier)
+        # #print('get cr identifier',identifier)
         return file_synchronizer(
             identifier="dbmcontainer/funclock/%s/%s" % (
                 self.namespace, key
@@ -735,10 +743,11 @@ class FileNamespaceManager(OpenResourceNamespaceManager):
         )
 
     def file_exists(self, file):
-        return os.access(file, os.F_OK)
+        return os.access(file, os.F_OK)  # 测试path是否存在。
 
     def do_open(self, flags, replace):
         if not replace and self.file_exists(self.file):
+            # print('rb')
             try:
                 with open(self.file, 'rb') as fh:
                     # https: // zhuanlan.zhihu.com / p / 265856478
@@ -785,7 +794,8 @@ class FileNamespaceManager(OpenResourceNamespaceManager):
         return self.hash.keys()
 
 
-#### legacy stuff to support the old "Container" class interface
+# legacy stuff to support the old "Container" class interface
+# 支持旧的“容器”类接口的遗留内容
 
 namespace_classes = {}
 
@@ -833,3 +843,7 @@ class DBMContainer(Container):
 
 
 DbmContainer = DBMContainer
+
+if __name__ == '__main__':
+    s = encoded_path('../tmp/sessions/simple/container_file', '123456')
+    print(s)

@@ -2,8 +2,8 @@
 2022-12-01 08:47:27,341 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
 2022-12-01 08:47:39,092 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1
 2022-12-01 08:47:46,963 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
-2022-12-01 08:47:47,419 log_helper.py[line:14] INFO ÒÑ·ÅÈë»º´æ, key: {  managerdbe02c82d061c6a6bc4b4c63238ad291} {value: 1  put_time: 1669855667  expired: 86400}
-2022-12-01 08:47:47,422 log_helper.py[line:14] INFO ÒÑ·ÅÈë»º´æ, key: {  manager_1} {value: <views.models.Manager object at 0x02EA2088>  put_time: 1669855667  expired: 43200}
+2022-12-01 08:47:47,419 log_helper.py[line:14] INFO ï¿½Ñ·ï¿½ï¿½ë»ºï¿½ï¿½, key: {  managerdbe02c82d061c6a6bc4b4c63238ad291} {value: 1  put_time: 1669855667  expired: 86400}
+2022-12-01 08:47:47,422 log_helper.py[line:14] INFO ï¿½Ñ·ï¿½ï¿½ë»ºï¿½ï¿½, key: {  manager_1} {value: <views.models.Manager object at 0x02EA2088>  put_time: 1669855667  expired: 43200}
 2022-12-01 08:47:47,422 log_helper.py[line:14] INFO Exception:('login_error_count_9a6854e18ec8f1b0aa0e1589b47bb8b1',)
 2022-12-01 08:47:48,004 log_helper.py[line:14] INFO url:/api/login1/desk ip:127.0.0.1
 2022-12-01 08:47:48,137 log_helper.py[line:14] INFO url:/api/login1/css/lib/calendar2/pignose.calendar.min.css ip:127.0.0.1
@@ -44,8 +44,8 @@
 2022-12-01 08:47:49,343 log_helper.py[line:14] INFO url:/api/login1/images/avatar/3.jpg ip:127.0.0.1
 2022-12-01 08:51:28,115 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1
 2022-12-01 08:51:35,474 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
-2022-12-01 08:51:35,708 log_helper.py[line:14] INFO ÒÑ·ÅÈë»º´æ, key: {  manager9a296742aace7d96b86897224a484486} {value: 1  put_time: 1669855895  expired: 86400}
-2022-12-01 08:51:35,710 log_helper.py[line:14] INFO ÒÑ·ÅÈë»º´æ, key: {  manager_1} {value: <views.models.Manager object at 0x033CF7A8>  put_time: 1669855895  expired: 43200}
+2022-12-01 08:51:35,708 log_helper.py[line:14] INFO ï¿½Ñ·ï¿½ï¿½ë»ºï¿½ï¿½, key: {  manager9a296742aace7d96b86897224a484486} {value: 1  put_time: 1669855895  expired: 86400}
+2022-12-01 08:51:35,710 log_helper.py[line:14] INFO ï¿½Ñ·ï¿½ï¿½ë»ºï¿½ï¿½, key: {  manager_1} {value: <views.models.Manager object at 0x033CF7A8>  put_time: 1669855895  expired: 43200}
 2022-12-01 08:51:35,710 log_helper.py[line:14] INFO Exception:('login_error_count_9a6854e18ec8f1b0aa0e1589b47bb8b1',)
 2022-12-01 08:51:35,773 log_helper.py[line:14] INFO url:/api/login1/desk ip:127.0.0.1
 2022-12-01 08:51:35,918 log_helper.py[line:14] INFO url:/api/login1/css/lib/calendar2/pignose.calendar.min.css ip:127.0.0.1
@@ -92,3 +92,296 @@
 2022-12-01 08:51:37,671 log_helper.py[line:14] INFO url:/api/login1/images/avatar/2.jpg ip:127.0.0.1
 2022-12-01 08:51:37,687 log_helper.py[line:14] INFO url:/api/login1/images/avatar/3.jpg ip:127.0.0.1
 2022-12-01 08:51:55,028 log_helper.py[line:14] INFO url:/api/login1/chartjs.html ip:127.0.0.1
+2022-12-05 20:57:47,316 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2022-12-05 20:57:47,332 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2022-12-05 20:58:07,704 log_helper.py[line:14] INFO url:/api/logion ip:127.0.0.1
+2022-12-05 21:02:15,797 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2022-12-05 21:02:15,808 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2022-12-05 21:02:23,510 log_helper.py[line:14] INFO url:/api/logion ip:127.0.0.1
+2022-12-05 21:02:29,956 log_helper.py[line:14] INFO url:/api/login ip:127.0.0.1
+2022-12-05 21:02:34,081 log_helper.py[line:14] INFO url:/api/login1 ip:127.0.0.1
+2022-12-05 21:02:39,871 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1
+2022-12-05 21:02:47,728 log_helper.py[line:14] INFO url:/api/login/ ip:127.0.0.1
+2022-12-05 21:02:53,484 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1
+2022-12-05 21:03:25,005 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
+2022-12-05 21:03:25,139 log_helper.py[line:14] INFO ï¿½Ñ·ï¿½ï¿½ë»ºï¿½ï¿½, key: {  manager36c7306de47b4bf1d1e3b6d5cdf4d95c} {value: 1  put_time: 1670245405  expired: 86400}
+2022-12-05 21:03:25,139 log_helper.py[line:14] INFO ï¿½Ñ·ï¿½ï¿½ë»ºï¿½ï¿½, key: {  manager_1} {value: <views.models.Manager object at 0x0000023AE4124B20>  put_time: 1670245405  expired: 43200}
+2022-12-05 21:03:25,139 log_helper.py[line:14] INFO Exception:('login_error_count_9a6854e18ec8f1b0aa0e1589b47bb8b1',)
+2022-12-05 21:04:02,499 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1
+2022-12-05 21:04:02,507 log_helper.py[line:14] INFO url:/api/login1/desk ip:127.0.0.1
+2022-12-05 21:04:02,651 log_helper.py[line:14] INFO url:/api/login1/css/lib/calendar2/pignose.calendar.min.css ip:127.0.0.1
+2022-12-05 21:04:02,691 log_helper.py[line:14] INFO url:/api/login1/css/lib/chartist/chartist.min.css ip:127.0.0.1
+2022-12-05 21:04:02,707 log_helper.py[line:14] INFO url:/api/login1/css/lib/font-awesome.min.css ip:127.0.0.1
+2022-12-05 21:04:02,771 log_helper.py[line:14] INFO url:/api/login1/css/lib/themify-icons.css ip:127.0.0.1
+2022-12-05 21:04:02,787 log_helper.py[line:14] INFO url:/api/login1/css/lib/owl.carousel.min.css ip:127.0.0.1
+2022-12-05 21:04:02,807 log_helper.py[line:14] INFO url:/api/login1/css/lib/owl.theme.default.min.css ip:127.0.0.1
+2022-12-05 21:04:02,821 log_helper.py[line:14] INFO url:/api/login1/css/lib/weather-icons.css ip:127.0.0.1
+2022-12-05 21:04:02,836 log_helper.py[line:14] INFO url:/api/login1/css/lib/menubar/sidebar.css ip:127.0.0.1
+2022-12-05 21:04:02,843 log_helper.py[line:14] INFO url:/api/login1/css/lib/bootstrap.min.css ip:127.0.0.1
+2022-12-05 21:04:02,859 log_helper.py[line:14] INFO url:/api/login1/css/lib/helper.css ip:127.0.0.1
+2022-12-05 21:04:02,867 log_helper.py[line:14] INFO url:/api/login1/css/style.css ip:127.0.0.1
+2022-12-05 21:04:02,883 log_helper.py[line:14] INFO url:/api/login1/js/lib/jquery.min.js ip:127.0.0.1
+2022-12-05 21:04:02,891 log_helper.py[line:14] INFO url:/api/login1/js/lib/jquery.nanoscroller.min.js ip:127.0.0.1
+2022-12-05 21:04:02,899 log_helper.py[line:14] INFO url:/api/login1/js/lib/menubar/sidebar.js ip:127.0.0.1
+2022-12-05 21:04:02,971 log_helper.py[line:14] INFO url:/api/login1/js/lib/preloader/pace.min.js ip:127.0.0.1
+2022-12-05 21:04:02,985 log_helper.py[line:14] INFO url:/api/login1/js/lib/bootstrap.min.js ip:127.0.0.1
+2022-12-05 21:04:02,997 log_helper.py[line:14] INFO url:/api/login1/js/scripts.js ip:127.0.0.1
+2022-12-05 21:04:03,009 log_helper.py[line:14] INFO url:/api/login1/js/lib/calendar-2/moment.latest.min.js ip:127.0.0.1
+2022-12-05 21:04:03,018 log_helper.py[line:14] INFO url:/api/login1/js/lib/calendar-2/pignose.calendar.min.js ip:127.0.0.1
+2022-12-05 21:04:03,026 log_helper.py[line:14] INFO url:/api/login1/js/lib/calendar-2/pignose.init.js ip:127.0.0.1
+2022-12-05 21:04:03,042 log_helper.py[line:14] INFO url:/api/login1/js/lib/weather/jquery.simpleWeather.min.js ip:127.0.0.1
+2022-12-05 21:04:03,050 log_helper.py[line:14] INFO url:/api/login1/js/lib/weather/weather-init.js ip:127.0.0.1
+2022-12-05 21:04:03,066 log_helper.py[line:14] INFO url:/api/login1/js/lib/circle-progress/circle-progress.min.js ip:127.0.0.1
+2022-12-05 21:04:03,074 log_helper.py[line:14] INFO url:/api/login1/js/lib/circle-progress/circle-progress-init.js ip:127.0.0.1
+2022-12-05 21:04:03,082 log_helper.py[line:14] INFO url:/api/login1/js/lib/chartist/chartist.min.js ip:127.0.0.1
+2022-12-05 21:04:03,098 log_helper.py[line:14] INFO url:/api/login1/js/lib/sparklinechart/jquery.sparkline.min.js ip:127.0.0.1
+2022-12-05 21:04:03,106 log_helper.py[line:14] INFO url:/api/login1/js/lib/sparklinechart/sparkline.init.js ip:127.0.0.1
+2022-12-05 21:04:03,122 log_helper.py[line:14] INFO url:/api/login1/js/lib/owl-carousel/owl.carousel.min.js ip:127.0.0.1
+2022-12-05 21:04:03,130 log_helper.py[line:14] INFO url:/api/login1/js/lib/owl-carousel/owl.carousel-init.js ip:127.0.0.1
+2022-12-05 21:04:03,138 log_helper.py[line:14] INFO url:/api/login1/js/dashboard2.js ip:127.0.0.1
+2022-12-05 21:04:03,146 log_helper.py[line:14] INFO url:/api/login1/images/avatar/3.jpg ip:127.0.0.1
+2022-12-05 21:04:03,162 log_helper.py[line:14] INFO url:/api/login1/images/avatar/1.jpg ip:127.0.0.1
+2022-12-05 21:04:03,170 log_helper.py[line:14] INFO url:/api/login1/images/avatar/2.jpg ip:127.0.0.1
+2022-12-05 21:28:27,673 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2022-12-05 21:28:27,681 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2022-12-05 21:28:27,697 log_helper.py[line:25] INFO ("name 'convert_helper' is not defined",)
+Traceback (most recent call last):
+  File "D:\mcj\python\mysite_diy\brick\contrib\except_helper.py", line 29, in wrapper
+    return func(*args, **kwargs)
+  File "D:\mcj\python\mysite_diy\views\product.py", line 21, in callback
+    product_class_id = convert_helper.to_int0(web_helper.get_query('product_class_id', 'ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½id', is_check_null=False))
+NameError: name 'convert_helper' is not defined
+
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½Õ»ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½main.py(<module>:251)->wsgiapp.py(server_run:622)->baseserver.py(run:30)->socketserver.py(serve_forever:237)->socketserver.py(_handle_request_noblock:316)->socketserver.py(process_request:347)->socketserver.py(finish_request:360)->socketserver.py(__init__:747)->simple_server.py(handle:134)->handlers.py(run:137)->middleware.py(__call__:188)->wsgiapp.py(__call__:335)->wsgiapp.py(wsgi_app:312)->wsgiapp.py(_handle:212)->except_helper.py(wrapper:37)->log_helper.py(error:22)->
+
+2022-12-05 21:28:27,705 log_helper.py[line:26] ERROR ("name 'convert_helper' is not defined",)
+Traceback (most recent call last):
+  File "D:\mcj\python\mysite_diy\brick\contrib\except_helper.py", line 29, in wrapper
+    return func(*args, **kwargs)
+  File "D:\mcj\python\mysite_diy\views\product.py", line 21, in callback
+    product_class_id = convert_helper.to_int0(web_helper.get_query('product_class_id', 'ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½id', is_check_null=False))
+NameError: name 'convert_helper' is not defined
+
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½Õ»ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½main.py(<module>:251)->wsgiapp.py(server_run:622)->baseserver.py(run:30)->socketserver.py(serve_forever:237)->socketserver.py(_handle_request_noblock:316)->socketserver.py(process_request:347)->socketserver.py(finish_request:360)->socketserver.py(__init__:747)->simple_server.py(handle:134)->handlers.py(run:137)->middleware.py(__call__:188)->wsgiapp.py(__call__:335)->wsgiapp.py(wsgi_app:312)->wsgiapp.py(_handle:212)->except_helper.py(wrapper:37)->log_helper.py(error:22)->
+
+2022-12-05 21:28:35,655 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1
+2022-12-05 21:28:50,493 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
+2022-12-05 21:28:50,586 log_helper.py[line:14] INFO ï¿½Ñ·ï¿½ï¿½ë»ºï¿½ï¿½, key: {  managere2c038c4f88094f9d64475f41dac94d2} {value: 1  put_time: 1670246930  expired: 86400}
+2022-12-05 21:28:50,586 log_helper.py[line:14] INFO ï¿½Ñ·ï¿½ï¿½ë»ºï¿½ï¿½, key: {  manager_1} {value: <views.models.Manager object at 0x000001B5F8D80C40>  put_time: 1670246930  expired: 43200}
+2022-12-05 21:28:50,586 log_helper.py[line:14] INFO Exception:('login_error_count_9a6854e18ec8f1b0aa0e1589b47bb8b1',)
+2022-12-05 21:28:50,617 log_helper.py[line:14] INFO url:/api/login1/desk ip:127.0.0.1
+2022-12-05 21:28:50,688 log_helper.py[line:14] INFO url:/api/login1/css/lib/calendar2/pignose.calendar.min.css ip:127.0.0.1
+2022-12-05 21:28:50,704 log_helper.py[line:14] INFO url:/api/login1/css/lib/chartist/chartist.min.css ip:127.0.0.1
+2022-12-05 21:28:50,720 log_helper.py[line:14] INFO url:/api/login1/css/lib/font-awesome.min.css ip:127.0.0.1
+2022-12-05 21:28:50,728 log_helper.py[line:14] INFO url:/api/login1/css/lib/themify-icons.css ip:127.0.0.1
+2022-12-05 21:28:50,744 log_helper.py[line:14] INFO url:/api/login1/css/lib/owl.carousel.min.css ip:127.0.0.1
+2022-12-05 21:28:50,752 log_helper.py[line:14] INFO url:/api/login1/css/lib/owl.theme.default.min.css ip:127.0.0.1
+2022-12-05 21:28:50,768 log_helper.py[line:14] INFO url:/api/login1/css/lib/weather-icons.css ip:127.0.0.1
+2022-12-05 21:28:50,776 log_helper.py[line:14] INFO url:/api/login1/css/lib/menubar/sidebar.css ip:127.0.0.1
+2022-12-05 21:28:50,784 log_helper.py[line:14] INFO url:/api/login1/css/lib/bootstrap.min.css ip:127.0.0.1
+2022-12-05 21:28:50,800 log_helper.py[line:14] INFO url:/api/login1/css/lib/helper.css ip:127.0.0.1
+2022-12-05 21:28:50,808 log_helper.py[line:14] INFO url:/api/login1/css/style.css ip:127.0.0.1
+2022-12-05 21:28:50,824 log_helper.py[line:14] INFO url:/api/login1/js/lib/jquery.min.js ip:127.0.0.1
+2022-12-05 21:28:50,832 log_helper.py[line:14] INFO url:/api/login1/js/lib/jquery.nanoscroller.min.js ip:127.0.0.1
+2022-12-05 21:28:50,848 log_helper.py[line:14] INFO url:/api/login1/js/lib/menubar/sidebar.js ip:127.0.0.1
+2022-12-05 21:28:50,856 log_helper.py[line:14] INFO url:/api/login1/js/lib/preloader/pace.min.js ip:127.0.0.1
+2022-12-05 21:28:50,872 log_helper.py[line:14] INFO url:/api/login1/js/lib/bootstrap.min.js ip:127.0.0.1
+2022-12-05 21:28:50,888 log_helper.py[line:14] INFO url:/api/login1/js/scripts.js ip:127.0.0.1
+2022-12-05 21:28:50,896 log_helper.py[line:14] INFO url:/api/login1/js/lib/calendar-2/moment.latest.min.js ip:127.0.0.1
+2022-12-05 21:28:50,920 log_helper.py[line:14] INFO url:/api/login1/js/lib/calendar-2/pignose.calendar.min.js ip:127.0.0.1
+2022-12-05 21:28:50,928 log_helper.py[line:14] INFO url:/api/login1/js/lib/calendar-2/pignose.init.js ip:127.0.0.1
+2022-12-05 21:28:50,944 log_helper.py[line:14] INFO url:/api/login1/js/lib/weather/jquery.simpleWeather.min.js ip:127.0.0.1
+2022-12-05 21:28:50,952 log_helper.py[line:14] INFO url:/api/login1/js/lib/weather/weather-init.js ip:127.0.0.1
+2022-12-05 21:28:50,968 log_helper.py[line:14] INFO url:/api/login1/js/lib/circle-progress/circle-progress.min.js ip:127.0.0.1
+2022-12-05 21:28:50,976 log_helper.py[line:14] INFO url:/api/login1/js/lib/circle-progress/circle-progress-init.js ip:127.0.0.1
+2022-12-05 21:28:50,992 log_helper.py[line:14] INFO url:/api/login1/js/lib/chartist/chartist.min.js ip:127.0.0.1
+2022-12-05 21:28:51,000 log_helper.py[line:14] INFO url:/api/login1/js/lib/sparklinechart/jquery.sparkline.min.js ip:127.0.0.1
+2022-12-05 21:28:51,008 log_helper.py[line:14] INFO url:/api/login1/js/lib/sparklinechart/sparkline.init.js ip:127.0.0.1
+2022-12-05 21:28:51,024 log_helper.py[line:14] INFO url:/api/login1/js/lib/owl-carousel/owl.carousel.min.js ip:127.0.0.1
+2022-12-05 21:28:51,032 log_helper.py[line:14] INFO url:/api/login1/js/lib/owl-carousel/owl.carousel-init.js ip:127.0.0.1
+2022-12-05 21:28:51,048 log_helper.py[line:14] INFO url:/api/login1/js/dashboard2.js ip:127.0.0.1
+2022-12-05 21:28:51,056 log_helper.py[line:14] INFO url:/api/login1/images/avatar/3.jpg ip:127.0.0.1
+2022-12-05 21:28:51,064 log_helper.py[line:14] INFO url:/api/login1/images/avatar/1.jpg ip:127.0.0.1
+2022-12-05 21:28:51,080 log_helper.py[line:14] INFO url:/api/login1/images/avatar/2.jpg ip:127.0.0.1
+2022-12-05 21:31:12,890 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1
+2022-12-05 21:31:12,898 log_helper.py[line:14] INFO url:/api/login1/desk ip:127.0.0.1
+2022-12-26 11:57:09,653 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2022-12-26 11:57:09,661 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2022-12-26 11:57:27,654 log_helper.py[line:14] INFO url:/api/logion ip:127.0.0.1
+2022-12-26 11:57:27,703 log_helper.py[line:14] INFO url:/api/logion ip:127.0.0.1
+2022-12-26 11:57:45,042 log_helper.py[line:14] INFO url:/api/logion ip:127.0.0.1
+2022-12-26 11:57:45,052 log_helper.py[line:14] INFO url:/api/logion/ ip:127.0.0.1
+2022-12-26 11:57:52,985 log_helper.py[line:14] INFO url:/api/logio1 ip:127.0.0.1
+2022-12-26 11:58:12,566 log_helper.py[line:14] INFO url:/api/logion1 ip:127.0.0.1
+2022-12-26 11:58:20,387 log_helper.py[line:14] INFO url:/api/logion ip:127.0.0.1
+2022-12-26 11:58:26,564 log_helper.py[line:14] INFO url:/api/logion1/ ip:127.0.0.1
+2022-12-26 12:01:27,563 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1
+2022-12-26 12:01:41,572 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
+2022-12-26 12:01:48,154 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
+2022-12-26 12:01:58,184 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
+2022-12-26 12:01:59,052 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
+2022-12-26 12:01:59,242 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
+2022-12-26 12:01:59,416 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
+2022-12-26 12:01:59,646 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
+2022-12-26 12:02:01,222 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
+2022-12-26 12:02:01,418 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
+2022-12-26 12:02:01,624 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
+2022-12-26 12:03:03,893 log_helper.py[line:14] INFO url:/api/login/ ip:127.0.0.1
+2022-12-26 12:03:03,956 log_helper.py[line:14] INFO url:/api/login/ ip:127.0.0.1
+2022-12-26 12:03:32,877 log_helper.py[line:14] INFO url:/api/login/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456'], 'verify': ['dfgr']}}
+2022-12-26 12:04:51,618 log_helper.py[line:14] INFO url:/api/login/ ip:127.0.0.1
+2022-12-26 12:04:51,618 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1
+2022-12-26 12:05:59,714 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1
+2023-01-08 14:45:46,880 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-08 14:45:46,912 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-08 14:51:30,336 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-08 14:51:30,360 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-08 15:55:12,850 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-08 15:55:12,891 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-08 15:56:28,766 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1
+2023-01-08 16:05:20,522 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
+2023-01-08 16:05:25,129 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
+2023-01-08 16:06:07,903 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
+2023-01-08 16:06:09,293 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
+2023-01-08 16:06:09,482 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
+2023-01-08 16:06:09,672 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
+2023-01-08 16:06:09,879 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
+2023-01-08 16:06:12,301 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
+2023-01-08 16:07:32,973 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-08 16:07:32,989 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-08 16:21:13,547 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1
+2023-01-08 16:41:34,817 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
+2023-01-08 16:46:56,597 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1
+2023-01-08 16:46:56,645 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1
+2023-01-08 16:47:05,418 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
+2023-01-08 16:57:07,569 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
+2023-01-08 16:57:11,268 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
+2023-01-08 17:06:23,840 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
+2023-01-08 17:07:09,418 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
+2023-01-08 17:07:44,410 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
+2023-01-08 17:08:32,621 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1 params(post):{'dict': {'_method': ['put'], 'username': ['admin'], 'password': ['123456']}}
+2023-01-09 22:59:18,500 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-09 22:59:18,503 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-10 10:17:00,820 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-10 10:17:00,836 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-10 10:55:33,641 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-10 10:55:33,687 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-10 10:58:47,083 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-10 10:58:47,091 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-10 10:59:47,201 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-10 10:59:47,217 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-10 11:01:25,022 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-10 11:01:25,045 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-10 11:54:29,847 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-10 11:54:29,847 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-10 11:56:57,518 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-10 11:56:57,526 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-10 22:34:08,556 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-10 22:34:08,561 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-11 10:53:09,841 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-11 10:53:09,849 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-11 10:54:09,297 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-11 10:54:09,305 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-11 10:57:14,287 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-11 10:57:14,391 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-11 11:02:54,033 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-11 11:02:54,049 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-11 11:03:39,108 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-11 11:03:39,124 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-11 11:21:38,841 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-11 11:21:38,857 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-11 11:22:36,044 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-11 11:24:56,087 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-11 11:25:32,029 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-11 11:27:32,069 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-11 11:27:32,093 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-11 11:31:01,125 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-11 11:31:01,155 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-13 17:50:25,872 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-13 17:50:25,880 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-13 17:51:44,439 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1
+2023-01-13 17:53:34,586 log_helper.py[line:14] INFO url:/api/login1/ ip:127.0.0.1
+2023-01-13 17:53:35,002 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-13 17:53:35,018 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-13 18:46:19,741 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-13 18:46:19,821 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-13 18:47:43,772 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-13 18:47:43,804 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-13 18:52:23,828 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-13 18:52:23,836 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-13 19:08:55,957 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-13 19:08:55,973 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-13 19:10:02,690 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-13 19:10:02,706 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-13 19:11:57,750 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-13 19:11:57,766 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-13 19:13:19,426 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-13 19:13:19,442 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-13 21:21:17,743 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-13 21:21:17,751 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-13 21:21:22,519 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-13 21:21:22,527 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-13 21:25:39,255 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-13 21:25:39,255 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-13 21:28:40,534 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-13 21:28:40,541 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-13 21:46:57,403 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-13 21:46:57,404 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-13 21:46:57,415 log_helper.py[line:25] INFO ("name 'convert_helper' is not defined",)
+Traceback (most recent call last):
+  File "D:\mcj\python\mysite_diy\brick\contrib\except_helper.py", line 29, in wrapper
+    return func(*args, **kwargs)
+  File "D:\mcj\python\mysite_diy\views\product.py", line 21, in callback
+    product_class_id = convert_helper.to_int0(web_helper.get_query('product_class_id', '²úÆ··ÖÀàid', is_check_null=False))
+NameError: name 'convert_helper' is not defined
+
+³ÌÐòµ÷ÓÃ¶ÑÕ»µÄÈÕÖ¾£ºmain.py(<module>:270)->wsgiapp.py(server_run:620)->baseserver.py(run:30)->socketserver.py(serve_forever:237)->socketserver.py(_handle_request_noblock:316)->socketserver.py(process_request:347)->socketserver.py(finish_request:360)->socketserver.py(__init__:747)->simple_server.py(handle:134)->handlers.py(run:137)->middleware.py(__call__:193)->wsgiapp.py(__call__:333)->wsgiapp.py(wsgi_app:306)->wsgiapp.py(_handle:206)->except_helper.py(wrapper:37)->log_helper.py(error:22)->
+
+2023-01-13 21:46:57,416 log_helper.py[line:26] ERROR ("name 'convert_helper' is not defined",)
+Traceback (most recent call last):
+  File "D:\mcj\python\mysite_diy\brick\contrib\except_helper.py", line 29, in wrapper
+    return func(*args, **kwargs)
+  File "D:\mcj\python\mysite_diy\views\product.py", line 21, in callback
+    product_class_id = convert_helper.to_int0(web_helper.get_query('product_class_id', '²úÆ··ÖÀàid', is_check_null=False))
+NameError: name 'convert_helper' is not defined
+
+³ÌÐòµ÷ÓÃ¶ÑÕ»µÄÈÕÖ¾£ºmain.py(<module>:270)->wsgiapp.py(server_run:620)->baseserver.py(run:30)->socketserver.py(serve_forever:237)->socketserver.py(_handle_request_noblock:316)->socketserver.py(process_request:347)->socketserver.py(finish_request:360)->socketserver.py(__init__:747)->simple_server.py(handle:134)->handlers.py(run:137)->middleware.py(__call__:193)->wsgiapp.py(__call__:333)->wsgiapp.py(wsgi_app:306)->wsgiapp.py(_handle:206)->except_helper.py(wrapper:37)->log_helper.py(error:22)->
+
+2023-01-13 21:54:08,968 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-13 21:54:08,973 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-13 22:42:04,892 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-13 22:42:04,894 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-14 13:35:10,551 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-14 13:35:10,559 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-14 13:35:23,274 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-14 13:35:23,298 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-14 13:36:11,648 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-14 13:36:11,769 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-14 13:37:49,005 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-14 13:37:49,017 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-14 13:38:10,305 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-14 13:38:10,321 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-14 13:45:38,559 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-14 13:45:38,575 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-14 13:47:19,397 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-14 13:47:19,405 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-14 13:51:55,066 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-14 13:51:55,074 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-14 13:52:40,717 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-14 13:52:40,733 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-14 14:00:53,532 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-14 14:00:53,556 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-14 14:11:21,710 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-14 14:11:21,718 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-14 14:11:55,198 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-14 14:11:55,206 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-14 14:17:02,608 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-14 14:17:02,632 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-14 14:18:33,674 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-14 14:18:33,682 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-14 14:18:55,918 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-14 14:18:55,934 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-14 17:16:54,911 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-14 17:16:54,927 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1
+2023-01-14 18:10:44,806 log_helper.py[line:14] INFO url:/api/about/ ip:127.0.0.1
+2023-01-14 18:10:44,821 log_helper.py[line:14] INFO url:/api/product/ ip:127.0.0.1 params(get):rows=4&page=1

@@ -6,12 +6,14 @@
 # @File    : response.py
 # @Project : mysite_diy
 # @Software: PyCharm
-
+import decimal
 import email
+import json
 import time
+import uuid
+from datetime import date, datetime, timedelta
 from http import client
 from http.cookies import SimpleCookie
-from datetime import date, datetime
 
 from brick.core.httphelper.util import HeaderDict, _hkey, _hval, HeaderProperty, local_property
 
@@ -63,6 +65,8 @@ class BaseResponse(object):
         self._headers = {}
         self.body = body
         self.status = status or self.default_status
+        # print(self.default_status)
+        # print('self.status',self.status)
         if headers:
             if isinstance(headers, dict):
                 headers = headers.items()
@@ -210,12 +214,13 @@ class LocalResponse(BaseResponse):
     _headers = local_property()
     body = local_property()
 
+
 Response = BaseResponse
 response = LocalResponse()
 
 
 class HTTPResponse(BaseResponse, Exception):
-    def __init__(self, body='', status=None, headers=None, **more_headers):
+    def __init__(self, body=b'', status=None, headers=None, **more_headers):
         super(HTTPResponse, self).__init__(body, status, headers, **more_headers)
 
     def apply(self, response):
@@ -234,3 +239,95 @@ class HTTPError(HTTPResponse):
         self.exception = exception
         self.traceback = traceback
         super(HTTPError, self).__init__(body, status, **options)
+
+
+def _get_duration_components(duration):
+    days = duration.days
+    seconds = duration.seconds
+    microseconds = duration.microseconds
+
+    minutes = seconds // 60
+    seconds = seconds % 60
+
+    hours = minutes // 60
+    minutes = minutes % 60
+
+    return days, hours, minutes, seconds, microseconds
+
+
+def duration_iso_string(duration):
+    if duration < timedelta(0):
+        sign = '-'
+        duration *= -1
+    else:
+        sign = ''
+
+    days, hours, minutes, seconds, microseconds = _get_duration_components(duration)
+    ms = '.{:06d}'.format(microseconds) if microseconds else ""
+    return '{}P{}DT{:02d}H{:02d}M{:02d}{}S'.format(sign, days, hours, minutes, seconds, ms)
+
+class Promise:
+    """
+    Base class for the proxy class created in the closure of the lazy function.
+    It's used to recognize promises in code.
+    """
+    pass
+
+class BrickJSONEncoder(json.JSONEncoder):
+    """
+    JSONEncoder subclass that knows how to encode date/time, decimal types, and
+    UUIDs.
+    """
+
+    def default(self, o):
+        # See "Date Time String Format" in the ECMA-262 specification.
+        if isinstance(o, datetime):
+            r = o.isoformat()
+            if o.microsecond:
+                r = r[:23] + r[26:]
+            if r.endswith('+00:00'):
+                r = r[:-6] + 'Z'
+            return r
+        elif isinstance(o, date):
+            return o.isoformat()
+        elif isinstance(o, time):
+            if o.utcoffset() is not None:
+                raise ValueError("JSON can't represent timezone-aware times.")
+            r = o.isoformat()
+            if o.microsecond:
+                r = r[:12]
+            return r
+        elif isinstance(o, timedelta):
+            return duration_iso_string(o)
+        elif isinstance(o, (decimal.Decimal, uuid.UUID, Promise)):
+            return str(o)
+        else:
+            return super().default(o)
+
+
+class JsonResponse(HTTPResponse):
+    """
+    An HTTP response class that consumes data to be serialized to JSON.
+
+    :param data: Data to be dumped into json. By default only ``dict`` objects
+      are allowed to be passed due to a security flaw before EcmaScript 5. See
+      the ``safe`` parameter for more information.
+    :param encoder: Should be a json encoder class. Defaults to
+      ``django.core.serializers.json.DjangoJSONEncoder``.
+    :param safe: Controls if only ``dict`` objects may be serialized. Defaults
+      to ``True``.
+    :param json_dumps_params: A dictionary of kwargs passed to json.dumps().
+    """
+
+    def __init__(self, data, encoder=BrickJSONEncoder, safe=True,
+                 json_dumps_params=None, **kwargs):
+        if safe and not isinstance(data, dict):
+            raise TypeError(
+                'In order to allow non-dict objects to be serialized set the '
+                'safe parameter to False.'
+            )
+        if json_dumps_params is None:
+            json_dumps_params = {}
+        kwargs.setdefault('content_type', 'application/json')
+        data = json.dumps(data, cls=encoder, **json_dumps_params)
+        super().__init__(body=data, **kwargs)

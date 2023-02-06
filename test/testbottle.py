@@ -2357,9 +2357,9 @@ class ConfigDict(dict):
 
 
            >>> c = ConfigDict()
-           >>> c.load_module('config')
+           >>> c.load('config')
            {DEBUG: True, 'SQLITE.DB': 'memory'}
-           >>> c.load_module("config", False)
+           >>> c.load("config", False)
            {'DEBUG': True, 'SQLITE': {'DB': 'memory'}}
 
            :param squash: If true (default), dictionary values are assumed to

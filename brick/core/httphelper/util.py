@@ -7,7 +7,6 @@
 # @Project : mysite_diy
 # @Software: PyCharm
 import base64
-import functools
 import hashlib
 import hmac
 import os
@@ -16,14 +15,20 @@ import re
 import threading
 from collections.abc import MutableMapping
 from unicodedata import normalize
-try: from simplejson import dumps as json_dumps, loads as json_lds
-except ImportError: # pragma: no cover
-    try: from json import dumps as json_dumps, loads as json_lds
+
+try:
+    from simplejson import dumps as json_dumps, loads as json_lds
+except ImportError:  # pragma: no cover
+    try:
+        from json import dumps as json_dumps, loads as json_lds
     except ImportError:
-        try: from django.utils.simplejson import dumps as json_dumps, loads as json_lds
+        try:
+            from django.utils.simplejson import dumps as json_dumps, loads as json_lds
         except ImportError:
             def json_dumps(data):
                 raise ImportError("JSON support requires Python 2.6 or simplejson.")
+
+
             json_lds = json_dumps
 
 from brick.utils.cachehelper import cached_property

@@ -5,7 +5,6 @@ as well as a name-based mutex which locks within an application
 based on a string name.
 
 """
-import errno
 import os
 import sys
 import tempfile
@@ -44,7 +43,8 @@ class NameLock(object):
 
     Multiple threads can get a reference to the same RLock based on the
     name alone, and synchronize operations related to that name.
-
+    基于名称存储的RLock对象的代理注册表。
+    多个线程可以基于并同步与该名称相关的操作。
     """
     locks = WeakValuedRegistry()
 
@@ -76,29 +76,49 @@ _synchronizers = WeakValuedRegistry()
 
 
 def _synchronizer(identifier, cls, **kwargs):
-    #print('_synchronizer identifier:',identifier)
+    """
+    同步器
+    :param identifier:
+    :param cls:
+    :param kwargs:
+    :return:
+    """
+    # print('_synchronizer identifier:',identifier)
     return _synchronizers.sync_get((identifier, cls), cls, identifier, **kwargs)
 
 
 def file_synchronizer(identifier, **kwargs):
+    """
+    文件同步 标识符
+    @param identifier:标识符
+    @param kwargs:
+    @return:
+    """
     if not has_flock or 'lock_dir' not in kwargs:
-        #print('mutex')
-        #print('file_synchronizer identifier:', identifier)
-        #print('**kwargs:',kwargs)
+        # print('mutex')
+        # print('file_synchronizer identifier:', identifier)
+        # print('**kwargs:',kwargs)
         return mutex_synchronizer(identifier)
     else:
-        #print('_synchronizer')
+        # print('_synchronizer')
         return _synchronizer(identifier, FileSynchronizer, **kwargs)
 
 
 def mutex_synchronizer(identifier, **kwargs):
+    """
+    互斥同步器
+    :param identifier:
+    :param kwargs:
+    :return:
+    """
     return _synchronizer(identifier, ConditionSynchronizer, **kwargs)
 
 
 class null_synchronizer(object):
     """A 'null' synchronizer, which provides the :class:`.SynchronizerImpl` interface
     without any locking.
-
+    一个‘null’同步器，它提供：class:`.SynchronizerImpl`接口
+    没有任何锁定。
     """
 
     def acquire_write_lock(self, wait=True):
@@ -130,7 +150,7 @@ class SynchronizerImpl(object):
         __slots__ = 'reentrantcount', 'writing', 'reading'
 
         def __init__(self):
-            self.reentrantcount = 0
+            self.reentrantcount = 0  # 重入计数
             self.writing = False
             self.reading = False
 
@@ -140,7 +160,7 @@ class SynchronizerImpl(object):
             self._state.put(state)
             return state
         else:
-            #print('self._state.get：',self._state.get())
+            # print('self._state.get：',self._state.get())
             return self._state.get()
 
     state = property(state)
@@ -199,7 +219,7 @@ class SynchronizerImpl(object):
 
         if state.reentrantcount == 0:
             x = self.do_acquire_write_lock(wait)
-            if (wait or x):
+            if wait or x:
                 state.reentrantcount += 1
                 state.writing = True
             return x
@@ -232,7 +252,7 @@ class FileSynchronizer(SynchronizerImpl):
         self._filedescriptor = ThreadLocal()
 
         if lock_dir is None:
-            lock_dir = tempfile.gettempdir()
+            lock_dir = tempfile.gettempdir()  # 返回保存临时文件的文件夹路径
         else:
             lock_dir = lock_dir
 
@@ -242,6 +262,7 @@ class FileSynchronizer(SynchronizerImpl):
             extension='.lock'
         )
         self.lock_dir = os.path.dirname(self.filename)
+        print(' self.lock_dir', self.lock_dir)
 
     # 语法：os.path.dirname(path)  功能：去掉文件名，返回目录
 
@@ -263,9 +284,11 @@ class FileSynchronizer(SynchronizerImpl):
         return filedescriptor
 
     def do_acquire_read_lock(self, wait):
-        filedescriptor = self._open(os.O_CREAT | os.O_RDONLY)
+        filedescriptor = self._open(os.O_RDONLY)  # os.O_CREAT: 创建并打开一个新文件os.O_CREAT |
+        print('filedescriptor ',filedescriptor)
         if not wait:
             try:
+                # 文件只可以读
                 fcntl.flock(filedescriptor, fcntl.LOCK_SH | fcntl.LOCK_NB)
                 return True
             except IOError:
@@ -278,6 +301,7 @@ class FileSynchronizer(SynchronizerImpl):
 
     def do_acquire_write_lock(self, wait):
         filedescriptor = self._open(os.O_CREAT | os.O_WRONLY)
+        print('filedescriptor ', filedescriptor)
         if not wait:
             try:
                 fcntl.flock(filedescriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
@@ -329,7 +353,7 @@ class ConditionSynchronizer(SynchronizerImpl):
         # 由Condition的__init__方法可知, 它的底层也是维护了一个RLock锁
 
     def do_acquire_read_lock(self, wait=True):
-        self.condition.acquire()#获取底层锁。此方法调用底层锁上的相应方法;返回值是该方法返回的任何值。
+        self.condition.acquire()  # 获取底层锁。此方法调用底层锁上的相应方法;返回值是该方法返回的任何值。
         try:
             # see if a synchronous operation is waiting to start
             # or is already running, in which case we wait (or just

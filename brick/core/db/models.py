@@ -400,8 +400,8 @@ class Model(metaclass=ModelMetaclass):
 
     @classmethod
     def get(cls, *query, **filters):
-        sq = cls.select()
-        # sq = cls.select().naive()
+        # sq = cls.select()
+        sq = cls.select().naive()
         if query:
             sq = sq.where(*query)
         if filters:

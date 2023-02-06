@@ -15,13 +15,12 @@ import uuid
 import weakref
 from collections import namedtuple
 from functools import wraps, reduce
-# from inspect import isclass
 
 from brick.core.db.constants import unicode_type, string_type, long
-
-
 from brick.core.db.utils import basestring, format_date_time, datetime, returns_clone, OP, binary_construct, \
     DeferredRelation
+
+# from inspect import isclass
 
 try:
     from collections import OrderedDict
@@ -129,6 +128,15 @@ class Node(object):
     __rand__ = _e(OP.AND, inv=True)
     __ror__ = _e(OP.OR, inv=True)
     __rxor__ = _e(OP.XOR, inv=True)
+
+    like = _e(OP.LIKE)
+    ilike = _e(OP.ILIKE)
+
+    bin_and = _e(OP.BIN_AND)
+    bin_or = _e(OP.BIN_OR)
+    in_ = _e(OP.IN)
+    not_in = _e(OP.NOT_IN)
+    regexp = _e(OP.REGEXP)
 
     def __eq__(self, rhs):
         if rhs is None:
@@ -1929,7 +1937,6 @@ class ObjectIdDescriptor(object):
         setattr(instance, self.attr_name, value)
 
 
-
 class ForeignKeyField(IntegerField):
     def __init__(self, rel_model, related_name=None, on_delete=None,
                  on_update=None, extra=None, to_field=None,
@@ -2076,10 +2083,9 @@ class ForeignKeyField(IntegerField):
         return self.to_field.python_value(value)
 
 
-
-
 class DeferredThroughModel(object):
     '''延迟吞吐量模型'''
+
     def set_field(self, model_class, field, name):
         self.model_class = model_class
         self.field = field
@@ -2089,9 +2095,11 @@ class DeferredThroughModel(object):
         self.field._through_model = through_model
         self.field.add_to_class(self.model_class, self.name)
 
+
 class ManyToManyField(Field):
     def __init__(self, rel_model, related_name=None, through_model=None,
-                 _is_backref=False, verbose_name = None):
+                 _is_backref=False, on_delete=None,
+                 on_update=None, verbose_name=None):
         from brick.core.db.models import Model
         if through_model is not None and not (
                 isinstance(through_model, (Proxy, DeferredThroughModel)) or
@@ -2104,7 +2112,8 @@ class ManyToManyField(Field):
         self._is_backref = _is_backref
         self.primary_key = False
         self.verbose_name = verbose_name
-
+        self._on_delete = on_delete
+        self._on_update = on_update
     def _get_descriptor(self):
         return ManyToManyFieldDescriptor(self)
 
@@ -2113,6 +2122,7 @@ class ManyToManyField(Field):
             def callback(through_model):
                 self._through_model = through_model
                 self.add_to_class(model_class, name)
+
             self._through_model.attach_callback(callback)
             return
         elif isinstance(self._through_model, DeferredThroughModel):
@@ -2128,8 +2138,9 @@ class ManyToManyField(Field):
         if not self._is_backref:
             backref = ManyToManyField(
                 self.model_class,
-                through_model=self._through_model,
-                _is_backref=True)
+                through_model=self._through_model, on_delete=self._on_delete,
+                on_update=self._on_update,
+                _is_backref=True, verbose_name=self.verbose_name )
             related_name = self._related_name or model_class._meta.name + 's'
             backref.add_to_class(self.rel_model, related_name)
 
@@ -2151,9 +2162,8 @@ class ManyToManyField(Field):
                      True),)
                 validate_backrefs = False
 
-            attrs = {
-                lhs._meta.name: ForeignKeyField(rel_model=lhs),
-                rhs._meta.name: ForeignKeyField(rel_model=rhs)}
+            attrs = {lhs._meta.name: ForeignKeyField(rel_model=lhs),
+                     rhs._meta.name: ForeignKeyField(rel_model=rhs)}
             attrs['Meta'] = Meta
 
             from brick.core.db.models import Model
@@ -2187,4 +2197,3 @@ class ManyToManyFieldDescriptor(FieldDescriptor):
     def __set__(self, instance, value):
         query = self.__get__(instance)
         query.add(value, clear_existing=True)
-

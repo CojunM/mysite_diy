@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # coding=utf-8
-
+from brick.contrib import encrypt_helper
 from logic import _logic_base
 # from config import db_config
 # from common import encrypt_helper, cache_helper
