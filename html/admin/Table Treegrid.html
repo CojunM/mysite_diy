@@ -1,0 +1,197 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+
+<head>
+ <meta charset="utf-8" />
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta content="width=device-width,initial-scale=1.0" name="viewport">
+ <meta content="yes" name="apple-mobile-web-app-capable">
+ <meta content="black" name="apple-mobile-web-app-status-bar-style">
+ <meta content="telephone=no" name="format-detection">
+ <meta content="email=no" name="format-detection">
+ <title>系统管理</title>
+ <!--<link  rel="external nofollow" rel="stylesheet">-->
+ <!--<link  rel="external nofollow" rel="stylesheet">-->
+ <!--<link rel="stylesheet"  rel="external nofollow" >-->
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.21.4/dist/bootstrap-table.min.css">
+
+</head>
+
+<body>
+<div class="container">
+ <h1>树形表格 ： Table Treegrid</h1>
+ <table id="table"></table>
+ <br/>
+ <button onclick="test()">选择</button>
+</div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<!--<script src="https://cdn.bootcss.com/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>-->
+<script src="https://unpkg.com/bootstrap-table@1.21.4/dist/bootstrap-table.min.js"></script>
+<!--<script src="https://cdn.bootcss.com/bootstrap-table/1.12.0/extensions/treegrid/bootstrap-table-treegrid.js"></script>-->
+<!--<script src="https://cdn.bootcss.com/jquery-treegrid/0.2.0/js/jquery.treegrid.min.js"></script>-->
+<script type="text/javascript">
+ var $table = $('#table');
+ var data = [{0: undefined, id: 94710, pid: 0, mode: "系统管理", permissionTag: "*", permissionMark: "所有权限", }
+,{0: undefined, id: 94711, pid: 94710, mode: "营销中心管理", permissionTag: "*", permissionMark: "所有权限",}
+,{0: undefined, id: 471104, pid: 94711, mode: "营销中心管理", permissionTag: "search", permissionMark: "查询",}
+,{0: undefined, id: 94721, pid: 94710, mode: "工厂管理", permissionTag: "*", permissionMark: "所有权限", }
+,{0: undefined, id: 472104, pid: 94721, mode: "工厂管理", permissionTag: "search", permissionMark: "查询", }
+,{0: undefined, id: 94731, pid: 94710, mode: "经销商管理", permissionTag: "*", permissionMark: "所有权限", }
+,{0: undefined, id: 473104, pid: 94731, mode: "经销商管理", permissionTag: "search", permissionMark: "查询", }
+,{0: undefined, id: 94732, pid: 94710, mode: "产品管理", permissionTag: "*", permissionMark: "所有权限", }
+,{0: undefined, id: 473201, pid: 94732, mode: "产品管理", permissionTag: "insert", permissionMark: "添加", }
+,{0: undefined, id: 473202, pid: 94732, mode: "产品管理", permissionTag: "update", permissionMark: "修改", }
+, {0: undefined, id: 473203, pid: 94732, mode: "产品管理", permissionTag: "delete", permissionMark: "删除", }
+, {0: undefined, id: 473204, pid: 94732, mode: "产品管理", permissionTag: "search", permissionMark: "查询", }
+, {0: undefined, id: 94741, pid: 94710, mode: "用户账号", permissionTag: "*", permissionMark: "所有权限", }
+, {0: undefined, id: 474101, pid: 94741, mode: "用户账号", permissionTag: "insert", permissionMark: "添加", }
+, {0: undefined, id: 474102, pid: 94741, mode: "用户账号", permissionTag: "update", permissionMark: "修改", }
+, {0: undefined, id: 474103, pid: 94741, mode: "用户账号", permissionTag: "delete", permissionMark: "删除", }
+, {0: undefined, id: 474104, pid: 94741, mode: "用户账号", permissionTag: "search", permissionMark: "查询", }
+, {0: undefined, id: 474105, pid: 94741, mode: "用户账号", permissionTag: "resetPwd", permissionMark: "重置密码", }
+, {0: undefined, id: 94742, pid: 94710, mode: "角色权限管理", permissionTag: "*", permissionMark: "所有权限", }
+, {0: undefined, id: 474201, pid: 94742, mode: "角色权限管理", permissionTag: "insert", permissionMark: "添加", }
+, {0: undefined, id: 474202, pid: 94742, mode: "角色权限管理", permissionTag: "update", permissionMark: "修改", }
+, {0: undefined, id: 474203, pid: 94742, mode: "角色权限管理", permissionTag: "delete", permissionMark: "删除", }
+, {0: undefined, id: 474204, pid: 94742, mode: "角色权限管理", permissionTag: "search", permissionMark: "查询", }
+, {0: undefined, id: 94760, pid: 0, mode: "运营中心", permissionTag: "*", permissionMark: "所有权限", }
+, {0: undefined, id: 94770, pid: 94760, mode: "跨区域调拨单", permissionTag: "*", permissionMark: "所有权限", }
+, {0: undefined, id: 476104, pid: 94770, mode: "跨区域调拨单", permissionTag: "search", permissionMark: "查询", }
+, {0: undefined, id: 476105, pid: 94770, mode: "跨区域调拨单", permissionTag: "download", permissionMark: "下载", }]
+
+ $(function() {
+
+  //控制台输出一下数据
+  console.log(data);
+
+  $table.bootstrapTable({
+   data:data,
+   idField: 'id',
+   dataType:'jsonp',
+   columns: [
+    { field: 'check', checkbox: true, formatter: function (value, row, index) {
+      if (row.check == true) {
+       // console.log(row.serverName);
+       //设置选中
+       return { checked: true };
+      }
+     }
+    },
+    { field: 'mode', title: '名称' },
+    { field: 'permissionTag', title: '状态', },
+    { field: 'permissionMark', title: '权限值' },
+   ],
+   // bootstrap-table-treegrid.js 插件配置 -- start
+   //在哪一列展开树形
+   treeShowField: 'mode',
+   //指定父id列
+   parentIdField: 'pid',
+
+   onResetView: function(data) {
+    //console.log('load');
+    $table.treegrid({
+     // initialState: 'collapsed',// 所有节点都折叠
+     initialState: 'expanded',// 所有节点都展开，默认展开
+     treeColumn: 1,
+     // expanderExpandedClass: 'glyphicon glyphicon-minus', //图标样式
+     // expanderCollapsedClass: 'glyphicon glyphicon-plus',
+     onChange: function() {
+      $table.bootstrapTable('resetWidth');
+     }
+    });
+    //只展开树形的第一级节点
+    $table.treegrid('getRootNodes').treegrid('expand');
+   },
+   onCheck:function(row){
+    event.preventDefault()
+    var datas = $table.bootstrapTable('getData');
+    console.log(datas)
+    row.check = true
+    // 勾选子类
+    selectChilds(datas,row,"id","pid",true);
+    // 勾选父类
+    selectParentChecked(datas,row,"id","pid")
+
+    // 刷新数据
+    $table.bootstrapTable('load', datas);
+   },
+
+   onUncheck:function(row){
+    event.preventDefault()
+    row.check = false
+    var datas = $table.bootstrapTable('getData');
+    selectChilds(datas,row,"id","pid",false);
+    //取消选中最后一个子元素时时查找对应父元素取消
+    selectParentUnchecked(datas,row,"id","pid")
+    $table.bootstrapTable('load', datas);
+   },
+   // bootstrap-table-treetreegrid.js 插件配置 -- end
+  });
+ });
+
+
+</script>
+<script>
+ /**
+  * 选中父项时，同时选中子项
+  * @param datas 所有的数据
+  * @param row 当前数据
+  * @param id id 字段名
+  * @param pid 父id字段名
+  */
+ function selectChilds(datas,row,id,pid,checked) {
+  console.log("zi",datas,'row',row,'check',checked)
+  for(var i in datas){
+   if(datas[i][pid] == row[id]){
+    datas[i].check=checked;
+    selectChilds(datas,datas[i],id,pid,checked);
+   };
+  }
+ }
+
+ function selectParentUnchecked(datas,row,id,pid){
+  console.log("fu--Uncheck",datas,'row',row,)
+  let key = 0;
+  for(var i in datas){
+  if(datas[i].pid == row.pid && datas[i].check == true){
+   key++
+  }
+  }
+  console.log(key)
+  if(key == 0 ){
+  for(var i in datas){
+   if(datas[i][id] == row[pid]){
+   datas[i].check=false;
+   selectParentUnchecked(datas,datas[i],id,pid);
+   }
+  }
+  }
+ }
+
+ function selectParentChecked(datas,row,id,pid){
+  for(var i in datas){
+   if(datas[i][id] == row[pid]){
+    datas[i].check=true;
+    selectParentChecked(datas,datas[i],id,pid);
+   };
+  }
+ }
+
+ function test() {
+  var selRows = $table.bootstrapTable("getSelections");
+  if(selRows.length == 0){
+   alert("请至少选择一行");
+   return;
+  }
+  var postData = "";
+  $.each(selRows,function(i) {
+   postData += this.id;
+   if (i < selRows.length - 1) {
+    postData += "， ";
+   }
+  });
+  alert("你选中行的 id 为："+postData);
+ }
+</script>
+</html>

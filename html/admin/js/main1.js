@@ -88,7 +88,7 @@
             } else {
                 selectHeader.classList.remove('header-scrolled')
             }
-        }
+        };
         window.addEventListener('load', headerScrolled)
         onscroll(document, headerScrolled)
     }
@@ -104,7 +104,7 @@
             } else {
                 backtotop.classList.remove('active')
             }
-        }
+        };
         window.addEventListener('load', toggleBacktotop)
         onscroll(document, toggleBacktotop)
     }

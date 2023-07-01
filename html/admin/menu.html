@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html  lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--content的取值为webkit，ie-comp，ie-stand之一，区分大小写，分别代表用极速模式，兼容模式，IE模式打开。-->
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <!--在网页的<head>中增加下面这句话，可以让网页的宽度自动适应手机屏幕的宽度。-->
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <!--如第三方站点不希望某页面被转码，可在页面上添加以下协议，当用户通过移动搜索进入第三方网站时，会直接进入原网页。-->
+    <!--<meta http-equiv="Cache-Control" content="no-siteapp"/>-->
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+
+    <!-- 新 Bootstrap5 核心 CSS 文件 -->
+
+    <title>菜单管理</title>
+</head>
+<body>
+<nav class="breadcrumb"><i class=""></i> 首页
+    <span class="c-gray en">&gt;</span>
+    系统管理
+    <span class="c-gray en"></span>
+    菜单管理
+</nav>
+<div class="page-container">
+    <div class="cl pd-5 bg-1 bk-gray mt-5">
+		<span class="l">
+            <a href="javascript:location.replace(location.href);" class="btn btn-success radius">
+                <i class="Hui-iconfont"></i> 刷新</a>
+            <a class="btn btn-primary radius" onclick="add('添加','menu_info_edit', 500, 600)"
+               href="javascript:"><i class="t">;</i> 添加</a>
+            <a class="btn btn-secondary radius" onclick="edit('编辑','menu_info_edit', 500, 600)"
+               href="javascript:"><i class=""></i> 编辑</a>
+            <a href="javascript:" onclick="del()" class="btn btn-danger radius"><i class=""></i> 删除</a>
+		</span>
+    </div>
+    <div class="mt-10">
+        <!-- jqGrid table list4 -->
+        <table id="list"> </table>
+        <!-- jqGrid 分页 div gridPager -->
+        <div id="gridPager"></div>
+    </div>
+</div>
+<!--_footer 作为公共模版分离出去-->
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
+<!--    popper.min.js 用于弹窗、提示、下拉菜单-->
+<!--    <script src="https://cdn.staticfile.org/popper.js/2.9.3/umd/popper.min.js"></script>-->
+
+<!-- 最新的 Bootstrap5 核心 图标文件 -->
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<![endif]-->
+
+<!-- Template Main CSS File -->
+<!--<link rel="stylesheet" href="css/style3.css" >-->
+<!--<link rel="stylesheet" href="css/admin.css" >-->
+<link rel="stylesheet" href="/admin/css/admin.css">
+<link rel="stylesheet" href="/admin/css/style3.css">
+  <!-- jqGrid组件基础样式包-必要 -->
+    <link rel="stylesheet" href="/admin/js/jqgrid/css/ui.jqgrid.css"/>
+    <!-- jqGrid主题包-非必要 -->
+    <!-- 在jqgrid/css/css这个目录下还有其他的主题包，可以尝试更换看效果 -->
+    <link rel="stylesheet" href="/admin/js/jqgrid/css/css/redmond/jquery-ui-1.8.16.custom.css"/>
+  <!-- 引入bootstrap-table样式 -->
+<!--<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.21.4/dist/bootstrap-table.min.css">-->
+
+ <!--jquery -->
+<script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<!--<script src="https://unpkg.com/bootstrap-table@1.21.4/dist/bootstrap-table.min.js"></script>&lt;!&ndash;<script src="https://unpkg.com/bootstrap-table@1.21.4/dist/bootstrap-table.min.js"></script>&ndash;&gt;-->
+<!-- jqGrid插件包-必要 -->
+<script type="text/javascript" src="/admin/js/jqgrid/js/jquery.jqGrid.src.js"></script>
+<!-- jqGrid插件的多语言包-非必要 -->
+<!-- 在jqgrid/js/i18n下还有其他的多语言包，可以尝试更换看效果 -->
+<script type="text/javascript" src="/admin/js/jqgrid/js/i18n/grid.locale-cn.js"></script>
+
+<!-- 引入中文语言包 -->
+<!--<script src="https://cdn.bootcss.com/bootstrap-table/1.21.4/locale/bootstrap-table-zh-CN.min.js"></script>-->
+<!--  JS Files -->
+<!--[if lt IE 9]>
+  <! --html5shiv：解决ie9以下浏览器对html5新增标签的不识别，并导致CSS不起作用的问题。-->
+<!--respond.min:让不支持css3 Media Query的浏览器包括IE6-IE8等其他浏览器支持查询。-->
+<script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.js"></script>
+　　
+<script src="httsp://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<![endif]—>
+<!-- 最新的 Bootstrap5 核心 JavaScript 文件 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Template Main JS File -->
+<!--<script src="js/admin.js "></script>-->
+<!--<script src="js/main.js"></script>-->
+
+<script src="/admin/js/main.js"></script>
+<script src="/admin/js/admin.js "></script>
+<!--<script src="/admin/js/ajax.js"></script>-->
+<script type="text/javascript">
+    $(function () {
+        //创建jqGrid组件
+        $("#list").jqGrid({
+            url: "/api/system/menu_info/",//组件创建完成之后请求数据的url
+            mtype: "get",//向后台请求数据的ajax的类型。可选post,get
+            datatype: "json",//请求数据返回的类型。可选json,xml,txt
+            height: 'auto',//高度，表格高度。可为数值、百分比或'auto'
+            //width:1000,//这个宽度不能为百分比
+            autowidth: true,//自动宽
+            colNames: ['菜单名称', '小图标', '排序', '是否显示', '是否启用'],//jqGrid的列显示名字
+            colModel: [ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
+                {name: 'name', index: 'name', width: 100, sortable: false},
+                {
+                    name: 'icon', width: 80, formatter: function (cellvalue, options, rowObject) {
+                    return "<i class=\"Hui-iconfont\">" + cellvalue + "</i>"
+                }, sortable: false
+                },
+                {name: 'sort', index: 'sort', width: 80, sortable: false},
+                {
+                    name: 'is_show', index: 'is_show', width: 80,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue) {
+                            return "<i class=\"Hui-iconfont btn-success\">&#xe6a7;</i>"
+                        }
+                        else {
+                            return "<i class=\"Hui-iconfont btn-danger\">&#xe6a6;</i>"
+                        }
+                    }, sortable: false
+                },
+                {
+                    name: 'is_enabled',
+                    index: 'is_enabled',
+                    width: 80,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue) {
+                            return "<i class=\"Hui-iconfont btn-success\">&#xe6a7;</i>"
+                        }
+                        else {
+                            return "<i class=\"Hui-iconfont btn-danger\">&#xe6a6;</i>"
+                        }
+                    }, sortable: false
+                }
+            ],
+            rownumbers: false,//添加左侧行号
+            altRows: true,//设置为交替行表格,默认为false
+            rowNum: 20,//一页显示多少条
+            rowList: [20, 50, 100],//可供用户选择一页显示多少条
+            pager: '#gridPager',//表格页脚的占位符(一般是div)的id
+            sortname: 'sort',//初始化的时候排序的字段
+            sortorder: "asc",//排序方式,可选desc,asc
+            viewrecords: true,//是否在浏览导航栏显示记录总数
+            caption: "菜单列表",//表格的标题名字
+            treeGrid: true,//启用树列表
+            gridview: true,
+            treeGridModel: "adjacency",
+            ExpandColumn: 'name',//设置树列表扩开列
+            multiselect: false,//是否多选
+            treeReader: { //树列表主要字段对照表
+                level_field: "level",
+                parent_id_field: "parent_id",
+                leaf_field: "is_leaf",
+                expanded_field: "expanded"
+            }
+        });
+        /*创建jqGrid的操作按钮容器*/
+        /*可以控制界面上增删改查的按钮是否显示*/
+        $("#list").jqGrid('navGrid', '#gridPager', {edit: false, add: false, del: false, search: false});
+    });
+
+    /*添加*/
+    function add(title, url, w, h) {
+        layer_show(title, url, w, h);
+    }
+    /*编辑*/
+    function edit(title, url, w, h) {
+        var id = $("#list").jqGrid('getGridParam', 'selrow');
+        if (id) {
+            layer_show(title, url + '?id=' + id, w, h);
+        }
+        else {
+            layer.msg('请选择要编辑的行!', {icon: 1, time: 3000});
+        }
+    }
+    /*删除*/
+    function del() {
+        var id = $("#list").jqGrid('getGridParam', 'selrow');
+        if (id) {
+            layer.confirm('确认要删除吗？', function (index) {
+                $.ajax({
+                    type: 'POST',
+                    url: "/api/system/menu_info/" + id + "/",
+                    data: {'_method': 'delete'},
+                    dataType: 'json',
+                    success: function (data) {
+                        if (checkLogin(data, true)) {
+                            $("#list").jqGrid('delRowData', id);
+                            layer.msg('已删除!', {icon: 1, time: 3000});
+                            layer_close();
+                        }
+                    },
+                    error: function (data) {
+                        layer.msg('删除失败!', {icon: 1, time: 3000});
+                        layer_close();
+                    }
+                });
+            });
+        }
+        else {
+            layer.msg('请选择要删除的行!', {icon: 1, time: 3000});
+        }
+    }
+    /*弹出层*/
+/*
+	参数解释：
+	title	标题
+	url		请求的url
+	id		需要操作的数据id
+	w		弹出层宽度（缺省调默认值）
+	h		弹出层高度（缺省调默认值）
+*/
+function layer_show(title,url,w,h){
+	if (title == null || title == '') {
+		title=false;
+	};
+	if (url == null || url == '') {
+		url="404.html";
+	};
+	if (w == null || w == '') {
+		w=800;
+	};
+	if (h == null || h == '') {
+		h=($(window).height() - 50);
+	};
+	layer.open({
+		type: 2,
+		area: [w+'px', h +'px'],
+		fix: false, //不固定
+		maxmin: true,
+		shade:0.4,
+		title: title,
+		content: url
+	});
+}
+/*关闭弹出框口*/
+function layer_close(){
+	var index = parent.layer.getFrameIndex(window.name);
+	parent.layer.close(index);
+}
+</script>
+</body>
+</html>

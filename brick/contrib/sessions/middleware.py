@@ -24,80 +24,8 @@
 """
 import warnings
 
-from brick.contrib.sessions.cache import CacheManager
-from brick.contrib.sessions.session import Session, SessionObject
-from brick.contrib.sessions.util import coerce_session_params, \
-    parse_cache_config_options
-
-
-# try:
-#     # from paste.registry import StackedObjectProxy
-#     # beaker_session = StackedObjectProxy(name="Beaker Session")
-#     # beaker_cache = StackedObjectProxy(name="Cache Manager")
-#     web_session = threading.local()
-#     # beaker_cache = threading.local()
-# except:
-#     beaker_cache = None
-#     beaker_session = None
-
-
-class CacheMiddleware(object):
-    cache = beaker_cache = None
-
-    def __init__(self, app, config=None, environ_key='brick.cache', **kwargs):
-        """Initialize the Cache Middleware
-
-        The Cache middleware will make a CacheManager instance available
-        every request under the ``environ['beaker.cache']`` key by
-        default. The location in environ can be changed by setting
-        ``environ_key``.
-
-        ``config``
-            dict  All settings should be prefixed by 'cache.'. This
-            method of passing variables is intended for Paste and other
-            setups that accumulate multiple component settings in a
-            single dictionary. If config contains *no cache. prefixed
-            args*, then *all* of the config options will be used to
-            intialize the Cache objects.
-
-        ``environ_key``
-            Location where the Cache instance will keyed in the WSGI
-            environ
-
-        ``**kwargs``
-            All keyword arguments are assumed to be cache settings and
-            will override any settings found in ``config``
-
-        """
-        self.app = app
-        config = config or {}
-
-        self.options = {}
-
-        # Update the options with the parsed config
-        self.options.update(parse_cache_config_options(config))
-
-        # Add any options from kwargs, but leave out the defaults this
-        # time
-        self.options.update(
-            parse_cache_config_options(kwargs, include_defaults=False))
-
-        # Assume all keys are intended for cache if none are prefixed with
-        # 'cache.'
-        if not self.options and config:
-            self.options = config
-
-        self.options.update(kwargs)
-        self.cache_manager = CacheManager(**self.options)
-        self.environ_key = environ_key
-
-    def __call__(self, environ, start_response):
-        # if environ.get('paste.registry'):
-        #     if environ['paste.registry'].reglist:
-        #         environ['paste.registry'].register(self.cache,
-        #                                            self.cache_manager)
-        environ[self.environ_key] = self.cache_manager
-        return self.app(environ, start_response)
+from brick.contrib.backends.utils import coerce_session_params
+from brick.contrib.sessions.session import SessionObject
 
 
 class SessionMiddleware(object):
@@ -183,7 +111,7 @@ class SessionMiddleware(object):
         def session_start_response(status, headers, exc_info=None):
             if session.accessed():  # 第一次flase
                 session.persist()
-                print('000011')
+                # print('000011')
                 if session.__dict__['_headers']['set_cookie']:
                     cookie = session.__dict__['_headers']['cookie_out']
                     if cookie:

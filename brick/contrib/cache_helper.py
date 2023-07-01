@@ -27,6 +27,9 @@ from brick.contrib import log_helper
 
 import time
 
+from brick.contrib.backends import utils
+from brick.contrib.caches.cache import Cache, CacheManager
+
 
 class Value:
     def __init__(self, value, put_time, expired):
@@ -214,4 +217,13 @@ def _str_to_json(value):
     return value
 
 
+# 1. 实例化CacheManager
+cache_opts = {
+    'cache.type': 'file',
+    'cache.data_dir': '../../../tmp/cache/data',
+    'cache.lock_dir': '../../../tmp/cache/lock'
+}
+cache_manager=CacheManager(**utils.parse_cache_config_options(cache_opts))
+# cache = Cache('BrickCache', type='file', expire=43200,**utils.parse_cache_config_options(cache_opts))
+cache =cache_manager.get_cache('BrickCache', type='file', expire=43200)
 

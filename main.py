@@ -114,12 +114,12 @@ def validate():
         request.environ['REQUEST_METHOD'] = request.POST.get('_method', '')
 
     # 过滤不用进行登录权限判断的路由（登录与退出登录不用检查是否已经登录）
-    url_list = ["/api/login/", "/api/login1/", "/api/logout/"]
+    url_list = ["/api/login/", "/api/login1/", "/api/logout/", "/api/login2/"]
     if path_info in url_list:
         pass
         # print('0112332')
     else:
-        # print('112332')
+        print('112332')
         # 已经登录成功的用户session肯定有值，没有值的就是未登录
         session = web_helper.get_session()
         # 获取用户id
@@ -152,6 +152,21 @@ def hel():
     return template('index')
 
 
+@route('/api/login2/admin_main')
+def hel():
+    return template('admin_main')
+
+
+@route('/api/login2/admin_index')
+def hel():
+    return template('admin_index')
+
+
+@route('/api/login2/admin_base')
+def hel():
+    return template('admin_base')
+
+
 @route('/api/login/products_list')
 def hel():
     return template('products_list')
@@ -169,6 +184,7 @@ def hel():
     return template('main')
 
 
+@route('/api/login2/desk')
 @route('/api/login1/desk')
 def hel():
     return template('desk')
@@ -193,7 +209,7 @@ def hel():
 def hel():
     return template('about')
 
-
+@route('/api/login2/welcome')
 @route('/api/login/welcome')
 @route('/api/login1/welcome')
 def hel():
@@ -205,6 +221,10 @@ def hel():
 @get('/api/login1/menu_info')
 def hel():
     return template('menu_info')
+
+@get('/api/login2/menu_info')
+def hel():
+    return template('menu')
 
 
 @get('/api/login/department')
@@ -219,7 +239,7 @@ def helo():
 
 @get('/api/login2/')
 def helo():
-    return template('login1')
+    return template('admin_login')
 
 
 @get('/api/login/')

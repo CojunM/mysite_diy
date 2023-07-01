@@ -6,8 +6,9 @@
 # @File    : wsgiapp.py
 # @Project : mysite_diy
 # @Software: PyCharm
-
+import email
 import functools
+import hashlib
 import itertools
 import mimetypes
 import os
@@ -408,7 +409,7 @@ class DefaultApp(object):
         return tobytes(template(ERROR_PAGE_TEMPLATE, e=res))
 
 
-def static_file(filename, root, mimetype='auto', download=False, charset='UTF-8'):
+def static_file1(filename, root, mimetype='auto', download=False, charset='UTF-8'):
     """ Open a file in a safe way and return :exc:`HTTPResponse` with status
         code 200, 305, 403 or 404. The ``Content-Type``, ``Content-Encoding``,
         ``Content-Length`` and ``Last-Modified`` headers are set if possible.
@@ -478,6 +479,121 @@ def static_file(filename, root, mimetype='auto', download=False, charset='UTF-8'
         if body: body = _file_iter_range(body, offset, end - offset)
         return HTTPResponse(body, status=206, **headers)
     return HTTPResponse(body, **headers)
+
+
+def static_file(filename, root, mimetype=True, download=False, charset='UTF-8', etag=None, headers=None):
+    """ Open a file in a safe way and return an instance of :exc:`HTTPResponse`
+        that can be sent back to the client.
+
+        :param filename: Name or path of the file to send, relative to ``root``.
+        :param root: Root path for file lookups. Should be an absolute directory
+            path.
+        :param mimetype: Provide the content-type header (default: guess from
+            file extension)
+        :param download: If True, ask the browser to open a `Save as...` dialog
+            instead of opening the file with the associated program. You can
+            specify a custom filename as a string. If not specified, the
+            original filename is used (default: False).
+        :param charset: The charset for files with a ``text/*`` mime-type.
+            (default: UTF-8)
+        :param etag: Provide a pre-computed ETag header. If set to ``False``,
+            ETag handling is disabled. (default: auto-generate ETag header)
+        :param headers: Additional headers dict to add to the response.
+
+        While checking user input is always a good idea, this function provides
+        additional protection against malicious ``filename`` parameters from
+        breaking out of the ``root`` directory and leaking sensitive information
+        to an attacker.
+
+        Read-protected files or files outside of the ``root`` directory are
+        answered with ``403 Access Denied``. Missing files result in a
+        ``404 Not Found`` response. Conditional requests (``If-Modified-Since``,
+        ``If-None-Match``) are answered with ``304 Not Modified`` whenever
+        possible. ``HEAD`` and ``Range`` requests (used by download managers to
+        check or continue partial downloads) are also handled automatically.
+
+    """
+
+    root = os.path.join(os.path.abspath(root), '')
+    filename = os.path.abspath(os.path.join(root, filename.strip('/\\')))
+    headers = headers.copy() if headers else {}
+
+    if not filename.startswith(root):
+        return HTTPError(403, "Access denied.")
+    if not os.path.exists(filename) or not os.path.isfile(filename):
+        return HTTPError(404, "File does not exist.")
+    if not os.access(filename, os.R_OK):
+        return HTTPError(403, "You do not have permission to access this file.")
+
+    if mimetype is True:
+        if download and download is not True:
+            mimetype, encoding = mimetypes.guess_type(download)
+        else:
+            mimetype, encoding = mimetypes.guess_type(filename)
+        if encoding:
+            headers['Content-Encoding'] = encoding
+
+    if mimetype:
+        if (mimetype[:5] == 'text/' or mimetype == 'application/javascript') \
+                and charset and 'charset' not in mimetype:
+            mimetype += '; charset=%s' % charset
+        headers['Content-Type'] = mimetype
+
+    if download:
+        download = os.path.basename(filename if download is True else download)
+        headers['Content-Disposition'] = 'attachment; filename="%s"' % download
+
+    stats = os.stat(filename)
+    headers['Content-Length'] = clen = stats.st_size
+    headers['Last-Modified'] = email.utils.formatdate(stats.st_mtime,
+                                                      usegmt=True)
+    headers['Date'] = email.utils.formatdate(time.time(), usegmt=True)
+
+    getenv = request.environ.get
+
+    if etag is None:
+        etag = '%d:%d:%d:%d:%s' % (stats.st_dev, stats.st_ino, stats.st_mtime,
+                                   clen, filename)
+        etag = hashlib.sha1(tobytes(etag)).hexdigest()
+
+    if etag:
+        headers['ETag'] = etag
+        check = getenv('HTTP_IF_NONE_MATCH')
+        if check and check == etag:
+            return HTTPResponse(status=304, **headers)
+
+    ims = getenv('HTTP_IF_MODIFIED_SINCE')
+    if ims:
+        ims = parse_date(ims.split(";")[0].strip())
+        if ims is not None and ims >= int(stats.st_mtime):
+            return HTTPResponse(status=304, **headers)
+
+    body = '' if request.method == 'HEAD' else open(filename, 'rb')
+
+    headers["Accept-Ranges"] = "bytes"
+    range_header = getenv('HTTP_RANGE')
+    if range_header:
+        ranges = list(parse_range_header(range_header, clen))
+        if not ranges:
+            return HTTPError(416, "Requested Range Not Satisfiable")
+        offset, end = ranges[0]
+        rlen = end - offset
+        headers["Content-Range"] = "bytes %d-%d/%d" % (offset, end - 1, clen)
+        headers["Content-Length"] = str(rlen)
+        if body: body = _closeiter(_rangeiter(body, offset, rlen), body.close)
+        return HTTPResponse(body, status=206, **headers)
+    return HTTPResponse(body, **headers)
+
+
+def _rangeiter(fp, offset, limit, bufsize=1024 * 1024):
+    """ Yield chunks from a range in a file. """
+    fp.seek(offset)
+    while limit > 0:
+        part = fp.read(min(limit, bufsize))
+        if not part:
+            break
+        limit -= len(part)
+        yield part
 
 
 def _file_iter_range(fp, offset, bytes, maxread=1024 * 1024):

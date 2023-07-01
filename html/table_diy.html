@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>测试实例</title>
+		<style type="text/css">
+			/* table 自定义 */
+			.zdy_cols{
+				background-color:#01AAED;
+				color: #fff;
+				text-align: center;
+				line-height: 60px;
+			}
+			.zdy_cols th{padding: 0 25px;font-size: 14px;font-weight: normal;}
+            /* table 默认样式 */
+.table_style{border-color: #e4e0e0;padding: 0;margin: 0;}
+.table_style tbody td{color: #666666;font-size: 14px;}
+.table_cols{background-color:#EEF0F2;color: #333;text-align: center;line-height: 40px;}
+.table_cols th{padding: 0 15px;font-size: 14px;color: #333;font-weight: normal;}
+.ischeck_inp{padding-left: 15px;min-width: 50px;}
+.table_style .toolBtn a{padding: 3px 10px;border: 1px solid #999;border-radius: 4px;margin-right: 10px;cursor: pointer;}
+
+		</style>
+
+	</head>
+	<body>
+		<div id="ctools_table"></div>
+		<button onclick="getdata()">获取数据</button>
+	</body>
+	<script>
+        var msCtools = {
+	conf: {
+		host: "",
+		port: "80",
+		baseapi: "/api/",
+		basepath: "mhc/",
+	},
+	Table:{
+		init:function(param,id){
+			var options = {
+				columns: [], // 表格列内容设置（key:字段名，title：表头名，align：对齐方式，width：列宽度，textOver：超出行溢出，ishidden：是否隐藏(true:是，false:否)默认false）
+				dataSource: [], // 数据
+				width: '100%', // 宽度，默认100%
+				ischeck:false, // 是否勾选(true:是，false:否)，默认false
+				style:{
+					skin:'', // 边框样式：line线/row行/none无
+					even:false, // 是否开启隔行背景(true:是，false:否)，默认false
+					evenColor:['#fff','#EEF0F2'], // 隔行背景颜色设置
+				},
+				colClassName:'',
+			};
+			if (param && {}.toString.call(param) === '[object Object]') {
+				for (let attr in param) {
+				  options[attr] = param[attr]
+				}
+			}
+			// 参数格式校验：columns必须为数组且key不重复，dataSource必须为数组
+			if(!Array.isArray(options.columns)) {
+				alert('错误：传入columns必须为数组');
+			} else {
+				for(let i = 0; i < options.columns.length; i++) {
+					for(let j = i + 1; j < options.columns.length; j++) {
+						if(!options.columns[i].key) {
+							alert('key不存在');
+							break;
+						} else {
+							if(options.columns[i].key === options.columns[j].key) {
+								alert('key重复');
+								break;
+							}
+						}
+					}
+				}
+			}
+			if(!Array.isArray(options.dataSource)) {
+				alert('错误：传入dataSource必须为数组');
+			}
+			if(options.style === null || typeof options.style !== "object") {
+				alert('错误：style参数必须为对象');
+			}
+			if(options === null || typeof options !== "object") {
+				alert('错误：参数必须为对象');
+			}
+			// 赋值
+			this.cols = options.columns;
+			this.data = options.dataSource;
+			this.width = options.width;
+			this.ischeck = options.ischeck;
+			this.style = options.style;
+			this.colClassName = options.colClassName;
+			this.id = id;
+			this.content = document.getElementById(id);
+			// 创建dom节点
+			this.creatDom();
+		},
+		// 创建节点
+		creatDom:function(){
+			var table = document.createElement('table');
+				table.className = 'table_style';
+			// 表格边框的宽度
+			table.setAttribute('border','0');
+			// 单元格之间的空白
+			table.setAttribute('cellspacing','0');
+			// 单元边沿与其内容之间的空白
+			table.setAttribute('cellpadding','10px');
+
+			// table边框样式：line线/row行/none无
+			if(this.style.skin == 'line'){
+				// 外侧边框的哪个部分是可见的
+				table.setAttribute('frame','box');
+				// 内侧边框的哪个部分是可见的
+				table.setAttribute('rules','all');
+			}else if(this.style.skin == 'row'){
+				// 外侧边框的哪个部分是可见的
+				table.setAttribute('frame','box');
+				// 内侧边框的哪个部分是可见的
+				table.setAttribute('rules','rows');
+			}else if(this.style.skin == 'none'){
+				// 无边框
+			}
+
+			// 设置宽
+			table.setAttribute('width',this.width);
+
+			var thead = this.creatThead();
+			var tbody = this.creatTbody();
+			table.appendChild(thead);
+			table.appendChild(tbody);
+			this.content.appendChild(table);
+		},
+		// 创建thead
+		creatThead:function(){
+			var thead = document.createElement('thead');
+			var tr = document.createElement('tr');
+				tr.className = 'table_cols';
+				tr.classList.add(this.colClassName);
+			// 是否勾选ischeck( true / false )
+			if(this.ischeck){
+				var th = document.createElement('th');
+					th.id = 'ischeck_th';
+					th.className = 'ischeck_inp';
+				var input = document.createElement('input');
+					input.type = 'checkbox';
+					input.setAttribute('style','vertical-align: middle;');
+					var content = this.content;
+					input.onchange = function(e){
+						if(e.target.checked){
+							// 选中全选
+							alert('触发选中全选');
+							msCtools.Table.allCheck(content,true);
+						}else{
+							// 取消全选
+							alert('触发取消全选');
+							msCtools.Table.allCheck(content,false);
+						}
+					};
+				var span = document.createElement('span');
+					span.id = 'ischeck_title';
+					span.innerText = '全选';
+				th.appendChild(input);
+				th.appendChild(span);
+				tr.appendChild(th);
+			}
+			var lenn = this.cols.length;
+			for(var i=0;i<lenn;i++){
+				// 非隐藏
+				if( !this.cols[i].ishidden){
+					var th = document.createElement('th');
+						th.innerText = this.cols[i].title;
+					tr.appendChild(th);
+				}
+			}
+			thead.appendChild(tr);
+			return thead;
+		},
+		// 创建tbody
+		creatTbody:function(){
+			var tbody = document.createElement('tbody');
+			var lenn = this.data.length;
+			for(var i=0;i<lenn;i++){
+				var tr = document.createElement('tr');
+				// 是否开启隔行背景
+				if(this.style.even){
+					if(this.style.evenColor){
+						if(this.style.evenColor.length > 1){
+							var result = i % 2 == 0 ? this.style.evenColor[0] : this.style.evenColor[1];
+						}else{
+							var result = i % 2 == 0 ? '#ffffff' : '#e4e0e0';
+						}
+					}else{
+						var result = i % 2 == 0 ? '#ffffff' : '#e4e0e0';
+					}
+					tr.setAttribute('style','background-color:'+result)
+				}
+				// 是否勾选ischeck
+				if(this.ischeck){
+					var td = document.createElement('td');
+						td.className = 'ischeck_inp';
+					var input = document.createElement('input');
+						input.type = 'checkbox';
+						input.setAttribute('style','vertical-align: middle;');
+						input.setAttribute('set-data',this.data[i].id);
+						// var set_data1 = JSON.stringify(this.data[i]);
+						// input.setAttribute('set-data1',set_data1);
+						input.onchange = function(e){
+							if(e.target.checked){
+								// alert('触发选中')
+							}else{
+								// alert('触发取消')
+							}
+						};
+					td.appendChild(input);
+					tr.appendChild(td);
+				}
+				var lenn_cols = this.cols.length;
+				for(var f=0;f<lenn_cols;f++){
+					// 非隐藏
+					if( !this.cols[f].ishidden){
+						var td = document.createElement('td');
+						var span = document.createElement('span');
+						if(this.cols[f].render && typeof this.cols[f].render === 'function'){
+							// 执行render函数，传入行值和列值，并且获得返回值
+							let render = this.cols[f].render(this.data[i][this.cols[f].key], this.data[i]);
+							// 如果返回值是一个dom节点，则向td里插入节点
+							if(typeof render === "object") {
+								td.classList.add('toolBtn');
+								td.appendChild(render);
+							} else {
+								// 否则直接innerHTML
+								span.innerHTML = render;
+							}
+						}else{
+							// 直接插入对应值
+							span.innerText = this.data[i][this.cols[f].key];
+						}
+						var td_style = '';
+						// 设置对齐方式
+						if(this.cols[f].align){
+							td_style += 'text-align:'+this.cols[f].align+';';
+						}
+						// 设置列宽
+						if(this.cols[f].width){
+							td_style += 'width:'+this.cols[f].width+';';
+						}
+						// 设置满行溢出
+						var textOver = 1;
+						if(this.cols[f].textOver){
+							textOver = this.cols[f].textOver;
+						}
+						span.setAttribute('style','overflow : hidden; text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: '+textOver+'; -webkit-box-orient: vertical;');
+						td.setAttribute('style',td_style);
+						td.appendChild(span);
+						tr.appendChild(td);
+					}
+				}
+				tbody.appendChild(tr);
+			}
+			return tbody;
+		},
+		// 数据操作
+		tools:function(arry,data,cb){
+			let func = function(){};
+			if (cb && {}.toString.call(cb) === '[object Function]') {
+				func = cb
+			}
+			var lenn = arry.length;
+			var btns = document.createElement('div');
+				btns.classList.add('tooldivBtn');
+			for(var i=0;i<lenn;i++){
+				// 事件类型：type，文字：text，样式：classname
+				let element = document.createElement('a');
+				element.innerHTML = arry[i].text;
+				element.type = arry[i].type;
+				element.className = arry[i].classname;
+				var type = arry[i].type;
+				element.onclick = function(e){
+					// 回调函数：data点击行数据，type点击事件的执行类型：删除、修改....
+					func(data,e.target.type)
+				};
+				btns.appendChild(element)
+			}
+			return btns;
+		},
+		// 获取选中数据
+		getchecked:function(id){
+			var content = document.getElementById(id);
+			var table = content.querySelector('table');
+			var tbody = table.querySelector('tbody');
+			var node_checks = tbody.querySelectorAll('.ischeck_inp');
+			var data = [];
+			for(var i=0;i<node_checks.length;i++){
+				var item = node_checks[i];
+				var input = item.querySelector('input[type="checkbox"]');
+				if(input.checked){
+					// var itm = input.getAttribute('set-data1');
+					// 	itm = JSON.parse(itm);
+					var itm = input.getAttribute('set-data');
+					data.push(itm);
+				}
+			}
+			return data
+		},
+		// 全选/取消
+		allCheck:function(content,ischeck){
+			var table = content.querySelector('table');
+			var tbody = table.querySelector('tbody');
+			var node_checks = tbody.querySelectorAll('.ischeck_inp');
+			for(var i=0;i<node_checks.length;i++){
+				var item = node_checks[i];
+				var input = item.querySelector('input[type="checkbox"]');
+					input.checked = ischeck;
+			}
+		}
+	},
+};
+
+	var data = [
+			{id:'001', name:'还是等会计法恒生科技粉红色快递费数据库',age:12,job:'尽快尽快'},
+			{id:'002', name:'lili',age:12,job:'鼎折覆餗老看到集福卡了束带结发SDK福建省看到了附加速度快的说法可接受的开发收到了的看法是打开房间塞德里克肯德基首付款'},
+			{id:'003', name:'lili',age:12,job:'尽快尽快'}
+	];
+	msCtools.Table.init({
+		columns:[
+			{key: 'id',title: 'id', align: 'center',width:'60px'},
+			{key: 'name',title: '姓名', align: 'center',width:'60px'},
+			{key: 'age',title: '年龄',align: 'center',width:'60px'},
+			{key: 'job',title: '工作',align: 'center',
+					render:function (text, data){
+						return '<span style="color:green;">'+text+'</span>'
+					}
+			},
+			{key: 'tools',title: '操作',align: 'center',width:'200px',
+					render:function (text, data){
+						return msCtools.Table.tools([{
+								type:'del',
+								text:'删除',
+								classname:' toolBtn delBtn'
+							},{
+								type:'edit',
+								text:'修改',
+								classname:'toolBtn editBtn'
+							},{
+								type:'look',
+								text:'查看',
+								classname:'toolBtn lookBtn'
+							}],data,function(e,type){
+								// e:点击行数据
+								// type:点击事件执行类型--删除、修改、查看
+								if(type == 'del'){
+									alert('删除数据：');
+									// alert(e)
+								}else if(type == 'edit'){
+									alert('修改数据：');
+									// alert(e)
+								}else if(type == 'look'){
+									alert('查看数据：');
+									// alert(e)
+								}
+							})
+					}
+			},
+		],
+		dataSource:data,
+		width:'800px', // 宽度
+		ischeck:true, // 是否勾选
+        colClassName:'zdy_cols'
+	},'ctools_table');
+
+	function getdata(){
+		var data = msCtools.Table.getchecked('ctools_table');
+		alert(data);
+	}
+	</script>
+</html>
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+
+<!--<head>-->
+    <!--<meta charset="UTF-8">-->
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <!--<title>原生js实现树形表格</title>-->
+<!--</head>-->
+<!--<style>-->
+    <!--.icon-angle-left:before {-->
+        <!--content: '▶';-->
+    <!--}-->
+
+    <!--.icon-angle-down:before {-->
+        <!--content: '▼';-->
+    <!--}-->
+
+    <!--table {-->
+        <!--border-spacing: 0px;-->
+        <!--border-collapse: collapse;-->
+        <!--width: 50%;-->
+        <!--margin: 100px auto;-->
+        <!--border: rgb(221, 221, 221);-->
+    <!--}-->
+
+    <!--table tbody tr.level_odd{-->
+        <!--background-color: #FFF;-->
+    <!--}-->
+
+    <!--table tbody tr.level_even{-->
+        <!--background-color:  #f5f5f5;-->
+    <!--}-->
+
+    <!--.c_pointer{-->
+        <!--cursor: pointer;-->
+    <!--}-->
+<!--</style>-->
+
+<!--<body>-->
+    <!--<table border>-->
+        <!--<thead>-->
+            <!--<tr>-->
+                <!--<th>科目</th>-->
+                <!--<th>分数</th>-->
+            <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody id="myTbody"></tbody>-->
+    <!--</table>-->
+    <!--<script>-->
+        <!--// 树形结构层级转换-->
+        <!--treeList = [-->
+            <!--{-->
+                <!--name:'总分',-->
+                <!--grade:935-->
+            <!--},-->
+            <!--{-->
+                <!--name: '主课',-->
+                <!--grade: 375,-->
+                <!--childs: [-->
+                    <!--{-->
+                        <!--name: '语文',-->
+                        <!--grade: 125,-->
+                        <!--childs: [-->
+                            <!--{-->
+                                <!--name: '作文',-->
+                                <!--grade: 55-->
+                            <!--}, {-->
+                                <!--name: '其他',-->
+                                <!--grade: 70-->
+                            <!--}-->
+                        <!--]-->
+                    <!--},-->
+                    <!--{-->
+                        <!--name: '数学',-->
+                        <!--grade: 125-->
+                    <!--},-->
+                    <!--{-->
+                        <!--name: '英语',-->
+                        <!--grade: 125-->
+                    <!--}-->
+                <!--]-->
+            <!--},-->
+            <!--{-->
+                <!--name: '文综',-->
+                <!--grade: 290,-->
+                <!--childs: [-->
+                    <!--{-->
+                        <!--name: '历史',-->
+                        <!--grade: 100,-->
+                    <!--},-->
+                    <!--{-->
+                        <!--name: '政治',-->
+                        <!--grade: 95-->
+                    <!--},-->
+                    <!--{-->
+                        <!--name: '地理',-->
+                        <!--grade: 95-->
+                    <!--}-->
+                <!--]-->
+            <!--},-->
+            <!--{-->
+                <!--name: '理综',-->
+                <!--grade: 270,-->
+                <!--childs: [-->
+                    <!--{-->
+                        <!--name: '物理',-->
+                        <!--grade: 80-->
+                    <!--},-->
+                    <!--{-->
+                        <!--name: '生物',-->
+                        <!--grade: 100-->
+                    <!--},-->
+                    <!--{-->
+                        <!--name: '化学',-->
+                        <!--grade: 90-->
+                    <!--}-->
+                <!--]-->
+            <!--}-->
+        <!--]-->
+        <!--const fIdChildMapList = {}-->
+        <!--const trStatus = {}-->
+        <!--function flatAndaddSpace(tree, pre = '', idPre = '', pid = '', plevel = 0) {-->
+            <!--let data = []-->
+            <!--const len = tree.length-->
+            <!--for (let i = 0; i < len; i++) {-->
+                <!--if (fIdChildMapList[pid]) {-->
+                    <!--fIdChildMapList[pid].push(idPre + i)-->
+                <!--} else {-->
+                    <!--fIdChildMapList[pid] = [idPre + i]-->
+                <!--}-->
+                <!--tree[i].preSpace = pre-->
+                <!--tree[i].f_id = idPre + i-->
+                <!--tree[i].level = plevel + 1-->
+                <!--trStatus[idPre + i] = true-->
+                <!--const obj = {}-->
+                <!--Object.keys(tree[i]).forEach(key => {-->
+                    <!--if (key != 'childs') {-->
+                        <!--obj[key] = tree[i][key] === null ? '-' : tree[i][key]-->
+                    <!--}-->
+                <!--})-->
+                <!--data.push(obj)-->
+                <!--if (tree[i].childs) {-->
+                    <!--let currentPre = pre + '&nbsp;&nbsp;'-->
+                    <!--data = data.concat(flatAndaddSpace(tree[i].childs, currentPre, tree[i].f_id + '-', tree[i].f_id, tree[i].level))-->
+                <!--}-->
+            <!--}-->
+            <!--return data-->
+        <!--}-->
+
+        <!--const handleData = flatAndaddSpace(treeList, '', '', '-1')-->
+        <!--/**-->
+        <!--*-->
+        <!--* @param {string} curId-->
+        <!--* @param {boolean} showChild-->
+        <!--* @returns-->
+        <!--*/-->
+        <!--function getWillHideFId(curId) {-->
+            <!--if (!fIdChildMapList[curId]) return []-->
+            <!--var rst = fIdChildMapList[curId]-->
+            <!--fIdChildMapList[curId].forEach(key => {-->
+                <!--rst = rst.concat(getWillHideFId(key))-->
+            <!--})-->
+            <!--return rst-->
+        <!--}-->
+
+        <!--const createTr = data => {-->
+            <!--const tr = document.createElement('tr')-->
+            <!--let level = data.level % 2 !== 0 ? 'odd' : 'even'-->
+            <!--let icon = fIdChildMapList[data.f_id] ? '<i class="icon icon-angle-left"></i>' : '<i class="icon none"></i>'-->
+            <!--tr.className = `f_id_${data.f_id} level_${level} tree_table_tr ${fIdChildMapList[data.f_id] ?'c_pointer':''}`-->
+            <!--tr.setAttribute('f_id', data.f_id)-->
+            <!--const str = `-->
+            <!--<td>-->
+                <!--${data.preSpace}-->
+                <!--${icon}-->
+                <!--${data.name}-->
+            <!--</td>-->
+            <!--<td>${data.grade}</td>`-->
+            <!--tr.innerHTML = str-->
+            <!--tr.addEventListener('click', function () {-->
+                <!--handleClick(this)-->
+            <!--})-->
+            <!--return tr-->
+        <!--}-->
+
+        <!--function init() {-->
+            <!--const myTbody = document.querySelector('#myTbody')-->
+            <!--handleData.forEach(item => {-->
+                <!--if (fIdChildMapList['-1'].includes(item.f_id)) {-->
+                    <!--myTbody.appendChild(createTr(item))-->
+                <!--}-->
+            <!--})-->
+        <!--}-->
+        <!--init()-->
+
+        <!--/**-->
+         <!--* @param {HTMLElement} ele-->
+         <!--*/-->
+        <!--function handleClick(ele) {-->
+            <!--const fid = ele.getAttribute('f_id')-->
+            <!--const showChild = trStatus[fid]-->
+            <!--handShowAndHide(fid, showChild, ele)-->
+            <!--trStatus[fid] = !showChild-->
+            <!--let iconClass = showChild ? "icon icon-angle-down" : "icon icon-angle-left"-->
+            <!--if (ele.firstElementChild.firstElementChild.className.indexOf('none') === -1) {-->
+                <!--ele.firstElementChild.firstElementChild.className = iconClass-->
+                <!--ele.firstElementChild.firstElementChild.className = iconClass-->
+
+            <!--}-->
+        <!--}-->
+
+        <!--function handShowAndHide(fid, showChild, ele) {-->
+            <!--if (!showChild) {-->
+                <!--// 关闭-->
+                <!--getWillHideFId(fid).forEach(id => {-->
+                    <!--if (document.querySelector(`.f_id_${id}`))-->
+                        <!--document.querySelector(`.f_id_${id}`).style.display = "none"-->
+                    <!--let className = fIdChildMapList[id] ? "icon icon-angle-left" : "icon none"-->
+                    <!--document.querySelector(`.f_id_${id}`).firstElementChild.firstElementChild.className = className-->
+                    <!--trStatus[id] = false-->
+                <!--})-->
+            <!--} else {-->
+                <!--(fIdChildMapList[fid] || []).forEach(id => {-->
+                    <!--if (document.querySelector(`.f_id_${id}`)) {-->
+                        <!--document.querySelector(`.f_id_${id}`).style.display = "table-row"-->
+                    <!--} else {-->
+                        <!--const tr = createTr(handleData.filter(item => item.f_id === id)[0])-->
+                        <!--document.querySelector('#myTbody').insertBefore(tr, ele.nextSibling)-->
+                    <!--}-->
+                    <!--trStatus[id] = true-->
+                <!--})-->
+            <!--}-->
+        <!--}-->
+    <!--</script>-->
+<!--</body>-->
+
+<!--</html>-->
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="zh">-->
+<!--<head>-->
+    <!--<meta charset="UTF-8">-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <!--<meta http-equiv="X-UA-Compatible" content="ie=edge">-->
+    <!--<title>Document</title>-->
+    <!--<style type="text/css">-->
+        <!--#box {-->
+            <!--width: 600px;-->
+            <!--height: 600px;-->
+            <!--margin: 100px auto;-->
+        <!--}-->
+
+        <!--table {-->
+            <!--width: 100%;-->
+            <!--border: 1px solid #ccc;-->
+            <!--border-spacing: 0;-->
+            <!--border-collapse: collapse;-->
+            <!--text-align: center;-->
+        <!--}-->
+
+        <!--table td {-->
+            <!--border: 1px solid #ccc;-->
+        <!--}-->
+    <!--</style>-->
+    <!--<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css">-->
+<!--&lt;!&ndash;    popper.min.js 用于弹窗、提示、下拉菜单&ndash;&gt;-->
+<!--&lt;!&ndash;    <script src="https://cdn.staticfile.org/popper.js/2.9.3/umd/popper.min.js"></script>&ndash;&gt;-->
+
+<!--&lt;!&ndash; 最新的 Bootstrap5 核心 图标文件 &ndash;&gt;-->
+
+<!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">-->
+<!--<![endif]&ndash;&gt;-->
+<!--</head>-->
+
+<!--<body>-->
+
+<!--<table class="table table-hover table-bordered" id="mytable">-->
+    <!--<thead>-->
+        <!--<tr>-->
+            <!--<th>选中</th>-->
+            <!--<th>编号</th>-->
+            <!--<th>姓名</th>-->
+            <!--<th>密码</th>-->
+            <!--<th>生日</th>-->
+            <!--<th>地址</th>-->
+            <!--<th>操作</th>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td><input type="checkbox" οnclick="checkAll(this)"/></td>-->
+            <!--<td colspan="6"><a href="javascript:;" class="btn btn-danger" role="button" οnclick="delAll(this)">全部删除</a></td>-->
+        <!--</tr>-->
+    <!--</thead>-->
+    <!--<tbody id="listTable">-->
+        <!--<tr>-->
+            <!--<td><input type="checkbox" name="item" /></td>-->
+            <!--<td>100806131234</td>-->
+            <!--<td>劈日e斩月</td>-->
+            <!--<td>123456</td>-->
+            <!--<td>1995-08-07</td>-->
+            <!--<td>北京市朝阳区艾欧尼亚</td>-->
+            <!--<td>-->
+                <!--<input type="button" name="" value="删除" class="btn btn-danger" οnclick="del(this)" />-->
+                <!--<input type="button" name="" value="修改" class="btn btn-info" οnclick="modify(this)" />-->
+            <!--</td>-->
+        <!--</tr>-->
+    <!--</tbody>-->
+<!--</table>-->
+<!--<h1>新增数据</h1>-->
+<!--<form>-->
+    <!--<table class="table table-hover table-bordered">-->
+        <!--<tr>-->
+            <!--<th>编号</th>-->
+            <!--<td><input type="text" name="" class="form-control" id="num" /></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<th>姓名</th>-->
+            <!--<td><input type="text" name="" class="form-control" id="username" /></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<th>密码</th>-->
+            <!--<td><input type="password" name="" class="form-control" id="pwd" /></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<th>生日</th>-->
+            <!--<td><input type="date" name="" class="form-control" id="birth" /></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<th>地址</th>-->
+            <!--<td><input type="text" name="" class="form-control" id="addre" /></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td colspan="2">-->
+                <!--<input type="reset" value="重置" class="btn btn-primary" id="reset" />-->
+                <!--<input type="button" value="添加"  class="btn btn-success" id="add"  οnclick="addList()" />-->
+                <!--<input type="button" value="更新"  class="btn btn-info" id=""  οnclick="update()" />-->
+            <!--</td>-->
+        <!--</tr>-->
+    <!--</table>-->
+<!--</form>-->
+
+<!--<div id="box">-->
+<!--</div>-->
+<!--//此处要改路径-->
+<!--<script>-->
+   <!--function addList(){-->
+        <!--var oNum = document.getElementById('num').value;-->
+        <!--var oUser = document.getElementById('username').value;-->
+        <!--var oPwd = document.getElementById('pwd').value;-->
+        <!--var oBirth = document.getElementById('birth').value;-->
+        <!--var oAddre = document.getElementById('addre').value;-->
+        <!--var oTr = document.createElement('tr');-->
+        <!--var oTd1 = document.createElement('td');-->
+        <!--var oInput = document.createElement('input');-->
+        <!--oTd1.appendChild(oInput);-->
+        <!--oInput.setAttribute('type','checkbox');-->
+        <!--oInput.setAttribute('name','item');-->
+        <!--var oTd2 = document.createElement('td');-->
+        <!--oTd2.innerHTML = oNum;-->
+        <!--var oTd3 = document.createElement('td');-->
+        <!--oTd3.innerHTML = oUser;-->
+        <!--var oTd4 = document.createElement('td');-->
+        <!--oTd4.innerHTML = oPwd;-->
+        <!--var oTd5 = document.createElement('td');-->
+        <!--oTd5.innerHTML = oBirth;-->
+        <!--var oTd6 = document.createElement('td');-->
+        <!--oTd6.innerHTML = oAddre;-->
+        <!--var oTd7 = document.createElement('td');-->
+        <!--var oInput2 = document.createElement('input');-->
+        <!--var oInput3 = document.createElement('input');-->
+        <!--oInput2.setAttribute('type','button');-->
+        <!--oInput2.setAttribute('value','删除');-->
+        <!--oInput2.setAttribute('onclick','del(this)');-->
+        <!--oInput2.className = 'btn btn-danger';-->
+        <!--oInput3.setAttribute('type','button');-->
+        <!--oInput3.setAttribute('value','修改');-->
+        <!--oInput3.setAttribute('onclick','modify(this)');-->
+        <!--oInput3.className = 'btn btn-info';-->
+        <!--oTd7.appendChild(oInput2);-->
+        <!--oTd7.appendChild(oInput3);-->
+        <!--oTr.appendChild(oTd1);-->
+        <!--oTr.appendChild(oTd2);-->
+        <!--oTr.appendChild(oTd3);-->
+        <!--oTr.appendChild(oTd4);-->
+        <!--oTr.appendChild(oTd5);-->
+        <!--oTr.appendChild(oTd6);-->
+        <!--oTr.appendChild(oTd7);-->
+        <!--var olistTable = document.getElementById('listTable');-->
+        <!--olistTable.appendChild(oTr);-->
+    <!--}-->
+
+<!--function del(obj){-->
+        <!--var oParentnode = obj.parentNode.parentNode;-->
+        <!--var olistTable = document.getElementById('listTable');-->
+        <!--olistTable.removeChild(oParentnode);-->
+    <!--}-->
+<!--//全选-->
+    <!--function checkAll(c){-->
+        <!--var status = c.checked;-->
+        <!--var oItems = document.getElementsByName('item');-->
+        <!--for(var i=0;i<oItems.length;i++){-->
+            <!--oItems[i].checked=status;-->
+        <!--}-->
+    <!--}-->
+    <!--//delAll功能-->
+    <!--function delAll(){-->
+        <!--var olistTable = document.getElementById('listTable');-->
+        <!--var items = document.getElementsByName("item");-->
+        <!--for(var j=0;j<items.length;j++){-->
+            <!--if(items[j].checked)//如果item被选中-->
+            <!--{-->
+                <!--var oParentnode = items[j].parentNode.parentNode;-->
+                <!--olistTable.removeChild(oParentnode);-->
+                <!--j&#45;&#45;;-->
+            <!--}-->
+        <!--}-->
+    <!--}-->
+<!--//修改功能-->
+    <!--function modify(obj){-->
+        <!--var oNum = document.getElementById('num');-->
+        <!--var oUser = document.getElementById('username');-->
+        <!--var oPwd = document.getElementById('pwd');-->
+        <!--var oBirth = document.getElementById('birth');-->
+        <!--var oAddre = document.getElementById('addre');-->
+        <!--var oTr = obj.parentNode.parentNode;-->
+        <!--var aTd = oTr.getElementsByTagName('td');-->
+        <!--rowIndex = obj.parentNode.parentNode.rowIndex;-->
+        <!--oNum.value = aTd[1].innerHTML;-->
+        <!--oUser.value = aTd[2].innerHTML;-->
+        <!--oPwd.value = aTd[3].innerHTML;-->
+        <!--oBirth.value = aTd[4].innerHTML;-->
+        <!--oAddre.value = aTd[5].innerHTML;-->
+        <!--alert(aTd[4].innerHTML);-->
+        <!--//alert(i);-->
+
+    <!--}-->
+    <!--//更新功能-->
+    <!--function update(){-->
+        <!--var oNum = document.getElementById('num');-->
+        <!--var oUser = document.getElementById('username');-->
+        <!--var oPwd = document.getElementById('pwd');-->
+        <!--var oBirth = document.getElementById('birth');-->
+        <!--var oAddre = document.getElementById('addre');-->
+        <!--var oMytable = document.getElementById('mytable');-->
+        <!--//alert(rowIndex);-->
+        <!--//var aTd = rowIndex.cells;-->
+        <!--alert(oMytable.rows[rowIndex].cells)-->
+        <!--oMytable.rows[rowIndex].cells[1].innerHTML = oNum.value;-->
+        <!--oMytable.rows[rowIndex].cells[2].innerHTML = oUser.value;-->
+        <!--oMytable.rows[rowIndex].cells[3].innerHTML = oPwd.value;-->
+        <!--oMytable.rows[rowIndex].cells[4].innerHTML = oBirth.value;-->
+        <!--oMytable.rows[rowIndex].cells[5].innerHTML = oAddre.value;-->
+    <!--}-->
+
+<!--//-->
+<!--//   var box = document.getElementById('box');-->
+<!--// var arr = [-->
+<!--// 	["姓名", "昵称", "年龄", "性别", "爱好"],-->
+<!--// 	["刘备", "小刘", 58, "男", "吃饭睡觉玩游戏1"],-->
+<!--// 	["关羽", "官二", 47, "男", "吃饭睡觉玩游戏2"],-->
+<!--// 	["张飞", "张三", 45, "男", "吃饭睡觉玩游戏3"],-->
+<!--// 	["小乔", "乔二", 18, "女", "吃饭睡觉"],-->
+<!--// 	["熊大", "狗熊", 5, "男", "康师傅红烧方便面"],-->
+<!--// ];-->
+<!--// var table = document.createElement("table");-->
+<!--// var tbody = document.createElement("tbody");-->
+<!--//-->
+<!--//-->
+<!--// var tdd2 = document.createElement("td");-->
+<!--// for (var i = 0; i < arr.length; i++) {-->
+<!--// 	var tr = document.createElement("tr");-->
+<!--// 	var td = document.createElement("td");-->
+<!--// 	td.innerHTML = '<input type="checkbox" value="删除" class="xz">';-->
+<!--// 	var tdd = document.createElement("td");-->
+<!--// 	if (i == 0) {-->
+<!--// 		tdd.innerHTML = "#";-->
+<!--// 	} else {-->
+<!--// 		tdd.innerHTML = i;-->
+<!--// 	}-->
+<!--// 	tr.appendChild(td);-->
+<!--// 	tr.appendChild(tdd);-->
+<!--//-->
+<!--// 	for (var j = 0; j < arr[i].length; j++) {-->
+<!--// 		var td = document.createElement("td");-->
+<!--// 		td.innerHTML = arr[i][j];-->
+<!--// 		tr.appendChild(td);-->
+<!--// 	}-->
+<!--// 	var td = document.createElement("td");-->
+<!--//-->
+<!--// 	td.innerHTML = '<input type="button" value="×" class="delBtn">';-->
+<!--// 	tr.appendChild(td);-->
+<!--// 	tbody.appendChild(tr);-->
+<!--// 	table.appendChild(tbody);-->
+<!--// }-->
+<!--// box.appendChild(table);-->
+<!--//-->
+<!--//-->
+<!--// var delBtn = document.getElementsByClassName("delBtn");-->
+<!--// for (var i = 1; i < delBtn.length; i++) {-->
+<!--// 	delBtn[i].onclick = function () {-->
+<!--// 		var currentTr = this.parentElement.parentElement;-->
+<!--// 		currentTr.parentElement.removeChild(currentTr);-->
+<!--// 		//实现点击按钮排序-->
+<!--// 		for (var y = 1; y < delBtn.length; y++){-->
+<!--// 		tbody.children[y].children[1].innerHTML = y;-->
+<!--// 		}-->
+<!--//-->
+<!--// 	}-->
+<!--// }-->
+<!--// delBtn[0].style.display = "none";-->
+<!--// var span1 = document.createElement('span');-->
+<!--// span1.innerHTML = "操作";-->
+<!--// delBtn[0].parentElement.appendChild(span1);-->
+<!--//-->
+<!--// var ak47 = tbody.firstElementChild;-->
+<!--// ak47.style.fontWeight = "700";-->
+<!--// //全选-->
+<!--// window.onload = function () {-->
+<!--// 	var tab = document.querySelectorAll(".xz");-->
+<!--// 	var stab = document.querySelector(".xz");-->
+<!--// 	stab.onclick = function () {-->
+<!--// 		for (var e = 0; e < tab.length; e++) {-->
+<!--// 			if (e >= 1) {-->
+<!--// 				tab[e].checked = "checked";-->
+<!--// 				//当下面的被点击时 控制全选按钮,解除全选-->
+<!--// 				tab[e].onclick = function () {-->
+<!--// 					if (stab.checked) {-->
+<!--// 						stab.checked = false;-->
+<!--// 					}-->
+<!--//-->
+<!--// 					//当下面的全都选中了,控制点击按钮自动表现为全选-->
+<!--// 					var ad = 0;-->
+<!--// 					for (var s = 0; s < tab.length; s++) {-->
+<!--// 						if (tab[s].checked) {-->
+<!--// 							ad++;-->
+<!--// 						}-->
+<!--// 					}-->
+<!--// 					if (ad == tab.length - 1) {-->
+<!--// 						stab.checked = true;-->
+<!--// 						ad = 0;-->
+<!--// 					}-->
+<!--// 				}-->
+<!--// 				//全选状态下,点击全选按钮实现反选-->
+<!--// 				if (stab.checked == true) {-->
+<!--// 					for (var n = 0; n < tab.length; n++) {-->
+<!--// 						tab[n].checked = false;-->
+<!--// 					}-->
+<!--// 				} else {-->
+<!--// 					for (var n = 0; n < tab.length; n++) {-->
+<!--// 						tab[n].checked = true;-->
+<!--// 					}-->
+<!--// 				}-->
+<!--// 			}-->
+<!--// 		}-->
+<!--// 	}-->
+<!--// }-->
+<!--//-->
+<!--//-->
+
+<!--</script>-->
+<!--// </body>-->
+<!--// </html>-->

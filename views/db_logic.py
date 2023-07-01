@@ -50,6 +50,7 @@ class db_logic:
         self.__cache_list = self.__table_name + '_cache_list'
 
         print('self.__table_name: ', self.__table_name)
+
     #####################################################################
 
     def get_one(self, wheres):
@@ -63,7 +64,7 @@ class db_logic:
     def get_for_pk(self, pk):
         """通过主键值获取数据库记录实体"""
 
-        return self.get_one(getattr(self.__model,self.__pk_name) == str(pk))
+        return self.get_one(getattr(self.__model, self.__pk_name) == str(pk))
 
     def get_value(self, column_name, wheres=''):
         """
@@ -168,7 +169,108 @@ class db_logic:
 
         return self.delete(wheres)
 
-    def get_list(self, column_name_list='', wheres='', page_number=None, page_size=None,  orderby=None,table_name=None):
+    #
+    # def get_list(self, column_name_list='', wheres='', page_number=None, page_size=None, orderby=None, table_name=None):
+    #     """
+    #     获取指定条件的数据库记录集
+    #     :param column_name_list:      查询字段
+    #     :param wheres:      查询条件
+    #     :param page_number:   分页索引值
+    #     :param page_size:    分页大小， 存在值时才会执行分页
+    #     :param orderby:     排序规则
+    #     :param table_name:     查询数据表，多表查询时需要设置
+    #     :return: 返回记录集总数量与分页记录集
+    #         {'records': 0, 'total': 0, 'page': 0, 'rows': []}
+    #     """
+    #     # 初始化输出参数：总记录数量与列表集
+    #     data = {
+    #         'records': 0,  # 总记录数
+    #         'total': 0,  # 总页数
+    #         'page': 1,  # 当前页面索引
+    #         'rows': [],  # 查询结果（记录列表）
+    #     }
+    #     print('wheres0', wheres)
+    #     # 初始化查询字段名
+    #     if column_name_list:
+    #         # print('column_name_list ', column_name_list)
+    #         result = self.__model.select(*column_name_list)
+    #     else:
+    #         result = self.__model.select()
+    #     # print('012')
+    #     # 初始化查询条件
+    #     if wheres:
+    #         # 如果是字符串，表示该查询条件已组装好了，直接可以使用
+    #         # 如果是list，则表示查询条件有多个，可以使用join将它们用and方式组合起来使用
+    #         # print('wheres1', wheres)
+    #         if isinstance(wheres, (list, tuple)):
+    #             wheres = reduce(operator.and_, wheres)  # join('%s' %id for id in wheres)
+    #         #     print('wheres2', wheres)
+    #         result = result.where(wheres)
+    #
+    #     # 初始化排序
+    #     if not orderby:
+    #         # print('self.__pk_name',getattr(self.__model,self.__pk_name))
+    #         # print('self.__model', self.__model.__name__)
+    #         # n=self.__model.__name__+'.'+self.__pk_name
+    #
+    #         # print('012', n)
+    #         orderby = getattr(self.__model, self.__pk_name).desc()
+    #         # print('012', orderby)
+    #     result = result.order_by(orderby)
+    #     # result = result.order_by(self.__model.id.desc)
+    #     # 初始化分页查询的记录区间
+    #
+    #     # print('0123')
+    #     # paging = ''
+    #
+    #     # 判断是否需要进行分页
+    #     if page_size is not None:
+    #         # ### 执行sql，获取指定条件的记录总数量
+    #         # sql = 'select count(1) as records from %(table_name)s %(wheres)s ' % \
+    #         #       {'table_name': table_name, 'wheres': wheres}
+    #         # result = db.execute(sql)
+    #
+    #         # 如果查询失败或不存在指定条件记录，则直接返回初始值
+    #         if not result or result.count() == 0:
+    #             return data
+    #
+    #         # 设置记录总数量
+    #         data['records'] = result.count()
+    #         # print(' result.count()1', result.count())
+    #         #########################################################
+    #         ### 设置分页索引与页面大小 ###
+    #         if page_size <= 0:
+    #             page_size = 10
+    #         # 计算总分页数量：通过总记录数除于每页显示数量来计算总分页数量
+    #         if data['records'] % page_size == 0:
+    #             page_total = data['records'] // page_size
+    #         else:
+    #             page_total = data['records'] // page_size + 1
+    #         # 判断页码是否超出限制，超出限制查询时会出现异常，所以将页面索引设置为最后一页
+    #         if page_number < 1 or page_number > page_total:
+    #             page_number = page_total
+    #         # 记录总页面数量
+    #         data['total'] = page_total
+    #         # 记录当前页面值
+    #         data['page'] = page_number
+    #         # 计算当前页面要显示的记录起始位置（limit指定的位置）
+    #         record_number = (page_number - 1) * page_size or page_number  * page_size
+    #         # print(' record_number ',record_number,page_size )
+    #         #############################################################
+    #         ### 按条件查询数据库记录
+    #         result = result.paginate(page_number, record_number)
+    #         # results=[r for r in result]#[r.name,r.icon,r.sort,r.is_show,r.is_enabled]
+    #     # else:
+    #     #     result = result.execute()
+    #     if result:
+    #         data['rows'] = result  # [r for r in result]
+    #         # 不需要分页查询时，直接在这里设置总记录数
+    #         if page_size is None:
+    #             data['records'] = result.count()
+    #     # print(' result.count()', result.count()), print(' result()', result)
+    #     return data
+
+    def get_list(self, column_name_list='', wheres='', page_number=None, page_size=None, orderby=None, joins=None):
         """
         获取指定条件的数据库记录集
         :param column_name_list:      查询字段
@@ -176,7 +278,7 @@ class db_logic:
         :param page_number:   分页索引值
         :param page_size:    分页大小， 存在值时才会执行分页
         :param orderby:     排序规则
-        :param table_name:     查询数据表，多表查询时需要设置
+        :param join:     查询数据表，多表查询时需要设置
         :return: 返回记录集总数量与分页记录集
             {'records': 0, 'total': 0, 'page': 0, 'rows': []}
         """
@@ -187,23 +289,27 @@ class db_logic:
             'page': 1,  # 当前页面索引
             'rows': [],  # 查询结果（记录列表）
         }
-        print('wheres0', wheres)
+        # print('wheres0', wheres)
         # 初始化查询字段名
         if column_name_list:
-            print('column_name_list ',column_name_list)
+            # print('column_name_list ', column_name_list)
             result = self.__model.select(*column_name_list)
         else:
             result = self.__model.select()
         # print('012')
         # 初始化查询条件
+        if joins :
+            print('0123')
+            result = self.__model.select().join(joins)
         if wheres:
-                # 如果是字符串，表示该查询条件已组装好了，直接可以使用
-                # 如果是list，则表示查询条件有多个，可以使用join将它们用and方式组合起来使用
-                # print('wheres1', wheres)
-                if isinstance(wheres,( list,tuple)):
-                    wheres =reduce(operator.and_, wheres) #join('%s' %id for id in wheres)
-                #     print('wheres2', wheres)
-                result = result.where(wheres)
+            # 如果是字符串，表示该查询条件已组装好了，直接可以使用
+            # 如果是list，则表示查询条件有多个，可以使用join将它们用and方式组合起来使用
+            # print('wheres1', wheres)
+            if isinstance(wheres, (list, tuple)):
+                wheres = reduce(operator.and_, wheres)  # join('%s' %id for id in wheres)
+            #     print('wheres2', wheres)
+            result = result.where(wheres)
+        # print(' result', result)
 
         # 初始化排序
         if not orderby:
@@ -212,17 +318,17 @@ class db_logic:
             # n=self.__model.__name__+'.'+self.__pk_name
 
             # print('012', n)
-            orderby = getattr(self.__model,self.__pk_name).desc()
+            orderby = getattr(self.__model, self.__pk_name).desc()
             # print('012', orderby)
         result = result.order_by(orderby)
-            # result = result.order_by(self.__model.id.desc)
+        # result = result.order_by(self.__model.id.desc)
         # 初始化分页查询的记录区间
 
         # print('0123')
         # paging = ''
 
         # 判断是否需要进行分页
-        if not page_size is None:
+        if page_size is not None:
             # ### 执行sql，获取指定条件的记录总数量
             # sql = 'select count(1) as records from %(table_name)s %(wheres)s ' % \
             #       {'table_name': table_name, 'wheres': wheres}
@@ -252,15 +358,15 @@ class db_logic:
             # 记录当前页面值
             data['page'] = page_number
             # 计算当前页面要显示的记录起始位置（limit指定的位置）
-            record_number = (page_number - 1) * page_size
+            record_number = (page_number - 1) * page_size or page_number * page_size
             #############################################################
             ### 按条件查询数据库记录
-            result = result.paginate(page_size, record_number)
+            result = result.paginate(page_number, record_number)
             # results=[r for r in result]#[r.name,r.icon,r.sort,r.is_show,r.is_enabled]
         # else:
         #     result = result.execute()
         if result:
-            data['rows'] =result#[r for r in result]
+            data['rows'] = result  # [r for r in result]
             # 不需要分页查询时，直接在这里设置总记录数
             if page_size is None:
                 data['records'] = result.count()
@@ -409,7 +515,7 @@ class db_logic:
         if result:
             # 存储条件对应的主键id值到缓存中
             # pk_name = result.__getattribute__(self.__pk_name)
-            pk_name =getattr( result,self.__pk_name)
+            pk_name = getattr(result, self.__pk_name)
             # print('12345678:  ',pk_name)
             # print('12345678:  ',result.__getattribute__(self.__pk_name))
             cache_helper.set(model_cache_key, pk_name)
@@ -420,7 +526,7 @@ class db_logic:
 
     def get_value_for_cache(self, pk, column_name):
         """获取指定记录的字段值"""
-        return getattr(self.get_model_for_cache(pk),column_name)
+        return getattr(self.get_model_for_cache(pk), column_name)
 
     def del_model_for_cache(self, pk):
         """删除缓存中指定数据"""
@@ -497,13 +603,13 @@ class db_logic:
         for model in result.get('rows', {}):
             # 提取菜单页面对应的接口（后台菜单管理中的接口值，同一个菜单操作时，经常需要访问多个接口，所以这个值有中存储多们接口值）
             # interface_url = model.get('interface_url', '')
-            interface_url =getattr(model,'interface_url', '')
+            interface_url = getattr(model, 'interface_url', '')
             # print(' interfacemodel: ', model)
             # print(' interface_url: ',interface_url)
             if not interface_url:
                 continue
             # 获取前端html页面地址
-            page_url =getattr( model,'page_url', '')
+            page_url = getattr(model, 'page_url', '')
             # print(' page_url: ',page_url)
             # 同一页面接口可能有多个，所以需要进行分割
             interface_url_arr = interface_url.replace('\n', '').replace(' ', '').split(',')

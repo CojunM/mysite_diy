@@ -2,7 +2,8 @@
 # coding=utf-8
 
 # from common import cache_helper, convert_helper, encrypt_helper
-from brick.contrib import encrypt_helper, convert_helper, cache_helper
+from brick.contrib import encrypt_helper, convert_helper
+from brick.contrib.cache_helper import cache
 
 
 def check_operation_times(operation_name, limiting_frequency, ip, is_add=True):
@@ -27,7 +28,7 @@ def check_operation_times(operation_name, limiting_frequency, ip, is_add=True):
     ### 判断用户操作次数，超出次数限制执行 ###
     # 获取当前用户已记录操作次数
     operation_times_key = operation_name + '_' + encrypt_helper.md5(operation_name + ip)
-    operation_times = convert_helper.to_int0(cache_helper.get(operation_times_key))
+    operation_times = convert_helper.to_int0(cache.get_value(operation_times_key))
 
     # 如果系统限制了出错次数，且当前用户已超出限制，则返回错误
     if limiting_frequency and operation_times >= limiting_frequency:
@@ -35,9 +36,10 @@ def check_operation_times(operation_name, limiting_frequency, ip, is_add=True):
 
     if is_add:
         # 记录操作次数，默认在缓存中存储10分钟
-        cache_helper.set(operation_times_key, operation_times + 1, 600)
+        cache.set_value(operation_times_key, operation_times + 1, 600)
 
     return True, '', operation_times_key, operation_times
+
 
 
 def add_operation_times(operation_times_key):
@@ -47,9 +49,9 @@ def add_operation_times(operation_times_key):
     operation_times_key 缓存key
     """
     # 获取当前用户已记录操作次数
-    get_operation_times = convert_helper.to_int0(cache_helper.get(operation_times_key))
+    get_operation_times = convert_helper.to_int0(cache.get_value(operation_times_key))
     # 记录获取次数
-    cache_helper.set(operation_times_key, get_operation_times + 1, 600)
+    cache.set_value(operation_times_key, get_operation_times + 1, 600)
 
 
 def del_operation_times(operation_times_key):
@@ -58,8 +60,8 @@ def del_operation_times(operation_times_key):
     参数：
     operation_times_key 缓存key
     """
-    # 记录获取次数
-    cache_helper.delete(operation_times_key)
+
+    cache.clear_value(operation_times_key)
 
 
 def check_login_power(id, k, t, sessionid):

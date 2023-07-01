@@ -3,7 +3,7 @@
 # @Time    : 2020/9/26 0026 20:23
 # @Author  : Cojun  Mao
 # @Site    : 
-# @File    : model.py
+# @File    : models.py
 # @Project : mysite_diy
 # @Software: PyCharm
 import collections

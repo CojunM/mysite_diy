@@ -152,8 +152,9 @@
             <div class="">
                 <div class="input-group mb-3">
                      <span class="input-group-text "><i
-                                        class="bi bi-person-fill "></i></span>
-                    <input type="text" id="username" name="username" class="form-control" placeholder="用户名" required autofocus
+                             class="bi bi-person-fill "></i></span>
+                    <input type="text" id="username" name="username" class="form-control" placeholder="用户名" required
+                           autofocus
                            autofocus>
                     <!--<input type="text" name="username" id="username"class="form-control" placeholder="用户名" required  oninvalid="setCustomValidity('不能为空')"  oninput="setCustomValidity('')" autofocus>-->
                 </div>
@@ -167,9 +168,9 @@
                     <div class="text">请拖动滑块验证</div>
                     <div class="btn">&gt;&gt;</div>
                 </div>
-                  <div class="  text-center ">
-                                    <h5 id="msg" ></h5>
-                                </div>
+                <div class="  text-center ">
+                    <h5 id="msg"></h5>
+                </div>
                 <div class="  text-center mb-3">
                     <button id="login_btn" disabled onclick="loginIn()" type="button"
                             class="btn1 btn-primary float-right px-4  mt-2 ">登录
@@ -286,7 +287,7 @@
         *error ：可缺省，function代表失败的回调函数,该函数第一个形参代表请求的状态码
     */
     function ajax1(obj) {
-        var type = obj.type || 'GET',//默认是GET
+        let type = obj.type || 'GET',//默认是GET
             url = obj.url,
             asny = obj.asny !== false,
             data = '',
@@ -295,17 +296,24 @@
             error = obj.error;
 
 
+        let xhr = null;//创建XMLHttpRequest
+        // if (window.XMLHttpRequest) {
+        //     // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+        //     xhr = new XMLHttpRequest();
+        // }
+        // else {
+        //     // IE6, IE5 浏览器执行代码
+        //     xhr=new ActiveXObject("Microsoft.XMLHTTP");
+        // }
 
-        var xhr=null;//创建XMLHttpRequest
-        if (window.XMLHttpRequest) {
-            // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+        try {
             xhr = new XMLHttpRequest();
-        }
-        else {
+            // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+        } catch (e) {
+            xhr = new ActiveXObject('Microsoft.XMLHTTP');
             // IE6, IE5 浏览器执行代码
-            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
         }
-         // var param = ''
+// var param = ''
         //处理data
         // if (data != {} && data != null) {
         for (var key in obj.data) {
@@ -317,7 +325,7 @@
         }
         // }
         // data=param.substring(0,param.length-1)
-        data=data.substring(0,data.length-1)
+        data = data.substring(0, data.length - 1)
         // alert(data)
         if (type.toUpperCase() == 'GET') {//处理GET
             var d = new Date();
@@ -326,37 +334,36 @@
         }
 
         //xhr监听
-        if (xhr!=null){
+        if (xhr != null) {
             xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 ) {
-                if( xhr.status>=200  ){
-                      var response;
-                    if (dType == 'text' || dType == 'json') {
-                        if (dType == 'json') {//json
-                            response = JSON.parse(xhr.responseText);
-                        } else {//普通文本
-                            response = xhr.responseText;
-                        }
+                if (xhr.readyState == 4) {
+                    if (xhr.status >= 200) {
+                        var response;
+                        if (dType == 'text' || dType == 'json') {
+                            if (dType == 'json') {//json
+                                response = JSON.parse(xhr.responseText);
+                            } else {//普通文本
+                                response = xhr.responseText;
+                            }
                         } else {//XML
                             response = xhr.responseXML;
                         }
-                    success && success(response);//成功回调函数
-                      }else{
-                       //请求失败
-                     error && error(response);//失败回调函数console.log("请求失败")
-                      }
+                        success && success(response);//成功回调函数
+                    } else {
+                        //请求失败
+                        error && error(response);//失败回调函数console.log("请求失败")
+                    }
 
+                }
+
+                // alert(data)
             }
-
-        // alert(data)
-     }
-         xhr.open(type, url, asny);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');//设置请求头信息
-        xhr.send(data);//发送数据
-         }
-        else {
-        alert("Your browser does not support XMLHTTP.");
-         }
+            xhr.open(type, url, asny);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');//设置请求头信息
+            xhr.send(data);//发送数据
+        } else {
+            alert("Your browser does not support XMLHTTP.");
+        }
     }
 
     function loginIn() {
@@ -375,9 +382,8 @@
                     // $(location).attr('href', 'main');
                     // alert(data.msg)
                     location.href = ('desk');
-                }
-                else {
-                    document.getElementById("msg").innerHTML=data.msg;
+                } else {
+                    document.getElementById("msg").innerHTML = data.msg;
 
                 }
             },

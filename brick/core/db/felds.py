@@ -2114,6 +2114,7 @@ class ManyToManyField(Field):
         self.verbose_name = verbose_name
         self._on_delete = on_delete
         self._on_update = on_update
+
     def _get_descriptor(self):
         return ManyToManyFieldDescriptor(self)
 
@@ -2140,7 +2141,7 @@ class ManyToManyField(Field):
                 self.model_class,
                 through_model=self._through_model, on_delete=self._on_delete,
                 on_update=self._on_update,
-                _is_backref=True, verbose_name=self.verbose_name )
+                _is_backref=True, verbose_name=self.verbose_name)
             related_name = self._related_name or model_class._meta.name + 's'
             backref.add_to_class(self.rel_model, related_name)
 

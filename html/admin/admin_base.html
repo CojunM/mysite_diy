@@ -9,39 +9,33 @@
     <meta name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
     <!--如第三方站点不希望某页面被转码，可在页面上添加以下协议，当用户通过移动搜索进入第三方网站时，会直接进入原网页。-->
-    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <!--<meta http-equiv="Cache-Control" content="no-siteapp"/>-->
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Cache" content="no-cache">
+
 
     <!-- 新 Bootstrap5 核心 CSS 文件 -->
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
-    <!--    popper.min.js 用于弹窗、提示、下拉菜单-->
-    <!--    <script src="https://cdn.staticfile.org/popper.js/2.9.3/umd/popper.min.js"></script>-->
 
-    <!-- 最新的 Bootstrap5 核心 图标文件 -->
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <![endif]-->
-
-    <!-- Template Main CSS File -->
-    <link href="css/style.css" rel="stylesheet">
-
-    <title>后台管理系统</title>
+    <title>后台管理系统1.1.0</title>
 </head>
 <body>
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
-            <img src="assets/img/logo.png" alt="">
+        <a href="menu_info" class="logo d-flex align-items-center">
+            <img src="/assets/img/logo.png" alt="">
             <span class="d-none d-lg-block">NiceAdmin</span>
         </a>
-        <i class="bi bi-list toggle-sidebar-btn"></i>
+        <i class="bi bi-list  toggle-sidebar-btn "   ></i>
     </div><!-- End Logo -->
 
     <div class="search-bar">
         <form class="search-form d-flex align-items-center" method="POST" action="#">
-            <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-            <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+            <input ="stype="text" name="query" placeholder="Search" title="Enter search keyword">
+            <button typeubmit" title="Search"><i class="bi bi-search"></i></button>
         </form>
     </div><!-- End Search Bar -->
 
@@ -147,7 +141,7 @@
 
                     <li class="message-item">
                         <a href="#">
-                            <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
+                            <img src="/assets/img/messages-1.jpg" alt="" class="rounded-circle">
                             <div>
                                 <h4>Maria Hudson</h4>
                                 <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -161,7 +155,7 @@
 
                     <li class="message-item">
                         <a href="#">
-                            <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
+                            <img src="/assets/img/messages-2.jpg" alt="" class="rounded-circle">
                             <div>
                                 <h4>Anna Nelson</h4>
                                 <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -260,123 +254,6 @@
 <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav  " id="sidebar-nav">
-
-       <li class="nav-item">
-            <a class="nav-link " href="#./index.html" data-bs-target="#menu-title" data-bs-toggle="collapse"   >
-                <i class="bi bi-grid"></i>
-                <span   class="menu-title" >Dashboard</span>
-            </a>
-           <ul id="menu-title"data-bs-parent="#sidebar-nav"> </ul>
-        </li><!-- End Dashboard Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-menu-button-wide"></i><span class="menu-title">Components</span><i
-                    class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="components-alerts.html">
-                        <i class="bi bi-circle"></i><span class="menu-title">Alerts</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="components-accordion.html">
-                        <i class="bi bi-circle"></i><span class="menu-title">Accordion</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="components-badges.html">
-                        <i class="bi bi-circle"></i><span class="menu-title">Badges</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="components-breadcrumbs.html">
-                        <i class="bi bi-circle"></i><span class="menu-title">Breadcrumbs</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="components-buttons.html">
-                        <i class="bi bi-circle"></i><span class="menu-title">Buttons</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="components-cards.html">
-                        <i class="bi bi-circle"></i><span>Cards</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="components-carousel.html">
-                        <i class="bi bi-circle"></i><span>Carousel</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="components-list-group.html">
-                        <i class="bi bi-circle"></i><span>List group</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="components-modal.html">
-                        <i class="bi bi-circle"></i><span>Modal</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="components-tabs.html">
-                        <i class="bi bi-circle"></i><span>Tabs</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="components-pagination.html">
-                        <i class="bi bi-circle"></i><span>Pagination</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="components-progress.html">
-                        <i class="bi bi-circle"></i><span>Progress</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="components-spinners.html">
-                        <i class="bi bi-circle"></i><span>Spinners</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="components-tooltips.html">
-                        <i class="bi bi-circle"></i><span>Tooltips</span>
-                    </a>
-                </li>
-            </ul>
-        </li><!-- End Components Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-journal-text"></i><span class="menu-title">Forms</span><i
-                    class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="forms-elements.html">
-                        <i class="bi bi-circle"></i><span>Form Elements</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="forms-layouts.html">
-                        <i class="bi bi-circle"></i><span>Form Layouts</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="forms-editors.html">
-                        <i class="bi bi-circle"></i><span>Form Editors</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="forms-validation.html">
-                        <i class="bi bi-circle"></i><span>Form Validation</span>
-                    </a>
-                </li>
-            </ul>
-        </li><!-- End Forms Nav -->
-
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-layout-text-window-reverse"></i><span class="menu-title">Tables</span><i
@@ -395,111 +272,29 @@
                 </li>
             </ul>
         </li><!-- End Tables Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-bar-chart"></i><span class="menu-title">Charts</span><i
-                    class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="charts-chartjs.html">
-                        <i class="bi bi-circle"></i><span>Chart.js</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="charts-apexcharts.html">
-                        <i class="bi bi-circle"></i><span>ApexCharts</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="charts-echarts.html">
-                        <i class="bi bi-circle"></i><span>ECharts</span>
-                    </a>
-                </li>
-            </ul>
-        </li><!-- End Charts Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-gem"></i><span class="menu-title">Icons</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="icons-bootstrap.html">
-                        <i class="bi bi-circle"></i><span>Bootstrap Icons</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="icons-remix.html">
-                        <i class="bi bi-circle"></i><span>Remix Icons</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="icons-boxicons.html">
-                        <i class="bi bi-circle"></i><span>Boxicons</span>
-                    </a>
-                </li>
-            </ul>
-        </li><!-- End Icons Nav -->
-
-        <li class="nav-heading">Pages</li>
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#users-profile.html">
-                <i class="bi bi-person"></i>
-                <span class="menu-title">Profile</span>
-            </a>
-        </li><!-- End Profile Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span class="menu-title">F.A.Q</span>
-            </a>
-        </li><!-- End F.A.Q Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-contact.html">
-                <i class="bi bi-envelope"></i>
-                <span class="menu-title">Contact</span>
-            </a>
-        </li><!-- End Contact Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#pages-register.html" >
-                <i class="bi bi-card-list"></i>
-                <span class="menu-title">Register</span>
-            </a>
-        </li><!-- End Register Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-login.html">
-                <i class="bi bi-box-arrow-in-right"></i>
-                <span class="menu-title">Login</span>
-            </a>
-        </li><!-- End Login Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-error-404.html">
-                <i class="bi bi-dash-circle"></i>
-                <span>Error 404</span>
-            </a>
-        </li><!-- End Error 404 Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-blank.html">
-                <i class="bi bi-file-earmark"></i>
-                <span>Blank</span>
-            </a>
-        </li><!-- End Blank Page Nav -->
-
     </ul>
 
 </aside><!-- End Sidebar-->
 <main id="main" class="main">
-    <iframe class="iframe_show" name="menuFrame" src="admin_index.html"></iframe>
+    <!--<iframe class="iframe_show" name="menuFrame" src="admin_main.html"></iframe>-->
 
+    <section class="Hui-article-box">
+        <div id="Hui-tabNav" class="Hui-tabNav hidden-xs">
+            <div class="Hui-tabNav-wp">
+                <ul id="min_title_list" class="acrossTab cl">
+                    <li class="tab_item active"><span title="我的桌面" data-href="welcome">我的桌面</span><em></em></li>
+                </ul>
+            </div>
+
+        </div>
+        <div id="iframe_box" class="Hui-article">
+            <div class="show_iframe  active">
+                <div style="display:none" class="loading"></div>
+                <iframe scrolling="yes" frameborder="0" src="../welcome.html"></iframe>
+            </div>
+        </div>
+
+    </section>
 </main><!-- End #main -->
 <footer id="footer" class="footer">
     <div class="copyright">
@@ -515,6 +310,20 @@
     </div>
 </footer><!-- End Footer -->
 
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
+<!--    popper.min.js 用于弹窗、提示、下拉菜单-->
+<!--    <script src="https://cdn.staticfile.org/popper.js/2.9.3/umd/popper.min.js"></script>-->
+
+<!-- 最新的 Bootstrap5 核心 图标文件 -->
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<![endif]-->
+
+<!-- Template Main CSS File -->
+<!--<link rel="stylesheet" href="css/style3.css" >-->
+<!--<link rel="stylesheet" href="css/admin.css" >-->
+<link rel="stylesheet" href="/admin/css/admin.css">
+<link rel="stylesheet" href="/admin/css/style3.css">
 
 <!--  JS Files -->
 <!--[if lt IE 9]>
@@ -527,6 +336,46 @@
 <!-- 最新的 Bootstrap5 核心 JavaScript 文件 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Template Main JS File -->
-<script src="js/main.js"></script>
+<!--<script src="js/admin.js "></script>-->
+<!--<script src="js/main.js"></script>-->
+<script src="/admin/js/main.js"></script>
+<script src="/admin/js/admin.js "></script>
+<script src="/admin/js/ajax.js"></script>
+<script>
+    (function () {
+
+        $.ajax({
+            method: 'GET',
+            url: "/api/login2/menu/?" + 100 * Math.random(),
+            dataType: 'json',
+            // withCredentials: true,
+            success: function (data) {
+                if (data) {
+                    // alert(data.data.menu_html);
+                    document.getElementById("sidebar-nav").innerHTML = data.data.menu_html;
+                    // parent.location.reload(true);
+                   //重新加载js
+                   //  let script = document.createElement("script"),
+                   //      script1 = document.createElement("script");
+                   //  script.src = "/admin/js/main.js";
+                   //   script1.src = "/admin/js/admin.js";
+                   //  document.body.appendChild(script);
+                   //   document.body.appendChild(script1);
+                } else {
+                    document.getElementById("msg").innerHTML = data.msg;
+
+                }
+
+            },
+            error: function (data) {
+                if (data) {
+                    alert(data.msg);
+                }
+
+            }
+        });
+    })();
+
+</script>
 </body>
 </html>

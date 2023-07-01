@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        /* table 默认样式 */
+.table_style{border-color: #e4e0e0;padding: 0;margin: 0;}
+.table_style tbody td{color: #666666;font-size: 14px;}
+.table_cols{background-color:#EEF0F2;color: #333;text-align: center;line-height: 40px;}
+.table_cols th{padding: 0 15px;font-size: 14px;color: #333;font-weight: normal;}
+.ischeck_inp{padding-left: 15px;min-width: 50px;}
+.table_style .toolBtn a{padding: 3px 10px;border: 1px solid #999;border-radius: 4px;margin-right: 10px;cursor: pointer;}
+ .zdy_cols{
+				background-color:#01AAED;
+				color: #fff;
+				text-align: center;
+				line-height: 60px;
+			}
+			.zdy_cols th{padding: 0 25px;font-size: 14px;font-weight: normal;}
+
+    </style>
+    <script src="js/bs_table.js"></script>
+    <title>Title</title>
+</head>
+<body>
+<table id="table"></table>
+	</body>
+	<script>
+	document.getElementById("#table").bootstrapTable({
+    url: options.url,
+    method: options.method || 'get',      //请求方式（*）
+    //toolbar: '#toolbar',    //工具按钮用哪个容器
+    striped: true,      //是否显示行间隔色
+    cache: false,      //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+    pagination: true,     //是否显示分页（*）
+    sortable: false,      //是否启用排序
+    sortOrder: "asc",     //排序方式
+    //: queryParams,//传递参数（*）
+    pageNumber:1,      //初始化加载第一页，默认第一页
+    pageSize: 20,      //每页的记录行数（*）
+    pageList: [10, 20, 50, 100],  //可供选择的每页的行数（*）
+    //search: true,      //是否显示表格搜索，此搜索是客户端搜索，不会进服务端
+    //strictSearch: true,
+    //showColumns: true,     //是否显示所有的列
+    //showRefresh: true,     //是否显示刷新按钮
+    minimumCountColumns: 2,    //最少允许的列数
+    clickToSelect: true,    //是否启用点击选中行
+    uniqueId: "id",      //每一行的唯一标识，一般为主键列
+    showToggle:false,     //是否显示详细视图和列表视图的切换按钮
+    sidePagination: "server", //服务端处理分页
+    columns:[
+        {title: 'id',field: 'id', visible: false, align: 'center',valign: 'middle'},
+        {title: '名称',   field: 'name',  align: 'center',valign: 'middle'},
+        {title: '操作',field: '#',align: 'center',
+            formatter:function(value,row,index){
+                var e = '<a href="#" mce_href="#" οnclick="onEditClick(\''+ row.id + '\',\'' +row.flowProcessId+ '\',\'' +'\')">编辑</a> ';
+                var f = '<a href="#" mce_href="#" οnclick="onCopyClick(\''+ row.id + '\')">复制</a> ';
+                //var d = '<a href="#" mce_href="#" οnclick="onDeleteClick(\''+ row.id +'\')">删除</a> ';
+                return e+f;
+            }
+        }
+    ]
+})
+	</script>
+
+</html>

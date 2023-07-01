@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <meta charset="UTF-8">
+    <style>
+        * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        border: 0;
+    }
+
+
+
+
+    li {
+        list-style: none;
+    }
+
+    main {
+        margin: 0 auto;
+        width: 800px;
+    }
+
+    main h4 {
+        line-height: 80px;
+        text-align: center;
+        height: 80px;
+        font-size: 25px;
+    }
+
+    /*#iframe_box {*/
+        /*width: 100%;*/
+        /*height: 60px;*/
+        /*border: 1px solid #ccc;*/
+    /*}*/
+
+    .Hui-tabNav {
+        position: relative;
+        height: 60px;
+
+    }
+
+    /*.Hui-tabNav ul {*/
+        /*height: 100%;*/
+    /*}*/
+
+    .Hui-tabNav ul li {
+        position: relative;
+        float: left;
+        width: 100px;
+        /*height: 59px;*/
+        /*line-height: 60px;*/
+        text-align: center;
+        /*border-right: 1px solid #ccc;*/
+        /*border-bottom: 1px solid #ccc;*/
+        background-color: #fff;
+    }
+
+    /*.Hui-tabNav ul li input {*/
+        /*width: 90px;*/
+        /*height: 30px;*/
+        /*outline-color: rgb(181, 150, 179);*/
+    /*}*/
+
+
+
+
+
+    #iframe_box  {
+        position: relative;
+        margin-top: 1px;
+        margin-left: 1px;
+        width: 100%;
+        height: 100%;
+        border: 1px solid #ccc;
+        border-top: 0;
+    }
+
+    /*section {*/
+        /*display: none;*/
+        /*text-align: left;*/
+        /*padding: 30px;*/
+        /*width: 800px;*/
+        /*height: 300px;*/
+    /*}*/
+
+
+
+    /*.Hui-article-box {*/
+        /*display: block;*/
+    /*}*/
+
+    /*.active {*/
+        /*border-bottom: 0;*/
+    /*}*/
+
+
+    /*选项卡导航*/
+/*.Hui-tabNav-wp{position:relative; height:35px;overflow:hidden}!*overflow:hidden作用是当元素内的内容溢出的时候使它隐藏溢出的部分，即超出部分隐藏。*!*/
+.Hui-tabNav .acrossTab li em{background-image:url(admin/images/acrossTab/acrossTab-2.png)}
+/*.Hui-tabNav{height:35px; padding-right:75px;overflow:hidden; position:relative;background-color:#efeef0; background-repeat: repeat-x; background-position: 0 -175px;}*/
+/*.Hui-tabNav .acrossTab{ position:absolute; height:26px; line-height:26px; background:none; top:8px; left:0;padding-top:0}*/
+/*.Hui-tabNav .acrossTab li{height:26px;line-height:26px;}*/
+/*.Hui-tabNav .acrossTab li em{ right:-16px; height: 26px; width: 16px}*/
+/*.loading {background:url(./images/loading.gif) no-repeat center; height:100px}*/
+/*ul li {*/
+    /*position: relative;*/
+    /*float: left;*/
+    /*width: 100px;*/
+    /*height: 59px;*/
+    /*line-height: 60px;*/
+    /*text-align: center;*/
+    /*border-right: 1px solid #ccc;*/
+    /*border-bottom: 1px solid #ccc;*/
+    /*background-color: #fff;*/
+/*}*/
+.show_iframe  { position: relative; display: block;top:0; right:0; left:0; bottom:0;;height: 100%;width: 100%}
+.show_iframe:not(.active) { position: relative;display:None; top:100px; right:0; left:0; bottom:0;}
+/*.show_iframe .active iframe {position: absolute;bottom: 0;height: 100%;width: 100%}*/
+
+
+@media (max-width: 767px) {
+	.breadcrumb{ padding:0 15px;}
+	.show_iframe{-webkit-overflow-scrolling: touch;overflow-y: scroll;}
+}
+
+    </style>
+    <title>Title</title>
+</head>
+<body>
+<aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav  " id="sidebar-nav">
+     <li class="nav-item">
+            <a class="nav-link " data-href="./manager.html" data-title="manager" href="#" data-bs-target="#menu-title" data-bs-toggle="collapse"   >
+                <i class="bi bi-grid"></i>
+                <span   class="menu-title" >Dashboard</span>
+            </a>
+           <ul id="menu-title"data-bs-parent="#sidebar-nav"> </ul>
+        </li><!-- End Dashboard Nav -->
+     <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-layout-text-window-reverse"></i><span class="menu-title">Tables</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a data-href="./base.html" data-title="base" href="#" target="menuFrame">
+                        <i class="bi bi-circle"></i><span>General Tables</span>
+                    </a>
+                </li>
+                <li>
+                    <a data-href="./index.html" data-title="index" href="javascript:void(0)" target="menuFrame">
+                        <i class="bi bi-circle"></i><span>Data Tables</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End Tables Nav -->
+
+
+    </ul>
+
+</aside><!-- End Sidebar-->
+<main>
+    <h4>
+        JS面向对象动态添加标签页
+    </h4>
+<button id='btn' >绑定多个事件 </button>
+    <section class="Hui-article-box">
+    <div id="Hui-tabNav" class="Hui-tabNav hidden-xs">
+        <div class="Hui-tabNav-wp">
+            <ul id="min_title_list" class="acrossTab cl">
+                <li class="tab_item active"> <span title="我的桌面" data-href="welcome">我的桌面</span><i class="bi  bi-x"></i><em></em></li>
+            </ul>
+        </div>
+
+    </div>
+    <div id="iframe_box" class="Hui-article">
+        <div class="show_iframe  active">
+            <div style="display:none" class="loading"></div>
+            <iframe scrolling="yes" frameborder="0" src="./welcome.html"></iframe>
+        </div>
+    </div>
+
+</section>
+</main>
+
+
+<script>
+
+
+
+    //通过事件监听  绑定多个事件
+    let btn = document.getElementById('btn');
+    btn.addEventListener('click', one);
+    btn.addEventListener('click', two);
+    function one() {
+        alert('第一个')
+    }
+    function two() {
+        alert('第二个')
+    }
+
+    /*阻止默认行为*/
+    function stopDefault(e) {
+        if (e && e.preventDefault) {
+            e.preventDefault(); //阻止默认浏览器动作(W3C)
+        } else {
+            window.event.returnValue = false; //IE中阻止函数器默认动作的方式
+        }
+        return false;
+    }
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        let that;
+        class Tab {
+            constructor() {
+                that = this;
+                // 获取元素,获取的这些只能是之前的，动态添加的不能够获取到
+                this.main = document.querySelector("main");
+                // this.add = this.main.querySelector(".add");
+                // this.ul = this.main.querySelector(".ul");
+                this.iframe_box = this.main.querySelector("#iframe_box");
+                // console.log(that.iframe_box);
+                this.show_nav =  this.main.querySelector('#min_title_list');
+                // this.iframe=this.main.querySelector("iframe");
+                // 实例化对象后直接实现init()方法即可
+                this.init();
+
+
+            };
+
+            updateNode() {
+                this.lis = this.main.querySelectorAll("li");
+                this.show_iframe = this.main.querySelectorAll(".show_iframe");
+                // console.log(this.show_iframe);
+                // 获取删除按钮
+                this.errors = this.main.querySelectorAll(" li i");//CSS3 :nth-child(n) 选择器匹配父元素中的第 n 个子元素，元素类型没有限制。
+                // if (this.errors.length!==0) {
+                    // console.log(this.errors)
+                // }
+                // 动态获取所有li里面的第一个span标签
+                // this.span1s = this.main.querySelectorAll("li span:nth-child(1)");
+            }
+
+            init() {
+                // 初始化操作，让相关元素绑定事件   [指向constructor]
+                // 获取一下li和section，一定要放到前面，先获取元素才能绑定事件
+                // 直接把他放到这，重新获取一下li和section也为新的元素重新绑定一下
+                this.updateNode();
+                // 当点击添加按钮的时候，执行添加方法
+                // that.add.onclick = this.addTab;
+                for (let i = 0; i < this.lis.length; i++) {
+                    // 给所有的li的index属性赋值
+                    this.lis[i].index = i;
+                    // 点击之后执行toggleTab这个方法
+                    this.lis[i].onclick = this.toggleTab;
+                    // 输出的this指向的是 被点击的那个li的index属性
+                    // console.log(this.index);
+                    // 循环遍历，当点击删除按钮时,当前被点击按钮的操作
+                    // if (this.errors.length!==0) {this.errors[i].onclick = this.removeTab}
+                    // this.errors[i].onclick = this.removeTab;
+                    // // 当双击被选中的li里面第一个span的时候，执行edit方法
+                    // this.span1s[i].ondblclick = this.editTab;
+                    // // section也绑定双击事件
+                    // this.sections[i].ondblclick = this.editTab;
+                    //为啥在这地方输出的i是3
+                }
+                // 循环遍历，当点击删除按钮时,当前被点击按钮的操作
+                if (this.errors.length !==0) {
+                    for (let i = 0; i < this.errors.length; i++) {
+                        this.errors[i].index = i;
+                        this.errors[i].onclick = this.removeTab;
+                        console.log(i)
+                    }
+
+                    }
+            };
+
+
+            clearClass() {
+                // for循环排他的思想
+                // 让他的所有的类先清除掉
+                for (let i = 0; i < this.lis.length; i++) {
+                    // 把li的所有li的类名全去掉，不用管指向谁直接
+                    this.lis[i].classList.remove('active');
+                    // console.log(this.lis[i].classList);
+                    that.show_iframe[i].classList.remove('active');
+                }
+                // for (let i = 0; i < this.show_iframe.length; i++) {
+                //         // 把li的所有li的类名全去掉，不用管指向谁直接
+                //         that.show_iframe[i].classList.remove('active');
+                //
+                // }
+                };
+            // 1、切换功能
+            toggleTab() {
+                // 指向被点击的哪个li
+                // 切换之前，先调用clearClass()，把所有的类先清除，再添加,
+                // 用that，toggleTab()指向的是li
+                that.clearClass();
+                // 点击哪个li就给那个li添加bottom类，让他的下边框去掉
+                // let index = this.parentNode.index;
+                // this.show_iframe[this.index].classList.add ('active');
+                // console.log(this.index);
+                that.lis[this.index].classList.add("active");
+                // console.log(that.lis[this.index].classList);
+                that.show_iframe[this.index].classList.add("active");
+
+            };
+
+            // 2、添加功能
+             addTab(href, title) {
+                // 指向点击的添加按钮
+                // 在添加元素前，清除一下所有的类名，让刚添加的元素处于选中状态
+                that.clearClass();
+                // 创建一个li元素
+                // var li = '<li class="active"><span>' + title + '</span><span><i class="bi  bi-x"></i></span></li>';
+                // 把li追加到ul里面
+                // let nav_li=that.show_nav.querySelectorAll('li');
+                // for (let i = 0; i <nav_li.length; i++) {
+                //    nav_li[i].remove("active");
+                // }
+                that.show_nav.insertAdjacentHTML("beforeend",'<li class="tab_item  active"><span data-href="' + href + '">' + title + '</span><i class="bi  bi-x"></i><em></em></li>');
+                // var section = '<section class="block">模块内容' + (that.lis.length + 1) + '</section>';
+                 /*创建iframe*/
+                that.iframe_box.insertAdjacentHTML("beforeend",'<div class="show_iframe active"><div class="loading"></div><iframe frameborder="0" src=' + href + '></iframe></div>');
+                // console.log(that.iframe_box);
+                // that.iframe.src= href ;
+                // that.iframe.contentWindow.location.reload(true);
+                // 点击添加按钮后再重新获取一下li和section和绑定元素
+                that.init();
+                }
+                 //
+            // 3删除功能功能
+            removeTab(e) {
+                // [指向被点击的删除按钮]
+                // 阻止冒泡事件
+                e.stopPropagation();
+                // 获取被点击的li的索引号 拿到父亲的索引号
+                // let index = this.index;
+                let index = this.parentNode.index;
+                console.log(index);
+                that.lis[index].remove();
+               that.show_iframe[index].remove();
+                // 点击添加按钮后再重新获取一下li和section和绑定元素
+                that.init();
+                // 当我们删除之后，还有li处于选中状态（也就是说删除的不是处于选中状态的）
+                // 就直接return，不再进行前一个选中操作，保持原来的选中状态不变
+                // 当我们删除选中状态的li后，让他的前一个处于选中状态
+                index--;//先用再减
+                // 手动调用一下点击事件
+                // 如果点击的这个元素前面为空，index值不存在就不执行点击事件，否则会报错
+                that.lis[index] && that.lis[index].click();
+            };
+
+
+        }
+
+        const tab = new Tab();
+
+        let sidebar = document.querySelector(".sidebar"),
+            al = sidebar.querySelectorAll('a');
+
+        for (let i = 0; i < al.length; i++) {
+           // alert("Hello World!");
+            let href = al[i].getAttribute('data-href'),
+                title=al[i].getAttribute("data-title") ;
+
+            if (href || href === "" ) {
+
+                al[i].onclick = function (ev) {
+                    //阻止默认行为
+                    stopDefault(ev);
+                    tab.addTab(href,title);
+
+            }
+            }
+        }
+    });
+
+
+    // (function () {
+    //
+    //     alert("Hello World!");
+    //     document.querySelector('a').onclick = function (ev) {
+    //         alert('警告！');
+    //         ev.preventDefault();
+    //         tab.addTab()
+    //     };
+    //     let topWindow = window.parent.document,
+    //         show_navLi = topWindow.find("#nav-item a");
+    //     // show_navLi.onClick=function (ev) {
+    //
+    //     // ev.preventDefault();
+    //
+    //     // };
+    // }());
+    //  window.onload=function(){
+    //     let a ; //定义变量但未赋值  此时a=undefined
+    //     if(a){
+    //         console.log("1,判断为true,a=",a)
+    //     }else{
+    //         console.log("1,判断为false,a=",a) // 输出结果：1,判断为false,a= undefined
+    //     }
+    //     let b =0;
+    //     if(b){
+    //         console.log("2,判断为true,b=",b)
+    //     }else{
+    //         console.log("2,判断为false,b=",b)  // 输出结果：2,判断为false,b= 0
+    //     }
+    //
+    //     let c = null;
+    //     if(!c){
+    //         console.log("3,判断为true,c=",c)
+    //     }else{
+    //         console.log("3,判断为false,c=",c) // 输出结果：3,判断为false,c= null
+    //     }
+    //
+    //     let d = "";
+    //     if(d){
+    //         console.log("4,判断为true,d=",d)
+    //     }else{
+    //         console.log("4,判断为false,d=",d) // 输出结果：4,判断为false,d=
+    //     }
+    //     let e = NaN;
+    //     if(e){
+    //         console.log("5,判断为true,e=",e)
+    //     }else{
+    //         console.log("5,判断为false,e=",e) // 输出结果：5,判断为false,e= NaN
+    //     }
+    //     let f = false;
+    //     if(f){
+    //         console.log("6,判断为true,f=",f)
+    //     }else{
+    //         console.log("6,判断为false,f=",f) // 输出结果：6,判断为false,f= false
+    //     }
+    //
+    //
+    // }
+
+</script>
+</body>
+</html>

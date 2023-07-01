@@ -532,9 +532,9 @@ h1, h2, h3, h4, h5, h6 {
   top: 60px;
   left: 0;
   bottom: 0;
-  width: 300px;
-  z-index: 996;
-  transition: all 0.3s;
+  width: 200px;
+  z-index: 999;
+  /*transition: all 0.3s;*/
   padding: 20px;
   overflow-y: auto;
   scrollbar-width: thin;

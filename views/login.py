@@ -126,7 +126,7 @@ def post_login():
 @put('/api/login1/')
 @exception_handling
 def post_login():
-    # print('112332')
+    print('112332')
     """用户登陆验证"""
     ##############################################################
     # 获取并验证客户端提交的参数
@@ -168,7 +168,7 @@ def post_login():
     manager_result = _manager_logic.get_model_for_cache_of_where(Manager.login_name == str(username))
     # manager_result =Manager.select().where(Manager.login_name ==  str(username))
     # manager_result = Manager.get(Manager.login_name == str(username))
-    # print('pathnfo:12')
+
     # 判断用户记录是否存在
     if not manager_result:
         return web_helper.return_msg(-1, '账户不存在')
@@ -202,7 +202,7 @@ def post_login():
 
     # 登录成功，清除登录错误记录
     security_helper.del_operation_times(operation_times_key)
-
+    print('pathnfo:12')
     ##############################################################
     # 把用户信息保存到session中 ###
     ##############################################################
@@ -243,7 +243,7 @@ def authenticate(username, password):
         return user
 
 
-@put('/api/login2/')
+# @put('/api/login2/')
 @exception_handling
 def post_login():
     """用户登陆验证"""

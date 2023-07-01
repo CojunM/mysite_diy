@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: 0;
+}
+
+
+/* 引入字体图标 */
+
+@font-face {
+    font-family: 'icomoon';
+    src: url('fonts/icomoon.eot?e8ckkr');
+    src: url('fonts/icomoon.eot?e8ckkr#iefix') format('embedded-opentype'), url('fonts/icomoon.ttf?e8ckkr') format('truetype'), url('fonts/icomoon.woff?e8ckkr') format('woff'), url('fonts/icomoon.svg?e8ckkr#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+li {
+    list-style: none;
+}
+
+main {
+    margin: 0 auto;
+    width: 800px;
+}
+
+main h4 {
+    line-height: 80px;
+    text-align: center;
+    height: 80px;
+    font-size: 25px;
+}
+
+.tabsbox {
+    width: 100%;
+    height: 60px;
+    border: 1px solid #ccc;
+}
+
+nav {
+    position: relative;
+    height: 60px;
+}
+
+nav ul {
+    height: 100%;
+}
+
+nav ul li {
+    position: relative;
+    float: left;
+    width: 100px;
+    height: 59px;
+    line-height: 60px;
+    text-align: center;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    background-color: #fff;
+}
+
+nav ul li input {
+    width: 90px;
+    height: 30px;
+    outline-color: rgb(181, 150, 179);
+}
+
+nav ul li span:nth-child(2) {
+    line-height: 0;
+    position: absolute;
+    top: 8px;
+    right: 0;
+    font-size: 20px;
+    font-family: 'icomoon';
+}
+
+.add {
+    text-align: center;
+    position: absolute;
+    line-height: 30px;
+    right: 10px;
+    top: 15px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ccc;
+    font-family: 'icomoon';
+}
+
+.tabscontent {
+    margin-top: -1px;
+    margin-left: -1px;
+    width: 800px;
+    height: 300px;
+    border: 1px solid #ccc;
+    border-top: 0px;
+}
+
+section {
+    display: none;
+    text-align: left;
+    padding: 30px;
+    width: 800px;
+    height: 300px;
+}
+
+section input {
+    width: 600px;
+    height: 200px;
+    outline-color: bisque;
+}
+
+.block {
+    display: block;
+}
+
+.bottom {
+    border-bottom: 0;
+}</style>
+</head>
+<body>
+<main>
+    <h4>
+        JS面向对象动态添加标签页
+    </h4>
+    <div class="tabsbox">
+        <nav>
+            <ul class="ul">
+                <li class="bottom">
+                    <span>标签1</span>
+                    <span></span>
+
+                </li>
+                <li>
+                    <span>标签2</span>
+                    <span></span>
+
+                </li>
+                <li>
+                    <span>标签3</span>
+                    <span></span>
+                </li>
+                <div class="add"></div>
+            </ul>
+        </nav>
+        <div class="tabscontent">
+            <section class="block">标签内容1</section>
+            <section>标签内容2</section>
+            <section>标签内容3</section>
+        </div>
+    </div>
+</main>
+<script>document.addEventListener("DOMContentLoaded", function() {
+    var that;
+    class Tab {
+        constructor() {
+            that = this;
+            // 获取元素,获取的这些只能是之前的，动态添加的不能够获取到
+            this.main = document.querySelector("main");
+            this.add = this.main.querySelector(".add");
+            this.ul = this.main.querySelector(".ul");
+            this.tabscontent = this.main.querySelector(".tabscontent");
+            // 实例化对象后直接实现init()方法即可
+            this.init();
+        };
+        updateNode() {
+            this.lis = this.main.querySelectorAll("li");
+            this.sections = this.main.querySelectorAll("section");
+            // 获取删除按钮
+            this.errors = this.main.querySelectorAll("li span:nth-child(2)");
+            // 动态获取所有li里面的第一个span标签
+            this.span1s = this.main.querySelectorAll("li span:nth-child(1)");
+        }
+        init() {
+            // 初始化操作，让相关元素绑定事件   [指向constructor]
+            // 获取一下li和section，一定要放到前面，先获取元素才能绑定事件
+            // 直接把他放到这，重新获取一下li和section也为新的元素重新绑定一下
+            this.updateNode();
+            // 当点击添加按钮的时候，执行添加方法
+            that.add.onclick = that.addTab;
+            for (var i = 0; i < this.lis.length; i++) {
+                // 给 所有的li的index属性赋值
+                this.lis[i].index = i;
+                // 点击之后执行toggleTab这个方法
+                this.lis[i].onclick = this.toggleTab;
+                // 输出的this指向的是 被点击的那个li的index属性
+                // console.log(this.index);
+                // 循环遍历，当点击删除按钮时,当前被点击按钮的操作
+                this.errors[i].onclick = this.removeTab;
+                // 当双击被选中的li里面第一个span的时候，执行edit方法
+                this.span1s[i].ondblclick = this.editTab;
+                // section也绑定双击事件
+                this.sections[i].ondblclick = this.editTab;
+                //为啥在这地方输出的i是3
+            }
+        };
+        clearClass() {
+            // for循环排他的思想
+            // 让他的所有的类先清除掉
+            for (var i = 0; i < this.lis.length; i++) {
+                // 把li的所有li的类名全去掉，不用管指向谁直接
+                that.lis[i].className = '';
+                that.sections[i].className = '';
+            }
+        };
+        // 1、切换功能
+        toggleTab() {
+            // 指向被点击的哪个li
+            // 切换之前，先调用clearClass()，把所有的类先清除，再添加,
+            // 用that，toggleTab()指向的是li
+            that.clearClass();
+            // 点击哪个li就给那个li添加bottom类，让他的下边框去掉
+            this.className = 'bottom';
+            that.sections[this.index].className = 'block';
+        };
+        // 2、添加功能
+        addTab() {
+            // 指向点击的添加按钮
+            // 在添加元素前，清除一下所有的类名，让刚添加的元素处于选中状态
+            that.clearClass();
+            // 创建一个li元素
+            var li = '<li class="bottom"><span>测试' + (that.lis.length + 1) + '</span><span></span></li>';
+            var section = '<section class="block">模块内容' + (that.lis.length + 1) + '</section>';
+            // 把li追加到ul里面
+            that.ul.insertAdjacentHTML("beforeend", li);
+            that.tabscontent.insertAdjacentHTML("beforeend", section);
+            // 点击添加按钮后再重新获取一下li和section和绑定元素
+            that.init();
+        };
+        // 3删除功能功能
+        removeTab(e) {
+            // [指向被点击的删除按钮]
+            // 阻止冒泡事件
+            e.stopPropagation();
+            // 获取被点击的li的索引号
+            var index = this.parentNode.index;
+             console.log(index);
+            that.lis[index].remove();
+            that.sections[index].remove();
+            // 点击添加按钮后再重新获取一下li和section和绑定元素
+            that.init();
+            // 当我们删除之后，还有li处于选中状态（也就是说删除的不是处于选中状态的）
+            // 就直接return，不再进行前一个选中操作，保持原来的选中状态不变
+            // 当我们删除选中状态的li后，让他的前一个处于选中状态
+            index--;
+            // 手动调用一下点击事件
+            // 如果点击的这个元素前面为空，index值不存在就不执行点击事件，否则会报错
+            that.lis[index] && that.lis[index].click();
+        };
+        // 4、修改功能
+        editTab() {
+            // [指向被双击的那个span标签和section标签]
+            // 禁止双击选中文字
+            window.getSelection ? window.getSelection().removeAllRanges() : document.getSelection.empty();
+            // 先获取第一个span的内容
+            var content = this.innerHTML;
+            // 生成表单     成为span的孩子啦
+            this.innerHTML = '<input type="text" value="' + content + '">';
+            // 让里面的文字处于选中状态
+            var input = this.children[0];
+            input.select();
+            // 如果失去焦点的时候，把input里面的值再传给span盒子
+            input.onblur = function() {
+                // 这里的this指向input
+                this.parentNode.innerHTML = this.value;
+            }
+            input.onkeyup = function(e) {
+                if (e.keyCode == 13) {
+                    this.blur();
+                }
+            }
+
+        };
+    }
+    var tab = new Tab();
+})</script>
+</body>
+</html>

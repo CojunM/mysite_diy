@@ -40,7 +40,7 @@ def callback():
     if result:
         # 定义最终输出的html存储变量
         html = ''
-        # print('提取出result',result)
+        # print('提取出result',result.get('rows'))
         lst = [m for m in result.get('rows')]
         for model in lst:
             # print('提取出model',getattr(model,'name'))
@@ -92,8 +92,8 @@ def callback():
     获取列表数据
     """
     # 检查用户权限
-    common_logic.check_user_power()
-
+    # common_logic.check_user_power()
+    # print(' page   ', web_helper.get_query('page', '', is_check_null=False))
     # 父id
     parent_id = convert_helper.to_int0(web_helper.get_query('nodeid', '', is_check_null=False))
     # 页面索引
@@ -103,7 +103,7 @@ def callback():
     # 接收排序参数
     sidx = web_helper.get_query('sidx', '', is_check_null=False)
     sord = web_helper.get_query('sord', '', is_check_null=False)
-    # print(' sidx   ',  sidx) ,print('sord  ', sord)
+    # print(' sidx   ', sidx), print('sord  ', sord)
     # 初始化排序字段
     order_by = Menu_info.sort.desc()
     # print('order_by   ',order_by)
@@ -114,14 +114,14 @@ def callback():
     _menu_info_logic = db_logic(Menu_info)
     # 读取记录
 
-    # print('读取记录wheres', wheres)
+    # print('读取记录page_size', page_number, page_size)
     result = _menu_info_logic.get_list('', wheres, page_number, page_size, order_by)
     # print('读取记录result', result)
     # result =get_model_for_cache(Menu_info)
     lst = [{'id': r.id, 'name': r.name, 'icon': r.icon, 'page_url': r.page_url, 'interface_url': r.interface_url,
             'parent_id': r.parent_id, 'sort': r.sort, 'expanded': r.expanded, 'is_leaf': r.is_leaf, 'level': r.level,
             'is_show': r.is_show, 'is_enabled': r.is_enabled} for r in [m for m in result.get('rows')]]
-    # print('读取记录lst', lst)
+    print('读取记录lst', lst)
     result['rows'] = lst
     if result:  # json.dumps(result)
         # return json.dumps(result, default=lambda o: o.__dict__,sort_keys=True, indent=4)
@@ -141,9 +141,9 @@ def callback():
 
     _menu_info_logic = db_logic(Menu_info)
     # 读取记录 (Menu_info.id, Menu_info.parent_id, Menu_info.name, not Menu_info.is_leaf).alias('open')
-    result = _menu_info_logic.get_list('', Menu_info.is_leaf == False,None,None, Menu_info.sort.asc())
+    result = _menu_info_logic.get_list('', Menu_info.is_leaf == False, None, None, Menu_info.sort.asc())
     # print('读取记录result', result)
-    lst =[ {'id': r.id, 'name': r.name, 'is_leaf':  r.is_leaf}  for r in result.get('rows')]
+    lst = [{'id': r.id, 'name': r.name, 'is_leaf': r.is_leaf} for r in result.get('rows')]
     # print('lst:   ',lst)
     if result:
         return web_helper.return_msg(0, "成功", {'tree_list': lst})

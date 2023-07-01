@@ -441,8 +441,9 @@ class SelectQuery(Query):
         if page > 0:
             page -= 1
         self._limit = paginate_by
+        # print(' self._limit ', self._limit,page)
         self._offset = page * paginate_by
-
+        # print(' self._offset ', self._offset)
     @returns_clone
     def distinct(self, is_distinct=True):
         self._distinct = is_distinct
@@ -522,7 +523,7 @@ class SelectQuery(Query):
             clone._limit = clone._offset = None
 
         sql, params = clone.sql()
-        wrapped = 'SELECT COUNT(1) FROM (%s) AS wrapped_select' % sql
+        wrapped =  'SELECT COUNT(1) FROM (%s) AS wrapped_select' % sql
         rq = self.model_class.raw(wrapped, *params)
         return rq.scalar() or 0
 

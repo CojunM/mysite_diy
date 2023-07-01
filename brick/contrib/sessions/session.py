@@ -22,7 +22,7 @@
                   ┃┫┫  ┃┫┫
                   ┗┻┛  ┗┻┛
 """
-# from ._compat import PY2, pickle, http_cookies, unicode_text, b64encode, b64decode, string_type
+
 import binascii
 import hmac
 import os
@@ -30,19 +30,13 @@ import time
 from base64 import b64encode, b64decode
 from datetime import datetime, timedelta
 from hashlib import sha1, pbkdf2_hmac
-# hmac_sha1 = sha1
+
 from http.cookies import SimpleCookie, BaseCookie, CookieError
 
-from brick.contrib.sessions import util, noencryption
-from brick.contrib.sessions.cache import cls_maps
+from brick.contrib.backends import utils
+from brick.contrib.backends.base import clsmap
+from brick.contrib.sessions import noencryption
 from brick.contrib.sessions.exceptions import BeakerException, InvalidCryptoBackendError
-
-# from beaker.crypto import hnac as hnac, hmac_sha1 as SHA1, sha1, get_nonce_size, DEFAULT_NONCE_BITS, get_crypto_module
-# from beaker import crypto, util
-# from brick.contrib.sessions.cache import clsmap
-
-# from beaker.cookie import SimpleCookie
-# from brick.contrib.sessions.util import sha1
 
 string_type = str
 unicode_text = str
@@ -404,7 +398,7 @@ class Session(_ConfigurableSession):
         else:
             self.type = type
 
-        self.namespace_class = namespace_class or cls_maps[self.type]
+        self.namespace_class = namespace_class or clsmap[self.type]
 
         self.namespace_args = namespace_args
 
@@ -489,7 +483,7 @@ class Session(_ConfigurableSession):
                 # #print("session  request1: ", request)
             except Exception as e:
                 if self.invalidate_corrupt:
-                    util.warn(
+                    utils.warn(
                         "Invalidating corrupt session %s; "
                         "error was: %s.  Set invalidate_corrupt=False "
                         "to propagate this exception." % (self.id, e))
@@ -501,9 +495,9 @@ class Session(_ConfigurableSession):
     def _set_serializer(self, data_serializer):
         self.data_serializer = data_serializer
         if self.data_serializer == 'json':
-            self.serializer = util.JsonSerializer()
+            self.serializer = utils.JsonSerializer()
         elif self.data_serializer == 'pickle':
-            self.serializer = util.PickleSerializer()
+            self.serializer = utils.PickleSerializer()
         elif isinstance(self.data_serializer, string_type):
             raise BeakerException('Invalid value for data_serializer: %s' % data_serializer)
         else:
@@ -568,7 +562,7 @@ class Session(_ConfigurableSession):
         except CookieError as e:
             if 'Invalid Attribute httponly' not in str(e):
                 raise
-            util.warn('Python 2.6+ is required to use httponly')
+            utils.warn('Python 2.6+ is required to use httponly')
 
     def _create_id(self, set_new=True):
         self.id = _session_id()
@@ -928,7 +922,7 @@ class CookieSession(Session):
                 self.update(self._decrypt_data(cookie_data))
             except Exception as e:
                 if self.invalidate_corrupt:
-                    util.warn(
+                    utils.warn(
                         "Invalidating corrupt session %s; "
                         "error was: %s.  Set invalidate_corrupt=False "
                         "to propagate this exception." % (self.id, e))
