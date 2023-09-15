@@ -23,7 +23,6 @@
                   ┗┻┛  ┗┻┛
 """
 from datetime import datetime
-
 from brick.core.db.databases import PostgresqlDatabase
 from brick.core.db.felds import TextField, IntegerField, DateTimeField, BooleanField, DateField, PrimaryKeyField, \
     CharField, ForeignKeyField, ManyToManyField
@@ -542,3 +541,4 @@ if __name__ == "__main__":
     creare_tables()
 
     insert_datas()
+    

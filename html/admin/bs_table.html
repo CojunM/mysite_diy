@@ -19,48 +19,87 @@
 			.zdy_cols th{padding: 0 25px;font-size: 14px;font-weight: normal;}
 
     </style>
-    <script src="js/bs_table.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.js"></script>
+　　
+<!-- <script src="httsp://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script> -->
+<![endif]—>
+<!-- 最新的 Bootstrap5 核心 JavaScript 文件 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="../lib/jquery/1.9.1/jquery.js"></script>
+    <script src="js/bsTtable/bs_table.js"></script>
+	<link href="js/bsTtable/">
     <title>Title</title>
 </head>
 <body>
-<table id="table"></table>
-	</body>
+
+	<table id="table">
+		<thead>
+		  <tr>
+			<th data-field="id">ID</th>
+			<th data-field="name">Item Name</th>
+			<th data-field="price">Item Price</th>
+		  </tr>
+		</thead>
+	  </table>
+	  <div id="divTwo">
+		<p>这是divTwo</p>
+	  </div>
+	  <div id="divOne">
+		<p>这是divOne</p>
+	  </div>
+</body>
 	<script>
-	document.getElementById("#table").bootstrapTable({
-    url: options.url,
-    method: options.method || 'get',      //请求方式（*）
-    //toolbar: '#toolbar',    //工具按钮用哪个容器
-    striped: true,      //是否显示行间隔色
-    cache: false,      //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
-    pagination: true,     //是否显示分页（*）
-    sortable: false,      //是否启用排序
-    sortOrder: "asc",     //排序方式
-    //: queryParams,//传递参数（*）
-    pageNumber:1,      //初始化加载第一页，默认第一页
-    pageSize: 20,      //每页的记录行数（*）
-    pageList: [10, 20, 50, 100],  //可供选择的每页的行数（*）
-    //search: true,      //是否显示表格搜索，此搜索是客户端搜索，不会进服务端
-    //strictSearch: true,
-    //showColumns: true,     //是否显示所有的列
-    //showRefresh: true,     //是否显示刷新按钮
-    minimumCountColumns: 2,    //最少允许的列数
-    clickToSelect: true,    //是否启用点击选中行
-    uniqueId: "id",      //每一行的唯一标识，一般为主键列
-    showToggle:false,     //是否显示详细视图和列表视图的切换按钮
-    sidePagination: "server", //服务端处理分页
-    columns:[
-        {title: 'id',field: 'id', visible: false, align: 'center',valign: 'middle'},
-        {title: '名称',   field: 'name',  align: 'center',valign: 'middle'},
-        {title: '操作',field: '#',align: 'center',
-            formatter:function(value,row,index){
-                var e = '<a href="#" mce_href="#" οnclick="onEditClick(\''+ row.id + '\',\'' +row.flowProcessId+ '\',\'' +'\')">编辑</a> ';
-                var f = '<a href="#" mce_href="#" οnclick="onCopyClick(\''+ row.id + '\')">复制</a> ';
-                //var d = '<a href="#" mce_href="#" οnclick="onDeleteClick(\''+ row.id +'\')">删除</a> ';
-                return e+f;
-            }
-        }
-    ]
+       var $table = $('#table')
+
+$(function() {
+  var data = [
+	{
+	  'id': 0,
+	  'name': 'Item 0',
+	  'price': '$0'
+	},
+	{
+	  'id': 1,
+	  'name': 'Item 1',
+	  'price': '$1'
+	},
+	{
+	  'id': 2,
+	  'name': 'Item 2',
+	  'price': '$2'
+	},
+	{
+	  'id': 3,
+	  'name': 'Item 3',
+	  'price': '$3'
+	},
+	{
+	  'id': 4,
+	  'name': 'Item 4',
+	  'price': '$4'
+	},
+	{
+	  'id': 5,
+	  'name': 'Item 5',
+	  'price': '$5'
+	}
+  ]
+  $table.bootstrapTable({data: data});
+  $table.bootstrapTable('hideLoading');
 })
+ 
+let divOne = document.querySelector("#divOne")
+//   let divTwo = document.querySelector("#divTwo")
+// //   $("#divOne").after($("#divTwo"))
+//   divOne.parentNode.insertBefore(divTwo, divOne.nextSibling)
+
+divOne.insertAdjacentHTML('beforeend','<div id="two">two</div>');
+
 	</script>
 
 </html>
