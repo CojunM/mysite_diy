@@ -203,7 +203,7 @@ def encoded_path(root, identifiers, extension=".enc", depth=3,
 
     global sha1
     if sha1 is None:
-        from beaker.crypto import sha1
+        from hashlib import sha1
 
     if digest_filenames:
         if isinstance(ident, unicode_text):

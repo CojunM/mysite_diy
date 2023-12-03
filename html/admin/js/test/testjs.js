@@ -14,11 +14,37 @@
  *  GridManager: 挂载至Element、window
  *  #001: 如果已经存在，则清除之前的实例，重新进行实例化。原因：如果不清除而直接返回错误，会让使用者存在不便。
  * */
+
+
+    //    工具函数 
+
+
+    // 顺序替换文本，无替换文本返回空;  
+    var sprintf = function (str) {
+        var args = arguments,
+            flag = true,
+            i = 1;
+
+        str = str.replace(/%s/g, function () {
+            var arg = args[i++];// 对每个匹配值应用函数，i自加1，直到无匹配值;  
+
+            if (typeof arg === 'undefined') {
+                flag = false;
+                return '';
+            }
+            return arg;
+        });
+        return flag ? str : '';
+    };
+
+
+
+
     /**
-     * 是否为 string
-     * @param o
-     * @returns {boolean}
-     */
+      * 是否为 string
+      * @param o
+      * @returns {boolean}
+      */
     const isString = (o) => {
         return typeof (o) === 'string';
     };
@@ -29,7 +55,6 @@
     //     Element.prototype.bootstrapTable = Element.prototype.bt = function () {
     // 		// 方法名
     // 		let name,
-
     // 		// 参数
     // 		arg,
 
@@ -73,89 +98,157 @@
     function jQueryEach(object, callback, args) {
 
         var name,
-    
-        i = 0,
-    
-        length = object.length;
-    
+
+            i = 0,
+
+            length = object.length;
+
         if (args) {
-    
+
             if (length == undefined) {
-    
+
                 for (name in object) {
-    
+
                     if (callback.apply(object[name], args) === false) {
-    
+
                         break
-    
+
                     }
-    
+
                 }
-    
+
             } else {
-    
+
                 for (; i < length;) {
-    
+
                     if (callback.apply(object[i++], args) === false) {
-    
+
                         break
-    
+
                     }
-    
+
                 }
-    
+
             }
-    
+
         } else {
-    
+
             if (length == undefined) {
-    
+
                 for (name in object) {
-    
+
                     if (callback.call(object[name], name, object[name]) === false) {
-    
+
                         break
-    
+
                     }
-    
+
                 }
-    
+
             } else {
-    
-                for (var value = object[0]; i < length && callback.call(value, i, value) !== false; value = object[++i]) {}
-    
+
+                for (var value = object[0]; i < length && callback.call(value, i, value) !== false; value = object[++i]) { }
+
             }
-    
+
         }
-    
+
         return object
-    
+
     };
 
 
 
 
+    function isObject(obj) {
+        return typeof (obj) === 'object' && obj !== null && !Array.isArray(obj);
+    };
     function extend() {
-        var length = arguments.length;
-        var target = arguments[0] || {};
-        if (typeof target != "object" && typeof target != "function") {
+        // var length = arguments.length;
+        // var target = arguments[0] || {};
+        // if (typeof target != "object" && typeof target != "function") {
+        // target = {};
+        // }
+        // if (length == 1) {
+        // target = this;
+        // i--;
+        // }
+        // for (var i = 1; i < length; i++) {
+        // var source = arguments[i];
+        // for (var key in source) {
+        // 使用for in会遍历数组所有的可枚举属性，包括原型。
+        // if (Object.prototype.hasOwnProperty.call(source, key)) {
+        // target[key] = source[key];
+        // }
+        // }
+        // }
+        // return target;
+
+        for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+        var target = args[0] || {};
+        var i = 1;
+        var deep = false;
+        var clone;
+        // Handle a deep copy situation
+        if (typeof target === 'boolean') {
+            deep = target;
+            // Skip the boolean and the target
+            target = args[i] || {};
+            i++;
+        }
+        // Handle case when target is a string or something (possible in deep copy)
+        if (typeof (target) !== 'object' && typeof target !== 'function') {
             target = {};
         }
-        if (length == 1) {
-            target = this;
-            i--;
-        }
-        for (var i = 1; i < length; i++) {
-            var source = arguments[i];
-            for (var key in source) {
-                // 使用for in会遍历数组所有的可枚举属性，包括原型。
-                if (Object.prototype.hasOwnProperty.call(source, key)) {
-                    target[key] = source[key];
+        for (; i < args.length; i++) {
+            var options = args[i];
+            // Ignore undefined/null values
+            if (typeof options === 'undefined' || options === null) {
+                continue;
+            }
+            // Extend the base object
+            // eslint-disable-next-line guard-for-in
+            for (var name in options) {
+                var copy = options[name];
+                // Prevent Object.prototype pollution
+                // Prevent never-ending loop
+                if (name === '__proto__' || target === copy) {
+                    continue;
+                }
+                var copyIsArray = Array.isArray(copy);
+                // Recurse if we're merging plain objects or arrays
+                if (deep && copy && (isObject(copy) || copyIsArray)) {
+                    var src = target[name];
+                    if (copyIsArray && Array.isArray(src)) {
+                        if (src.every(function (it) {
+                            return !isObject(it) && !Array.isArray(it);
+                        })) {
+                            target[name] = copy;
+                            continue;
+                        }
+                    }
+                    if (copyIsArray && !Array.isArray(src)) {
+                        clone = [];
+                    } else if (!copyIsArray && !isObject(src)) {
+                        clone = {};
+                    } else {
+                        clone = src;
+                    }
+                    // Never move original objects, clone them
+                    target[name] = extend(deep, clone, copy);
+                    // Don't bring in undefined values
+                } else if (copy !== undefined) {
+                    target[name] = copy;
                 }
             }
         }
         return target;
+
+
     }
+
     /**
             * Easy selector helper function*简易选择器辅助功能
             */
@@ -179,7 +272,7 @@
         this.options = options;
         // alert(el)
         this.$el = el;
-        this.$el_ = this.$el.cloneNode( true );// 记录触发元素的初始值，destroy销毁重置的时候使用  
+        this.$el_ = this.$el.cloneNode(true);// 记录触发元素的初始值，destroy销毁重置的时候使用  
         this.timeoutId_ = 0;// 超时计时器，有滚动条的情况下调整表头的水平偏移量  
         this.timeoutFooter_ = 0;// 超时计时器，有滚动条的情况下调整表尾的水平偏移量  
 
@@ -468,7 +561,7 @@
         // 创建包裹元素this.container及其子元素this.$toolbar、this.$pagination等，为表格添加样式;  
         this.initTable();
         // 获取页面配置更新options.columns、options.data，this.columns记录表体对应标题栏的数据;  
-        // this.initHeader();
+        this.initHeader();
         // // 渲染表头，设置this.header数据记录主键等，绑定表头事件，卡片式显示时隐藏表头;  
         // this.initData();
         // // 页面初始化、后台传值、表头表尾插入数据，更新this.data、options.data，前台分页则排序;  
@@ -493,14 +586,16 @@
             parts[1] && parts[1].toUpperCase();
             if (fn.bootstrapTable.locales[this.options.locale]) {
                 extend(this.options, fn.bootstrapTable.locales[this.options.locale]);
-             } else if (fn.bootstrapTable.locales[parts.join('-')]) {
+            } else if (fn.bootstrapTable.locales[parts.join('-')]) {
                 extend(this.options, fn.bootstrapTable.locales[parts.join('-')]);
             } else if (fn.bootstrapTable.locales[parts[0]]) {
                 extend(this.options, fn.bootstrapTable.locales[parts[0]]);
-            }
+            };
+            console.log(parts)
         }
-console.log(parts)
+
     };
+
 
     // 创建包裹元素this.container及其子元素this.$toolbar、this.$pagination等，为表格添加样式;  
     BootstrapTable.prototype.initContainer = function () {
@@ -550,6 +645,74 @@ console.log(parts)
         }
         // alert(232434)
     };
+
+
+
+    // 将paramName的data属性转换成param-name修改完成后输出;  
+    var getRealDataAttr = function (dataAttr) {
+        for (var attr in dataAttr) {
+            // "paramName".split(/(?=[A-Z])/) 返回结果为["param","Name"];  
+            var auxAttr = attr.split(/(?=[A-Z])/).join('-').toLowerCase();
+            if (auxAttr !== attr) {
+                dataAttr[auxAttr] = dataAttr[attr];
+                delete dataAttr[attr];
+            }
+        }
+        return dataAttr;
+    };
+    // 为每条标题栏数据设置filedIndex:所在列/列坐标;  
+    /** 
+     * 策略： 
+     * 表头分割成columns.length（总行数）* totalCol（总列数）的矩阵，以flag矩阵标记为false; 
+     * 各标题栏为columns[i][j].rowspan（行数）* columns[i][j].colspan（列数）的小矩阵; 
+     * 从左自右、从上而下遍历标题栏小矩阵，将标题栏对应的flag首行、首列标记为true; 
+     * 因标题栏只能跨列或跨行，不能既跨行又跨列，函数的实现依赖用户输入正确的options.columns格式， 
+     */
+    var setFieldIndex = function (columns) {
+        var i, j, k,
+            totalCol = 0,
+            flag = [];
+        // console.log(columns[0])
+        // console.log(columns)
+        for (i = 0; i < columns[0].length; i++) {
+            totalCol += columns[0][i].colspan || 1;// 表格总列数;  
+        }
+        // alert('totalCol'+totalCol)
+        for (i = 0; i < columns.length; i++) {// columns.length表格总行数;  
+            flag[i] = [];
+            for (j = 0; j < totalCol; j++) {
+                flag[i][j] = false;
+            }
+        }
+        alert(flag)
+        for (i = 0; i < columns.length; i++) {
+            for (j = 0; j < columns[i].length; j++) {// columns[i].length某行共有多少元素;  
+                var r = columns[i][j],
+                    rowspan = r.rowspan || 1,
+                    colspan = r.colspan || 1,
+                    // i为标题栏小矩阵在flag大矩阵的行位置;  
+                    // index记录标题栏小矩阵在flag大矩阵的列位置;  
+                    index = flag[i].indexOf(false);
+
+                if (colspan === 1) {
+                    // fieldIndex记录每个标题栏的列坐标信息;  
+                    r.fieldIndex = index;
+                    if (typeof r.field === 'undefined') {
+                        r.field = index;
+                    }
+                }
+
+                // 目的是让$.inArray(false, flag[i])正确获取标题栏的列坐标;  
+                for (k = 0; k < rowspan; k++) {
+                    flag[i + k][index] = true;
+                }
+                for (k = 0; k < colspan; k++) {
+                    flag[i][index + k] = true;
+                }
+            }
+        }
+    };
+
     // 当html中包含thead>tr>th以及tbody>tr>td时，获取页面的配置项更新options.columns、options.data;  
     // js配置的优先级高于html页面配置;  
     // this.columns以this.columns[fieldIndex]的数组形式[columns]记录表体相应标题栏的数据内容;  
@@ -559,28 +722,32 @@ console.log(parts)
             data = [];
 
         // 触发元素table中有thead子标签等则使用（查询排序的时候），无则创建  
-        this.$header = this.$el.querySelectorAll('>thead');
+        this.$header = this.$el.querySelector('thead');
         if (!this.$header.length) {
-            this.$header =this.$el.insertAdjacentHTML('beforeend', '<thead></thead>');
+            this.$el.insertAdjacentHTML('beforeend', '<thead></thead>');
+            this.$header = this.$el.querySelector('thead');
         }
-        this.$header.find('tr').each(function () {
-            var column = [];
-
-            $(this).find('th').each(function () {
-                column.push($.extend({}, {
-                    title: $(this).html(),
-                    'class': $(this).attr('class'),
-                    titleTooltip: $(this).attr('title'),
-                    rowspan: $(this).attr('rowspan') ? +$(this).attr('rowspan') : undefined,
-                    colspan: $(this).attr('colspan') ? +$(this).attr('colspan') : undefined
-                }, $(this).data()));
-            });
-            columns.push(column);
-        });
-        if (!$.isArray(this.options.columns[0])) {
+        else {
+            this.$tr = this.$header.querySelectorAll('tr')
+            if (this.$tr.length) {
+                this.$tr.forEach(function () {
+                    var column = []; this.querySelectorAll('th').forEach(function () {
+                        column.push(extend({}, {
+                            title: this.innerHTM(),
+                            'class': this.getAttribute('class'),
+                            titleTooltip: this.getAttribute('title'),
+                            rowspan: this.getAttribute('rowspan') ? +this.getAttribute('rowspan') : undefined,
+                            colspan: this.getAttribute('colspan') ? +this.getAttribute('colspan') : undefined
+                        }, this.data()));
+                    });
+                    columns.push(column);
+                })
+            }
+        };
+        if (!Array.isArray(this.options.columns[0])) {
             this.options.columns = [this.options.columns];// 都处理成两维数组的形式  
         }
-        this.options.columns = $.extend(true, [], columns, this.options.columns);
+        this.options.columns = extend(true, [], columns, this.options.columns);
 
         // 借用this.columns[fieldIndex]=column构建this.columns;  
         // this.column的数据格式为{[column]}，列坐标相同的标题栏取靠后的子标题;  
@@ -590,9 +757,9 @@ console.log(parts)
         // setFieldIndex将标题栏的fieldIndex属性赋值为标题栏所在列坐标;  
         setFieldIndex(this.options.columns);
 
-        $.each(this.options.columns, function (i, columns) {
-            $.each(columns, function (j, column) {
-                column = $.extend({}, BootstrapTable.COLUMN_DEFAULTS, column);
+        each(this.options.columns, function (i, columns) {
+            each(columns, function (j, column) {
+                column = extend({}, BootstrapTable.COLUMN_DEFAULTS, column);
 
                 if (typeof column.fieldIndex !== 'undefined') {
                     that.columns[column.fieldIndex] = column;
@@ -606,31 +773,212 @@ console.log(parts)
             return;
         }
 
-        this.$el.find('>tbody>tr').each(function () {
-            var row = {};
+        this.$el.getElementsByTagName('tbody').forEach(function (tb) {
 
-            // 获取每一行tr的id、class、data属性，以数组形式赋值给data  
-            row._id = $(this).attr('id');
-            row._class = $(this).attr('class');
-            row._data = getRealDataAttr($(this).data());
+            tb.getElementsByTagName('tr').forEach(function () {
+                var row = {};
 
-            // 获取某一行每个子元素的内容、id、class、rowspan、title、data属性  
-            $(this).find('td').each(function (i) {
-                // field通常是后台数据的id号，没有该值的时候赋值为column列坐标信息，写入本地数据的时候  
-                var field = that.columns[i].field;
+                // 获取每一行tr的id、class、data属性，以数组形式赋值给data  
+                row._id = this.getAttribute('id');
+                row._class = this.getAttribute('class');
+                // row._data = getRealDataAttr(this.data());
 
-                row[field] = $(this).html();
-                // save td's id, class and data-* attributes  
-                row['_' + field + '_id'] = $(this).attr('id');
-                row['_' + field + '_class'] = $(this).attr('class');
-                row['_' + field + '_rowspan'] = $(this).attr('rowspan');
-                row['_' + field + '_title'] = $(this).attr('title');
-                row['_' + field + '_data'] = getRealDataAttr($(this).data());
-            });
-            data.push(row);
+                // 获取某一行每个子元素的内容、id、class、rowspan、title、data属性  
+                var $tds = this.querySelectorAll('td');
+                [].forEach.call($tds, function (i) {
+                    // field通常是后台数据的id号，没有该值的时候赋值为column列坐标信息，写入本地数据的时候  
+                    var field = that.columns[i].field;
+
+                    row[field] = this.innerHTML;
+                    // save td's id, class and data-* attributes  
+                    row['_' + field + '_id'] = this.attr('id');
+                    row['_' + field + '_class'] = this.getAttribute('class');
+                    row['_' + field + '_rowspan'] = this.getAttribute('rowspan');
+                    row['_' + field + '_title'] = this.getAttribute('title');
+                    // row['_' + field + '_data'] = getRealDataAttr(this.data());
+                });
+                data.push(row);
+            })
         });
 
         this.options.data = data;
+    };
+
+    // 由options.columns渲染表头,th的data-field记为column[field],data数据记为column;  
+    // 更新this.header记录主键、样式、事件、格式化函数等，以及stateField复选框上传字段;  
+    // 绑定事件，包括点击排序、确认键排序、全选，更新上传数据、页面状态等；  
+    BootstrapTable.prototype.initHeader = function () {
+        var that = this,
+            visibleColumns = {},
+            html = [];
+
+        this.header = {
+            fields: [],
+            styles: [],
+            classes: [],
+            formatters: [],
+            events: [],
+            sorters: [],
+            sortNames: [],
+            cellStyles: [],
+            searchables: []
+        };
+
+        each(this.options.columns, function (i, columns) {
+            html.push('<tr>');
+
+            // 页面以表格显示且有卡片式详情点击按钮的时候，表头首列为该按钮开辟一个空白的单元格  
+            if (i == 0 && !that.options.cardView && that.options.detailView) {
+                html.push(sprintf('<th class="detail" rowspan="%s"><div class="fht-cell"></div></th>',
+                    that.options.columns.length));
+            }
+
+            each(columns, function (j, column) {
+                var text = '',
+                    halign = '',
+                    align = '',
+                    style = '',
+                    class_ = sprintf(' class="%s"', column['class']),
+                    order = that.options.sortOrder || column.order,
+                    unitWidth = 'px',
+                    width = column.width;
+
+                // width输入宽度有%或px时，分割%或px到unitWidth中，width保留数字字符串  
+                // width输入数值时，unitWidth默认取px  
+                if (column.width !== undefined && (!that.options.cardView)) {
+                    if (typeof column.width === 'string') {
+                        if (column.width.indexOf('%') !== -1) {
+                            unitWidth = '%';
+                        }
+                    }
+                }
+                if (column.width && typeof column.width === 'string') {
+                    width = column.width.replace('%', '').replace('px', '');
+                }
+
+                halign = sprintf('text-align: %s; ', column.halign ? column.halign : column.align);
+                align = sprintf('text-align: %s; ', column.align);
+                style = sprintf('vertical-align: %s; ', column.valign);
+                style += sprintf('width: %s; ', (column.checkbox || column.radio) && !width ?
+                    '36px' : (width ? width + unitWidth : undefined));
+
+                /**  
+                 * this.header.styles、this.header.classes: 
+                 *     数组形式存储经过处理的每列数据的样式、类; 
+                 * this.header.formatters、this.header.cellStyles、this.header.sorters: 
+                 *     数组形式存储格式化函数、设置单元格样式函数、排序函数，或者window方法名; 
+                 * this.header.events、this.header.sortNames、this.header.searchables: 
+                 *     数组形式存储表体相应标题栏配置的事件events、上传排序的字段名sortName、可搜索searchable; 
+                 */
+                // 填充触发元素的tbody内容块时使用  
+                if (typeof column.fieldIndex !== 'undefined') {
+                    that.header.fields[column.fieldIndex] = column.field;
+                    that.header.styles[column.fieldIndex] = align + style;
+                    that.header.classes[column.fieldIndex] = class_;
+                    that.header.formatters[column.fieldIndex] = column.formatter;
+                    that.header.events[column.fieldIndex] = column.events;
+                    that.header.sorters[column.fieldIndex] = column.sorter;
+                    that.header.sortNames[column.fieldIndex] = column.sortName;
+                    that.header.cellStyles[column.fieldIndex] = column.cellStyle;
+                    that.header.searchables[column.fieldIndex] = column.searchable;
+
+                    if (!column.visible) {
+                        return;
+                    }
+
+                    if (that.options.cardView && (!column.cardVisible)) {
+                        return;
+                    }
+
+                    visibleColumns[column.field] = column;
+                }
+
+                // options.columns数据回显和渲染页面  
+                html.push('<th' + sprintf(' title="%s"', column.titleTooltip),
+                    column.checkbox || column.radio ?
+                        sprintf(' class="bs-checkbox %s"', column['class'] || '') :
+                        class_,
+                    sprintf(' style="%s"', halign + style),
+                    sprintf(' rowspan="%s"', column.rowspan),
+                    sprintf(' colspan="%s"', column.colspan),
+                    sprintf(' data-field="%s"', column.field),
+                    "tabindex='0'",
+                    '>');
+
+                html.push(sprintf('<div class="th-inner %s">', that.options.sortable && column.sortable ?
+                    'sortable both' : ''));
+
+                text = column.title;
+
+                if (column.checkbox) {
+                    if (!that.options.singleSelect && that.options.checkboxHeader) {
+                        text = '<input name="btSelectAll" type="checkbox" />';
+                    }
+                    that.header.stateField = column.field;// 复选框内容上传时的字段名  
+                }
+                if (column.radio) {
+                    text = '';
+                    that.header.stateField = column.field;
+                    that.options.singleSelect = true;
+                }
+
+                html.push(text);
+                html.push('</div>');
+                html.push('<div class="fht-cell"></div>');
+                html.push('</div>');
+                html.push('</th>');
+            });
+            html.push('</tr>');
+        });
+
+        this.$header.innerHTML = html.join('');
+        console.log(this.$header);
+        this.$header.getElementsByTagName(th).forEach(function (i) {
+            // 标题栏data属性写入各自的column数据，展开卡片式详情时使用  
+            this.getAttribute(visibleColumns[this.getAttribute('field')]);
+        });
+
+        // 绑定点击排序事件  
+        this.$container.off('click', '.th-inner').on('click', '.th-inner', function (event) {
+            var target = $(this);
+            if (target.closest('.bootstrap-table')[0] !== that.$container[0])
+                return false;
+
+            if (that.options.sortable && target.parent().data().sortable) {
+                that.onSort(event);
+            }
+        });
+
+        // 确认键排序  
+        this.$header.children().children().off('keypress').on('keypress', function (event) {
+            if (that.options.sortable && $(this).data().sortable) {
+                var code = event.keyCode || event.which;
+                if (code == 13) { //Enter keycode  
+                    that.onSort(event);
+                }
+            }
+        });
+
+        // 显示隐藏表头，调整this.$tableLoading位置;options.cardView为真时卡片式显示隐藏表头  
+        if (!this.options.showHeader || this.options.cardView) {
+            this.$header.hide();
+            this.$tableHeader.hide();
+            this.$tableLoading.css('top', 0);
+        } else {
+            this.$header.show();
+            this.$tableHeader.show();
+            this.$tableLoading.css('top', this.$header.outerHeight() + 1);
+
+            this.getCaret();// 更新排序箭头显示情况  
+        }
+
+        // 全选  
+        this.$selectAll = this.$header.find('[name="btSelectAll"]');
+        this.$selectAll.off('click').on('click', function () {
+            var checked = $(this).prop('checked');
+            that[checked ? 'checkAll' : 'uncheckAll']();// 改变复选框勾选状态，更新上传数据  
+            that.updateSelected();// tr添加selected类  
+        });
     };
 
     var allowedMethods = [
@@ -662,26 +1010,26 @@ console.log(parts)
     ];
     function parseHTML(string) {
         const context = document.implementation.createHTMLDocument();
-      
+
         // Set the base href for the created document so any parsed elements with URLs
         // are based on the document's URL
         const base = context.createElement('base');
         base.href = document.location.href;
         context.head.appendChild(base);
-      
+
         context.body.innerHTML = string;
         return context.body.children;
-      }
-    function inArray(elem,array){    
-        if(Array.isArray(array)){    
-              
-                    return array.includes(elem);    
-                   
-            }    
-            return false;    
-        }    
-       
-   
+    }
+    function inArray(elem, array) {
+        if (Array.isArray(array)) {
+
+            return array.includes(elem);
+
+        }
+        return false;
+    }
+
+
     // function inArray(elem, arr, i) {
     //     return arr == null ? -1 : indexOf.call(arr, elem, i);
     // };
@@ -721,8 +1069,8 @@ console.log(parts)
         }
     };
     // (() => {
-        
-   var fn=Element.prototype.bootstrapTable = Element.prototype.bt = function (option) {
+
+    var fn = Element.prototype.bootstrapTable = Element.prototype.bt = function (option) {
 
         var value,
             args = Array.prototype.slice.call(arguments, 1);
@@ -731,13 +1079,13 @@ console.log(parts)
         console.log(this);
         var data = this["bootstrap.table"],
             // 配置项在触发元素的data数据中，或在js的option传参中  
-            options = extend({}, BootstrapTable.DEFAULTS, 
+            options = extend({}, BootstrapTable.DEFAULTS,
                 typeof option === 'object' && option);
 
         // console.log(options);
         // console.log(data);
         if (typeof option === 'string') {
-            if (inArray(option, allowedMethods) ) {
+            if (!inArray(option, allowedMethods)) {
                 throw new Error("Unknown method: " + option);
             }
 
@@ -748,7 +1096,7 @@ console.log(parts)
             value = data[option].apply(data, args);
 
             if (option === 'destroy') {
-               delete this['bootstrap.table'];
+                delete this['bootstrap.table'];
             }
         }
 
@@ -756,9 +1104,9 @@ console.log(parts)
             this['bootstrap.table', (data = new BootstrapTable(this, options))];
         };
 
-    return typeof value === 'undefined' ? this : value;
-};
-// })()
+        return typeof value === 'undefined' ? this : value;
+    };
+    // })()
 
     // fn.bootstrapTable.Constructor = BootstrapTable;
     // fn.bootstrapTable.defaults = BootstrapTable.DEFAULTS;

@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TestJs</title>
-    <script src="testjs.js"> </script>
-
+    <!-- <script src="testjs.js"> </script> -->
+<script src="testjs1.0.js"></script>
     <!-- <script src="tset.js"></script> -->
     <!-- <script src="tsbt.js"></script> -->
 </head>
 
 <body>
-    <table id="table">刚刚</table>
+    <table id="table" class="gv">刚刚</table>
 
     <div id="app" name="na">hello world</div>
 
@@ -20,6 +20,63 @@
 
    
     <script>
+
+
+         var data = [
+	{
+	  'id': 0,
+	  'name': 'Item 0',
+	  'price': '$0'
+	},
+	{
+	  'id': 1,
+	  'name': 'Item 1',
+	  'price': '$1'
+	},
+	{
+	  'id': 2,
+	  'name': 'Item 2',
+	  'price': '$2'
+	},
+	{
+	  'id': 3,
+	  'name': 'Item 3',
+	  'price': '$3'
+	},
+	{
+	  'id': 4,
+	  'name': 'Item 4',
+	  'price': '$4'
+	},
+	{
+	  'id': 5,
+	  'name': 'Item 5',
+	  'price': '$5'
+	}
+  ]
+  
+  document.querySelector("#table").bootstrapTable({data: data, columns:   [
+    {
+          field: 'id',
+          title: 'Item ID'
+      },
+       {
+          field: 'name',
+          title: 'Item Name'
+      }, 
+      {
+         field: 'price',
+         title: 'Item Price'
+     }, 
+      {title: '操作',field: '#',align: 'center',  
+            formatter:function(value,row,index){  
+                var e = '<a href="#" mce_href="#" οnclick="onEditClick(\''+ row.id + '\',\'' +row.flowProcessId+ '\',\'' +'\')">编辑</a> ';  
+                var f = '<a href="#" mce_href="#" οnclick="onCopyClick(\''+ row.id + '\')">复制</a> ';    
+                var d = '<a href="#" mce_href="#" οnclick="onDeleteClick(\''+ row.id +'\')">删除</a> ';    
+                return e+f+d;    
+            }   
+        }  ]
+});
         // var a=document.querySelector("#app");
         // a.dataset.bootstrap= "1";
         //  a["bootstrap.table"]='wer';
@@ -27,7 +84,7 @@
         // delete a["bootstrap.table"];
         // alert(a["bootstrap.table"]);
         // alert(document.querySelector("#app").dataset.bootstrap);
-        document.querySelector("#table").bootstrapTable({ data: 'data' })
+    
 // $("#bt").html("HELLO MYTH23");
 //  myth("#bt").html("HELLO MYTH23");
 // document.querySelector("#app").GM();
@@ -37,6 +94,7 @@
 // $("#app").bootstrapTable({data: 'data'})
 // BootstrapTable("#app").setBg('#ff0').setHeight('100px').setWidth('200px')
 // $("#bt").setBg('#ff0').setHeight('50px').setWidth('100px')
+
     </script>
 
 </body>

@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3d0953a8-c3eb-40b0-97f7-7b4d1fc1361f" name="Default Changelist" comment="626">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/mysite_diy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mysite_diy.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/11_30.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/11_30.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/admin/bs_table.html" beforeDir="false" afterPath="$PROJECT_DIR$/html/admin/bs_table.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/admin/js/Quicktab.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/admin/js/Quicktab.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/admin/js/bs_table.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/bstable/bootstrap-table.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/bstable/bootstrap-table.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/info.log" beforeDir="false" afterPath="$PROJECT_DIR$/log/info.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -635,6 +624,7 @@
       <workItem from="1690185424844" duration="1134000" />
       <workItem from="1691065964236" duration="484000" />
       <workItem from="1692111375648" duration="462000" />
+      <workItem from="1695220366385" duration="883000" />
     </task>
     <task id="LOCAL-00001" summary="626">
       <created>1656301574449</created>
