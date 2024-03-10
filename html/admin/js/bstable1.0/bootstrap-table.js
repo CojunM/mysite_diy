@@ -266,7 +266,8 @@
             '<div class="pull-right">',
             '<ul class="pagination">',
             '<li class="page-first"><a href="javascript:void(0)">&lt;&lt;</a></li>',
-            '<li class="page-pre"><a href="javascript:void(0)">&lt;</a></li>');
+            '<li class="page-pre"><a href="javascript:void(0)">&lt;</a></li>'
+        );
 
         if (this.totalPages < 5) {
             from = 1;
@@ -367,6 +368,9 @@
 
     BootstrapTable.prototype.onPageNumber = function (event) {
         this.options.pageNumber = +$(event.currentTarget).text();
+        console.log(event.currentTarget);
+        console.log($(event.currentTarget).text());
+        console.log(this.options.pageNumber);
         this.updatePagination();
         this.initBody();
     };

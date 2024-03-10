@@ -1,5 +1,4 @@
 
-
 (function (global, factory) {
     // alert(global)
     // 检查上下文环境是否为Nodejs环境'
@@ -89,7 +88,6 @@
         return object
 
     };
-
 
 
     //  data的原生实现
@@ -200,9 +198,9 @@
         return target;
     }
 
-    function inArray(elem, array, i) {
+    function inArray(elem, arr, i) {
         var len, indexOf = Array.indexOf;
-        if (Array.isArray(array)) {
+        if (Array.isArray(arr)) {
             if (indexOf) {
                 return indexOf.call(arr, elem, i);
             }
@@ -289,10 +287,11 @@
     BootstrapTable.prototype.init = function () {
         this.initContainer();
         this.initHeader();
-        // this.initData();
-        // this.initPagination();
-        // this.initBody();
-        // this.initServer();
+        this.initData();
+        this.initPagination();
+        this.initBody();
+        this.initServer();
+
     };
 
     BootstrapTable.prototype.initContainer = function () {
@@ -305,44 +304,37 @@
         // '<div class="fixed-table-pagination"></div>', '</div > '
         // ].join(''));
         this.$container = document.createElement('div');
+        this.$container.className = 'fixed-table-container';
         this.$container.insertAdjacentHTML('afterbegin', [
-            '<div class="fixed-table-container">',
             '<div class="fixed-table-header"></div>',
             '<div class="fixed-table-body"></div>',
-            '<div class="fixed-table-pagination"></div>', '</div > '
+            '<div class="fixed-table-pagination"></div>',
         ].join(''))
-
-        // this.$container.innerHTML = [
-        // '<div class="fixed-table-container">',
-        // '<div class="fixed-table-header"></div>',
-        // '<div class="fixed-table-body"></div>',
-        // '<div class="fixed-table-pagination"></div>', '</div > '
-        // ].join('');
-
-        // console.log(this.$el.className);
 
         this.$el.className = this.options.classes;
 
         if (this.options.striped) {
             this.$el.classList.add('table-striped');
         }
+        this.$el.parentNode.replaceChild(this.$container, this.$el);
+        this.$container.querySelector('.fixed-table-body').appendChild(this.$el);
 
-        // this.$container.querySelector('.fixed-table-body').appendChild(this.$el);
+        // 添加清除浮动 
+        // this.$container.querySelector('.fixed-table-body').insertAdjacentHTML('beforeend', '<div class="clearfix"></div
+        // ');
 
-
-        alert(this.$container.innerHTML)
-
-        this.$container.querySelector('.fixed-table-container').insertAdjacentHTML('afterend', '<div class="clearfix"></div>');
+        this.$container.insertAdjacentHTML('afterend', '<div class="clearfix"></div>');
         if (this.options.height) {
             this.$container.style.height = this.options.height + 'px';
         }
 
 
 
-
-        this.$el.insertAdjacentHTML('afterend', this.$container);
+        // 有没有好像一样
+        // this.$el.insertAdjacentHTML('afterend', this.$container.innerHTML);
         // this.$el.parentNode.replaceChild(this.$container, this.$el);
-        console.log(this.$container.innerHTML);
+
+        // console.log(this.$container.innerHTML);
     };
 
 
@@ -352,19 +344,26 @@
             html = [];
         this.$header = this.$el.querySelector('thead');
         if (this.$header === null) {
-            this.$header = document.createEvent('thead')
-            this.$el.appendchild(this.$header);
-        }
+            this.$header = document.createElement('thead')
+            this.$el.appendChild(this.$header);
+        };
+        // 处理行
         if (this.$header.querySelector('tr') === null) {
             this.$header.append(document.createElement('tr'));
-        }
-        this.$header.querySelectorall('th').forEach(element => {
+        };
+        // console.log('th');
+        // console.log(this.$header.querySelectorAll('th'));
+        // 处理列 [].forEach.cal
+        this.$header.querySelectorAll('th').forEach(element => {
+
             var column = extend({}, {
                 title: this.innertext
             }, this.data());
             columns.push(column);
-
+            console.log(columns);
         });
+        // console.log('th1');
+
         this.options.columns = extend(columns, this.options.columns);
         this.header = {
             fields: [],
@@ -376,12 +375,15 @@
             var text = '',
                 style = sprintf('text-align: %s; ', column.align) + sprintf('vertical-align: %s; ', column.valign),
                 order = that.options.sortOrder || column.order || 'asc';
+
             that.header.fields.push(column.field);
             that.header.styles.push(style);
             that.header.formatters.push(column.formatter);
             that.header.sorters.push(column.sorter);
-            style = sprintf('width: %spx; ', column.checkbox || column.radio ? 36 : column.width);
+            style += sprintf('width: %s px; ', column.checkbox || column.radio ? 36 : column.width);
             style += column.sortable ? 'cursor: pointer; ' : '';
+            // alert(style)
+            // console.log("style:", style);
             html.push('<th' + sprintf(' style="%s"', style) + '>');
             html.push('<div class="th-inner">');
             text = column.title;
@@ -400,21 +402,31 @@
             html.push('</div>');
             html.push('</th>');
         });
-        this.$header.querySelectorall('tr').forEach(function (i) { i.innerHTML = html.join('') });
-        this.$header.querySelectorall('th').forEach(function (i) {
-            this.data(columns[i]);
+        // console.log(html);
+        this.$header.querySelectorAll('tr').forEach(function (i) { i.innerHTML = html.join('') });
+        this.$header.querySelectorAll('th').forEach(function (_, i) {
+            // this.data(columns[i]);
             if (columns[i].sortable) {
                 // this.onclick = function () { new proxy(that, {}).onSort };
                 this.onclick = function () { that.onSort.bind(that) };
             }
         });
-        this.$selectAll = this.$header.find('[name="btSelectAll"]');
-        this.$selectAll.onclick = null;
-        this.$selectAll.addEventListener('click', function () {
-            var checked = this['checked'];
-            that[checked ? 'checkAll' : 'uncheckAll']();
-        });
-    };
+        this.$selectAll = this.$header.querySelectorAll('[name="btSelectAll"]');
+        this.$selectAll.forEach(item => {
+            item.onclick = null;
+            item.addEventListener('click', function () {
+                var checked = item['checked'];
+                that[checked ? 'checkAll' : 'uncheckAll']();
+            })
+        }
+
+
+
+
+        );
+
+    }
+
 
     BootstrapTable.prototype.initData = function (data, append) {
         if (append) {
@@ -457,7 +469,7 @@
         this.initSort();
         this.initBody();
     };
-
+    // 分页
     BootstrapTable.prototype.initPagination = function () {
         if (!this.options.pagination) {
             return;
@@ -531,7 +543,7 @@
             ' <span class="caret"></span>',
             '</button>',
             '<ul class="dropdown-menu" role="menu">');
-        $.each(this.options.pageList, function (i, page) {
+        each(this.options.pageList, function (i, page) {
             var active = page === that.options.pageSize ? ' class="active"' : '';
             html.push(sprintf('<li%s><a href="javascript:void(0)">%s</a></li>', active, page));
         });
@@ -544,7 +556,7 @@
         $pre = this.$pagination.querySelector('.page-pre');
         $next = this.$pagination.querySelector('.page-next');
         $last = this.$pagination.querySelector('.page-last');
-        $number = this.$pagination.querySelector('.page-number');
+        $number = this.$pagination.querySelectorAll('.page-number');
         if (this.options.pageNumber <= 1) {
             $first.classList.add('disabled');
             $pre.classList.add('disabled');
@@ -553,16 +565,22 @@
             $next.classList.add('disabled');
             $last.classList.add('disabled');
         }
-        $pageList.removeEventListener('click').addEventListener('click', this.onPageListChange.bind(this));
-        $first.removeEventListener('click').addEventListener('click', this.onPageFirst.bind(this));
-        $pre.removeEventListener('click').addEventListener('click', this.onPagePre.bind(this));
-        $next.removeEventListener('click').addEventListener('click', this.onPageNext.bind(this));
-        $last.removeEventListener('click').addEventListener('click', this.onPageLast.bind(this));
-        $number.removeEventListener('click').addEventListener('click', this.onPageNumber.bind(this));
+        $pageList.removeEventListener('click', this.onPageListChange)
+        $pageList.addEventListener('click', this.onPageListChange.bind(this));
+        $first.removeEventListener('click', this.onPageFirst)
+        $first.addEventListener('click', this.onPageFirst.bind(this));
+        $pre.removeEventListener('click', this.onPagePre)
+        $pre.addEventListener('click', this.onPagePre.bind(this));
+        $next.removeEventListener('click', this.onPageNext)
+        $next.addEventListener('click', this.onPageNext.bind(this));
+        $last.removeEventListener('click', this.onPageLast)
+        $last.addEventListener('click', this.onPageLast.bind(this));
+        $number.forEach(item => { item.removeEventListener('click', this.onPageNumber) })
+        $number.forEach(item => { item.addEventListener('click', this.onPageNumber.bind(this)) });
     };
 
     BootstrapTable.prototype.onPageListChange = function (event) {
-        this.options.pageSize = +$(event.currentTarget).text();
+        this.options.pageSize = +document.querySelector(event.currentTarget).textContent;
         this.updatePagination();
         this.initBody();
     };
@@ -593,7 +611,14 @@
     };
 
     BootstrapTable.prototype.onPageNumber = function (event) {
-        this.options.pageNumber = +$(event.currentTarget).text();
+        // 获取当前点击的页码
+        // 更新当前页码
+        // 更新分页信息
+        // 重新加载表格数据
+        console.log(event.currentTarget.textContent);
+        // var $number = event.currentTarget.textContent;
+        this.options.pageNumber = + event.currentTarget.textContent;
+        console.log('this.options.pageNumber:' + this.options.pageNumber);
         this.updatePagination();
         this.initBody();
     };
@@ -601,10 +626,13 @@
     BootstrapTable.prototype.initBody = function () {
         var that = this,
             html = [];
-        this.$body = this.$el.find('tbody');
-        if (!this.$body.length) {
-            this.$body = $('<tbody></tbody>').appendTo(this.$el);
+        this.$body = this.$el.querySelector('tbody');
+        if (!this.$body) {
+            this.$el.insertAdjacentHTML('beforeend', '<tbody></tbody>');
+
+            this.$body = this.$el.querySelector('tbody');
         }
+        // 分页
         if (!this.options.pagination) {
             this.pageFrom = 1;
             this.pageTo = this.data.length;
@@ -612,7 +640,7 @@
         for (var i = this.pageFrom - 1; i < this.pageTo; i++) {
             var item = this.data[i];
             html.push('<tr' + ' data-index="' + i + '">');
-            $.each(that.header.fields, function (j, field) {
+            each(that.header.fields, function (j, field) {
                 var text = '',
                     value = item[field],
                     type = '';
@@ -632,19 +660,24 @@
                         '</td>'].join('');
                 }
                 html.push(text);
+                // console.log(text)
             });
             html.push('</tr>');
         }
-        this.$body.html(html.join(''));
-        this.$body.find('tr').off('click').on('click', function () {
-            that.options.onClickRow(that.data[$(this).data('index')]);
+        this.$body.innerHTML = html.join('');
+        this.$body.querySelector('tr').addEventListener('click', function () {
+            that.options.onClickRow(that.data[this.data('index')]);
         });
-        this.$selectItem = this.$body.find('[name="btSelectItem"]');
-        this.$selectItem.off('click').on('click', function () {
-            var checkAll = that.data.length === that.$selectItem.filter(':checked').length;
-            that.$selectAll.prop('checked', checkAll);
-            that.data[$(this).data('index')][that.header.stateField] = $(this).prop('checked');
-        });
+        this.$selectItem = this.$body.querySelectorAll('[name="btSelectItem"]');
+
+        this.$selectItem.forEach(function (item, index) {
+            item.addEventListener('click', function () {
+                var checkAll = that.data.length === that.$selectItem.filter(':checked').length;
+                that.$selectAll.setAttribute('checked', checkAll);
+                that.data[this.data('index')][that.header.stateField] = this.getAttribute('checked');
+            })
+        })
+            ;
         this.resetView();
     };
 
@@ -653,16 +686,16 @@
         if (!this.options.url) {
             return;
         }
-        $.ajax({
-            type: this.options.method,
-            url: this.options.url,
-            data: this.options.queryParams,
-            contentType: 'application/json',
-            dataType: 'json',
-            success: function (data) {
-                that.load(data);
-            }
-        });
+        // $.ajax({
+        // type: this.options.method,
+        // url: this.options.url,
+        // data: this.options.queryParams,
+        // contentType: 'application/json',
+        // dataType: 'json',
+        // success: function (data) {
+        // that.load(data);
+        // }
+        // });
     };
 
     BootstrapTable.prototype.getCaretHtml = function () {
@@ -674,15 +707,20 @@
     BootstrapTable.prototype.resetView = function () {
         var header = this.header;
 
-        this.$header.find('.th-inner').each(function (i) {
-            $(this).attr('style', header.styles[i])
-                .css('width', ($(this).parent().width()) + 'px'); // padding: 8px
-        });
-    };
+        if (this.$header) {
+            this.$header.querySelectorAll('.th-inner').forEach(function (_, i) {
+                if (this) {
+
+                    this.setAttribute('style', header.styles[i])
+                    this.style.width = this.parentnode.clientWidth; // padding: 8px
+                }
+            })
+        };
+    }
 
     BootstrapTable.prototype.updateRows = function (checked) {
         var that = this;
-        $.each(this.data, function (i, row) {
+        each(this.data, function (i, row) {
             row[that.header.stateField] = checked;
         });
     };
@@ -702,38 +740,49 @@
 
     BootstrapTable.prototype.mergeCells = function (options) {
         var row = options.index,
-            col = $.inArray(options.field, this.header.fields),
+            col = inArray(options.field, this.header.fields),
             rowspan = options.rowspan || 1,
             colspan = options.colspan || 1,
             i, j,
-            $tr = this.$body.find('tr'),
-            $td = $tr.eq(row).find('td').eq(col);
+            $tr = this.$body.querySelectorall('tr'),
+            $td = $tr[row].querySelectorall('td')[col];
         if (row < 0 || col < 0 || row >= this.data.length) {
             return;
         }
         for (i = row; i < row + rowspan; i++) {
             for (j = col; j < col + colspan; j++) {
-                $tr.eq(i).find('td').eq(j).hide();
+                $tr[i].querySelectorall('td')[j].style.display = 'none';
             }
         }
-        $td.attr('rowspan', rowspan).attr('colspan', colspan).show();
+        $td.attr('rowspan', rowspan).attr('colspan', colspan).style.display = '';
     };
     BootstrapTable.prototype.getSelections = function () {
         var that = this;
-        return $.grep(this.data, function (row) {
+        return this.data.filter(function (row) {
             return row[that.header.stateField];
         });
 
     };
     BootstrapTable.prototype.checkAll = function () {
-        this.$selectAll.prop('checked', true);
-        this.$selectItem.prop('checked', true);
-        this.updateRows(true);
+        let that = this
+        this.$selectAll.forEach(function (item, index) {
+            item.setAttribute('checked', true);
+            that.$selectItem.forEach(item => { item.checked = true; });
+            that.updateRows(true);
+        })
+
+
     };
     BootstrapTable.prototype.uncheckAll = function () {
-        this.$selectAll.prop('checked', false);
-        this.$selectItem.prop('checked', false);
-        this.updateRows(false);
+        let that = this
+        this.$selectAll.forEach(function (item, index) {
+            item.setAttribute('checked', false);
+
+            that.$selectItem.forEach(item => { item.checked = false; });
+
+            that.updateRows(false);
+        })
+
     };
     BootstrapTable.prototype.destroy = function () {
         this.$container.replaceWith(this.$el_);
@@ -741,13 +790,13 @@
     };
 
 
-    $.fn.bootstrapTable.Constructor = BootstrapTable;
+    fn.Constructor = BootstrapTable;
 
     // BOOTSTRAP TABLE INIT
     // =======================
 
-    $(function () {
-        $('[data-toggle="table"]').bootstrapTable();
-    });
+    // (function () {
+    // document.querySelector('[data-toggle="table"]').bootstrapTable();
+    // });
 
 }))

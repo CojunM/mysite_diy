@@ -1,8 +1,9 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('jquery')) :
-  typeof define === 'function' && define.amd ? define(['jquery'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.BootstrapTable = factory(global.jQuery));
-})(this,   (function ($$o) { 'use strict';
+    typeof define === 'function' && define.amd ? define(['jquery'], factory) :
+      (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.BootstrapTable = factory(global.jQuery));
+})(this, (function ($$o) {
+  'use strict';
 
   function _iterableToArrayLimit(arr, i) {
     var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"];
@@ -102,7 +103,7 @@
       if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
         if (it) o = it;
         var i = 0;
-        var F = function () {};
+        var F = function () { };
         return {
           s: F,
           n: function () {
@@ -466,8 +467,8 @@
 
   var sharedExports = {};
   var shared$4 = {
-    get exports(){ return sharedExports; },
-    set exports(v){ sharedExports = v; },
+    get exports() { return sharedExports; },
+    set exports(v) { sharedExports = v; },
   };
 
   var isPure = false;
@@ -721,8 +722,8 @@
 
   var makeBuiltInExports = {};
   var makeBuiltIn$3 = {
-    get exports(){ return makeBuiltInExports; },
-    set exports(v){ makeBuiltInExports = v; },
+    get exports() { return makeBuiltInExports; },
+    set exports(v) { makeBuiltInExports = v; },
   };
 
   var DESCRIPTORS$9 = descriptors;
@@ -887,7 +888,7 @@
     try {
       if (options && hasOwn$7(options, 'constructor') && options.constructor) {
         if (DESCRIPTORS$8) defineProperty$7(value, 'prototype', { writable: false });
-      // in V8 ~ Chrome 53, prototypes of some methods, like `Array.prototype.values`, are non-writable
+        // in V8 ~ Chrome 53, prototypes of some methods, like `Array.prototype.values`, are non-writable
       } else if (value.prototype) value.prototype = undefined;
     } catch (error) { /* empty */ }
     var state = enforceInternalState$1(value);
@@ -1001,8 +1002,8 @@
         value = O[index++];
         // eslint-disable-next-line no-self-compare -- NaN check
         if (value != value) return true;
-      // Array#indexOf ignores holes, Array#includes - not
-      } else for (;length > index; index++) {
+        // Array#indexOf ignores holes, Array#includes - not
+      } else for (; length > index; index++) {
         if ((IS_INCLUDES || index in O) && O[index] === el) return IS_INCLUDES || index || 0;
       } return !IS_INCLUDES && -1;
     };
@@ -1107,8 +1108,8 @@
     var value = data[normalize(feature)];
     return value == POLYFILL ? true
       : value == NATIVE ? false
-      : isCallable$9(detection) ? fails$m(detection)
-      : !!detection;
+        : isCallable$9(detection) ? fails$m(detection)
+          : !!detection;
   };
 
   var normalize = isForced$3.normalize = function (string) {
@@ -1286,10 +1287,10 @@
     return it === undefined ? 'Undefined' : it === null ? 'Null'
       // @@toStringTag case
       : typeof (tag = tryGet(O = $Object$1(it), TO_STRING_TAG$2)) == 'string' ? tag
-      // builtinTag case
-      : CORRECT_ARGUMENTS ? classofRaw$1(O)
-      // ES3 arguments fallback
-      : (result = classofRaw$1(O)) == 'Object' && isCallable$8(O.callee) ? 'Arguments' : result;
+        // builtinTag case
+        : CORRECT_ARGUMENTS ? classofRaw$1(O)
+          // ES3 arguments fallback
+          : (result = classofRaw$1(O)) == 'Object' && isCallable$8(O.callee) ? 'Arguments' : result;
   };
 
   var classof$5 = classof$6;
@@ -1909,12 +1910,12 @@
       first = charCodeAt$1(S, position);
       return first < 0xD800 || first > 0xDBFF || position + 1 === size
         || (second = charCodeAt$1(S, position + 1)) < 0xDC00 || second > 0xDFFF
-          ? CONVERT_TO_STRING
-            ? charAt$4(S, position)
-            : first
-          : CONVERT_TO_STRING
-            ? stringSlice$6(S, position, position + 2)
-            : (first - 0xD800 << 10) + (second - 0xDC00) + 0x10000;
+        ? CONVERT_TO_STRING
+          ? charAt$4(S, position)
+          : first
+        : CONVERT_TO_STRING
+          ? stringSlice$6(S, position, position + 2)
+          : (first - 0xD800 << 10) + (second - 0xDC00) + 0x10000;
     };
   };
 
@@ -2046,9 +2047,9 @@
         }
         var output = [];
         var flags = (separator.ignoreCase ? 'i' : '') +
-                    (separator.multiline ? 'm' : '') +
-                    (separator.unicode ? 'u' : '') +
-                    (separator.sticky ? 'y' : '');
+          (separator.multiline ? 'm' : '') +
+          (separator.unicode ? 'u' : '') +
+          (separator.sticky ? 'y' : '');
         var lastLastIndex = 0;
         // Make `global` and avoid `lastIndex` issues by working with a copy
         var separatorCopy = new RegExp(separator.source, flags + 'g');
@@ -2069,7 +2070,7 @@
         } else push$4(output, stringSlice$5(string, lastLastIndex));
         return output.length > lim ? arraySlice$2(output, 0, lim) : output;
       };
-    // Chakra, V8
+      // Chakra, V8
     } else if ('0'.split(undefined, 0).length) {
       internalSplit = function (separator, limit) {
         return separator === undefined && limit === 0 ? [] : call$5(nativeSplit, this, separator, limit);
@@ -2102,9 +2103,9 @@
 
         var unicodeMatching = rx.unicode;
         var flags = (rx.ignoreCase ? 'i' : '') +
-                    (rx.multiline ? 'm' : '') +
-                    (rx.unicode ? 'u' : '') +
-                    (UNSUPPORTED_Y$1 ? 'g' : 'y');
+          (rx.multiline ? 'm' : '') +
+          (rx.unicode ? 'u' : '') +
+          (UNSUPPORTED_Y$1 ? 'g' : 'y');
 
         // ^(? + rx + ) is needed, in combination with some S slicing, to
         // simulate the 'y' flag.
@@ -2398,7 +2399,7 @@
       var create = specificCreate || arraySpeciesCreate$1;
       var target = IS_MAP ? create($this, length) : IS_FILTER || IS_FILTER_REJECT ? create($this, 0) : undefined;
       var value, result;
-      for (;length > index; index++) if (NO_HOLES || index in self) {
+      for (; length > index; index++) if (NO_HOLES || index in self) {
         value = self[index];
         result = boundFunction(value, index, O);
         if (TYPE) {
@@ -2585,7 +2586,7 @@
   // https://tc39.es/ecma262/#sec-array.prototype.foreach
   var arrayForEach = !STRICT_METHOD$1 ? function forEach(callbackfn /* , thisArg */) {
     return $forEach(this, callbackfn, arguments.length > 1 ? arguments[1] : undefined);
-  // eslint-disable-next-line es/no-array-prototype-foreach -- safe
+    // eslint-disable-next-line es/no-array-prototype-foreach -- safe
   } : [].forEach;
 
   var global$7 = global$k;
@@ -3796,8 +3797,8 @@
       index: 0,                          // next index
       kind: kind                         // kind
     });
-  // `%ArrayIteratorPrototype%.next` method
-  // https://tc39.es/ecma262/#sec-%arrayiteratorprototype%.next
+    // `%ArrayIteratorPrototype%.next` method
+    // https://tc39.es/ecma262/#sec-%arrayiteratorprototype%.next
   }, function () {
     var state = getInternalState(this);
     var target = state.target;
@@ -5737,6 +5738,7 @@
           cellStyles: [],
           searchables: []
         };
+
         Utils.updateFieldGroup(this.options.columns, this.columns);
         this.options.columns.forEach(function (columns, i) {
           var html = [];
@@ -5804,8 +5806,8 @@
               }
             }
             html.push("<th".concat(Utils.sprintf(' title="%s"', column.titleTooltip)), column.checkbox || column.radio ? Utils.sprintf(' class="bs-checkbox %s"', column['class'] || '') : classes || class_, Utils.sprintf(' style="%s"', halign + style + csses.join('; ')), Utils.sprintf(' rowspan="%s"', column.rowspan), Utils.sprintf(' colspan="%s"', column.colspan), Utils.sprintf(' data-field="%s"', column.field),
-            // If `column` is not the first element of `this.options.columns[0]`, then className 'data-not-first-th' should be added.
-            j === 0 && i > 0 ? ' data-not-first-th' : '', data_.length > 0 ? data_.join(' ') : '', '>');
+              // If `column` is not the first element of `this.options.columns[0]`, then className 'data-not-first-th' should be added.
+              j === 0 && i > 0 ? ' data-not-first-th' : '', data_.length > 0 ? data_.join(' ') : '', '>');
             html.push(Utils.sprintf('<div class="th-inner %s">', _this2.options.sortable && column.sortable ? "sortable".concat(columnHalign === 'center' ? ' sortable-center' : '', " both") : ''));
             var text = _this2.options.escape && _this2.options.escapeTitle ? Utils.escapeHTML(column.title) : column.title;
             var title = text;
@@ -7557,8 +7559,8 @@
         var _this17 = this;
         var data = this.options.data;
         if ((this.searchText || this.options.customSearch || this.options.sortName !== undefined || this.enableCustomSort ||
-        // Fix #4616: this.enableCustomSort is for extensions
-        !Utils.isEmptyObject(this.filterColumns) || typeof this.options.filterOptions.filterAlgorithm === 'function' || !Utils.isEmptyObject(this.filterColumnsPartial)) && (!params || !params.unfiltered)) {
+          // Fix #4616: this.enableCustomSort is for extensions
+          !Utils.isEmptyObject(this.filterColumns) || typeof this.options.filterOptions.filterAlgorithm === 'function' || !Utils.isEmptyObject(this.filterColumnsPartial)) && (!params || !params.unfiltered)) {
           data = this.data;
         }
         if (params && !params.includeHiddenRows) {
