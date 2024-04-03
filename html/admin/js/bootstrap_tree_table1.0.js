@@ -9,6 +9,143 @@
             (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.BootstrapTable = factory());
 })(this, (function () {
     'use strict';
+
+    /**
+ * 代理事件
+ * ========================================================
+ * 说明：代码修改至 Nicolas Gallagher 的 delegate.js
+ * 项目 GitHub 地址：https://github.com/necolas/delegate.js
+ * ========================================================
+ */
+    let Delegate = {
+        /**
+         * 绑定代理事件
+         * ========================================================================
+         * @param {HTMLElement} el - 绑定代理事件的 DOM 节点
+         * @param {String} selector - 触发 el 代理事件的 DOM 节点的选择器
+         * @param {String} type - 事件类型
+         * @param {Function} callback - 绑定事件的回调函数
+         * @param {Object} [context] - callback 回调函数的 this 上下文（默认值：el）
+         * @param {Boolean} [capture] - 是否采用事件捕获（默认值：false - 事件冒泡）
+         * @param {Boolean} [once] - 是否只触发一次（默认值：false - 事件冒泡）
+         */
+        on(el, selector, type, callback, context, capture, /* private */ once) {
+            const Delegate = Delegate
+            const wrapper = function (e) {
+                let delegateTarget = Delegate.getDelegateTarget(el, e.target, selector)
+
+                e.delegateTarget = delegateTarget
+
+                if (delegateTarget) {
+                    if (once === true) {
+                        Delegate.off(el, type, wrapper)
+                    }
+                    callback.call(context || el, e)
+                }
+            }
+
+            if (type === 'mouseenter' || type === 'mouseleave') {
+                capture = true
+            }
+
+            callback._delegateWrapper = callback
+            el.addEventListener(type, wrapper, capture || false)
+
+            return callback
+        },
+        /**
+         * 绑定只触发一次的事件
+         * ========================================================================
+         * @param {HTMLElement} el - 绑定代理事件的 DOM 节点
+         * @param {String} selector - 触发 el 代理事件的 DOM 节点的选择器
+         * @param {String} type - 事件类型
+         * @param {Function} callback - 绑定事件的回调函数
+         * @param {Object} [context] - callback 回调函数的 this 上下文（默认值：el）
+         * @param {Boolean} [capture] - 是否采用事件捕获（默认值：false - 事件冒泡）
+         */
+        once(el, type, selector, callback, context, capture) {
+            Calendar.Delegate.on(el, type, selector, callback, context, capture, true)
+        },
+        /**
+         * 取消事件绑定
+         * ========================================================================
+         * @param {HTMLElement} el - 取消绑定（代理）事件的 DOM 节点
+         * @param {String} type - 事件类型
+         * @param {Function} callback - 绑定事件的回调函数
+         * @param {Boolean} [capture] - 是否采用事件捕获（默认值：false - 事件冒泡）
+         */
+        off(el, type, callback, capture) {
+            if (callback._delegateWrapper) {
+                callback = callback._delegateWrapper
+                delete callback._delegateWrapper
+            }
+
+            if (type === 'mouseenter' || type === 'mouseleave') {
+                capture = true
+            }
+
+            el.removeEventListener(type, callback, capture || false)
+        },
+        /**
+         * 停止事件（阻止默认行为和阻止事件的捕获或冒泡）
+         * ========================================================================
+         * @param {Event} evt - 事件对象
+         */
+        stop(evt) {
+            const Delegate = Calendar.Delegate
+
+            Delegate.stopPropagation(evt)
+            Delegate.preventDefault(evt)
+        },
+        /**
+         * 终止事件在传播过程的捕获或冒泡
+         * ========================================================================
+         * @param {Event} evt - 事件对象
+         */
+        stopPropagation(evt) {
+            let event = window.event
+
+            if (evt.stopPropagation) {
+                evt.stopPropagation()
+            } else {
+                event.cancelBubble = true
+            }
+        },
+        /**
+         * 阻止事件的默认行为
+         * ========================================================================
+         * @param {Event} evt - 事件对象
+         */
+        preventDefault(evt) {
+            let event = window.event
+
+            if (evt.preventDefault) {
+                evt.preventDefault()
+            } else {
+                event.returnValue = false
+            }
+        },
+        /**
+         * 通过 className 获得事件代理节点的事件代理目标节点
+         * ========================================================================
+         * @param {HTMLElement} el - 绑定事件代理的节点
+         * @param target - （触发事件后）事件的目标对象
+         * @param selector - 目标节点的类选择器
+         * @returns {HTMLElement|Null}
+         */
+        getDelegateTarget(el, target, selector) {
+            while (target && target !== el) {
+                if (Calendar.DOM.hasClass(target, selector.replace('.', ''))) {
+                    return target
+                }
+
+                target = target.parentElement
+            }
+
+            return null
+        }
+    }
+
     //    工具函数
     var Utils = {
         //比较对象
@@ -56,8 +193,9 @@
             return parents;
         },
         trigger: function (elem, eventName, data) {
-            if (data) { const _event = new CustomEvent(eventName, data); }
-            else { const _event = new Event(eventName); }
+            let _event;
+            if (data) { _event = new CustomEvent(eventName, data); }
+            else { _event = new Event(eventName); }
             elem.dispatchEvent(_event);
         },
         $: {
@@ -415,14 +553,31 @@
         // 返回格式化后的字符串;
         // 示例：Utils.sprintf("Age:%d, Height:%f", 29, 1.75);
         // 返回：Age:29, Height:1.75;
-        sprintf: function () {
-            if (!arguments.length) return '';
-            var str = arguments[0],
-                i = 1;
-            return str.replace(/%s/g, function () {
-                return typeof arguments[i++] !== 'undefined' ? arguments[i - 1] : '';// 对每个匹配值应用函数，i自加1，直到无匹配值; 
-            });
-        },
+        sprintf:
+            function (str) {
+                var args = arguments,
+                    flag = true,
+                    i = 1;
+                str = str.replace(/%s/g, function () {
+                    var arg = args[i++];
+                    if (typeof arg === 'undefined') {
+                        flag = false;
+                        return '';
+                    }
+                    return arg;
+                });
+                return flag ? str : '';
+            },
+        // function () {
+        // if (!arguments.length) return '';
+        // var str = arguments[0],
+        // i = 1;
+        // str.replace(/%s/g, function () {
+        // var arg = arguments[i++];
+        // return typeof arg !== 'undefined' ? arvg : '';// 对每个匹配值应用函数，i自加1，直到无匹配值; 
+        // return str;
+        // });
+        // },
         /* 这个函数的作用是对表格的列进行排序，并为每个列分配一个唯一的索引。这个索引是根据列的行跨度（rowspan）和列跨度（colspan）计算得出的。
         函数的参数是一个数组（columns），其中每个元素都是一个包含列对象的一维数组。列对象可以包含以下属性：
         - colspan：列的列跨度，默认为 1
@@ -548,7 +703,7 @@
         getItemField: function (item, field, escape) {
             var value = item;
             if (typeof field !== 'string' || item.hasOwnProperty(field)) {
-                return escape ? escapeHTML(item[field]) : item[field];
+                return escape ? Utils.escapeHTML(item[field]) : item[field];
             }
             var props = field.split('.');
             for (var p in props) {
@@ -556,9 +711,20 @@
                     value = value && value[props[p]];
                 }
             }
-            return escape ? escapeHTML(value) : value;
+            return escape ? Utils.escapeHTML(value) : value;
         },
-
+        escapeHTML: function (text) {
+            if (typeof text === 'string') {
+                return text
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;')
+                    .replace(/`/g, '&#x60;');
+            }
+            return text;
+        },
     };
 
 
@@ -763,6 +929,7 @@
 
     // 定义BootstrapTable函数，接收两个参数：el和options
     var BootstrapTable = function (el, options) {
+        console.log('开始初始化');
         this.options = options;
         this.$el = el;
         this.$el_ = this.$el.cloneNode(true);// 记录触发元素的初始值，destroy销毁重置的时候使用
@@ -1096,6 +1263,7 @@
 
     // 将语言包添加进配置项this.options中，数据格式是{formatLoadingMessage:fn};  
     BootstrapTable.prototype.initLocale = function () {
+        console.log('将语言包添加进配置项')
         if (this.options.locale) {
             var parts = this.options.locale.split(/-|_/);
             parts[0].toLowerCase();
@@ -1134,6 +1302,7 @@
             '</div>',
 
         ].join(''));
+
         this.$el.parentNode.replaceChild(this.$container, this.$el);
         // this.$container.insertAfter(this.$el);
         this.$tableContainer = this.$container.querySelector('.fixed-table-container');
@@ -1272,8 +1441,8 @@
                 html.push(Utils.sprintf('<th class="detail" rowspan="%s"><div class="fht-cell"></div></th>',
                     that.options.columns.length));
             }
-
             Object.entries(columns).forEach(function (column) {
+                // columns.forEach(function (column) {
                 var text = '',
                     halign = '',
                     align = '',
@@ -1334,7 +1503,7 @@
                 }
 
                 // options.columns数据回显和渲染页面  
-                html.push('<th' + Utils.sprintf(' title="%s"', column.titleTooltip),
+                html.push('<th' + Utils.sprintf('  title="%s"', column.titleTooltip),
                     column.checkbox || column.radio ?
                         Utils.sprintf(' class="bs-checkbox %s"', column['class'] || '') :
                         _class,
@@ -1345,7 +1514,7 @@
                     "tabindex='0'",
                     '>');
 
-                html.push(Utils.sprintf('<div class="th-inner %s">', that.options.sortable && column.sortable ?
+                html.push(Utils.sprintf('<div class="th-inner  %s">', that.options.sortable && column.sortable ?
                     'sortable both' : ''));
 
                 text = column.title;
@@ -1372,16 +1541,18 @@
         });
 
         this.$header.innerHTML = html.join('');
+        // console.log(this.$header.innerHTML)
         this.$header.querySelectorAll('th[data-field]').forEach(function (_) {
             // 标题栏data属性写入各自的column数据，展开卡片式详情时使用  
             if (_) {
-                _.dataset[visibleColumns[_.dataset['field']]];
+                _.daaset[visibleColumns[_.dataset['field']]];
                 // _.dataset['field'] = _.getAttribute('data-field');
             }
 
         });
 
-        // 绑定点击排序事件  
+        // 绑定点击排序事件
+
         this.$container.querySelector('.th-inner').onclick = function (event) {
             var target = this;
             if (target.closest('.bootstrap-table')[0] !== that.$container[0])
@@ -1576,10 +1747,11 @@
             $search,
             switchableCount = 0;
 
-        if (this.$toolbar.querySelectorAll('.bars').children().length) {
+        if (this.$toolbar.querySelector('.bs-bars')?.children.length) {
+            // cannot read property of undefined报错的五种解决方案https://juejin.cn/post/7013545448308899870
             document.querySelector('body').append(this.options.toolbar);
         }
-        this.$toolbar.html('');
+        this.$toolbar.innerHTML = '';
 
         if (typeof this.options.toolbar === 'string' || typeof this.options.toolbar === 'object') {
             this.$toolbar.append(Utils.sprintf('<div class="bars pull-%s"></div>', this.options.toolbarAlign))
@@ -1702,15 +1874,7 @@
 
                     that.toggleColumn(Utils.getFieldIndex(that.columns,
                         this.dataset.field), $this['checked'], false);
-
-                    if (window.CustomEvent) {
-                        const event_ = new CustomEvent('column-switch', { detail: { key1: this.dataset.field, key2: $this['checked'] } });
-                    } else {
-                        const event_ = document.createEvent('column-switch');
-                        event_.initCustomEvent('column-switch', true, true, { key1: this.dataset.field, key2: $this['checked'] });
-                    }
-
-                    that.dispatchEvent(event_);
+                    that.trigger('column-switch', this.dataset.field, $this['checked']);
                 }
             });
         }
@@ -1722,11 +1886,10 @@
                 '<div class="pull-' + this.options.searchAlign + ' search">',
                 Utils.sprintf('<input class="form-control' +
                     Utils.sprintf(' input-%s', this.options.iconSize) +
-                    '" type="text" placeholder="%s">',
-                    this.options.formatSearch()),
+                    '" type="text" placeholder="%s">', this.options.formatSearch()),
                 '</div>');
-
-            this.$toolbar.appendChild(html.join(''));
+            // console.log(this.options.formatSearch())
+            this.$toolbar.insertAdjacentHTML('beforeend', html.join(''));
             $search = this.$toolbar.querySelector('.search input');
             $search.onkeyup = $search.ondrop = function (event) {
                 if (that.options.searchOnEnterKey) {
@@ -2045,7 +2208,7 @@
                 '</ul>',
                 '</div>');
         }
-        this.$pagination.html(html.join(''));
+        this.$pagination.insertAdjacentHTML('beforeend', html.join(''));
 
         if (!this.options.onlyInfoPagination) {
             $pageList = this.$pagination.querySelectorAll('.page-list a');// 每页显示数据量切换按钮  
@@ -2182,6 +2345,7 @@
         var that = this,
             html = [],
             data = this.getData();// 获取搜索过滤后的数据  
+        // console.log(data);
         // data的数据格式为对象形式  
         // [{   // 行tr中的属性设置  
         //      _data:{  
@@ -2201,17 +2365,12 @@
         // tr以及checkbox中data数组的序号data-index，以便于获取data[data-index]数据调用  
 
         // 触发pre-body事件，传递data数据
-        if (window.CustomEvent) {
-            const event_ = new CustomEvent('pre-body', { detail: data });
-        } else {
-            const event_ = document.createEvent('pre-body');
-            event_.initCustomEvent('pre-body', true, true, data);
-        }
-        this.dispatchEvent(event_);
+        this.trigger('pre-body', data);
         this.$body = this.$el.querySelector('tbody');
         if (!this.$body) {
             this.$body = document.createElement('tbody')
             this.$el.appendChild(this.$body);
+            // console.log('!this.$body')
         }// 页面初始化存在tbody>tr>td的情况下，this.options.data数据由initTable获取  
 
         //Fix #389 Bootstrap-table-flatJSON is not working  
@@ -2231,7 +2390,7 @@
                 htmlAttributes = [];
 
             // 通过options.rowStyle(row,index)函数或window[options.rowStyle](row,index)获取tbody>tr样式  
-            style = Utils.Utils.calculateObjectValue(this.options, this.options.rowStyle, [item, i], style);
+            style = Utils.calculateObjectValue(this.options, this.options.rowStyle, [item, i], style);
             if (style && style.css) {
                 for (key in style.css) {
                     csses.push(key + ': ' + style.css[key]);
@@ -2239,11 +2398,11 @@
             }
 
             // 通过options.rowAttributes(row,index)函数或window[options.rowAttributes](row,index)获取tbody>tr属性  
-            attributes = Utils.Utils.calculateObjectValue(this.options,
+            attributes = Utils.calculateObjectValue(this.options,
                 this.options.rowAttributes, [item, i], attributes);
             if (attributes) {
                 for (key in attributes) {
-                    htmlAttributes.push(Utils.sprintf('%s="%s"', key, escapeHTML(attributes[key])));
+                    htmlAttributes.push(Utils.sprintf('%s="%s"', key, Utils.escapeHTML(attributes[key])));
                 }
             }
 
@@ -2286,7 +2445,7 @@
             // j即列坐标  
             this.header.fields.forEach(function (field, j) {
                 var text = '',
-                    value = Utils.Utils.getItemField(item, field, that.options.escape),// 获取row[field]  
+                    value = Utils.getItemField(item, field, that.options.escape),// 获取row[field]  
                     type = '',
                     cellStyle = {},
                     id_ = '',
@@ -2294,7 +2453,7 @@
                     data_ = '',
                     rowspan_ = '',
                     title_ = '',
-                    column = that.columns[Utils.Utils.getFieldIndex(that.columns, field)];
+                    column = that.columns[Utils.getFieldIndex(that.columns, field)];
 
                 if (!column.visible) {// 筛选时设置  
                     return;
@@ -2304,7 +2463,7 @@
 
                 // 调用that.header.formatters[j](item.field,item,i)格式化显示内容  
                 // 特别当单元格是复选框的时候，value返回值可以是对象形式{checked:true;disabled:true}，此时无显示文本  
-                value = Utils.Utils.calculateObjectValue(column,
+                value = Utils.calculateObjectValue(column,
                     that.header.formatters[j], [value, item, i], value);
 
                 if (item['_' + field + '_id']) {
@@ -2320,7 +2479,7 @@
                     title_ = Utils.sprintf(' title="%s"', item['_' + field + '_title']);
                 }
                 // 调用that.header.cellStyles[j](item.field,item,i)设置单元格显示样式  
-                cellStyle = Utils.Utils.calculateObjectValue(that.header,
+                cellStyle = Utils.calculateObjectValue(that.header,
                     that.header.cellStyles[j], [value, item, i], cellStyle);
                 if (cellStyle.classes) {
                     class_ = Utils.sprintf(' class="%s"', cellStyle.classes);
@@ -2572,14 +2731,6 @@
         this.resetView();
 
         this.trigger('post-body');
-
-        if (window.CustomEvent) {
-            const event__ = new CustomEvent('post-body');
-        } else {
-            const event__ = document.createEvent('post-body');
-            event__.initCustomEvent('post-body', true, true);
-        }
-        that.dispatchEvent(event__);
     };
 
     // 触发ajax事件（可以是用户自定义的方法options.ajax），上传数据格式为  
@@ -2697,14 +2848,17 @@
 
     // 全选以及全不选时改变全选复选框的勾选状态，以及tr行添加或删除selected类  
     BootstrapTable.prototype.updateSelected = function () {
-        var checkAll = this.$selectItem.filter((w) => w.disabled = false).length &&
-            this.$selectItem.filter((w) => w.disabled = false).length ===
-            this.$selectItem.filter((w) => w.disabled = false).filter((w) => w.checked = true).length;
-
-        this.$selectAll.push(this.$selectAll_)
+        var checkAll = [].filter.call(this.$selectItem, (w) => w.disabled = false).length &&
+            [].filter.call(this.$selectItem, ((w) => w.disabled = false)).length ===
+            [].filter.call([].filter.call(this.$selectItem, ((w) => w.disabled = false)), ((w) => w.checked = true).length);
+        // var allTags = [];
+        // allTags.push.apply(allTags, this.$selectAll);
+        // allTags.push.apply(allTags, this.$selectAll_)
+        // allTags.forEach(element => {
+        // this.$selectAll.add(this.$selectAll_);
+        this.$selectAll = Array.from(this.$selectAll).concat(this.$selectAll_);
         this.$selectAll.forEach(element => {
-            element['checked'] = checkAll;
-
+            if (element) element['checked'] = checkAll;
         });
 
         this.$selectItem.forEach(function () {
@@ -2740,10 +2894,10 @@
 
         name += '.bs.table';
         this.options[BootstrapTable.EVENTS[name]].apply(this.options, args);
-        Utils.trigger(this.$el, this.Event(name), { detail: args });
+        Utils.trigger(this.$el, name, { detail: args });
 
         this.options.onAll(name, args);
-        Utils.trigger(this.$el, this.Event('all.bs.table'), { detail: [name, args] });
+        Utils.trigger(this.$el, 'all.bs.table', { detail: [name, args] });
     };
 
     // 一定时间内触发this.fitHeader函数调整表头的水平偏移，垂直滚动不影响表头  
@@ -2796,13 +2950,6 @@
                 }
             })
         };
-
-
-
-
-
-
-
 
         this.$header_ = this.$header.cloneNode(true);
         this.$selectAll_ = this.$header_.querySelectorAll('[name="btSelectAll"]');
@@ -3144,9 +3291,10 @@
         }
 
         this.$selectAll.forEach(element => {
-
-            element.setAttribute('checked', that.$selectItem.length > 0 &&
-                that.$selectItem.length === that.$selectItem.querySelectorAll(':checked').length)
+            if (element) {
+                element.setAttribute('checked', that.$selectItem.length > 0 &&
+                    that.$selectItem.length === that.$selectItem.querySelectorAll(':checked').length)
+            }
         });
 
         if (this.options.height) {
@@ -3188,7 +3336,7 @@
     //  有过滤数据，返回过滤数据this.data，无则返回未过滤数据this.options.data;  
     //  前台分页，获取this.pageFrom-1到this.pageTo的data数据或者整个data数据;  
     BootstrapTable.prototype.getData = function (useCurrentPage) {
-        return (this.searchText || !Utils.isEmptyObject(this.filterColumns) || !Utils.isEmptyObject(this.filterColumnsPartial)) ?
+        return (this.searchText || !Utils.isEmptyObject(this.filterColumns || {}) || !Utils.isEmptyObject(this.filterColumnsPartial || {})) ?
             (useCurrentPage ? this.data.slice(this.pageFrom - 1, this.pageTo) : this.data) :
             (useCurrentPage ? this.options.data.slice(this.pageFrom - 1, this.pageTo) : this.options.data);
     };
@@ -3662,7 +3810,7 @@
             value = value === 'bottom' ? this.$tableBody[0].scrollHeight : 0;
         }
         if (typeof value === 'number') {
-            this.$tableBody.scrollTop(value);
+            this.$tableBody.scrollTop = value;
         }
         if (typeof value === 'undefined') {
             return this.$tableBody.scrollTop();// 返回顶部  
@@ -3874,7 +4022,7 @@
         }
 
         if (!data) {
-            $this.dataset('bootstrap.table', (data = new BootstrapTable(this, options)));
+            $this.dataset['bootstrap.table'] = data = new BootstrapTable(this, options);
         };
         // });
 
