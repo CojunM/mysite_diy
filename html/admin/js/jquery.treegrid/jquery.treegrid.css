@@ -1,0 +1,25 @@
+.treegrid-indent {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    position: relative;
+}
+
+.treegrid-expander {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+
+.treegrid-expander-expanded {
+    /* background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M12 20l-6-6h12l-6 6zm0-16l6 6H6l6-6z'/%3E%3C/svg%3E"); */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'  fill='currentColor'  viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+}
+
+/* .treegrid-expander-expanded{background-image: url(../img/collapse.png);} */
+.treegrid-expander-collapsed {
+    /* background-image: url(../img/expand.png); */
+    background-image: url("data:image/svg+xml,%3Csvg  xmlns='http://www.w3.org/2000/svg' fill='currentColor'   viewBox='0 0 16 16'%3E%3Cpath d='m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z'/%3E%3C/svg%3E")
+}

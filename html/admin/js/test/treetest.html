@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 新 Bootstrap5 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.net/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
+
+    <!-- 最新的 Bootstrap5 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.net/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+    <title>Treetest</title>
+    <!-- <script src="testjs.js"> </script> -->
+
+    <!-- <script src="tset.js"></script> -->
+    <!-- <script src="tsbt.js"></script> -->
+    <link href="/html/admin/js/bootstrap-table-1.13/bootstrap-table.css">
+    <script src="/html/admin/js/bootstrap_tree_table1.1.js"></script>
+</head>
+
+<body>
+    <table id="table"></table>
+    <script>
+        (function () {
+            // var data = JSON.parse(
+            // '[{"id":1,"pid":0,"status":1,"name":"用户管理","permissionValue":"open:user:manage"},' +
+            // '{"id":2,"pid":0,"status":1,"name":"系统管理","permissionValue":"open:system:manage"},' +
+            // '{"id":3,"pid":1,"status":1,"name":"新增用户","permissionValue":"open:user:add"},' +
+            // '{"id":4,"pid":1,"status":1,"name":"修改用户","permissionValue":"open:user:edit"},' +
+            // '{"id":5,"pid":1,"status":0,"name":"删除用户","permissionValue":"open:user:del"},' +
+            // '{"id":6,"pid":2,"status":1,"name":"系统配置管理","permissionValue":"open:systemconfig:manage"},' +
+            // '{"id":7,"pid":6,"status":1,"name":"新增配置","permissionValue":"open:systemconfig:add"},' +
+            // '{"id":8,"pid":6,"status":1,"name":"修改配置","permissionValue":"open:systemconfig:edit"},' +
+            // '{"id":9,"pid":6,"status":0,"name":"删除配置","permissionValue":"open:systemconfig:del"},' +
+            // '{"id":10,"pid":2,"status":1,"name":"系统日志管理","permissionValue":"open:log:manage"},' +
+            // '{"id":11,"pid":10,"status":1,"name":"新增日志","permissionValue":"open:log:add"},' +
+            // '{"id":12,"pid":10,"status":1,"name":"修改日志","permissionValue":"open:log:edit"},' +
+            // '{"id":13,"pid":10,"status":0,"name":"删除日志","permissionValue":"open:log:del"}]');
+            // 
+            var data = [{
+                "time": "2019-08-27",
+                "id": 1,
+                "content": "内容1",
+                "pid": ""
+            }, {
+                "time": "2019-08-27 1",
+                "id": 2,
+                "content": "内容2",
+                "pid": 1
+            }, {
+                "time": "2019-08-27 2",
+                "id": 3,
+                "content": "内容3",
+                "pid": 1
+            }, {
+                "time": "2019-08-27 3",
+                "id": 4,
+                "content": "内容4",
+                "pid": ""
+            }, {
+                "time": "2019-08-27 4",
+                "id": 5,
+                "content": "内容5",
+                "pid": 2
+            },
+            {
+                "time": "2019-08-27 5",
+                "id": 6,
+                "content": "内容6",
+                "pid": ""
+            },
+            {
+                "time": "2019-08-27 6",
+                "id": 7,
+                "content": "内容7",
+                "pid": 6
+            },
+            ];
+            var $table = document.querySelector("#table")
+            $table.bootstrapTable({
+                // $table.bootstrapTable({
+                search: true,  //是否显示搜索框功能
+                data: data,
+                idField: 'id',
+                dataType: 'jsonp',
+                // columns: [{
+                // field: 'ck',
+                // checkbox: true
+                // },
+                // {
+                // field: 'name',
+                // title: '名称'
+                // },
+                // {
+                // field: 'status',
+                // title: '状态',
+                // sortable: true,
+                // align: 'center',
+                // formatter: 'statusFormatter'
+                // },
+                // {
+                // field: 'permissionValue',
+                // title: '权限值'
+                // }
+                // ],
+                columns: [{
+                    field: 'time',
+                    title: '时间',
+                    width: 140
+                },
+                {
+                    field: 'content',
+                    title: '主要内容'
+                },
+                ],
+                // bootstrap-table-treegrid.js 插件配置 -- start
+
+                //在哪一列展开树形
+                // treeShowField: 'name',
+                treeShowField: 'time',
+                //指定父id列
+                parentIdField: 'pid',
+                onResetView: function (data) {
+                    // console.log('load', $table);
+                    $table.treegrid({
+                        initialState: 'collapsed',// 所有节点都折叠
+                        // initialState: 'expanded',// 所有节点都展开，默认展开
+                        treeColumn: 0,
+                        expanderExpandedClass: 'glyphicon glyphicon-minus',  //图标样式
+                        expanderCollapsedClass: 'glyphicon glyphicon-plus',
+                        onChange: function () {
+                            $table.bootstrapTable('resetWidth');
+                        }
+                    });
+
+                    // 只展开树形的第一级节
+                    // $table.treegrid('getRootNodes').forEach(rn => rn.treegrid('expand'));
+                    // console.log($table.treegrid('getRootNodes'));
+                },
+                onCheck: function (row) {
+                    var datas = $table.bootstrapTable('getData');
+                    // 勾选子类
+                    selectChilds(datas, row, "id", "pid", true);
+
+                    // 勾选父类
+                    selectParentChecked(datas, row, "id", "pid")
+
+                    // 刷新数据
+                    $table.bootstrapTable('load', datas);
+                },
+
+                onUncheck: function (row) {
+                    var datas = $table.bootstrapTable('getData');
+                    selectChilds(datas, row, "id", "pid", false);
+                    $table.bootstrapTable('load', datas);
+                },
+                // bootstrap-table-treetreegrid.js 插件配置 -- end
+            });
+
+        })()
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 新 Bootstrap5 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.net/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
+
+    <!-- 最新的 Bootstrap5 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.net/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+    <title>Tree</title>
+    <!-- <script src="testjs.js"> </script> -->
+
+    <!-- <script src="tset.js"></script> -->
+    <!-- <script src="tsbt.js"></script> -->
+    <!-- <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script> -->
+    <link href="/html/admin/js/bstable/bootstrap-table.css">
+    <!-- <link href="/html/admin/js/bstable/bootstrap-table-tree-column.css"> -->
+    <!-- <script src="/html/admin/js/bstable1.11/bootstrap-table.js"></script> -->
+    <!-- <script src="/html/admin/js/bstable1.11/bootstrap-table-tree-column.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery-treegrid@0.3.0/js/jquery.treegrid.min.js"></script> -->
+    <script src="/html/admin/js/bootstrap_tree_table1.1.js"></script>
+</head>
+
+<body>
+    <table id="table" class="gv"></table>
+
+    <script>
+        (function () {
+            var data = [
+                { 'team': '班组1', 'teamId': '1', 'teamParentId': '', '2019-01': 22, '2019-02': 33, '2019-03': 44 },
+                { 'team': '用户1', 'teamId': '12', 'teamParentId': '1', '2019-01': 1, '2019-02': 3, '2019-03': 4 },
+                { 'team': '用户2', 'teamId': '13', 'teamParentId': '3', '2019-01': 1, '2019-02': '', '2019-03': 4 },
+                { 'team': '用户3', 'teamId': '14', 'teamParentId': '1', '2019-01': 20, '2019-02': 30, '2019-03': 36 },
+                { 'team': '班组2', 'teamId': '2', 'teamParentId': '', '2019-01': 66, '2019-02': 77, '2019-03': 88 },
+                { 'team': '用户4', 'teamId': '21', 'teamParentId': '2', '2019-01': 11, '2019-02': 2, '2019-03': 33 },
+                { 'team': '班组3', 'teamId': '3', 'teamParentId': '', '2019-01': 88, '2019-02': 55, '2019-03': 100 },
+            ]
+            // var $table = $('#table')
+            document.querySelector("#table").bootstrapTable({
+                // $table.bootstrapTable({
+                search: true,  //是否显示搜索框功能
+                data: data,
+                pagination: true,
+                pageSize: 5,//每页显示的数据条数
+                pageList: [5, 10, 20],//用于设置选择每页显示的记录数，支持动态显示
+                paginationPreText: '上一页',//指定分页条中上一页按钮的图标或文字,可以自定义
+                paginationNextText: '下一页',//指定分页条中下一页按钮的图标或文字,可以自定义
+                showRefresh: false,//刷新按钮是否显示：true:显示，false：不显示 
+                paginationLoop: true,//true 翻页功能无限循环，false:关闭此功能
+                treeView: true,//是否显示树形视图
+                treeShowField: 'team',// 指定那列来展开tree grid默认为第一列expandField:
+                idField: "teamId",//treeGrid父级id字段	对应于返回父节点字段keytreeField
+                parentIdField: 'teamParentId',
+                treeRootLevel: 1,
+                showColumns: true,
+                // idField: 'id',
+                // showColumns: true,
+                // treeShowField: 'name',
+                // parentIdField: 'pid',
+                // onPostBody: function () {
+                // var columns = $table.bootstrapTable('getOptions').columns
+
+                // if (columns && columns[0][1].visible) {
+                // $table.treegrid({
+                // treeColumn: 1,
+                // onChange: function () {
+                // $table.bootstrapTable('resetView')
+                // }
+                // })
+                // }
+                // },
+                columns: [
+                    [
+                        {
+                            title: '班组', field: 'team', align: 'center', valign: 'middle', rowspan: 2,
+                            formatter: function (value, row, index) {
+                                row.index = index;
+                                if (row.teamStyle == 1) {
+                                    return "<div><i class='layui-icon' οnclick='treeGridClick(" + row.teamId + ")' style='cursor:pointer' id='" + row.teamId + "'>&#xe602;</i>&nbsp;" + value + "</div>";
+                                } else {
+                                    return "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + value;
+                                }
+
+                            }
+                        },
+                        { title: '2019第一季度', field: 'ta', align: 'center', valign: 'middle', }//colspan: 3
+                    ],
+                    [
+                        { title: '1月', field: '2019-01', align: 'center', valign: 'middle', },
+                        { title: '2月', field: '2019-02', align: 'center', valign: 'middle', },
+                        { title: '3月', field: '2019-03', align: 'center', valign: 'middle', },
+                    ]
+
+                ]
+            });
+        })()
+        // [{
+        // "deptId": 1,
+        // "parentId": 0,
+        // "deptName": "开发部",
+        // "orderNum": null,
+        // "createTime": 1515051746000
+        // }, {
+        // "deptId": 2,
+        // "parentId": 1,
+        // "deptName": "开发一部",
+        // "orderNum": null,
+        // "createTime": 1515051754000
+        // }, {
+        // "deptId": 3,
+        // "parentId": 1,
+        // "deptName": "开发二部",
+        // "orderNum": null,
+        // "createTime": 1515051749000
+        // }, {
+        // "deptId": 4,
+        // "parentId": 0,
+        // "deptName": "市场部",
+        // "orderNum": null,
+        // "createTime": 1515051756000
+        // }, {
+        // "deptId": 5,
+        // "parentId": 0,
+        // "deptName": "人事部",
+        // "orderNum": null,
+        // "createTime": 1515051752000
+        // }, {
+        // "deptId": 6,
+        // "parentId": 0,
+        // "deptName": "测试部",
+        // "orderNum": null,
+        // "createTime": 1515051758000
+        // }, {
+        // "deptId": 7,
+        // "parentId": 2,
+        // "deptName": "开发一部福州分部",
+        // "orderNum": null,
+        // "createTime": 1521077535000
+        // }]
+    </script>
+
+
+</body>
+
+</html>

@@ -6,7 +6,7 @@
         // 检测上下文环境是否为AMD或CMD
         typeof define === 'function' && define.amd ? define(factory) :
 
-            (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.BootstrapTable = factory());
+            (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.bootstrapTable = factory());
 })(this, (function () {
     'use strict';
 
@@ -15,43 +15,124 @@
  * ========================================================
  * 说明：代码修改至 Nicolas Gallagher 的 delegate.js
  * 项目 GitHub 地址：https://github.com/necolas/delegate.js
+ * jQuery
  * ========================================================
  */
-    let Delegate = {
+    let $Event = {
+        _events: new WeakMap(), // 使用WeakMap存储事件与元素的映射关系，利于垃圾回收
         /**
          * 绑定代理事件
          * ========================================================================
          * @param {HTMLElement} el - 绑定代理事件的 DOM 节点
          * @param {String} selector - 触发 el 代理事件的 DOM 节点的选择器
-         * @param {String} type - 事件类型
+         * @param {String} types - 事件类型
          * @param {Function} callback - 绑定事件的回调函数
          * @param {Object} [context] - callback 回调函数的 this 上下文（默认值：el）
          * @param {Boolean} [capture] - 是否采用事件捕获（默认值：false - 事件冒泡）
          * @param {Boolean} [once] - 是否只触发一次（默认值：false - 事件冒泡）
          */
-        on(el, selector, type, callback, context, capture, /* private */ once) {
-            const Delegate = Delegate
-            const wrapper = function (e) {
-                let delegateTarget = Delegate.getDelegateTarget(el, e.target, selector)
-
-                e.delegateTarget = delegateTarget
-
-                if (delegateTarget) {
-                    if (once === true) {
-                        Delegate.off(el, type, wrapper)
-                    }
-                    callback.call(context || el, e)
+        on(el, types, selector, context, callback, capture, /* private */ once) {
+            let type
+            //如果第一个types的对象是object类型，见代码1
+            if (typeof types === "object") {
+                // ( types-Object, selector, data )
+                //如果第二个参数不是string，那么调用方式就是$("p").on(typeObject,dataObject)
+                //也就是第一个参数是type对象，第二个参数是数据对象
+                if (typeof selector !== "string") {
+                    context = context || selector;
+                    selector = undefined;
                 }
+                //获取types封装的每一个type对象
+                for (type in types) {
+                    //继续逐个绑定到选择器选择的对象上面去。也就是虽然事件类型是一个object对象，但是还
+                    //type是"mouseenter",但是types[type]就是function对象
+                    let fn = types[type]
+                    if (!fn._flag) fn._flag = selector + Math.random().toString(36).substr(2, 8);
+                    $Event.on(el, type, selector, context, fn, capture, once);
+                }
+                return el;
+            }
+            //如果第一个参数不是object类型，同时第三个和第四个参数data和fn同时是null,因为undefined==nu
+            // 这个if语句的调用逻辑是: $("p").on("click", function () { })也就是只有两个参数，这种调用方式第二个参数是f
+            // 第一个是types，data和selector是undefined。on: function(types, selector, data, fn, /*INTERNAL*/ one
+            if (context == null && callback == null) {
+                // ( types, fn )
+                //把selector赋值给fn,记住韦恩图的逻辑!
+                callback = selector;
+                context = selector = undefined;
+            } else if (callback == null) {
+                //仅仅fn为null，data不是null,function( types, selector, data, fn, /*INTERNAL*/ one )
+                if (typeof selector === "string") {
+                    // ( types, selector, fn )
+                    callback = context;
+                    context = undefined;
+                } else {
+                    // ( types, data, fn )
+                    callback = context;
+                    context = selector;
+                    selector = undefined;
+                }
+            }
+            //如果第四个参数是false,那么就把事件触发时候的回调函数设为returnFalse函数!
+            if (callback === false) {
+                callback = () => { return false; };
+            } else if (!callback) {
+                return el;
+            }
+            callback._flag = callback._flag = selector + Math.random().toString(36).substr(2, 8);
+            // Ensure that invalid selectors throw exceptions at attach time
+            // Evaluate against documentElement in case elem is a non-element node (e.g., document)
+            if (selector) {
+                let fn = callback;
+                callback = function (e) {
+                    //  验证子选择器所匹配的nodeList中是否包含当前事件源 或 事件源的父级
+                    // 注意: 这个方法为包装函数,此处的this为触发事件的Elemen  t
+                    var target = e.target;
+                    while (target !== el) {
+                        if ([].indexOf.call(el.querySelectorAll(selector), target) !== -1) {
+                            fn.apply(target, arguments);
+                            break;
+                        }
+                        target = target.parentNode;
+                    };
+                }
+                callback._flag = fn._flag
+            }
+            //如果传入了最后一个参数，同时设置为1，在下面的one（）函数中会被调用
+            if (once === true) {
+                //保存原来的传递过来的事件函数
+                //把one调用的函数作为局部变量保存下来
+                let fn = callback;
+                //对传进来的fn重新赋值，这个函数是一个全新的函数，这个函数首先移除相应的事件，移除以后
+                //一次
+                callback = function (event) {
+                    // Can use an empty set, since event contains the info
+                    $Event.off(el, types, selector, callback);
+                    return fn.apply(context || el, arguments);
+                };
+                callback._flag = fn._flag
             }
 
             if (type === 'mouseenter' || type === 'mouseleave') {
                 capture = true
             }
 
-            callback._delegateWrapper = callback
-            el.addEventListener(type, wrapper, capture || false)
 
-            return callback
+            // Only attach events to objects that accept data
+            // if (!acceptData(el)) {
+            // return;
+            // }
+            //jQuery.event.add传入参数，第一个参数是遍历出来的jQuery对象转化成的DOM对象，即$("p")[i]
+            //第二个参数是类型，第三个参数回调函数，第四个参数是传递的额外数据，最后一个是选择器
+
+            // if (typeof el === '') {
+            // el.forEach(function (item) {
+            // Delegate.addEvent(item, types, callback, context, selector, capture || false)
+            // })}
+            //    else  {
+            $Event.addEvent(el, types, callback, context, selector, capture || false)
+            return el
+            //    }              ;
         },
         /**
          * 绑定只触发一次的事件
@@ -63,8 +144,8 @@
          * @param {Object} [context] - callback 回调函数的 this 上下文（默认值：el）
          * @param {Boolean} [capture] - 是否采用事件捕获（默认值：false - 事件冒泡）
          */
-        once(el, type, selector, callback, context, capture) {
-            Calendar.Delegate.on(el, type, selector, callback, context, capture, true)
+        once(el, type, selector, context, callback, capture) {
+            $Event.on(el, type, selector, context, callback, capture, true);
         },
         /**
          * 取消事件绑定
@@ -74,28 +155,135 @@
          * @param {Function} callback - 绑定事件的回调函数
          * @param {Boolean} [capture] - 是否采用事件捕获（默认值：false - 事件冒泡）
          */
-        off(el, type, callback, capture) {
-            if (callback._delegateWrapper) {
-                callback = callback._delegateWrapper
-                delete callback._delegateWrapper
+        off(el, types, selector, fn) {
+            //如果types存在，同时types有preventDefault和handleObj对象
+            //很显然这样的off方法是用于内部调用的!
+            if (typeof types === "object") {
+                // ( types-object [, selector] )
+                for (let type in types) {
+                    //那么对每一个调用对象单独移除事件!
+                    $Event.off(el, type, selector, types[type]);
+                }
+                return el;
             }
-
-            if (type === 'mouseenter' || type === 'mouseleave') {
-                capture = true
+            //如果selector是false或者是函数，那么调用就是off(types,fn)
+            if (selector === false || typeof selector === "function") {
+                // ( types [, fn] )
+                fn = selector;
+                selector = undefined;
             }
-
-            el.removeEventListener(type, callback, capture || false)
+            //如果函数是fn===false那么移除的函数就是returnFalse函数!
+            if (fn === false) {
+                fn = false;
+            }
+            $Event.removeEvent(el, types, fn, selector);
+            return el;
         },
         /**
-         * 停止事件（阻止默认行为和阻止事件的捕获或冒泡）
-         * ========================================================================
-         * @param {Event} evt - 事件对象
+         * 为一个元素添加一个或多个事件监听器。
+         * 
+         * @param {HTMLElement} el - 需要添加事件监听器的元素。
+         * @param {String} types - 一个或多个以空格分隔的事件类型，例如 'click keydown'.
+         * @param {Function} callback - 事件被触发时执行的回调函数。
+         * @param {Object} [context=this] - 回调函数执行时的上下文对象，默认为当前函数作用域。
+         * @param {String} [selector] - 一个CSS选择器，用于筛选出事件冒泡过程中的目标元素。
+         * @param {Boolean} [capture=false] - 指定事件是否在捕获或冒泡阶段执行，默认为冒泡阶段。
          */
-        stop(evt) {
-            const Delegate = Calendar.Delegate
+        addEvent(el, types, callback, context, selector, capture) {
+            // Only attach events to objects that accept data
+            if (!$Event.acceptData(el) || !types || !callback) return;
+            // Define a cache object for the element's events if it doesn't exist
+            let handlers = $Event._events.get(el) || {};
+            // 处理多事件绑定
+            types.split(' ').filter((item) => {
+                return item !== null && item !== "";
+            }).forEach(type => {
+                handlers[type] = handlers[type] || [];
+                // 添加事件处理信息到WeakMap
+                handlers[type].push({
+                    selector: selector,
+                    callback: callback,
+                    context: context,
+                    capture: capture
+                });
 
-            Delegate.stopPropagation(evt)
-            Delegate.preventDefault(evt)
+                $Event._events.set(el, handlers);
+                el.addEventListener(type, callback, capture);
+            });
+        },
+        /**
+ * 移除指定元素的事件监听器。
+ * 
+ * @param {HTMLElement} el - 要移除事件监听器的元素。
+ * @param {String} types - 以空格分隔的多个事件类型字符串。
+ * @param {Function} callback - 事件被触发时执行的回调函数。
+ * @param {String} [selector] - 一个CSS选择器，用于选择事件委托的目标。
+ */
+        removeEvent(el, types, callback, selector) {
+            let handlers = $Event._events.get(el);
+            if (!handlers) return;
+            if (!types) {
+                //type是空，那么直接移除所有的事件!
+                Object.entries(handlers).forEach(([k, v]) => {
+                    v.forEach((item) => {
+                        el.removeEventListener(k, item.callback, item.capture)
+
+                    })
+                    $Event._events.delete(el);
+                });
+            }
+            else {
+                types.split(' ').filter((item) => {
+                    return item !== null && item !== "";
+                }).forEach(type => {
+                    if (handlers[type]) {
+                        let handleObj = handlers[type]
+                        if (!callback) {
+                            handleObj.forEach(item => {
+                                el.removeEventListener(type, item.callback, item.capture)
+                            })
+                            delete handlers[type];
+                        }
+                        else {
+                            //如果传入了handler，那么就移除对应的事件!
+                            handleObj.forEach((item, index) => {
+                                //判断当前遍历到的方法和传入的方法是否相同
+                                if ((item.callback._flag === callback._flag) &&
+                                    (!selector || selector === item.selector || selector === "**" && item.selector)) {
+                                    //移除对应的事件
+                                    el.removeEventListener(type, item.callback, item.capture)
+                                    //删除对应的事件对象
+                                    delete handlers[type].splice(index, 1);
+                                }
+                            })
+
+                        }
+                    }
+                })
+            }
+        },
+        /**
+ * 触发指定DOM元素上的事件。
+ * @param {Element} elem - 需要触发事件的DOM元素。
+ * @param {string} eventName - 需要触发的事件名称。
+ * @param {*} data - 与事件一起传递的数据。
+ * @returns {boolean} - 如果事件被成功触发，则返回true；否则返回false。
+ */
+        trigger(elem, eventName, data) {
+            let _event;
+            if (data) { _event = new CustomEvent(eventName, { detail: data }); }
+            else { _event = new Event(eventName); }
+            // 触发事件
+            return elem.dispatchEvent(_event);
+        },
+        /**
+ * 停止事件（阻止默认行为和阻止事件的捕获或冒泡）
+ * ========================================================================
+ * @param {Event} evt - 事件对象
+ */
+        stop(evt) {
+            $Event.stopPropagation(evt)
+            $Event.preventDefault(evt)
         },
         /**
          * 终止事件在传播过程的捕获或冒泡
@@ -104,7 +292,6 @@
          */
         stopPropagation(evt) {
             let event = window.event
-
             if (evt.stopPropagation) {
                 evt.stopPropagation()
             } else {
@@ -118,36 +305,33 @@
          */
         preventDefault(evt) {
             let event = window.event
-
             if (evt.preventDefault) {
                 evt.preventDefault()
             } else {
                 event.returnValue = false
             }
         },
-        /**
-         * 通过 className 获得事件代理节点的事件代理目标节点
-         * ========================================================================
-         * @param {HTMLElement} el - 绑定事件代理的节点
-         * @param target - （触发事件后）事件的目标对象
-         * @param selector - 目标节点的类选择器
-         * @returns {HTMLElement|Null}
-         */
-        getDelegateTarget(el, target, selector) {
-            while (target && target !== el) {
-                if (Calendar.DOM.hasClass(target, selector.replace('.', ''))) {
-                    return target
-                }
 
-                target = target.parentElement
-            }
-
-            return null
-        }
+        acceptData(owner) {
+            // Accepts only:
+            //  - Node
+            //    - Node.ELEMENT_NODE
+            //    - Node.DOCUMENT_NODE
+            //  - Object
+            //    - Any
+            //!(+owner.nodeType)对于非 Node 类型的对象，
+            //    通过逻辑表达式 !(+owner.nodeType) 进行判断。
+            //    这里将 owner.nodeType 转换为数值（+owner.nodeType），
+            //    然后取反。由于非 Node 类型的 owner 其 nodeType 
+            //    属性通常不存在或非数值，转换后可能为 NaN 或非零数值，
+            //    取反后结果为真（即接受此类对象）。
+            return !!owner && (owner.nodeType === 1 || owner.nodeType === 9 || !(+owner.nodeType));
+        },
     }
 
+
     //    工具函数
-    var Utils = {
+    let Utils = {
         //比较对象
         compareObjects: function (objectA, objectB, compareLength) {
             // Create arrays of property names
@@ -172,25 +356,6 @@
             }
             // If we made it this far, objects are considered equivalent
             return true;
-        },
-        parents: function getParents(el, parentSelector /* optional */) {
-            // console.log(el);
-            // If no parentSelector defined will bubble up all the way to *document*
-            if (parentSelector === undefined) {
-                parentSelector = document;
-            }
-
-            var parents = [];
-            var p = el.parentNode;
-
-            while (p !== parentSelector) {
-
-                var o = p;
-                parents.push(o);
-                p = o.parentNode;
-            }
-            parents.push(parentSelector);
-            return parents;
         },
         trigger: function (elem, eventName, data) {
             let _event;
@@ -317,7 +482,34 @@
             });
             return result;
         },
+        getScrollBarWidth: function () {
+            if (cachedWidth === null) {
+                var inner = document.querySelectorAll('<p/>'),
+                    outer = document.querySelectorAll('<div/>'),
+                    w1, w2;
+                inner.forEach(function (item, i) {
+                    item.classList.add('fixed-table-scroll-inner');
+                })
+                outer.forEach(function (item, i) {
+                    item.classList.add('fixed-table-scroll-outer');
+                })
 
+                outer.forEach(o => {
+                    o.appendChild(inner);
+                })
+
+                document.querySelector('body').appendChild(outer);
+                w1 = inner[0].offsetWidth;
+                outer.forEach((o) => o.styles.overflow = 'scroll');
+                w2 = inner[0].offsetWidth;
+                if (w1 === w2) {
+                    w2 = outer[0].clientWidth;
+                }
+                outer.parentNode.removeChild(outer);;
+                cachedWidth = w1 - w2;
+            }
+            return cachedWidth;
+        },
         compareObjects: function (objectA, objectB, compareLength) {
             // Create arrays of property names
             var objectAProperties = Object.getOwnPropertyNames(objectA),
@@ -594,64 +786,34 @@
                 totalCol += columns[0][i].colspan || 1;
             }
             for (i = 0; i < columns.length; i++) {
-                for (j = 0; j < columns[i].length; j++) {
-                    flag[i] = [];
-                    for (k = 0; k < totalCol; k++) {
-                        flag[i][k] = 0;
-                    }
+                flag[i] = [];
+                for (j = 0; j < totalCol; j++) {
+                    flag[i][j] = false;
                 }
             }
             for (i = 0; i < columns.length; i++) {
                 for (j = 0; j < columns[i].length; j++) {
-                    var colspan = columns[i][j].colspan || 1,
-                        rowspan = columns[i][j].rowspan || 1;
-                    for (k = 0; k < rowspan; k++) {
-                        for (var l = 0; l < colspan; l++) {
-                            flag[i + k][j + l] = 1;
+                    var r = columns[i][j],
+                        rowspan = r.rowspan || 1,
+                        colspan = r.colspan || 1,
+                        index = Utils.inArray(false, flag[i]);
+                    if (colspan === 1) {
+                        r.fieldIndex = index;
+                        // when field is undefined, use index instead
+                        if (typeof r.field === 'undefined') {
+                            r.field = index;
                         }
+                    }
+                    for (k = 0; k < rowspan; k++) {
+                        flag[i + k][index] = true;
+                    }
+                    for (k = 0; k < colspan; k++) {
+                        flag[i][index + k] = true;
                     }
                 }
             }
-            return flag;
         },
-        // 
-        // setFieldIndex : function (columns) {
-        // var i, j, k,
-        // totalCol = 0,
-        // flag = [];
-        // for (i = 0; i < columns[0].length; i++) {
-        //  totalCol += columns[0][i].colspan || 1;
-        // }
-        // for (i = 0; i < columns.length; i++) {
-        // flag[i] = [];
-        // for (j = 0; j < totalCol; j++) {
-        // flag[i][j] = false;
-        // }
-        //  }
-        // for (i = 0; i < columns.length; i++) {
-        // for (j = 0; j < columns[i].length; j++) {
-        // var r = columns[i][j],
-        // rowspan = r.rowspan || 1,
-        // colspan = r.colspan || 1,
-        // index = $.inArray(false, flag[i]);
-        // if (colspan === 1) {
-        // r.fieldIndex = index;
-        // // when field is undefined, use index instead
-        // if (typeof r.field === 'undefined') {
-        // r.field = index;
-        // }
-        // }
-        // for (k = 0; k < rowspan; k++) {
-        // flag[i + k][index] = true;
-        // }
-        // for (k = 0; k < colspan; k++) {
-        // flag[i][index + k] = true;
-        // }
-        // }
-        // }
-        // },
-        //    
-        // 获取真实的data-attr属性值
+        //                                                                                                                                                                                         // 获取真实的data-attr属性值
         getRealDataAttr: function (dataAttr) {
 
             for (var attr in dataAttr) {
@@ -725,145 +887,74 @@
             }
             return text;
         },
+        inArray: function (elem, arr, i) {
+            var len, indexOf = Array.indexOf;
+            if (Array.isArray(arr)) {
+                if (indexOf) {
+                    return indexOf.call(arr, elem, i);
+                }
+                len = arr.length;
+                //alert($.inArray(5,[1,2,3,5,4],-1))这里获取到的i就是4，len就是5，返回值为-1
+                i = i ? i < 0 ? Math.max(0, len + i) : i : 0;
+                for (; i < len; i++) {
+                    // Skip accessing in sparse arrays
+                    //这里直接跳过稀疏数组中的空白部分，进而节约时间 
+                    if (i in arr && arr[i] === elem) {
+                        return i;
+                    }
+                }
+            }
+            return -1;
+        },
+        parents: function getParents(el, parentSelector /* optional */) {
+            // console.log(el);
+            // If no parentSelector defined will bubble up all the way to *document*
+            if (parentSelector === undefined) {
+                parentSelector = document;
+            }
+            var parents = [];
+            var p = el.parentNode;
+            while (p !== parentSelector) {
+                var o = p;
+                parents.push(o);
+                p = o.parentNode;
+            }
+            parents.push(parentSelector);
+            return parents;
+        },
+        // Tree相关方法
+        getParent: function (node, source, treefield, parentfield) {
+            var data = [];
+            var items = source.filter(function (item, index) {
+                return node[parentfield] == item[treefield];
+            });
+            items.forEach(function (item, index) {
+                data.splice(0, 0, item);
+                var child = Utils.getParent(item, source, treefield, parentfield);
+                child.forEach(function (n, i) {
+                    data.splice(0, 0, n);
+                });
+            });
+            return data;
+
+        },
+        getChild: function (node, source, treefield, parentfield) {
+            var data = [];
+            var items = source.filter(function (item, index) {
+                return item[parentfield] == node[treefield];
+            });
+            items.forEach(function (item, index) {
+                data.push(item);
+                var child = Utils.getChild(item, source, treefield, parentfield);
+                child.forEach(function (n, i) {
+                    data.push(n);
+                });
+            });
+            return data;
+        },
     };
 
 
-    var _Event = {
-        on: function (event, querySelector, callback, useCapture) {
-            // 将事件触发执行的函数存储于DOM上, 在清除事件时使用
-            return this.addEvent(this.getEventObject(event, querySelector, callback, useCapture));
-
-        },
-
-        off: function (event, querySelector) {
-            return this.removeEvent(this.getEventObject(event, querySelector));
-        },
-
-        bind: function (event, callback, useCapture) {
-            return this.on(event, undefined, callback, useCapture);
-        },
-
-        unbind: function (event) {
-            return this.removeEvent(this.getEventObject(event));
-        },
-        // 获取 jTool Event 对象
-        getEventObject: function (event, querySelector, callback, useCapture) {
-            // $(dom).on(event, callback);
-            if (typeof querySelector === 'function') {
-                useCapture = callback || false;
-                callback = querySelector;
-                querySelector = undefined;
-            }
-            // event callback 为必要参数
-            if (!event) {
-                utilities.error('事件绑定失败,原因: 参数中缺失事件类型');
-                return this;
-            }
-
-            // 子选择器不存在 或 当前DOM对象包含Window Document 则将子选择器置空
-            if (!querySelector || utilities.type(this.DOMList[0]) !== 'element') {
-                querySelector = '';
-            }
-            // #Event003 存在子选择器 -> 包装回调函数, 回调函数的参数
-            // 预绑定功能实现
-            if (querySelector !== '') {
-                var fn = callback;
-                callback = function (e) {
-                    // 验证子选择器所匹配的nodeList中是否包含当前事件源 或 事件源的父级
-                    // 注意: 这个方法为包装函数,此处的this为触发事件的Element
-                    var target = e.target;
-                    while (target !== this) {
-                        if ([].indexOf.call(this.querySelectorAll(querySelector), target) !== -1) {
-                            fn.apply(target, arguments);
-                            break;
-                        }
-                        target = target.parentNode;
-                    }
-                };
-            }
-            var eventSplit = event.split(' ');
-            var eventList = [],
-                eventScopeSplit,
-                eventObj;
-
-            utilities.each(eventSplit, function (i, eventName) {
-                if (eventName.trim() === '') {
-                    return true;
-                }
-
-                eventScopeSplit = eventName.split('.');
-                eventObj = {
-                    eventName: eventName + querySelector,
-                    type: eventScopeSplit[0],
-                    querySelector: querySelector,
-                    callback: callback || utilities.noop,
-                    useCapture: useCapture || false,
-                    // TODO: nameScope暂时不用
-                    nameScope: eventScopeSplit[1] || undefined
-                };
-                eventList.push(eventObj);
-            });
-            return eventList;
-        },
-
-        // 增加事件,并将事件对象存储至DOM节点
-        addEvent: function (eventList) {
-            var _this = this;
-            utilities.each(eventList, function (index, eventObj) {
-                utilities.each(_this.DOMList, function (i, v) {
-                    v.jToolEvent = v.jToolEvent || {};
-                    v.jToolEvent[eventObj.eventName] = v.jToolEvent[eventObj.eventName] || [];
-                    v.jToolEvent[eventObj.eventName].push(eventObj);
-                    v.addEventListener(eventObj.type, eventObj.callback, eventObj.useCapture);
-                });
-            });
-            return _this;
-        },
-
-        // 删除事件,并将事件对象移除出DOM节点
-        removeEvent: function (eventList) {
-            var _this = this;
-            var eventFnList; //事件执行函数队列
-            utilities.each(eventList, function (index, eventObj) {
-                utilities.each(_this.DOMList, function (i, v) {
-                    if (!v.jToolEvent) {
-                        return;
-                    }
-                    eventFnList = v.jToolEvent[eventObj.eventName];
-                    if (eventFnList) {
-                        utilities.each(eventFnList, function (i2, v2) {
-                            v.removeEventListener(v2.type, v2.callback);
-                        });
-                        v.jToolEvent[eventObj.eventName] = undefined;
-                    }
-                });
-            });
-            return _this;
-        }
-    };
-
-
-
-    function inArray(elem, arr, i) {
-        var len, indexOf = Array.indexOf;
-        if (Array.isArray(arr)) {
-            if (indexOf) {
-                return indexOf.call(arr, elem, i);
-            }
-            len = arr.length;
-            //alert($.inArray(5,[1,2,3,5,4],-1))这里获取到的i就是4，len就是5，返回值为-1
-            i = i ? i < 0 ? Math.max(0, len + i) : i : 0;
-            for (; i < len; i++) {
-                // Skip accessing in sparse arrays
-                //这里直接跳过稀疏数组中的空白部分，进而节约时间 
-                if (i in arr && arr[i] === elem) {
-                    return i;
-                }
-            }
-        }
-        return -1;
-    }
-    // 
     // 定义一个数组，用于存储允许的方法
     var allowedMethods = [
         'getOptions',
@@ -893,43 +984,9 @@
         'updateFormatText'
     ];
 
-    //
-    // 定义一个函数，用于创建一个BootstrapTable实例
-    var fn = Element.prototype.BootstrapTable = function (option) {
-        var value,
-            args = [].slice.call(arguments, 1);// slice() 方法以新的数组对象，返回数组中被选中的元素。
-        // console.log(arguments);
-        // console.log(this);
-        var data = this["bootstrap.table"] //this.data('bootstrap.table'),
-        // 配置项在触发元素的data数据中，或在js的option传参中  
-        options = Object.assign({}, BootstrapTable.DEFAULTS,
-            typeof option === 'object' && option);
-        //typeof option === 'object' && option,如果所有条件都是真实的，
-        //它将始终将其设置为最后一个真实变量。如果要将该变量用作布尔值，则可以双倍否定(!!）该变量，以便它返回布尔
-        // console.log(options);
-        // console.log(data);
-        if (typeof option === 'string') {
-            if (!allowedMethods.includes(option)) {
-                throw new Error("Unknown method: " + option);
-            }
-            if (!data) {
-                return;
-            }
-            value = data[option].apply(data, args);//执行指定方法
-            if (option === 'destroy') {
-                delete this['bootstrap.table'];
-            }
-        }
-        if (!data) {
-            // 创建一个新的BootstrapTable实例
-            data = this['bootstrap.table'] = new BootstrapTable(this, options);
-        };
-        return typeof value === 'undefined' ? this : value;
-    };
 
     // 定义BootstrapTable函数，接收两个参数：el和options
-    var BootstrapTable = function (el, options) {
-        console.log('开始初始化');
+    let BootstrapTable = function (el, options) {
         this.options = options;
         this.$el = el;
         this.$el_ = this.$el.cloneNode(true);// 记录触发元素的初始值，destroy销毁重置的时候使用
@@ -937,25 +994,9 @@
     };
 
 
-    // 将BootstrapTable函数添加到BootstrapTable.Constructor中
-    // 这样就可以通过BootstrapTable.Constructor访问BootstrapTable函数
-    // 例如：BootstrapTable.Constructor.methodName()
-    // 例如：BootstrapTable.Constructor.methodName(arg1, arg2, ...)
-    fn.Constructor = BootstrapTable;
-    // 定义BootstrapTable原型
-    // BootstrapTable.prototype = {
-    // constructor: BootstrapTable,
-    // init: function () { 
-    // 初始化表格
-    // this.initToolbar();
-    // this.initHeader();
-    // this.initBody();
-    // this.initFooter();
-    // this.initPagination();
-    // this.initSearch();
-    // this.initEvents();
-    // }
-    // }
+
+
+
     BootstrapTable.DEFAULTS = {
         classes: 'table table-hover',// 触发元素table加入的样式;  
         locale: undefined,// 设置语言包;  
@@ -1045,8 +1086,76 @@
             columns: 'glyphicon-th icon-th',// 筛选条目按钮  
             detailOpen: 'glyphicon-plus icon-plus',// 卡片式详情展开按钮  
             detailClose: 'glyphicon-minus icon-minus'// 卡片式详情折叠按钮  
-        },// 工具栏按钮具体样式  
-
+        },// 工具栏按钮具体样式
+        //tree
+        treeView: false,//treeView视图
+        // treeGridModel: "adjacency",
+        expandField: "id",//treeView视图字段
+        treeField: "id",
+        parentField: "ParentId",//treeView视图id
+        treeRootLevel: 0,//根节点序号
+        expandAll: false,//是否全部展开
+        initialState: 'expanded',
+        saveState: false,
+        saveStateMethod: 'cookie',
+        saveStateName: 'tree-grid-state',
+        expanderTemplate: '<span class="treegrid-expander"></span>',
+        indentTemplate: '<span class="treegrid-indent"></span>',
+        expanderExpandedClass: 'treegrid-expander-expanded',
+        expanderCollapsedClass: 'treegrid-expander-collapsed',
+        collapseIcon: "glyphicon glyphicon-chevron-right",//折叠样式
+        expandIcon: "glyphicon glyphicon-chevron-down",//展开样式
+        treeColumn: 0,
+        getExpander: function () {
+            return this.querySelector('.treegrid-expander');
+        },
+        getNodeId: function () {
+            var template = /treegrid-([A-Za-z0-9_-]+)/;
+            if (template.test(this.getAttribute('class'))) {
+                return template.exec(this.getAttribute('class'))[1];
+            }
+            return null;
+        },
+        getParentNodeId: function () {
+            var template = /treegrid-parent-([A-Za-z0-9_-]+)/;
+            if (template.test(this.getAttribute('class'))) {
+                return template.exec(this.getAttribute('class'))[1];
+            }
+            return null;
+        },
+        getNodeById: function (id, treegridContainer) {
+            var templateClass = "treegrid-" + id;
+            return treegridContainer.querySelector('tr.' + templateClass);
+        },
+        getChildNodes: function (id, treegridContainer) {
+            var templateClass = "treegrid-parent-" + id;
+            return treegridContainer.querySelectorAll('tr.' + templateClass);
+        },
+        getTreeGridContainer: function () {
+            return this.closest('table');
+        },
+        getRootNodes: function (treegridContainer) {
+            var result = [].filter.call(treegridContainer.querySelectorAll('tr'), function (element) {
+                var classNames = document.querySelector(element).getAttribute('class');
+                var templateClass = /treegrid-([A-Za-z0-9_-]+)/;
+                var templateParentClass = /treegrid-parent-([A-Za-z0-9_-]+)/;
+                return templateClass.test(classNames) && !templateParentClass.test(classNames);
+            });
+            return result;
+        },
+        getAllNodes: function (treegridContainer) {
+            var result = [].filter.call(treegridContainer.querySelectorAll('tr'), function (element) {
+                var classNames = document.querySelector(element).getAttribute('class');
+                var templateClass = /treegrid-([A-Za-z0-9_-]+)/;
+                return templateClass.test(classNames);
+            });
+            return result;
+        },
+        //Events
+        onCollapse: null,
+        onExpand: null,
+        onChange: null,
+        //end
         rowStyle: function (row, index) {
             return {};
         },// 传递给每一行的css设置，row为这一行的data数据  
@@ -1062,6 +1171,7 @@
             return false;
         },
         onDblClickCell: function (field, value, row, $element) {
+            // console.log('yunxing')
             return false;
         },
         onClickRow: function (item, $element) {
@@ -1245,6 +1355,7 @@
         this.initHeader();
         // 渲染表头，设置this.header数据记录主键等，绑定表头事件，卡片式显示时隐藏表头;  
         this.initData();
+        this.initHiddenRows();
         // 页面初始化、后台传值、表头表尾插入数据，更新this.data、options.data，前台分页则排序;  
         this.initFooter();
         // 显示隐藏表尾;  
@@ -1263,19 +1374,20 @@
 
     // 将语言包添加进配置项this.options中，数据格式是{formatLoadingMessage:fn};  
     BootstrapTable.prototype.initLocale = function () {
-        console.log('将语言包添加进配置项')
+        // console.log('将语言包添加进配置项')
         if (this.options.locale) {
             var parts = this.options.locale.split(/-|_/);
             parts[0].toLowerCase();
             parts[1] && parts[1].toUpperCase();
-            if (fn.bootstrapTable.locales[this.options.locale]) {
-                Object.assign(this.options, fn.bootstrapTable.locales[this.options.locale]);
-            } else if (fn.bootstrapTable.locales[parts.join('-')]) {
-                Object.assign(this.options, fn.bootstrapTable.locales[parts.join('-')]);
-            } else if (fn.bootstrapTable.locales[parts[0]]) {
-                Object.assign(this.options, fn.bootstrapTable.locales[parts[0]]);
+            if (fn.locales[this.options.locale]) {
+                Object.assign(this.options, fn.locales[this.options.locale]);
+            } else if (fn.locales[parts.join('-')]) {
+                Object.assign(this.options, fn.locales[parts.join('-')]);
+            } else if (fn.locales[parts[0]]) {
+                Object.assign(this.options, fn.locales[parts[0]]);
             }
         }
+
     };
 
     // 创建包裹元素this.container及其子元素this.$toolbar、this.$pagination等，为表格添加样式;  
@@ -1343,7 +1455,6 @@
         }
         this.$header.querySelectorAll('tr').forEach(function () {
             var column = [];
-
             this.querySelectorAll('th').forEach(function () {
                 column.push(Object.assign({}, {
                     title: this.innertext,
@@ -1355,8 +1466,10 @@
             });
             columns.push(column);
         });
-        if (Array.isArray(this.options.columns[0])) {
+
+        if (!Array.isArray(this.options.columns[0])) {
             this.options.columns = [this.options.columns];// 都处理成两维数组的形式  
+
         }
         this.options.columns = Object.assign([], columns, this.options.columns);
 
@@ -1369,15 +1482,18 @@
         Utils.setFieldIndex(this.options.columns);
         // console.log('12' + this.options.columns)
         this.options.columns.forEach(function (columns, i) {
-            // console.log('22' + Object.entries(columns))
 
-            Object.entries(columns).forEach(function (column, j) {
+            // Object.entries(columns).forEach(function (column, j) {
+            columns.forEach(function (column, j) {
+                // console.log([column])//[key, value]
                 column = Object.assign({}, BootstrapTable.COLUMN_DEFAULTS, column);
 
                 if (typeof column.fieldIndex !== 'undefined') {
                     that.columns[column.fieldIndex] = column;
                 }
                 that.options.columns[i][j] = column;
+                // console.log(that.options.columns)
+
             });
         });
 
@@ -1396,11 +1512,10 @@
             // 获取某一行每个子元素的内容、id、class、rowspan、title、data属性  
             this.querySelectorAll('td').forEach(function (_
                 , i) {
-                // field通常是后台数据的id号，没有该值的时候赋值为column列坐标信息，写入本地数据的时候  
+                //  field通常是后台数据的id号，没有该值的时候赋值为column列坐标信息，写入本地数据的时候  
                 var field = that.columns[i].field;
 
-                row[field] = this.innertext;
-                // save td's id, class and data-* attributes  
+                row[field] = this.innertext;                // save td's id, class and data-* attributes  
                 row['_' + field + '_id'] = this.getAttribute('id');
                 row['_' + field + '_class'] = this.getAttribute('class');
                 row['_' + field + '_rowspan'] = this.getAttribute('rowspan');
@@ -1409,7 +1524,7 @@
             });
             data.push(row);
         });
-
+        // console.log(data)
         this.options.data = data;
     };
 
@@ -1440,14 +1555,15 @@
             if (i == 0 && !that.options.cardView && that.options.detailView) {
                 html.push(Utils.sprintf('<th class="detail" rowspan="%s"><div class="fht-cell"></div></th>',
                     that.options.columns.length));
+                // console.log('123ab')
             }
-            Object.entries(columns).forEach(function (column) {
-                // columns.forEach(function (column) {
+
+            columns.forEach(function (column) {
                 var text = '',
                     halign = '',
                     align = '',
                     style = '',
-                    _class = Utils.sprintf(' class="%s"', column['class']),
+                    class_ = Utils.sprintf(' class="%s"', column['class']),
                     order = that.options.sortOrder || column.order,
                     unitWidth = 'px',
                     width = column.width;
@@ -1506,7 +1622,7 @@
                 html.push('<th' + Utils.sprintf('  title="%s"', column.titleTooltip),
                     column.checkbox || column.radio ?
                         Utils.sprintf(' class="bs-checkbox %s"', column['class'] || '') :
-                        _class,
+                        class_,
                     Utils.sprintf(' style="%s"', halign + style),
                     Utils.sprintf(' rowspan="%s"', column.rowspan),
                     Utils.sprintf(' colspan="%s"', column.colspan),
@@ -1541,40 +1657,43 @@
         });
 
         this.$header.innerHTML = html.join('');
-        // console.log(this.$header.innerHTML)
-        this.$header.querySelectorAll('th[data-field]').forEach(function (_) {
+        this.$header.querySelectorAll('th[data-field]').forEach(function (item) {
             // 标题栏data属性写入各自的column数据，展开卡片式详情时使用  
-            if (_) {
-                _.daaset[visibleColumns[_.dataset['field']]];
-                // _.dataset['field'] = _.getAttribute('data-field');
-            }
-
+            item.dataset[visibleColumns[item.dataset['field']]];
         });
 
         // 绑定点击排序事件
-
-        this.$container.querySelector('.th-inner').onclick = function (event) {
+        $Event.on(this.$container.querySelector('.th-inner'), function (event) {
             var target = this;
             if (target.closest('.bootstrap-table')[0] !== that.$container[0])
                 return false;
 
-            if (that.options.sortable && target.parent().dataset.sortable) {
+            if (that.options.sortable && target.parentNode.dataset.sortable) {
                 that.onSort(event);
-            }
-        };
-
-        // 确认键排序  
-        Array.from(this.$header.children).forEach(function (item) {
-            item.children.onkeypress = function (event) {
-                if (that.options.sortable && this.dataset.sortable) {
-                    var code = event.keyCode || event.which;
-                    if (code == 13) { //Enter keycode  
-                        that.onSort(event);
-                    }
-                }
             }
         });
 
+        // 确认键排序  
+        let childrens = this.$header.children
+        for (let i = 0; i < childrens.length; i++) {
+            if (childrens[i].children.length > 0) {
+                let children = childrens[i].children
+                for (let j = 0; j < children.length; j++) {
+                    $Event.off(children[j], 'keypress')
+                    $Event.on(children[j], "keypress", function (event) {
+                        if (that.options.sortable && this.dataset.sortable) {
+                            var code = event.keyCode || event.which;
+                            if (code == 13) { //Enter keycode  
+                                that.onSort(event);
+                            }
+                        }
+                    })
+
+
+
+                }
+            }
+        };
         // 显示隐藏表头，调整this.$tableLoading位置;options.cardView为真时卡片式显示隐藏表头  
         if (!this.options.showHeader || this.options.cardView) {
             this.$header.style.display = 'none';
@@ -1589,14 +1708,14 @@
         }
 
         // 全选  
-        this.$selectAll = this.$header.querySelectorAll('[name="btSelectAll"]');
+        this.$selectAll = Array.from(this.$header.querySelectorAll('[name="btSelectAll"]'));
         this.$selectAll.forEach(item => {
             // item.indeterminate = false,
-            item.onclick = function () {
+            $Event.on(item, 'click', function () {
                 var checked = this['checked'];
                 that[checked ? 'checkAll' : 'uncheckAll']();// 改变复选框勾选状态，更新上传数据  
                 that.updateSelected();// tr添加selected类  
-            }
+            })
         })
     };
 
@@ -1604,7 +1723,7 @@
     // 显示隐藏表尾  
     BootstrapTable.prototype.initFooter = function () {
         if (!this.options.showFooter || this.options.cardView) {
-            this.$tableFooter.style.display = 'none';;
+            this.$tableFooter.style.display = 'none';
         } else {
             this.$tableFooter.style.display = '';
         }
@@ -1617,6 +1736,7 @@
     // type为prepend时，表格顶部插入数据，this.data、options.data头部插入相应数据;   
     // 前台分页的情况下调用this.initSort，后台分页以返回数据为准;  
     BootstrapTable.prototype.initData = function (data, type) {
+        let that = this;
         if (type === 'append') {
             this.data = this.data.concat(data);
         } else if (type === 'prepend') {
@@ -1625,18 +1745,36 @@
             this.data = data || this.options.data;
         }
 
-        if (type === 'append') {
-            this.options.data = this.options.data.concat(data);
-        } else if (type === 'prepend') {
-            this.options.data = [].concat(data).concat(this.options.data);
-        } else {
-            this.options.data = this.data;
-        }
-
         if (this.options.sidePagination === 'server') {
             return;
         }
         this.initSort();
+        //    增加treeView
+        if (this.options.treeView && this.options.data.length > 0) {
+            var rows = [], parentField = this.options.parentField,
+                roots = this.options.data.filter(function (row, index) {
+                    return !row[parentField] || row[parentField] == 0 || row[parentField] == 'null'
+                    // //return row[parentField] == '' || row[parentField] == null || row[parentField] == 'null' || String(row[parentField]).toLowerCase() === "null";
+                });
+
+            console.log(roots);
+            roots.forEach(function (item, index) {
+                rows.push(item);
+                var child = Utils.getChild(item, that.options.data, that.options.treeField, that.options.parentField);
+                console.log(child);
+                child.forEach(function (n, i) {
+                    if (that.options.treeCollapseAll) {
+                        n.hidden = true;
+                    }
+                    console.log(n);
+                    rows.push(n);
+                });
+            });
+
+
+            that.options.data = that.data = rows;
+
+        }
     };
     // onSort方法设置点击排序按钮时，更新options.sortName为相应标题栏column.field值;  
     // initSort由column.field值获得相应的sortName;  
@@ -1716,13 +1854,10 @@
             this.options.sortName = $this.data['field'];
             this.options.sortOrder = $this.data['order'] === 'asc' ? 'desc' : 'asc';
         }
-        if (window.CustomEvent) {
-            const event_ = new CustomEvent('sort', { detail: (this.options.sortName, this.options.sortOrder) });
-        } else {
-            const event_ = document.createEvent('sort');
-            event_.initCustomEvent('sort', true, true, this.options.sortName, this.options.sortOrder);
-        }
-        this.dispatchEvent(event_);
+        $Event.trigger(this.$el, 'sort-change', {
+            sortName: this.options.sortName, sortOrder: this.options.sortOrder
+        })
+            ;
         $this.dataset.order = this.options.sortOrder;
         $this_.dataset.order = this.options.sortOrder;
         this.getCaret();// 更新排序箭头样式  
@@ -1837,22 +1972,23 @@
 
         // 绑定分页显示隐藏按钮点击事件  
         if (this.options.showPaginationSwitch) {
-            this.$toolbar.querySelector('button[name="paginationSwitch"]')
-                .onclick = this.togglePagination.bind(this);
+            let paginationSwitch = this.$toolbar.querySelector('button[name="paginationSwitch"]')
+            $Event.off(paginationSwitch, 'click');
+            $Event.off(paginationSwitch, 'click', this.togglePagination.bind(this));
         }
 
         // 绑定刷新按钮点击事件  
         if (this.options.showRefresh) {
-            this.$toolbar.querySelector('button[name="refresh"]')
-                .onclick = this.refresh.bind(this);
+            let refresh = this.$toolbar.querySelector('button[name="refresh"]')
+            $Event.off(refresh, 'click');
+            $Event.on(refresh, 'click', this.refresh.bind(this));
         }
 
         // 绑定卡片式显示、表格详情显示切换按钮点击事件  
         if (this.options.showToggle) {
-            this.$toolbar.querySelector('button[name="toggle"]')
-                .onclick = function () {
-                    that.toggleView();
-                };
+            let toggle = this.$toolbar.querySelector('button[name="toggle"]')
+            $Event.off(toggle, 'click');
+            $Event.on(toggle, 'click', function () { that.toggleView() });
         }
 
         // 帮点筛选条目下拉列表中复选框的点击事件，筛选条目按钮点击事件由bootstrap提供  
@@ -1864,18 +2000,21 @@
             }
 
             $keepOpen.querySelectorAll('li').forEach(elem => {
-                elem.onclick = function (event) {
+                $Event.off(elem, 'click');
+                $Event.on(elem, 'click', function (event) {
                     event.stopImmediatePropagation();// 阻止事件冒泡，并阻止同类型事件的冒泡  
-                }
+                })
             });
             $keepOpen.querySelectorAll('input').forEach(elem => {
-                elem.onclick = function () {
-                    var $this = this;
+                $Event.off(elem, 'click');
+                $Event.on(elem, 'click',
+                    function () {
+                        var $this = this;
 
-                    that.toggleColumn(Utils.getFieldIndex(that.columns,
-                        this.dataset.field), $this['checked'], false);
-                    that.trigger('column-switch', this.dataset.field, $this['checked']);
-                }
+                        that.toggleColumn(Utils.getFieldIndex(that.columns,
+                            this.dataset.field), $this['checked'], false);
+                        that.trigger('column-switch', { field: this.dataset.field, checked: $this['checked'] });
+                    })
             });
         }
 
@@ -1891,26 +2030,32 @@
             // console.log(this.options.formatSearch())
             this.$toolbar.insertAdjacentHTML('beforeend', html.join(''));
             $search = this.$toolbar.querySelector('.search input');
-            $search.onkeyup = $search.ondrop = function (event) {
-                if (that.options.searchOnEnterKey) {
-                    if (event.keyCode !== 13) {
-                        return;
+            $Event.off($search, 'keyup drop');
+            $Event.on($search, 'keyup drop',
+                function (event) {
+                    if (that.options.searchOnEnterKey) {
+                        if (event.keyCode !== 13) {
+                            return;
+                        }
                     }
-                }
 
-                clearTimeout(timeoutId);
-                timeoutId = setTimeout(function () {
-                    that.onSearch(event);
-                }, that.options.searchTimeOut);
-            };
+                    clearTimeout(timeoutId);
+                    timeoutId = setTimeout(function (event) {
+                        $search = event.currentTarget
+                        that.onSearch({ currentTarget: $search });
+                    }, that.options.searchTimeOut);
+                });
 
             if (Utils.isIEBrowser()) {
-                $search.onmouseup = function (event) {
-                    clearTimeout(timeoutId);
-                    timeoutId = setTimeout(function () {
-                        that.onSearch(event);
-                    }, that.options.searchTimeOut);
-                };
+                $Event.off($search, 'mouseup');
+                $Event.on($search, 'mouseup',
+                    function (event) {
+                        clearTimeout(timeoutId);
+                        timeoutId = setTimeout(function (event) {
+                            $search = event.currentTarget
+                            that.onSearch({ currentTarget: $search });
+                        }, that.options.searchTimeOut);
+                    });
             }
         }
     };
@@ -1919,6 +2064,7 @@
     // 调用initSearch将筛选本地数据;调用updatePagination完成远程交互或单渲染本地数据;  
     // 触发search事件;  
     BootstrapTable.prototype.onSearch = function (event) {
+        console.log(event)
         var text = event.currentTarget.value.trim();
 
         if (this.options.trimOnSearch && event.currentTarget.value !== text) {
@@ -1999,7 +2145,7 @@
     // 通过options.pageNumber获取this.pageFrom、this.pageTo，以便前台分页时initBody获取相应数据;  
     BootstrapTable.prototype.initPagination = function () {
         if (!this.options.pagination) {
-            this.$pagination.hide();
+            this.$pagination.style.display = 'none';
             return;
         } else {
             this.$pagination.style.display = '';
@@ -2042,7 +2188,7 @@
                 }
             }
 
-            this.totalPages = ~~((this.options.totalRows - 1) / this.options.pageSize) + 1;
+            this.totalPages = ~~((this.options.totalRows - 1) / this.options.pageSize) + 1;//~~()取整操作
             // -1针对this.options.totalRows是this.options.pageSize倍数的情况  
 
             this.options.totalPages = this.totalPages;
@@ -2069,13 +2215,19 @@
             html.push('<span class="page-list">');
 
             // 分页提示文案，即每页显示几条数据，每页显示数据量下拉列表  
+            // var pageNumber = [Utils.sprintf('<div class="btn-group %s">', this.options.paginationVAlign === 'top' || this.options.paginationVAlign === 'both' ?
+            // 'dropdown' : 'dropup'),
+            // '<select  class="form-select' + Utils.sprintf(' btn-%s', this.options.iconSize) + '" id="sel2" name="sellist2">',
+            // '<option class="page-size">', $allSelected ? this.options.formatAllRows() : this.options.pageSize,
+            // '</option> ',],
+
             var pageNumber = [
                 Utils.sprintf('<span class="btn-group %s">',
                     this.options.paginationVAlign === 'top' || this.options.paginationVAlign === 'both' ?
                         'dropdown' : 'dropup'),
                 '<button type="button" class="btn btn-default ' +
                 Utils.sprintf(' btn-%s', this.options.iconSize) +
-                ' dropdown-toggle" data-toggle="dropdown">',
+                ' dropdown-toggle" data-bs-toggle="dropdown" >',
                 '<span class="page-size">',
                 $allSelected ? this.options.formatAllRows() : this.options.pageSize,
                 '</span>',
@@ -2096,23 +2248,27 @@
                         that.options.formatAllRows() : +value);
                 });
             }
+
             pageList.forEach(function (page, i) {
                 // this.options.smartDisplay为真，当总页数为1时，屏蔽分页，以及下拉列表仅有一条时，屏蔽切换条目数按钮下拉功能  
                 if (!that.options.smartDisplay || i === 0 || pageList[i - 1] <= that.options.totalRows) {
+
                     var active;
                     if ($allSelected) {
                         active = page === that.options.formatAllRows() ? ' class="active"' : '';
                     } else {
                         active = page === that.options.pageSize ? ' class="active"' : '';
                     }
+                    // pageNumber.push(Utils.sprintf('<option%s>%s</option>', active, page));
+
                     pageNumber.push(Utils.sprintf('<li%s><a href="javascript:void(0)">%s</a></li>', active, page));
                 }
             });
-
+            // pageNumber.push('</select>');
             pageNumber.push('</ul></span>');
 
             html.push(this.options.formatRecordsPerPage(pageNumber.join('')));
-            html.push('</span>');
+            html.push('</div>');
 
             // 分页  
             // 策略：通过from初始页、to结尾页，先设置首页起的显示情况，再设置...按钮的显示情况，接着尾页的显示情况  
@@ -2208,14 +2364,14 @@
                 '</ul>',
                 '</div>');
         }
-        this.$pagination.insertAdjacentHTML('beforeend', html.join(''));
+        this.$pagination.innerHTML = html.join('');
 
         if (!this.options.onlyInfoPagination) {
             $pageList = this.$pagination.querySelectorAll('.page-list a');// 每页显示数据量切换按钮  
-            $first = this.$pagination.querySelectorAll('.page-first');
-            $pre = this.$pagination.querySelectorAll('.page-pre');
-            $next = this.$pagination.querySelectorAll('.page-next');
-            $last = this.$pagination.querySelectorAll('.page-last');
+            $first = this.$pagination.querySelector('.page-first');
+            $pre = this.$pagination.querySelector('.page-pre');
+            $next = this.$pagination.querySelector('.page-next');
+            $last = this.$pagination.querySelector('.page-last');
             $number = this.$pagination.querySelectorAll('.page-number');
 
             if (this.options.smartDisplay) {
@@ -2233,13 +2389,18 @@
                 this.options.pageSize = this.options.formatAllRows();
             }
 
-            // 绑定事件  
-            $pageList.onclick = this.onPageListChange.bind(this);
-            $first.onclick = this.onPageFirst.bind(this);
-            $pre.onclick = this.onPageFirst.bind(this);
-            $next.onclick = this.onPageNext.bind(this);
-            $last.onclick = this.onPageLast.bind(this);
-            $number.onclick = this.onPageNumber.bind(this);
+            // 绑定事件 
+            $pageList.forEach(function (page) {
+                $Event.on($Event.off(page, 'click'), 'click', that.onPageListChange.bind(that));
+            });
+
+            $Event.on($Event.off($first, 'click'), 'click', this.onPageFirst.bind(this));
+            $Event.on($Event.off($pre, 'click'), 'click', this.onPagePre.bind(this));
+            $Event.on($Event.off($next, 'click'), 'click', this.onPageNext.bind(this));
+            $Event.on($Event.off($last, 'click'), 'click', this.onPageLast.bind(this));
+            $number.forEach(function (number) {
+                $Event.on($Event.off(number, 'click'), 'click', that.onPageNumber.bind(that));
+            });
         }
     };
 
@@ -2252,6 +2413,7 @@
     BootstrapTable.prototype.updatePagination = function (event) {
         // Fix #171: IE disabled button can be clicked bug.  
         if (event && event.currentTarget.classList.contains('disabled')) {
+
             return;
         }
 
@@ -2266,13 +2428,13 @@
             this.initBody();
         }
 
-        if (window.CustomEvent) {
-            const event_ = new CustomEvent('page-change', { detail: (this.options.pageNumber, this.options.pageSize) });
-        } else {
-            const event_ = document.createEvent('page-change');
-            event_.initCustomEvent('page-change', true, true, this.options.pageNumber, this.options.pageSize);
-        }
-        this.dispatchEvent(event_);
+
+        const event_ = new CustomEvent('page-change', { detail: (this.options.pageNumber, this.options.pageSize) });
+
+        this.trigger('page-change', [this.options.pageNumber, this.options.pageSize]);
+
+
+
     };
 
     // 每页显示数据量下拉列表选中时触发，替换每页显示数据量按钮文本;  
@@ -2280,18 +2442,16 @@
     // updatePagination再调用initServer完成交互，或initBody渲染本地数据;  
     BootstrapTable.prototype.onPageListChange = function (event) {
         var $this = event.currentTarget;
-
         $this.parentNode.classList.add('active')
-        $this.parentNode.children.forEach(child => {  // 遍历所有兄弟节点，移除active类;
-            if (child.nodeType === 1 && child !== $this) {  // 排除文本节点;
-                child.classList.remove('active');
+        let childrens = $this.parentNode.children
+        for (let i = 0; i < childrens.length; i++) { // 遍历所有兄弟节点，移除active类;
+            if (childrens[i].nodeType === 1 && childrens[i] !== $this) { // 排除文本节点;
+                childrens[i].classList.remove('active')
             }
-        }
-
-        );
+        };
         this.options.pageSize = $this.textContent.toUpperCase() === this.options.formatAllRows().toUpperCase() ?
             this.options.formatAllRows() : +$this.textContent;
-        this.$toolbar.querySelector('.page-size').textContent = this.options.pageSize;
+        this.$pagination.querySelector('.page-size').textContent = this.options.pageSize;
         this.updatePagination(event);
     };
 
@@ -2334,6 +2494,208 @@
         this.updatePagination(event);
     };
 
+    BootstrapTable.prototype.initRow = function (item, i, data, parentDom) {
+        var that = this,
+            key,
+            html = [],
+            style = {},
+            csses = [],
+            data_ = '',
+            attributes = {},
+            htmlAttributes = [];
+        if (this.hiddenRows.indexOf(item) > -1) {
+            return;
+        }
+        style = Utils.calculateObjectValue(this.options, this.options.rowStyle, [item, i], style);
+        if (style && style.css) {
+            for (key in style.css) {
+                csses.push(key + ': ' + style.css[key]);
+            }
+        }
+        // 通过options.rowAttributes(row,index)函数或window[options.rowAttributes](row,index)获取tbody>
+        attributes = Utils.calculateObjectValue(this.options,
+            this.options.rowAttributes, [item, i], attributes);
+        if (attributes) {
+            for (key in attributes) {
+                htmlAttributes.push(Utils.sprintf('%s="%s"', key, Utils.escapeHTML(attributes[key])));
+            }
+        }
+        // 通过row._data，row._id，row._class，row[options.uniqueId]渲染tb
+        if (item._data && !Utils.isEmptyObject(item._data)) {
+            item._data.forEach(function (k, v) {
+                if (k === 'index') {
+                    return;
+                }
+                data_ += Utils.sprintf(' data-%s="%s"', k, v);
+            });
+        }
+        html.push('<tr',
+            Utils.sprintf(' %s', htmlAttributes.join(' ')),
+            Utils.sprintf(' id="%s"', Array.isArray(item) ? undefined : item._id),
+            Utils.sprintf(' class="%s"', style.classes || (Array.isArray(item) ? undefined : item._class)),
+            Utils.sprintf(' data-index="%s"', i),
+            Utils.sprintf(' data-uniqueid="%s"', item[this.options.uniqueId]),
+            Utils.sprintf('%s', data_),
+            '>'
+        );
+        // 卡片式显示跨列  
+        if (this.options.cardView) {
+            html.push(Utils.sprintf('<td colspan="%s">', this.header.fields.length));
+        }
+        // 表格显示时添加每行数据前点击展示卡片式详情按钮  
+        if (!this.options.cardView && this.options.detailView) {
+            html.push('<td>',
+                '<a class="detail-icon" href="#">',
+                Utils.sprintf('<i class="%s %s"></i>', this.options.iconsPrefix, this.options.icons.detailOpen),
+                '</a>',
+                '</td>');
+        }
+        // 遍历this.header.fields获取主键field值，再由主键field拼接row中的属性取值，包括row[field]  
+        // 显示文本row[field]调用对应的this.header.formatter[j]处理后获取  
+        // j即列坐标  
+        this.header.fields.forEach(function (field, j) {
+            var text = '',
+                value = Utils.getItemField(item, field, that.options.escape),// 获取row[field]  
+                type = '',
+                cellStyle = {},
+                id_ = '',
+                class_ = that.header.classes[j],
+                data_ = '',
+                rowspan_ = '', colspan_ = '',
+                title_ = '',
+                // column = that.columns[Utils.getFieldIndex(that.columns, field)];
+                column = that.columns[j];
+            if (that.fromHtml && typeof value_ === 'undefined') {
+                return;
+            }
+            if (!column.visible) {// 筛选时设置  
+                return;
+            }
+            if (that.options.cardView && (!column.cardVisible)) {
+                return;
+            }
+            if (column.escape) {
+                value_ = Utils.escapeHTML(value_);
+            }
+
+
+            style = Utils.sprintf('style="%s"', csses.concat(that.header.styles[j]).join('; '));
+            // handle td's id and class
+            if (item['_' + field + '_id']) {
+                id_ = Utils.sprintf(' id="%s"', item['_' + field + '_id']);
+            }
+            if (item['_' + field + '_class']) {
+                class_ = Utils.sprintf(' class="%s"', item['_' + field + '_class']);
+            }
+            if (item['_' + field + '_rowspan']) {
+                rowspan_ = Utils.sprintf(' rowspan="%s"', item['_' + field + '_rowspan']);
+            }
+            if (item['_' + field + '_colspan']) {
+                colspan_ = sprintf(' colspan="%s"', item['_' + field + '_colspan']);
+            }
+            if (item['_' + field + '_title']) {
+                title_ = Utils.sprintf(' title="%s"', item['_' + field + '_title']);
+            }
+            // 调用that.header.cellStyles[j](item.field,item,i)设置单元格显示样式  
+            cellStyle = Utils.calculateObjectValue(that.header,
+                that.header.cellStyles[j], [value, item, i], cellStyle);
+            if (cellStyle.classes) {
+                class_ = Utils.sprintf(' class="%s"', cellStyle.classes);
+            }
+            if (cellStyle.css) {
+                var csses_ = [];
+                for (var key in cellStyle.css) {
+                    csses_.push(key + ': ' + cellStyle.css[key]);
+                }
+                style = Utils.sprintf('style="%s"', csses_.concat(that.header.styles[j]).join('; '));
+            }
+            // 调用that.header.formatters[j](item.field,item,i)格式化显示内容
+            // 特别当单元格是复选框的时候，value返回值可以是对象形式{checked:true;disabled:true}，此时无显
+            value = Utils.calculateObjectValue(column,
+                that.header.formatters[j], [value, item, i], value);
+            if (item['_' + field + '_data'] && !Utils.isEmptyObject(item['_' + field + '_data'])) {
+                item['_' + field + '_data'].forEach(function (k, v) {
+                    if (k === 'index') {
+                        return;
+                    }
+                    data_ += Utils.sprintf(' data-%s="%s"', k, v);
+                });
+            }
+            if (column.checkbox || column.radio) {
+                type = column.checkbox ? 'checkbox' : type;
+                type = column.radio ? 'radio' : type;
+                text = [Utils.sprintf(that.options.cardView ?
+                    '<div class="card-view %s">' : '<td class="bs-checkbox %s">', column['class'] || ''),
+                '<input' +
+                Utils.sprintf(' data-index="%s"', i) +
+                Utils.sprintf(' name="%s"', that.options.selectItemName) +
+                Utils.sprintf(' type="%s"', type) +
+                Utils.sprintf(' value="%s"', item[that.options.idField]) +
+                Utils.sprintf(' checked="%s"', value === true ||
+                    (value && value.checked) ? 'checked' : undefined) +
+                Utils.sprintf(' disabled="%s"', !column.checkboxEnabled ||
+                    (value && value.disabled) ? 'disabled' : undefined) +
+                ' />',
+                that.header.formatters[j] && typeof value === 'string' ? value : '',
+                that.options.cardView ? '</div>' : '</td>'
+                ].join('');
+                // 复选框上传内容字段名属性后添加true选中/false未选中值  
+                item[that.header.stateField] = value === true || (value && value.checked);
+            } else {
+                value = typeof value === 'undefined' || value === null ?
+                    that.options.undefinedText : value;
+                //tree 实现
+                // var indent, icon;
+                // if (that.options.treeView && column.field == that.options.expandField) {
+                // var rows = [], parentField = this.options.parentField,
+                // roots = data.filter(function (row, index) {
+                // return !row[parentField] || row[parentField] == 0 || row[parentField] == 'null'
+                // return row[parentField] == '' || row[parentField] == null || row[parentFiel
+                // });
+                // roots.forEach(function (i, item) {
+                // var tr = $('<tr></tr>');
+                // tr.addClass('treegrid-' + (j + i));
+                // $.each(options.columns, function (index, column) {
+                // var td = $('<td></td>');
+                // td.text(item[column.field]);
+                // tr.append(td);
+                // });
+                // tbody.append(tr);
+                // });
+
+                // var indent = item.Level == that.options.Level ? '' : Utils.sprintf('<span style="margi
+                //   var child = data.filter(function (d, i) {
+                // return d.parentField == item[that.options.parentField] && !d.hidden;
+                // });
+                // icon = Utils.sprintf('<span class="tree-icon %s" style="cursor: pointer; margin: 0px 5
+                //icon = sprintf('<span class="tree-icon %s" style="cursor: pointer; margin: 0px 5px;"
+                //   }
+                // 结束
+                // getPropertyFromOther卡片式显示时获取标题栏的文本内容  
+                text = that.options.cardView ? ['<div class="card-view">',
+                    that.options.showHeader ? Utils.sprintf('<span class="title" %s>%s</span>', style,
+                        Utils.getPropertyFromOther(that.columns, 'field', 'title', field)) : '',
+                    Utils.sprintf('<span class="value">%s</span>', value),
+                    '</div>'
+                ].join('') : [Utils.sprintf('<td%s %s %s %s %s %s %s>', id_, class_, style, data_, rowspan_, colspan_, title_),
+                    value, //indent, icon,
+                    '</td>'
+                ].join('');
+                // Hide empty data on Card view when smartDisplay is set to true.
+                if (that.options.cardView && that.options.smartDisplay && value === '') {
+                    // 占位符，以利于根据元素序号准确地绑定事件  
+                    text = '<div class="card-view"></div>';
+                }
+            }
+            html.push(text);
+        });
+        if (this.options.cardView) {
+            html.push('</div></td>');
+        }
+        html.push('</tr>');
+        return html.join(' ');
+
+    };
     // fixedScroll为否的情况下，表体移动到顶部;  
     // 通过this.pageFrom、this.pageTo截取this.getData()数据row渲染表体，主要是tbody>tr以及tbody>tr>td;  
     // tbody>tr的data-index设为行号，class、id为row._class、row._id，样式、data数据通过调用函数获得;  
@@ -2363,7 +2725,6 @@
         //                     // 以及data-index添加行号、data-uniqueId每行的唯一标识，根据options.uniqueId从data中获取  
         //                       
         // tr以及checkbox中data数组的序号data-index，以便于获取data[data-index]数据调用  
-
         // 触发pre-body事件，传递data数据
         this.trigger('pre-body', data);
         this.$body = this.$el.querySelector('tbody');
@@ -2379,313 +2740,149 @@
             this.pageFrom = 1;
             this.pageTo = data.length;
         }
+        var hasTr, trFragments = document.createDocumentFragment();
 
         for (var i = this.pageFrom - 1; i < this.pageTo; i++) {
-            var key,
-                item = data[i],// 行数据信息row  
-                style = {},
-                csses = [],
-                data_ = '',
-                attributes = {},
-                htmlAttributes = [];
-
-            // 通过options.rowStyle(row,index)函数或window[options.rowStyle](row,index)获取tbody>tr样式  
-            style = Utils.calculateObjectValue(this.options, this.options.rowStyle, [item, i], style);
-            if (style && style.css) {
-                for (key in style.css) {
-                    csses.push(key + ': ' + style.css[key]);
-                }
+            var item = data[i],
+                tr = this.initRow(item, i, data, trFragments);
+            hasTr = hasTr || !!tr;
+            if (tr && tr !== true) {
+                trFragments.append(tr);
             }
-
-            // 通过options.rowAttributes(row,index)函数或window[options.rowAttributes](row,index)获取tbody>tr属性  
-            attributes = Utils.calculateObjectValue(this.options,
-                this.options.rowAttributes, [item, i], attributes);
-            if (attributes) {
-                for (key in attributes) {
-                    htmlAttributes.push(Utils.sprintf('%s="%s"', key, Utils.escapeHTML(attributes[key])));
-                }
-            }
-
-            // 通过row._data，row._id，row._class，row[options.uniqueId]渲染tbody>tr  
-            if (item._data && !Utils.isEmptyObject(item._data)) {
-                item._data.forEach(function (k, v) {
-                    if (k === 'index') {
-                        return;
-                    }
-                    data_ += Utils.sprintf(' data-%s="%s"', k, v);
-                });
-            }
-
-            html.push('<tr',
-                Utils.sprintf(' %s', htmlAttributes.join(' ')),
-                Utils.sprintf(' id="%s"', Array.isArray(item) ? undefined : item._id),
-                Utils.sprintf(' class="%s"', style.classes || (Array.isArray(item) ? undefined : item._class)),
-                Utils.sprintf(' data-index="%s"', i),
-                Utils.sprintf(' data-uniqueid="%s"', item[this.options.uniqueId]),
-                Utils.sprintf('%s', data_),
-                '>'
-            );
-
-            // 卡片式显示跨列  
-            if (this.options.cardView) {
-                html.push(Utils.sprintf('<td colspan="%s">', this.header.fields.length));
-            }
-
-            // 表格显示时添加每行数据前点击展示卡片式详情按钮  
-            if (!this.options.cardView && this.options.detailView) {
-                html.push('<td>',
-                    '<a class="detail-icon" href="javascript:">',
-                    Utils.sprintf('<i class="%s %s"></i>', this.options.iconsPrefix, this.options.icons.detailOpen),
-                    '</a>',
-                    '</td>');
-            }
-
-            // 遍历this.header.fields获取主键field值，再由主键field拼接row中的属性取值，包括row[field]  
-            // 显示文本row[field]调用对应的this.header.formatter[j]处理后获取  
-            // j即列坐标  
-            this.header.fields.forEach(function (field, j) {
-                var text = '',
-                    value = Utils.getItemField(item, field, that.options.escape),// 获取row[field]  
-                    type = '',
-                    cellStyle = {},
-                    id_ = '',
-                    class_ = that.header.classes[j],
-                    data_ = '',
-                    rowspan_ = '',
-                    title_ = '',
-                    column = that.columns[Utils.getFieldIndex(that.columns, field)];
-
-                if (!column.visible) {// 筛选时设置  
-                    return;
-                }
-
-                style = Utils.sprintf('style="%s"', csses.concat(that.header.styles[j]).join('; '));
-
-                // 调用that.header.formatters[j](item.field,item,i)格式化显示内容  
-                // 特别当单元格是复选框的时候，value返回值可以是对象形式{checked:true;disabled:true}，此时无显示文本  
-                value = Utils.calculateObjectValue(column,
-                    that.header.formatters[j], [value, item, i], value);
-
-                if (item['_' + field + '_id']) {
-                    id_ = Utils.sprintf(' id="%s"', item['_' + field + '_id']);
-                }
-                if (item['_' + field + '_class']) {
-                    class_ = Utils.sprintf(' class="%s"', item['_' + field + '_class']);
-                }
-                if (item['_' + field + '_rowspan']) {
-                    rowspan_ = Utils.sprintf(' rowspan="%s"', item['_' + field + '_rowspan']);
-                }
-                if (item['_' + field + '_title']) {
-                    title_ = Utils.sprintf(' title="%s"', item['_' + field + '_title']);
-                }
-                // 调用that.header.cellStyles[j](item.field,item,i)设置单元格显示样式  
-                cellStyle = Utils.calculateObjectValue(that.header,
-                    that.header.cellStyles[j], [value, item, i], cellStyle);
-                if (cellStyle.classes) {
-                    class_ = Utils.sprintf(' class="%s"', cellStyle.classes);
-                }
-                if (cellStyle.css) {
-                    var csses_ = [];
-                    for (var key in cellStyle.css) {
-                        csses_.push(key + ': ' + cellStyle.css[key]);
-                    }
-                    style = Utils.sprintf('style="%s"', csses_.concat(that.header.styles[j]).join('; '));
-                }
-
-                if (item['_' + field + '_data'] && !Utils.isEmptyObject(item['_' + field + '_data'])) {
-                    item['_' + field + '_data'].forEach(function (k, v) {
-                        if (k === 'index') {
-                            return;
-                        }
-                        data_ += Utils.sprintf(' data-%s="%s"', k, v);
-                    });
-                }
-
-                if (column.checkbox || column.radio) {
-                    type = column.checkbox ? 'checkbox' : type;
-                    type = column.radio ? 'radio' : type;
-
-                    text = [Utils.sprintf(that.options.cardView ?
-                        '<div class="card-view %s">' : '<td class="bs-checkbox %s">', column['class'] || ''),
-                    '<input' +
-                    Utils.sprintf(' data-index="%s"', i) +
-                    Utils.sprintf(' name="%s"', that.options.selectItemName) +
-                    Utils.sprintf(' type="%s"', type) +
-                    Utils.sprintf(' value="%s"', item[that.options.idField]) +
-                    Utils.sprintf(' checked="%s"', value === true ||
-                        (value && value.checked) ? 'checked' : undefined) +
-                    Utils.sprintf(' disabled="%s"', !column.checkboxEnabled ||
-                        (value && value.disabled) ? 'disabled' : undefined) +
-                    ' />',
-                    that.header.formatters[j] && typeof value === 'string' ? value : '',
-                    that.options.cardView ? '</div>' : '</td>'
-                    ].join('');
-
-                    // 复选框上传内容字段名属性后添加true选中/false未选中值  
-                    item[that.header.stateField] = value === true || (value && value.checked);
-                } else {
-                    value = typeof value === 'undefined' || value === null ?
-                        that.options.undefinedText : value;
-
-                    // getPropertyFromOther卡片式显示时获取标题栏的文本内容  
-                    text = that.options.cardView ? ['<div class="card-view">',
-                        that.options.showHeader ? Utils.sprintf('<span class="title" %s>%s</span>', style,
-                            Utils.getPropertyFromOther(that.columns, 'field', 'title', field)) : '',
-                        Utils.sprintf('<span class="value">%s</span>', value),
-                        '</div>'
-                    ].join('') : [Utils.sprintf('<td%s %s %s %s %s %s>', id_, class_, style, data_, rowspan_, title_),
-                        value,
-                        '</td>'
-                    ].join('');
-
-                    if (that.options.cardView && that.options.smartDisplay && value === '') {
-                        // 占位符，以利于根据元素序号准确地绑定事件  
-                        text = '<div class="card-view"></div>';
-                    }
-                }
-
-                html.push(text);
-            });
-
-            if (this.options.cardView) {
-                html.push('</td>');
-            }
-
-            html.push('</tr>');
         }
-
-        if (!html.length) {
-            html.push('<tr class="no-records-found">',
+        // show no records
+        if (!hasTr) {
+            trFragments.append('<tr class="no-records-found">' +
                 Utils.sprintf('<td colspan="%s">%s</td>',
-                    this.$header.querySelectorAll('th').length, this.options.formatNoMatches()),
+                    this.$header.querySelectorAll('th').length,
+                    this.options.formatNoMatches()) +
                 '</tr>');
         }
-
-        this.$body.innerHTML = html.join('');
-
+        // this.$body.appendChild(trFragments); // html.join('');
+        this.$body.innerHTML = trFragments.textContent
         if (!fixedScroll) {
             this.scrollTo(0);
         }
 
         // 点击单元格触发单元格以及当前行点击事件，复选框则勾选  
-        this.$body.querySelectorAll(' tr[data-index] > td').forEach(item => {
-            item.onclick = item.ondblclick = function (e) {
-                var $td = this,
-                    $tr = $td.parentNode,
-                    item = that.data[$tr.dataset.index],// 获取当前行的data[data-index]数据调用  
-                    index = $td[0].cellIndex,// 返回一行内单元格所在的列坐标  
-                    field = that.header.fields[that.options.detailView && !that.options.cardView ? index - 1 : index],
-                    column = that.columns[Utils.getFieldIndex(that.columns, field)],
-                    value = Utils.getItemField(item, field, that.options.escape);
-
-                if ($td.querySelectorAll('.detail-icon').length) {
-                    return;
-                }
-
-                // 单元格点击事件传入单元格的field（借此获取data中的有关数据）、显示内容value值data[data-index][field]、  
-                // 当前行data数据item值data[data-index]、单元格jquery对象$td  
-                if (window.CustomEvent) {
-                    const event_ = new CustomEvent(e.type === 'click' ? 'click-cell' : 'dbl-click-cell', { detail: (field, value, item, $td) });
-                } else {
-                    const event_ = document.createEvent(e.type === 'click' ? 'click-cell' : 'dbl-click-cell');
-                    event_.initCustomEvent(e.type === 'click' ? 'click-cell' : 'dbl-click-cell', true, true, field, value, item, $td);
-                }
-                this.dispatchEvent(event_);
-                // 行点击事件传入当前行data数据item值data[data-index]以及当前行jquery对象$tr  
-                if (window.CustomEvent) {
-                    const event__ = new CustomEvent(e.type === 'click' ? 'click-row' : 'dbl-click-row', { detail: (item, $tr) });
-                } else {
-                    const event__ = document.createEvent(e.type === 'click' ? 'click-row' : 'dbl-click-row');
-                    event__.initCustomEvent(e.type === 'click' ? 'click-row' : 'dbl-click-row', true, true, item, $tr);
-                }
-                this.dispatchEvent(event__);
-
-                if (e.type === 'click' && that.options.clickToSelect && column.clickToSelect) {
-                    var $selectItem = $tr.querySelectorAll(Utils.sprintf('[name="%s"]', that.options.selectItemName));
-                    if ($selectItem.length) {
-                        $selectItem[0].click(); // #144: .trigger('click') bug  
+        this.$body.querySelectorAll(' tr[data-index] > td').forEach(td => {
+            $Event.on($Event.off(td, 'click dblclick'), 'click dblclick',
+                function (e) {
+                    var $td = this,
+                        $tr = $td.parentNode,
+                        item = that.data[$tr.dataset.index],// 获取当前行的data[data-index]数据调用  
+                        index = $td.cellIndex,// 返回一行内单元格所在的列坐标  
+                        fields = that.getVisibleFields(),
+                        field = fields[that.options.detailView && !that.options.cardView ? index - 1 : index],
+                        // field = that.header.fields[that.options.detailView && !that.options.cardView ? index - 1 : index],
+                        column = that.columns[Utils.getFieldIndex(that.columns, field)],
+                        value = Utils.getItemField(item, field, that.options.escape);
+                    if ($td.querySelectorAll('.detail-icon').length) {
+                        return;
                     }
-                }
-            }
+                    // console.log('field:', field, 'value:', value, 'item:', item, '$td:', $td)
+                    // 单元格点击事件传入单元格的field（借此获取data中的有关数据）、显示内容value值data[data-index][field]、  
+                    // 当前行data数据item值data[data-index]、单元格jquery对象$td  
+                    that.trigger(e.type === 'click' ? 'click-cell' : 'dbl-click-cell', field, value, item, $td);
+                    that.trigger(e.type === 'click' ? 'click-row' : 'dbl-click-row', item, $tr, field);
+                    // if click to select - then trigger the checkbox/radio click
+                    if (e.type === 'click' && that.options.clickToSelect && column.clickToSelect) {
+                        var $selectItem = $tr.querySelectorAll(Utils.sprintf('[name="%s"]', that.options.selectItemName));
+                        if ($selectItem.length) {
+                            $selectItem[0].click(); // #144: .trigger('click') bug  
+                        }
+                    }
+                });
         });
 
         // 展开折叠卡片式详情  
         this.$body.querySelectorAll(' tr[data-index] > td > .detail-icon').forEach(item => {
-            item.onclick = function () {
-                var $this = this,
-                    $tr = $this.parentNode.parentNode,
-                    index = $tr.dataset.index,
-                    row = data[index]; // Fix #980 Detail view, when searching, returns wrong row  
-
-                if ($tr.nextSibling.matches('tr.detail-view')) {
-                    $this.querySelectorAll('i').forEach(v => v.classList.add(Utils.sprintf('%s %s', that.options.iconsPrefix, that.options.icons.detailOpen)));
-                    $tr.nextSibling.remove();
-
-                    if (window.CustomEvent) {
-                        const event__ = new CustomEvent('collapse - row', { detail: (index, row) });
+            $Event.on($Event.off(item, 'click'),
+                function () {
+                    var $this = this,
+                        $tr = $this.parentNode.parentNode,
+                        index = $tr.dataset.index,
+                        row = data[index];// Fix #980 Detail view, when searching, returns wrong row
+                    if ($tr.nextSibling.matches('tr.detail-view')) {
+                        $this.querySelectorAll('i').forEach(v => v.classList.add(Utils.sprintf('%s %s', that.options.iconsPrefix, that.options.icons.detailOpen)));
+                        $tr.nextSibling.remove();
+                        that.trigger('collapse-row', index, row);
                     } else {
-                        const event__ = document.createEvent('collapse-row');
-                        event__.initCustomEvent('collapse-row', true, true, index, row);
-                    }
-                    that.dispatchEvent(event__);
-                } else {
-                    $this.find('i').attr('class', Utils.sprintf('%s %s', that.options.iconsPrefix, that.options.icons.detailClose));
-                    $tr.after(Utils.sprintf('<tr class="detail-view"><td colspan="%s"></td></tr>', $tr.find('td').length));
-                    var $element = $tr.nextSibling.querySelectorAll('td');
-                    // options.detailFormatter执行后渲染折叠式卡片详情文本内容，包含html标签、Dom元素  
-                    var content = Utils.Utils.calculateObjectValue(that.options, that.options.detailFormatter, [index, row, $element], '');
-                    if ($element.length === 1) {
-                        $element.forEach(item => item.append(content));
-                    }
+                        $this.querySelectorAll('i').forEach(v => v.classList.add(Utils.sprintf('%s %s', that.options.iconsPrefix, that.options.icons.detailClose)));
+                        $tr.insertAdjacentHTML('afterEnd', Utils.sprintf('<tr class="detail-view"><td colspan="%s"></td></tr>', $tr.querySelectorAll('td').length));
+                        var $element = $tr.nextSibling.querySelectorAll('td');
+                        // options.detailFormatter执行后渲染折叠式卡片详情文本内容，包含html标签、Dom元素  
+                        var content = Utils.calculateObjectValue(that.options, that.options.detailFormatter, [index, row, $element], '');
+                        if ($element.length === 1) {
+                            $element.forEach(item => item.insertAdjacentHTML('beforeEnd', content));
+                        }
 
-                    if (window.CustomEvent) {
-                        const event__ = new CustomEvent('expand-row', { detail: (index, row, $element) });
-                    } else {
-                        const event__ = document.createEvent('expand-row');
-                        event__.initCustomEvent('expand-row', true, true, index, row, $element);
+                        that.trigger('expand-row', index, row, $element);
                     }
-                    that.dispatchEvent(event__);
-                }
-                that.resetView();
-            }
+                    that.resetView();
+                });
         });
+        //tree
+        // this.$body.querySelectorAll(' tr[data-index] > td > .tree-icon').forEach(item => {
+        // $Event.on($Event.off(item, 'click'), function (e) {
+        // debugger;
+        // e.stopPropagation();
+        // var $this = this,
+        // $tr = $this.parent().parent(),
+        // index = $tr.data('index'),
+        // row = data[index],
+        // var icon = $(this);
+        // child = Utils.getChild(data[index], data, that.options.parentField);
+        // child.forEach(function (c, i) {
+        // that.data.forEach(function (item, index) {
+        // if (item[that.options.parentField] == c[that.options.parentField]) {
+        // item.hidden = $this.classList.contains(that.options.expandIcon);
+        // that.uncheck(index);
+        // return;
+        // }
+        // });
+        // });
+        // if ($this.classList.contains(that.options.expandIcon)) {
+        // $this.classList.remove(that.options.expandIcon).classList.add(that.options.collapseIcon);
+        // } else {
+        // $this.classList.remove(that.options.collapseIcon).classList.add(that.options.expandIcon);
+        // }
+        // that.options.data = that.data;
+        // that.initBody(true);
+        // })
+        // });
 
         // 绑定复选框点击事件  
         this.$selectItem = this.$body.querySelectorAll(Utils.sprintf('[name="%s"]', this.options.selectItemName));
+        console.log('this.$selectItem:', this.$selectItem);
         this.$selectItem.forEach(item => {
-            item.onclick = function (event) {
-                event.stopImmediatePropagation();
+            $Event.on($Event.off(item, 'click'), 'click',
+                function (event) {
+                    event.stopImmediatePropagation();
 
-                var $this = this,
-                    checked = $this['checked'],
-                    row = that.data[$this.dataset.index];
+                    var $this = this,
+                        checked = $this['checked'],
+                        row = that.data[$this.dataset.index];
 
-                if (that.options.maintainSelected && this.matches("[type='radio']")) {
-                    that.options.data.forEach(function (row) {
-                        row[that.header.stateField] = false;
-                    });
-                }
+                    if (that.options.maintainSelected && $this.matches("[type='radio']")) {
+                        that.options.data.forEach(function (row) {
+                            row[that.header.stateField] = false;
+                        });
+                    }
 
-                row[that.header.stateField] = checked;
+                    row[that.header.stateField] = checked;
 
-                if (that.options.singleSelect) {
-                    that.$selectItem.filter(v => { return v !== this; }).forEach(function (item) {
-                        that.data[item.dataset.index][that.header.stateField] = false;
-                    });
-                    that.$selectItem.filter(item => item['checked'] == true).filter(
-                        v => v !== this).forEach(v => v['checked'] = false);
-                }
+                    if (that.options.singleSelect) {
+                        that.$selectItem.filter(v => { return v !== $this; }).forEach(function (item) {
+                            that.data[item.dataset.index][that.header.stateField] = false;
+                        });
+                        that.$selectItem.filter(item => item['checked'] == true).filter(
+                            v => v !== $this).forEach(v => v['checked'] = false);
+                    }
 
-                that.updateSelected();
-
-                if (window.CustomEvent) {
-                    const event__ = new CustomEvent(checked ? 'check' : 'uncheck', { detail: (row, $this) });
-                } else {
-                    const event__ = document.createEvent(checked ? 'check' : 'uncheck');
-                    event__.initCustomEvent(checked ? 'check' : 'uncheck', true, true, row, $this);
-                }
-                that.dispatchEvent(event__);
-            }
+                    that.updateSelected();
+                    that.trigger(checked ? 'check' : 'uncheck', row, $this);
+                })
         });
 
         // 由this.header.events为tbody>tr>td中子元素绑定事件  
@@ -2708,20 +2905,19 @@
             for (var key in events) {
                 that.$body.querySelectorAll('tr:not(.no-records-found)').forEach(function () {
                     var $tr = this,
-                        $td = $tr.querySelectorAll(that.options.cardView ? '.card-view' : 'td')[fieldIndex],
+                        $td = $tr.querySelector(that.options.cardView ? '.card-view' : 'td')[fieldIndex],
                         index = key.indexOf(' '),
                         name = key.substring(0, index),
                         el = key.substring(index + 1),
                         func = events[key];
-                    var currEl = $td.querySelector(el)
-                    var cloneEl = currEl.cloneNode(true);
-                    currEl.parentNode.replaceChild(cloneEl, currEl);
-                    cloneEl.addEventListener(name, function (e) {
-                        var index = $tr.dataset.index,
-                            row = that.data[index],
-                            value = row[field];
-
-                        func.apply(this, [e, value, row, index]);
+                    // $td.find(el).off(name).on(name, function (e) { TODO
+                    $td.querySelectorAll(el).forEach(item => {
+                        $Event.on($Event.off(item, name), name, function (e) {
+                            var index = $tr.dataset['index'],
+                                row = that.data[index],
+                                value = row[field];
+                            func.apply(this, [e, value, row, index]);
+                        })
                     });
                 });
             }
@@ -2848,21 +3044,17 @@
 
     // 全选以及全不选时改变全选复选框的勾选状态，以及tr行添加或删除selected类  
     BootstrapTable.prototype.updateSelected = function () {
-        var checkAll = [].filter.call(this.$selectItem, (w) => w.disabled = false).length &&
-            [].filter.call(this.$selectItem, ((w) => w.disabled = false)).length ===
-            [].filter.call([].filter.call(this.$selectItem, ((w) => w.disabled = false)), ((w) => w.checked = true).length);
-        // var allTags = [];
-        // allTags.push.apply(allTags, this.$selectAll);
-        // allTags.push.apply(allTags, this.$selectAll_)
-        // allTags.forEach(element => {
-        // this.$selectAll.add(this.$selectAll_);
-        this.$selectAll = Array.from(this.$selectAll).concat(this.$selectAll_);
+        var $selectItems = [].filter.call(this.$selectItem, (w) => w.disabled === false),
+            checkAll = $selectItems.length &&
+                $selectItems.length ===
+                [].filter.call($selectItems, ((w) => w.checked === true)).length;
+
+        if (this.$selectAll_) this.$selectAll.push(this.$selectAll_);
         this.$selectAll.forEach(element => {
             if (element) element['checked'] = checkAll;
         });
-
-        this.$selectItem.forEach(function () {
-            this['checked'] ? this.closest('tr').classList.add('selected') : this.closest('tr').classList.remove('selected');
+        this.$selectItem.forEach(function (item) {
+            item['checked'] ? item.closest('tr').classList.add('selected') : item.closest('tr').classList.remove('selected');
         });
     };
 
@@ -2870,8 +3062,8 @@
     BootstrapTable.prototype.updateRows = function () {
         var that = this;
 
-        this.$selectItem.forEach(function () {
-            that.data[this.data['index']][that.header.stateField] = this['checked'];
+        this.$selectItem.forEach(function (item) {
+            that.data[item.dataset['index']][that.header.stateField] = item['checked'];
         });
     };
 
@@ -2890,14 +3082,13 @@
 
     // 执行this.options[BootstrapTable.EVENTS[name]]函数(类似浏览器默认事件)，并触发事件  
     BootstrapTable.prototype.trigger = function (name) {
-        var args = Array.prototype.slice.call(arguments, 1);
-
+        var args = [].slice.call(arguments, 1);
         name += '.bs.table';
         this.options[BootstrapTable.EVENTS[name]].apply(this.options, args);
-        Utils.trigger(this.$el, name, { detail: args });
+        Utils.trigger(this.$el, name, args);
 
         this.options.onAll(name, args);
-        Utils.trigger(this.$el, 'all.bs.table', { detail: [name, args] });
+        Utils.trigger(this.$el, 'all.bs.table', args);
     };
 
     // 一定时间内触发this.fitHeader函数调整表头的水平偏移，垂直滚动不影响表头  
@@ -2905,7 +3096,7 @@
         // fix #61: the hidden table reset header bug.  
         // fix bug: get $el.css('width') error sometime (height = 500)  
         clearTimeout(this.timeoutId_);
-        this.timeoutId_ = setTimeout(this.fitHeader.bind9(this), this.$el.matches(':hidden') ? 100 : 0);
+        this.timeoutId_ = setTimeout(this.fitHeader.bind(this), this.$el.matches(':hidden') ? 100 : 0);
     };
 
     // 克隆this.$el中的表头，置入this.$tableHeader中，出使垂直滚动时，表头信息不变  
@@ -2921,12 +3112,12 @@
             that.timeoutId_ = setTimeout(that.fitHeader.bind(that), 100);
             return;
         }
-        fixedBody = this.$tableBody.get(0);// 包裹表单的.fixed-table-body元素  
+        fixedBody = this.$tableBody;// 包裹表单的.fixed-table-body元素  
 
         // .fixed-table-container有固定高度，其子元素.fixed-table-body超过该高度就显示滚动条  
         scrollWidth = fixedBody.scrollWidth > fixedBody.clientWidth &&
             fixedBody.scrollHeight > fixedBody.clientHeight + this.$header.outerHeight() ?
-            getScrollBarWidth() : 0;
+            Utils.getScrollBarWidth() : 0;
 
         this.$el.style.marginTop = -this.$header.outerHeight();
 
@@ -2952,7 +3143,7 @@
         };
 
         this.$header_ = this.$header.cloneNode(true);
-        this.$selectAll_ = this.$header_.querySelectorAll('[name="btSelectAll"]');
+        this.$selectAll_ = this.$header_.querySelector('[name="btSelectAll"]');
         this.$tableHeader.style.marginRight = scrollWidth;
         let $headertable = this.$tableHeader.querySelector('table');
         $headertable.style.width = this.$el.outerWidth();
@@ -3293,7 +3484,7 @@
         this.$selectAll.forEach(element => {
             if (element) {
                 element.setAttribute('checked', that.$selectItem.length > 0 &&
-                    that.$selectItem.length === that.$selectItem.querySelectorAll(':checked').length)
+                    that.$selectItem.length === [].filter.call(that.$selectItem, item => item.checked === true).length)
             }
         });
 
@@ -3525,6 +3716,9 @@
         this.initBody(true);
     };
 
+    BootstrapTable.prototype.initHiddenRows = function () {
+        this.hiddenRows = [];
+    };
     // 根据{[index:index],[uniqueid:uniqueId]}找到某一行，显示  
     BootstrapTable.prototype.showRow = function (params) {
         if (!params.hasOwnProperty('index') && !params.hasOwnProperty('uniqueId')) {
@@ -3639,34 +3833,39 @@
     // 反选，调用updateRows执行initSort、initBody，调用updateSelect为行元素tr添加selected类  
     BootstrapTable.prototype.checkInvert = function () {
         var that = this;
-        var rows = that.$selectItem.filter(itm => itm.Enabled === true);
+        var rows = that.$selectItem.filter(itm => !itm.disabled);
         var checked = rows.filter(itm => itm.checked === true);
         rows.forEach(function () {
             this.setAttribute('checked', !this.checked);
         });
-        that.updateRows();
+        that.updateRows(); 29
         that.updateSelected();
-        that.trigger('uncheck-some', { detail: checked });
+        that.trigger('uncheck-some', { check: checked });
         checked = that.getSelections();
-        that.trigger('check-some', { detail: checked });
+        that.trigger('check-some', { check: checked });
     };
 
     // 全选或全不选执行函数，为什么这时又不像所在的行添加selected类？？？  
     BootstrapTable.prototype.checkAll_ = function (checked) {
         var rows;
+
         if (!checked) {
             rows = this.getSelections();
         }
-        this.$selectAll.add(this.$selectAll_).forEach(
-            function () { this.checked = checked; }
-        );//全选按钮  
-        this.$selectItem.filter(
-            function () { return this.enabled === true; }).forEach(function () { this.checked = checked; });
+        if (this.$selectAll_) this.$selectAll.push(this.$selectAll_);
+        this.$selectAll.forEach(function (item) {
+            item.checked = checked;
+        }
+        );
+        //全选按钮
+        [].filter.call(this.$selectItem, function (item) {
+            return !item.disabled;
+        }).forEach(function (item) { item.checked = checked; });
         this.updateRows();
         if (checked) {
             rows = this.getSelections();
         }
-        this.trigger(checked ? 'check-all' : 'uncheck-all', { detail: rows });
+        this.trigger(checked ? 'check-all' : 'uncheck-all', { rows: rows });
     };
 
     // 选中  
@@ -3993,18 +4192,20 @@
         'expandRow', 'collapseRow', 'expandAllRows', 'collapseAllRows',
         'updateFormatText'
     ];
-
+    // 定义一个函数，用于创建一个BootstrapTable实例
     var fn = Element.prototype.bootstrapTable = Element.prototype.bt = function (option) {
+
         var value,
-            args = Array.prototype.slice.call(arguments, 1);
+            args = Array.prototype.slice.call(arguments, 1);// slice() 方法以新的数组对象，返回数组中被选中的元素
 
         // this.forEach(function () {
         var $this = this,
             data = $this.dataset['bootstrap.table'],
             // 配置项在触发元素的data数据中，或在js的option传参中  
-            options = Utils.extend({}, BootstrapTable.DEFAULTS, $this.dataset,
+            options = Object.assign({}, BootstrapTable.DEFAULTS, $this.dataset,
                 typeof option === 'object' && option);
-
+        //typeof option === 'object' && option,如果所有条件都是真实的，
+        //它将始终将其设置为最后一个真实变量。如果要将该变量用作布尔值，则可以双倍否定(!!）该变量，以便它返回布尔
         if (typeof option === 'string') {
             if (allowedMethods.indexOf(option) < 0) {
                 throw new Error("Unknown method: " + option);
@@ -4014,7 +4215,7 @@
                 return;
             }
 
-            value = data[option].apply(data, args);
+            value = data[option].apply(data, args);//执行指定方法
 
             if (option === 'destroy') {
                 delete $this.dataset['bootstrap.table'];
@@ -4022,6 +4223,7 @@
         }
 
         if (!data) {
+            // 创建一个新的BootstrapTable实例
             $this.dataset['bootstrap.table'] = data = new BootstrapTable(this, options);
         };
         // });
@@ -4034,20 +4236,5 @@
     fn.columnDefaults = BootstrapTable.COLUMN_DEFAULTS;
     fn.locales = BootstrapTable.LOCALES;
     fn.methods = allowedMethods;
-    // fn.utils = {
-    // sprintf: sprintf,
-    // getFieldIndex: getFieldIndex,
-    // compareObjects: compareObjects,
-    // calculateObjectValue: calculateObjectValue
-    // };
-
-    // BOOTSTRAP TABLE INIT  
-    // =======================  
-    // 
-    // $(function () {
-    // $('[data-toggle="table"]').bootstrapTable();
-    // });
-    // 
-
 
 }));
