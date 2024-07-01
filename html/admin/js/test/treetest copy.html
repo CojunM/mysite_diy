@@ -24,7 +24,7 @@
     <!-- <link href="/html/admin/js/bootstrap-table-1.13/bootstrap-table.css" rel="stylesheet"> -->
 
     <!-- <link href="/html/admin/js/jquery.treegrid/jquery.treegrid.css"> -->
-    <script src="/html/admin/js/bootstrap_tree_table1.1.js"></script>
+    <script src="/html/admin/js/bootstrap_tree_table1.1.1.js"></script>
 </head>
 
 <body>
@@ -92,6 +92,7 @@
                 data: data,
                 idField: 'id',
                 dataType: 'jsonp',
+                treeEnable: true,
                 columns: [{
                     field: 'ck',
                     checkbox: true
@@ -129,38 +130,22 @@
                 // treeShowField: 'time',
                 //指定父id列
                 parentIdField: 'pid',
-                onResetView: function (data) {
-                    // console.log('load', $table);
-                    $table.treegrid({
-                        initialState: 'collapsed',// 所有节点都折叠
-                        // initialState: 'expanded',// 所有节点都展开，默认展开
-                        treeColumn: 1,
-                        // expanderExpandedClass: 'glyphicon glyphicon-minus',  //图标样式
-                        // expanderCollapsedClass: 'glyphicon glyphicon-plus',
-                        onChange: function () {
-                            $table.bootstrapTable('resetWidth');
-                        }
-                    });
+                // onCheck: function (row) {
+                // var datas = $table.bootstrapTable('getData');
+                // 勾选子类
+                // selectChilds(datas, row, "id", "pid", true);
 
-                    // 只展开树形的第一级节
-                    // $table.treegrid('getRootNodes').forEach(rn => rn.treegrid('expand'));
-                    // console.log($table.treegrid('getRootNodes'));
-                },
-                onCheck: function (row) {
-                    var datas = $table.bootstrapTable('getData');
-                    // 勾选子类
-                    selectChilds(datas, row, "id", "pid", true);
+                // 勾选父类
+                // selectParentChecked(datas, row, "id", "pid")
 
-                    // 勾选父类
-                    selectParentChecked(datas, row, "id", "pid")
-
-                    // 刷新数据
-                    $table.bootstrapTable('load', datas);
-                },
+                // 刷新数据
+                // $table.bootstrapTable('load', datas);
+                // },
 
                 onUncheck: function (row) {
-                    var datas = $table.bootstrapTable('getData');
-                    selectChilds(datas, row, "id", "pid", false);
+                    // var datas = $table.bootstrapTable('getData');
+                    // selectChilds(datas, row, "id", "pid", false);
+                    var datas = {};
                     $table.bootstrapTable('load', datas);
                 },
                 // bootstrap-table-treetreegrid.js 插件配置 -- end

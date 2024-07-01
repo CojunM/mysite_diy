@@ -2819,7 +2819,7 @@
                     }
 
                     style = Utils.calculateObjectValue(this.options, this.options.rowStyle, [item, i], style);
-
+                    console.log(style.classes);
                     if (style && style.css) {
                         var _iteratorNormalCompletion9 = true;
                         var _didIteratorError9 = false;
@@ -3214,10 +3214,10 @@
 
                     this.$selectItem = this.$body.querySelectorAll(Utils.sprintf('[name="%s"]', this.options.selectItemName));
                     this.$selectItem.forEach(item => {
-                        $Event.on($Event.off(item, 'click'), 'click', function (e) {
+                        $Event.on($Event.off(item, 'click'), 'c lick', function (e) {
                             e.stopImmediatePropagation();
 
-                            var $this = $(e.currentTarget);
+                            var $this = e.currentTarget;
                             _this8.check_($this['checked'], $this.dataset['index']);
                         });
                     });
@@ -4890,6 +4890,7 @@
         // td
         BootstrapTable.prototype.initHeader = function () {
             var that = this;
+            console.log(this)
             _initHeader.apply(that, Array.prototype.slice.apply(arguments));
             var treeShowField = that.options.treeShowField;
             if (treeShowField) {
@@ -4931,6 +4932,7 @@
         // tr
         BootstrapTable.prototype.initRow = function (item, idx, data, parentDom) {
             var that = this;
+            // console.log(data)
             if (that.treeEnable) {
                 // init root node
                 if (that.options.onCheckRoot.apply(that, [item, data])) {
@@ -4941,7 +4943,7 @@
                     that.options.rowStyle = function (item, idx) {
                         var res = _rowStyle.apply(that, Array.prototype.slice.apply(arguments));
                         var x = item[that.options.idField] ? item[that.options.idField] : 0;
-                        res.classes = [res.classes || '', 'treegrid-' + x].join(' ');
+                        res.classes = [res.classes || '', `treegrid-${x}`].join(' ');
                         return res;
                     };
                     initTr.apply(that, [item, idx, data, parentDom]);
@@ -4972,7 +4974,7 @@
                 this.treegrid('setTreeContainer', this);
                 this.treegrid('setSettings', settings);
                 var rootnodes = settings.getRootNodes.apply(this, [this])
-                console.log(rootnodes)
+                // console.log(rootnodes)
                 rootnodes.forEach(rt => rt.treegrid('initNode', settings));
 
 
@@ -4991,7 +4993,7 @@
                 // console.log(this)
                 this.treegrid('setTreeContainer', settings.getTreeGridContainer.apply(this));
                 this.treegrid('getChildNodes').forEach(cn => cn.treegrid('initNode', settings));
-                this.treegrid('initExpander').treegrid('initIndent').treegrid('initEvents').treegrid('initState').treegrid('initChangeEvent').treegrid("initSettingsEvents");
+                this.treegrid('initExpander').treegrid('initIndent').treegrid('initEvents').treegrid('initState').treegrid("initSettingsEvents");
                 return this;
             },
             initChangeEvent: function () {
@@ -5013,6 +5015,14 @@
              */
             initEvents: function () {
                 var $this = this;
+                //Save state on change
+                $Event.on($this, "change", function () {
+                    var $this = this;
+                    $this.treegrid('render');
+                    if ($this.treegrid('getSetting', 'saveState')) {
+                        $this.treegrid('saveState');
+                    }
+                });
                 //Default behavior on collapse
                 $Event.on($this, "collapse", function () {
                     var $this = this;
@@ -5076,9 +5086,9 @@
                 }
                 // console.log(cell)
                 cell.insertAdjacentHTML('afterbegin', tpl)
-                document.querySelectorAll(".treegrid-expander").forEach(te => te.click(function () {
+                document.querySelectorAll(".treegrid-expander").forEach(te => te.onclick = function () {
                     this.closest('tr').treegrid('toggle');
-                }));
+                });
                 return $this;
             },
             /**
@@ -5096,7 +5106,7 @@
                 // const tl = document.querySelector(tpl);
                 // tl.parentNode.insertBefore(expander, tl);
                 // }
-
+                // console.log(this)
                 for (var i = 0; i < this.treegrid('getDepth'); i++) {
                     // tl.parentNode.insertBefore($this.querySelector('.treegrid-expander', tl));
                     this.querySelectorAll('.treegrid-expander').forEach(tr =>
@@ -5121,6 +5131,7 @@
                         $this.treegrid('collapse');
                     }
                 }
+                // console.log($this)
                 return $this;
             },
             /**
@@ -5493,7 +5504,7 @@
              */
             render: function () {
 
-
+                console.log(this);
                 //if parent colapsed we hidden
                 if (this.treegrid('isOneOfParentsCollapsed')) {
                     this.style.display = 'none';
@@ -5502,7 +5513,7 @@
                 }
                 if (!this.treegrid('isLeaf')) {
                     this.treegrid('renderExpander');
-                    this.treegrid('getChildNodes'), forEach(cn => cn.treegrid('render'));
+                    this.treegrid('getChildNodes').forEach(cn => cn.treegrid('render'));
                 }
                 return this;
             },
@@ -5525,8 +5536,8 @@
                         })
                     } else {
                         expander.forEach(ex => {
-                            ex.removeClass($this.treegrid('getSetting', 'expanderExpandedClass'));
-                            ex.addClass($this.treegrid('getSetting', 'expanderCollapsedClass'))
+                            ex.classList.remove($this.treegrid('getSetting', 'expanderExpandedClass'));
+                            ex.classList.add($this.treegrid('getSetting', 'expanderCollapsedClass'))
                         });
                     }
                 } else {

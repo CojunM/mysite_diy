@@ -19,21 +19,21 @@
   margin-bottom: 10px;
 }
 
-.bootstrap-table .fixed-table-toolbar .columns .btn-group > .btn-group {
+.bootstrap-table .fixed-table-toolbar .columns .btn-group>.btn-group {
   display: inline-block;
   margin-left: -1px !important;
 }
 
-.bootstrap-table .fixed-table-toolbar .columns .btn-group > .btn-group > .btn {
+.bootstrap-table .fixed-table-toolbar .columns .btn-group>.btn-group>.btn {
   border-radius: 0;
 }
 
-.bootstrap-table .fixed-table-toolbar .columns .btn-group > .btn-group:first-child > .btn {
+.bootstrap-table .fixed-table-toolbar .columns .btn-group>.btn-group:first-child>.btn {
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
 
-.bootstrap-table .fixed-table-toolbar .columns .btn-group > .btn-group:last-child > .btn {
+.bootstrap-table .fixed-table-toolbar .columns .btn-group>.btn-group:last-child>.btn {
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
 }
@@ -291,48 +291,48 @@
   clear: both;
 }
 
-.bootstrap-table .fixed-table-pagination > .pagination-detail,
-.bootstrap-table .fixed-table-pagination > .pagination {
+.bootstrap-table .fixed-table-pagination>.pagination-detail,
+.bootstrap-table .fixed-table-pagination>.pagination {
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
-.bootstrap-table .fixed-table-pagination > .pagination-detail .pagination-info {
+.bootstrap-table .fixed-table-pagination>.pagination-detail .pagination-info {
   line-height: 34px;
   margin-right: 5px;
 }
 
-.bootstrap-table .fixed-table-pagination > .pagination-detail .page-list {
+.bootstrap-table .fixed-table-pagination>.pagination-detail .page-list {
   display: inline-block;
 }
 
-.bootstrap-table .fixed-table-pagination > .pagination-detail .page-list .btn-group {
+.bootstrap-table .fixed-table-pagination>.pagination-detail .page-list .btn-group {
   position: relative;
   display: inline-block;
   vertical-align: middle;
 }
 
-.bootstrap-table .fixed-table-pagination > .pagination-detail .page-list .btn-group .dropdown-menu {
+.bootstrap-table .fixed-table-pagination>.pagination-detail .page-list .btn-group .dropdown-menu {
   margin-bottom: 0;
 }
 
-.bootstrap-table .fixed-table-pagination > .pagination ul.pagination {
+.bootstrap-table .fixed-table-pagination>.pagination ul.pagination {
   margin: 0;
 }
 
-.bootstrap-table .fixed-table-pagination > .pagination ul.pagination li.page-intermediate a {
+.bootstrap-table .fixed-table-pagination>.pagination ul.pagination li.page-intermediate a {
   color: #c8c8c8;
 }
 
-.bootstrap-table .fixed-table-pagination > .pagination ul.pagination li.page-intermediate a::before {
+.bootstrap-table .fixed-table-pagination>.pagination ul.pagination li.page-intermediate a::before {
   content: "\2B05";
 }
 
-.bootstrap-table .fixed-table-pagination > .pagination ul.pagination li.page-intermediate a::after {
+.bootstrap-table .fixed-table-pagination>.pagination ul.pagination li.page-intermediate a::after {
   content: "\27A1";
 }
 
-.bootstrap-table .fixed-table-pagination > .pagination ul.pagination li.disabled a {
+.bootstrap-table .fixed-table-pagination>.pagination ul.pagination li.disabled a {
   pointer-events: none;
   cursor: default;
 }
@@ -348,7 +348,8 @@
   overflow-y: scroll;
 }
 
-.bootstrap-table.bootstrap4 .pagination-lg .page-link, .bootstrap-table.bootstrap5 .pagination-lg .page-link {
+.bootstrap-table.bootstrap4 .pagination-lg .page-link,
+.bootstrap-table.bootstrap5 .pagination-lg .page-link {
   padding: 0.5rem 1rem;
 }
 
@@ -379,10 +380,28 @@ div.fixed-table-scroll-outer {
   0% {
     opacity: 0;
   }
+
   50% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
   }
+}
+
+.treegrid-expander {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+.treegrid-expander-expanded {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'  fill='currentColor'  viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+}
+
+.treegrid-expander-collapsed {
+  background-image: url("data:image/svg+xml,%3Csvg  xmlns='http://www.w3.org/2000/svg' fill='currentColor'   viewBox='0 0 16 16'%3E%3Cpath d='m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z'/%3E%3C/svg%3E")
 }
