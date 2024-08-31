@@ -105,23 +105,25 @@ def callback():
     sord = web_helper.get_query('sord', '', is_check_null=False)
     # print(' sidx   ', sidx), print('sord  ', sord)
     # 初始化排序字段
-    order_by = Menu_info.sort.desc()
+    order_by = Menu_info.sort  # 默认排序
     # print('order_by   ',order_by)
     if sidx:
         order_by = getattr(getattr(Menu_info, sidx), sord)()
         # print('order_by1   ',order_by)
-    wheres = Menu_info.parent_id == str(parent_id)
+    # wheres = Menu_info.parent_id == str(parent_id)
     _menu_info_logic = db_logic(Menu_info)
     # 读取记录
 
     # print('读取记录page_size', page_number, page_size)
-    result = _menu_info_logic.get_list('', wheres, page_number, page_size, order_by)
+    # result = _menu_info_logic.get_list('','', page_number, page_size, order_by)
+    result = _menu_info_logic.get_list(orderby=order_by)
+
     # print('读取记录result', result)
     # result =get_model_for_cache(Menu_info)
     lst = [{'id': r.id, 'name': r.name, 'icon': r.icon, 'page_url': r.page_url, 'interface_url': r.interface_url,
             'parent_id': r.parent_id, 'sort': r.sort, 'expanded': r.expanded, 'is_leaf': r.is_leaf, 'level': r.level,
             'is_show': r.is_show, 'is_enabled': r.is_enabled} for r in [m for m in result.get('rows')]]
-    print('读取记录lst', lst)
+    print('读取记录menu_info ', lst)
     result['rows'] = lst
     if result:  # json.dumps(result)
         # return json.dumps(result, default=lambda o: o.__dict__,sort_keys=True, indent=4)

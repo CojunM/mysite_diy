@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!--content的取值为webkit，ie-comp，ie-stand之一，区分大小写，分别代表用极速模式，兼容模式，IE模式打开。-->
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <!--在网页的<head>中增加下面这句话，可以让网页的宽度自动适应手机屏幕的宽度。-->
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <!--如第三方站点不希望某页面被转码，可在页面上添加以下协议，当用户通过移动搜索进入第三方网站时，会直接进入原网页。-->
+    <!--<meta http-equiv="Cache-Control" content="no-siteapp"/>-->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+
+    <!-- 新 Bootstrap5 核心 CSS 文件 -->
+
+
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
+    <!--    popper.min.js 用于弹窗、提示、下拉菜单-->
+    <!--    <script src="https://cdn.staticfile.org/popper.js/2.9.3/umd/popper.min.js"></script>-->
+
+    <!-- 最新的 Bootstrap5 核心 图标文件 -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <link href="/admin/js/bootstrap-table-1.13/bootstrap-table.css" rel="stylesheet">
+    <!--      -->
+    <!-- Template Main CSS File -->
+    <!--<link rel="stylesheet" href="css/style3.css" >-->
+    <!--<link rel="stylesheet" href="css/admin.css" >-->
+    <link rel="stylesheet" href="/admin/css/admin.css">
+    <!-- <link rel="stylesheet" href="/admin/css/style3.css"> -->
+
+
+    <title>菜单管理</title>
+</head>
+
+
+<body>
+    <nav class="breadcrumb"><i class=""></i> 首页
+        <span class="c-gray en">&gt;</span>
+        系统管理
+        <span class="c-gray en"></span>
+        菜单管理
+    </nav>
+    <div class="page-container">
+        <div class="cl pd-5 bg-1 bk-gray mt-5">
+            <span class="l">
+                <a href="javascript:location.replace(location.href);" class="btn btn-success radius">
+                    <i class="Hui-iconfont"></i> 刷新</a>
+
+
+                <button type="button" class="btn btn-primary radius" data-bs-toggle="modal" data-bs-target="#myModal">
+                    添加
+                </button>
+                <button type="button" class="btn btn-primary radius" onclick="edit('编辑')">
+                    编辑
+                </button>
+                <a href="javascript:" onclick="del()" class="btn btn-danger radius"><i class=""></i> 删除</a>
+            </span>
+        </div>
+        <div class="mt-10">
+            <!-- jqGrid table list4 -->
+            <table id="list"> </table>
+            <!-- jqGrid 分页 div gridPager -->
+            <div id="gridPager"></div>
+        </div>
+    </div>
+    <!-- 模态框 -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+
+                <!-- 模态框头部 -->
+                <div class="modal-header">
+                    <h4 class="modal-title">添加</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- 模态框内容 -->
+                <div class="modal-body">
+                    <div class="page-container">
+                        <form class="form form-horizontal" id="form1">
+                            <div id="tab-category" class="HuiTab">
+                                <div class="row cl">
+                                    <input type="hidden" id="id" value="">
+                                    <label class="form-label col-xs-3 col-sm-2">上级菜单：</label>
+                                    <div class="formControls col-xs-4 col-sm-5">
+                                        <input id="itemSel" type="text" class="input-text" readonly value="" />
+                                    </div>
+                                    <a id="selectBtn" href="#" onclick="showList(); return false;">选择</a>
+                                    <div id="listContent" class="listContent"
+                                        style="z-index:9999; display:none; position: absolute;">
+                                        <ul id="tree" class="ztree"
+                                            style="margin-top:0; width:160px; background:#f0f6e4;border: 1px solid #617775;">
+                                        </ul>
+                                        <input type="hidden" id="tree_ok" value="">
+                                        <input type="hidden" id="parent_id" value="">
+                                    </div>
+                                </div>
+                                <div class="row cl">
+                                    <label class="form-label col-xs-3 col-sm-2">
+                                        菜单名称：
+                                        <span class="c-red">*</span></label>
+                                    <div class="formControls col-xs-8 col-sm-9">
+                                        <input type="text" class="input-text" value="" placeholder="" id="name"
+                                            name="name">
+                                    </div>
+                                    <div class="col-1">
+                                    </div>
+                                </div>
+                                <div class="row cl">
+                                    <label class="form-label col-xs-3 col-sm-2">菜单小图标：</label>
+                                    <div class="formControls col-xs-4 col-sm-5">
+                                        <input type="text" class="input-text" value="" placeholder="" id="icon"
+                                            name="icon">
+                                    </div>
+                                    <a href="http://www.h-ui.net/Hui-3.7-Hui-iconfont.shtml" style="color:#FF0000"
+                                        target="_blank">查看</a>
+                                </div>
+                                <div class="row cl">
+                                    <label class="form-label col-xs-3 col-sm-2">页面URL：</label>
+                                    <div class="formControls col-xs-8 col-sm-9">
+                                        <input type="text" class="input-text" value="" placeholder="" id="page_url"
+                                            name="page_url">
+                                    </div>
+                                    <div class="col-1">
+                                    </div>
+                                </div>
+                                <div class="row cl">
+                                    <label class="form-label col-xs-3 col-sm-2">接口url：</label>
+                                    <div class="formControls col-xs-8 col-sm-9">
+                                        <input type="text" class="input-text" value="" placeholder="" id="interface_url"
+                                            name="interface_url">
+                                    </div>
+                                    <div class="col-1">
+                                    </div>
+                                </div>
+                                <div class="row cl">
+                                    <label class="form-label col-xs-3 col-sm-2">排序：</label>
+                                    <div class="formControls col-xs-8 col-sm-9">
+                                        <input type="text" class="input-text" value="" placeholder="" id="sort"
+                                            name="sort">
+                                    </div>
+                                    <div class="col-1">
+                                    </div>
+                                </div>
+                                <div class="row cl">
+                                    <label class="form-label col-xs-3 col-sm-2">是否最终节点：</label>
+                                    <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                                        <div class="radio-box">
+                                            <input type="radio" id="is_leaf_1" name="is_leaf" value="false">否
+                                        </div>
+                                        <div class="radio-box">
+                                            <input type="radio" id="is_leaf_2" name="is_leaf" value="true">是
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                    </div>
+                                </div>
+                                <div class="row cl">
+                                    <label class="form-label col-xs-3 col-sm-2">是否显示：</label>
+                                    <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                                        <div class="radio-box">
+                                            <input type="radio" id="is_show_1" name="is_show" value="false">否
+                                        </div>
+                                        <div class="radio-box">
+                                            <input type="radio" id="is_show_2" name="is_show" value="true">是
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                    </div>
+                                </div>
+                                <div class="row cl">
+                                    <label class="form-label col-xs-3 col-sm-2">是否启用：</label>
+                                    <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                                        <div class="radio-box">
+                                            <input type="radio" id="is_enabled_1" name="is_enabled" value="false">否
+                                        </div>
+                                        <div class="radio-box">
+                                            <input type="radio" id="is_enabled_2" name="is_enabled" value="true">是
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row cl">
+                                <div class="col-9 col-offset-3">
+                                    <button onClick="save_submit();" class="btn btn-primary radius" type="button">
+                                        &nbsp;&nbsp;提交&nbsp;&nbsp;
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- 模态框底部 -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">取消</button>
+                    <button type="button" onClick="save();" class="btn btn-primary radius">提交</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--_footer 作为公共模版分离出去-->
+    <script src="/admin/js/bootstrap_tree_table1.1.2.js"></script>
+    <!-- 最新的 Bootstrap5 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <!--<script src="js/admin.js "></script>-->
+    <!--<script src="js/main.js"></script>-->
+    <script src="/admin/js/ajax.js"></script>
+
+    <script src="/admin/js/main.js"></script>
+    <script src="/admin/js/admin.js "></script>
+    <!--<script src="/admin/js/ajax.js"></script>-->
+    <script type="text/javascript">
+        // $(function () {
+        //     //创建jqGrid组件
+        //     $("#list").jqGrid({
+        //         url: "/api/system/menu_info/",//组件创建完成之后请求数据的url
+        //         mtype: "get",//向后台请求数据的ajax的类型。可选post,get
+        //         datatype: "json",//请求数据返回的类型。可选json,xml,txt
+        //         height: 'auto',//高度，表格高度。可为数值、百分比或'auto'
+        //         //width:1000,//这个宽度不能为百分比
+        //         autowidth: true,//自动宽
+        //         colNames: ['菜单名称', '小图标', '排序', '是否显示', '是否启用'],//jqGrid的列显示名字
+        //         colModel: [ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
+        //             { name: 'name', index: 'name', width: 100, sortable: false },
+        //             {
+        //                 name: 'icon', width: 80, formatter: function (cellvalue, options, rowObject) {
+        //                     return "<i class=\"Hui-iconfont\">" + cellvalue + "</i>"
+        //                 }, sortable: false
+        //             },
+        //             { name: 'sort', index: 'sort', width: 80, sortable: false },
+        //             {
+        //                 name: 'is_show', index: 'is_show', width: 80,
+        //                 formatter: function (cellvalue, options, rowObject) {
+        //                     if (cellvalue) {
+        //                         return "<i class=\"Hui-iconfont btn-success\">&#xe6a7;</i>"
+        //                     }
+        //                     else {
+        //                         return "<i class=\"Hui-iconfont btn-danger\">&#xe6a6;</i>"
+        //                     }
+        //                 }, sortable: false
+        //             },
+        //             {
+        //                 name: 'is_enabled',
+        //                 index: 'is_enabled',
+        //                 width: 80,
+        //                 formatter: function (cellvalue, options, rowObject) {
+        //                     if (cellvalue) {
+        //                         return "<i class=\"Hui-iconfont btn-success\">&#xe6a7;</i>"
+        //                     }
+        //                     else {
+        //                         return "<i class=\"Hui-iconfont btn-danger\">&#xe6a6;</i>"
+        //                     }
+        //                 }, sortable: false
+        //             }
+        //         ],
+        //         rownumbers: false,//添加左侧行号
+        //         altRows: true,//设置为交替行表格,默认为false
+        //         rowNum: 20,//一页显示多少条
+        //         rowList: [20, 50, 100],//可供用户选择一页显示多少条
+        //         pager: '#gridPager',//表格页脚的占位符(一般是div)的id
+        //         sortname: 'sort',//初始化的时候排序的字段
+        //         sortorder: "asc",//排序方式,可选desc,asc
+        //         viewrecords: true,//是否在浏览导航栏显示记录总数
+        //         caption: "菜单列表",//表格的标题名字
+        //         treeGrid: true,//启用树列表
+        //         gridview: true,
+        //         treeGridModel: "adjacency",
+        //         ExpandColumn: 'name',//设置树列表扩开列
+        //         multiselect: false,//是否多选
+        //         treeReader: { //树列表主要字段对照表
+        //             level_field: "level",
+        //             parent_id_field: "parent_id",
+        //             leaf_field: "is_leaf",
+        //             expanded_field: "expanded"
+        //         }
+        //     });
+        //     /*创建jqGrid的操作按钮容器*/
+        //     /*可以控制界面上增删改查的按钮是否显示*/
+        //     $("#list").jqGrid('navGrid', '#gridPager', { edit: false, add: false, del: false, search: false });
+        // });
+        (function () {
+            document.querySelector("#list").bootstrapTable({
+                url: "/api/system/menu_info/",//组件创建完成之后请求数据的url
+                method: "GET",//向后台请求数据的ajax的类型。可选post,get
+                ajax: $.ajax,
+                // classes: "table table-bordered table-hover table-responsive",
+                // height: 650,   //动态获取高度值，可以使表格自适应页面  document.body.clientHeight - 465,
+                // data: data,
+                idField: 'id',
+                dataType: 'json',
+                clickToSelect: true,                //是否启用点击选中行
+                treeEnable: true,
+                //在哪一列展开树形
+                treeShowField: 'name',
+                // treeShowField: 'time',
+                //指定父id列
+                parentIdField: 'parent_id',
+                initialState: 'collapsed',
+                expandedTree: false,
+                // onClickRow: function onClickRow(item, $element) {
+                // alert(item.id);
+                // let el = document.querySelector($element);
+
+                //判断是否已选中
+                // $element.classList.toggle("changeColor")
+                // console.log($element);
+                // return false;
+                // },
+
+                columns: [{ title: '菜单名称', field: 'name', sortable: false },
+                {
+                    title: '小图标', field: 'icon', formatter: function (cellvalue, options, rowObject) {
+                        return "<i class=\"Hui-iconfont\">" + cellvalue + "</i>"
+                    }, sortable: false
+                },
+                { title: '排序', field: 'sort', sortable: false },
+                {
+                    title: '是否显示', field: 'is_show',
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue) {
+                            // return '   <input type="checkbox" value=""checked  disabled > '
+                            return ' <i class="bi bi-check-square-fill" style=" color: green;"></i>'
+
+                        }
+                        else {
+                            // return '   <input type="checkbox" value=""disabled>'
+                            return '<i class="bi bi-x-square-fill" style=" color: red;"></i>'
+                        }
+                    }, sortable: false
+                },
+                {
+                    title: '是否启用',
+                    field: 'is_enabled',
+
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue) {
+                            return ' <i class="bi bi-check-square-fill" style=" color: green;"></i>'
+                        }
+                        else {
+                            // return '   <input type="checkbox" value=""disabled>'
+                            return '<i class="bi bi-x-square-fill" style=" color: red;"></i>'
+                        }
+                    }, sortable: false
+                },
+                ]
+            })
+        })();
+        /*添加*/
+        // function add(title, url) {
+        // layer_show(title, url, w, h);
+        // window.open(url, title, "height=h, width=w, toolbar= no, menubar=no, scrollbars=no, resizable=no, location=no, status=no,top=100,left=300")
+        // 
+        // }
+        /*编辑*/
+        function edit(title) {
+            document.querySelector('.modal-title').textContent = title
+            var arrselections = document.querySelector("#list").bootstrapTable('getSelections');
+
+            if (arrselections.length > 1) {
+                alert("只能选择一行进行编辑");
+                return;
+            }
+            if (arrselections.length <= 0) {
+                alert("请选择一行进行编辑");
+                return;
+            }
+            var id = arrselections[0].id;
+            alert('选择' + id)
+            document.querySelector("#myModal").show()
+            save(id)
+        }
+        // /*删除*/
+        // function del() {
+        // var id = $("#list").jqGrid('getGridParam', 'selrow');
+        // if (id) {
+        // layer.confirm('确认要删除吗？', function (index) {
+        // $.ajax({
+        // type: 'POST',
+        // url: "/api/system/menu_info/" + id + "/",
+        // data: { '_method': 'delete' },
+        // dataType: 'json',
+        // success: function (data) {
+        // if (checkLogin(data, true)) {
+        // $("#list").jqGrid('delRowData', id);
+        // layer.msg('已删除!', { icon: 1, time: 3000 });
+        // layer_close();
+        // }
+        // },
+        // error: function (data) {
+        // layer.msg('删除失败!', { icon: 1, time: 3000 });
+        // layer_close();
+        // }
+        // });
+        // });
+        // }
+        // else {
+        // layer.msg('请选择要删除的行!', { icon: 1, time: 3000 });
+        // }
+        // }
+        function save(url, id) {
+            if (id) {
+                url = url + id + "/"
+            }
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: $("#form").serialize(),
+                dataType: 'json',
+                success: function (data) {
+                    if (checkLogin(data, true)) {
+                        layer.msg('保存成功!', { icon: 1, time: 3000 });
+                        layer_close();
+                    }
+                },
+                error: function (data) { }
+            })
+        }
+    </script>
+</body>
+
+</html>

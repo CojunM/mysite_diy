@@ -224,7 +224,7 @@ def hel():
 
 @get('/api/login2/menu_info')
 def hel():
-    return template('menu')
+    return template('admin_menu')
 
 
 @get('/api/login/department')
@@ -248,7 +248,7 @@ def helo():
 
 
 @get('/api/login/manager_edit')
-@get('/api/login1/manager_edit')
+@get('/api/login2/manager_edit')
 def helo():
     return template('manager_edit')
 
@@ -260,11 +260,13 @@ def helo():
 
 
 @get('/api/login/menu_info_edit')
-@get('/api/login1/menu_info_edit')
+@get('/api/login2/menu_info_edit')
 def helo():
     return template('menu_info_edit')
 
-
+@get('/api/login2/model')
+def helo():
+    return template('model')
 @get('/api/login/products_class')
 def helo():
     return template('products_class')

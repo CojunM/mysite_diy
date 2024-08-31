@@ -5328,13 +5328,18 @@
                 return this.treegrid('getDepth') === 0;
             },
             /**
+ * Method return true if node has no child nodes
+ * 
+ * @returns {Boolean}
+ */
+            isLeaf: function () {
+                return this.treegrid('getChildNodes').length === 0;
+            },
+            /**
              * Method return true if node has no child nodes
              *
              * @returns {Boolean}
              */
-            isLeaf: function () {
-                return this.treegrid('getChildNodes').length === 0;
-            },
             /**
              * Method return true if node last in branch
              *

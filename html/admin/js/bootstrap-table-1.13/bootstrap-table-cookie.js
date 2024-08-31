@@ -69,32 +69,6 @@
             return index;
         };
 
-        var setCookie = function setCookie(that, cookieName, cookieValue) {
-            if (!that.options.cookie || !cookieEnabled() || that.options.cookieIdTable === '') {
-                return;
-            }
-
-            if (inArrayCookiesEnabled(cookieName, that.options.cookiesEnabled) === -1) {
-                return;
-            }
-
-            cookieName = that.options.cookieIdTable + '.' + cookieName;
-
-            switch (that.options.cookieStorage) {
-                case 'cookieStorage':
-                    document.cookie = [cookieName, '=', cookieValue, '; expires=' + calculateExpiration(that.options.cookieExpire), that.options.cookiePath ? '; path=' + that.options.cookiePath : '', that.options.cookieDomain ? '; domain=' + that.options.cookieDomain : '', that.options.cookieSecure ? '; secure' : ''].join('');
-                case 'localStorage':
-                    localStorage.setItem(cookieName, cookieValue);
-                    break;
-                case 'sessionStorage':
-                    sessionStorage.setItem(cookieName, cookieValue);
-                    break;
-                default:
-                    return false;
-            }
-
-            return true;
-        };
 
         var getCookie = function getCookie(that, tableName, cookieName) {
             if (!cookieName) {
@@ -184,19 +158,19 @@
                         header = getCurrentHeader(bootstrapTable),
                         searchControls = getCurrentSearchControls(bootstrapTable),
                         applyCookieFilters = function applyCookieFilters(element, filteredCookies) {
-                        $(filteredCookies).each(function (i, cookie) {
-                            if (cookie.text !== '') {
-                                $(element).val(cookie.text);
-                                cachedFilters[cookie.field] = cookie.text;
-                            }
-                        });
-                    };
+                            $(filteredCookies).each(function (i, cookie) {
+                                if (cookie.text !== '') {
+                                    $(element).val(cookie.text);
+                                    cachedFilters[cookie.field] = cookie.text;
+                                }
+                            });
+                        };
 
                     header.find(searchControls).each(function () {
                         var field = $(this).closest('[data-field]').data('field'),
                             filteredCookies = $.grep(parsedCookieFilters, function (cookie) {
-                            return cookie.field === field;
-                        });
+                                return cookie.field === field;
+                            });
 
                         applyCookieFilters(this, filteredCookies);
                     });

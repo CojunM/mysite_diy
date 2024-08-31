@@ -1,0 +1,117 @@
+<!-- 模态框头部 -->
+<div class="modal-header">
+    <h4 class="modal-title">模态框标题</h4>
+    <button type="button" class=" btn-close " data-bs-dismiss="modal" aria-hidden="true"></button>
+</div>
+
+<div class="modal-body">
+    <div class="page-container">
+        <form class="form form-horizontal" id="form1">
+            <div id="tab-category" class="HuiTab">
+                <div class="row cl">
+                    <input type="hidden" id="id" value="">
+                    <label class="form-label col-xs-3 col-sm-2">上级菜单：</label>
+                    <div class="formControls col-xs-4 col-sm-5">
+                        <input id="itemSel" type="text" class="input-text" readonly value="" />
+                    </div>
+                    <a id="selectBtn" href="#" onclick="showList(); return false;">选择</a>
+                    <div id="listContent" class="listContent" style="z-index:9999; display:none; position: absolute;">
+                        <ul id="tree" class="ztree"
+                            style="margin-top:0; width:160px; background:#f0f6e4;border: 1px solid #617775;"></ul>
+                        <input type="hidden" id="tree_ok" value="">
+                        <input type="hidden" id="parent_id" value="">
+                    </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-3 col-sm-2">
+                        菜单名称：
+                        <span class="c-red">*</span></label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input type="text" class="input-text" value="" placeholder="" id="name" name="name">
+                    </div>
+                    <div class="col-1">
+                    </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-3 col-sm-2">菜单小图标：</label>
+                    <div class="formControls col-xs-4 col-sm-5">
+                        <input type="text" class="input-text" value="" placeholder="" id="icon" name="icon">
+                    </div>
+                    <a href="http://www.h-ui.net/Hui-3.7-Hui-iconfont.shtml" style="color:#FF0000"
+                        target="_blank">查看</a>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-3 col-sm-2">页面URL：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input type="text" class="input-text" value="" placeholder="" id="page_url" name="page_url">
+                    </div>
+                    <div class="col-1">
+                    </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-3 col-sm-2">接口url：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input type="text" class="input-text" value="" placeholder="" id="interface_url"
+                            name="interface_url">
+                    </div>
+                    <div class="col-1">
+                    </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-3 col-sm-2">排序：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input type="text" class="input-text" value="" placeholder="" id="sort" name="sort">
+                    </div>
+                    <div class="col-1">
+                    </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-3 col-sm-2">是否最终节点：</label>
+                    <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                        <div class="radio-box">
+                            <input type="radio" id="is_leaf_1" name="is_leaf" value="false">否
+                        </div>
+                        <div class="radio-box">
+                            <input type="radio" id="is_leaf_2" name="is_leaf" value="true">是
+                        </div>
+                    </div>
+                    <div class="col-1">
+                    </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-3 col-sm-2">是否显示：</label>
+                    <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                        <div class="radio-box">
+                            <input type="radio" id="is_show_1" name="is_show" value="false">否
+                        </div>
+                        <div class="radio-box">
+                            <input type="radio" id="is_show_2" name="is_show" value="true">是
+                        </div>
+                    </div>
+                    <div class="col-1">
+                    </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-3 col-sm-2">是否启用：</label>
+                    <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                        <div class="radio-box">
+                            <input type="radio" id="is_enabled_1" name="is_enabled" value="false">否
+                        </div>
+                        <div class="radio-box">
+                            <input type="radio" id="is_enabled_2" name="is_enabled" value="true">是
+                        </div>
+                    </div>
+                    <div class="col-1">
+                    </div>
+                </div>
+            </div>
+            <div class="row cl">
+                <div class="col-9 col-offset-3">
+                    <button onClick="save_submit();" class="btn btn-primary radius" type="button">
+                        &nbsp;&nbsp;提交&nbsp;&nbsp;
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

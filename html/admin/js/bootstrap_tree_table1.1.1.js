@@ -1260,6 +1260,111 @@
             });
             return data;
         },
+        setCookie: function setCookie(that, cookieName, cookieValue) {
+            if (!that.options.cookie || !!!navigator.cookieEnabled || that.options.cookieIdTable === '') {
+                return;
+            }
+            // 
+            // if (inArrayCookiesEnabled(cookieName, that.options.cookiesEnabled) === -1) {
+            // return;
+            // }
+
+            cookieName = that.options.cookieIdTable + '.' + cookieName;
+
+            switch (that.options.cookieStorage) {
+                case 'cookieStorage':
+                    document.cookie = [cookieName, '=', cookieValue, '; expires=' + Utils.calculateExpiration(that.options.cookieExpire), that.options.cookiePath ? '; path=' + that.options.cookiePath : '', that.options.cookieDomain ? '; domain=' + that.options.cookieDomain : '', that.options.cookieSecure ? '; secure' : ''].join('');
+                case 'localStorage':
+                    localStorage.setItem(cookieName, cookieValue);
+                    break;
+                case 'sessionStorage':
+                    sessionStorage.setItem(cookieName, cookieValue);
+                    break;
+                default:
+                    return false;
+            }
+
+            return true;
+        },
+        getCookie: function getCookie(that, tableName, cookieName) {
+            if (!cookieName) {
+                return null;
+            }
+
+            // if (inArrayCookiesEnabled(cookieName, that.options.cookiesEnabled) === -1) {
+            // return null;
+            // }
+
+            cookieName = tableName + '.' + cookieName;
+
+            switch (that.options.cookieStorage) {
+                case 'cookieStorage':
+                    var value = '; ' + document.cookie;
+                    var parts = value.split('; ' + cookieName + '=');
+                    return parts.length === 2 ? parts.pop().split(';').shift() : null;
+                case 'localStorage':
+                    return localStorage.getItem(cookieName);
+                case 'sessionStorage':
+                    return sessionStorage.getItem(cookieName);
+                default:
+                    return null;
+            }
+        },
+
+        deleteCookie: function deleteCookie(that, tableName, cookieName) {
+            cookieName = tableName + '.' + cookieName;
+
+            switch (that.options.cookieStorage) {
+                case 'cookieStorage':
+                    document.cookie = [encodeURIComponent(cookieName), '=', '; expires=Thu, 01 Jan 1970 00:00:00 GMT', that.options.cookiePath ? '; path=' + that.options.cookiePath : '', that.options.cookieDomain ? '; domain=' + that.options.cookieDomain : ''].join('');
+                    break;
+                case 'localStorage':
+                    localStorage.removeItem(cookieName);
+                    break;
+                case 'sessionStorage':
+                    sessionStorage.removeItem(cookieName);
+                    break;
+
+            }
+            return true;
+        },
+
+        calculateExpiration: function calculateExpiration(cookieExpire) {
+            var time = cookieExpire.replace(/[0-9]*/, ''); //s,mi,h,d,m,y
+            cookieExpire = cookieExpire.replace(/[A-Za-z]{1,2}/, ''); //number
+
+            switch (time.toLowerCase()) {
+                case 's':
+                    cookieExpire = +cookieExpire;
+                    break;
+                case 'mi':
+                    cookieExpire = cookieExpire * 60;
+                    break;
+                case 'h':
+                    cookieExpire = cookieExpire * 60 * 60;
+                    break;
+                case 'd':
+                    cookieExpire = cookieExpire * 24 * 60 * 60;
+                    break;
+                case 'm':
+                    cookieExpire = cookieExpire * 30 * 24 * 60 * 60;
+                    break;
+                case 'y':
+                    cookieExpire = cookieExpire * 365 * 24 * 60 * 60;
+                    break;
+                default:
+                    cookieExpire = undefined;
+                    break;
+            }
+            if (!cookieExpire) {
+                return '';
+            }
+            var d = new Date();
+            d.setTime(d.getTime() + cookieExpire * 1000);
+            return d.toGMTString();
+        },
+
+
 
     };
 
@@ -1463,6 +1568,11 @@
         expanderExpandedClass: 'treegrid-expander-expanded',
         expanderCollapsedClass: 'treegrid-expander-collapsed',
         treeColumn: 0,
+        cookieExpire: '2h',
+        cookieIdTable: '',
+        // cookiesEnabled: ['bs.table.sortOrder', 'bs.table.sortName', 'bs.table.pageNumber', 'bs.table.pageList', 'bs.table.columns', 'bs.table.searchText', 'bs.table.filterControl'],
+        cookieStorage: 'cookieStorage', //localStorage, sessionStorage
+
         getExpander: function () {
             return this.querySelectorAll('.treegrid-expander');
         },
@@ -1481,6 +1591,7 @@
             return null;
         },
         getNodeById: function (id, treegridContainer) {
+            // console.log(treegridContainer);
             var templateClass = "treegrid-" + id;
             return treegridContainer.querySelector('tr.' + templateClass);
         },
@@ -1531,27 +1642,67 @@
             // data = data.filter(function (item) { return row[that.idField] != item[that.parentIdField]         }            )
             return nodes// [nodes, data];
         },
-        initNode: function (node) {
+        initNode: function (node, $this) {
 
-            // var $this = this;
-            // console.log(this)
-            TREEDEFAULTS.initSettingsEvents.apply(TREEDEFAULTS.initState.apply(TREEDEFAULTS.initEvents.apply(TREEDEFAULTS.initIndent.apply(TREEDEFAULTS.initExpander.apply(node)))));
+            // console.log($this)
+            // console.log(TREEDEFAULTS.getChildNodes.apply($this, [TREEDEFAULTS.getNodeId.apply(node), $this.$container]))
+
+            TREEDEFAULTS.getChildNodes.apply($this, [TREEDEFAULTS.getNodeId.apply(node), $this.$container]).forEach(function (element) {
+                TREEDEFAULTS.initNode.apply(element, [element, $this]);
+
+            });
+
+            TREEDEFAULTS.initSettingsEvents.apply(TREEDEFAULTS.initState.apply(TREEDEFAULTS.initEvents.apply
+                (TREEDEFAULTS.initIndent.apply(TREEDEFAULTS.initExpander.apply(node, [$this]), [$this]), [$this]), [$this]));
             return this;
         },
+        /** 
+ * Initialize events from settings
+ *
+ * @returns {Node}
+ */
+        initSettingsEvents: function () {
+
+            // console.log($this)
+            //Save state on change
+            $Event.on(this, "change", function () {
+
+                if (typeof (TREEDEFAULTS.onChange) === "function") {
+                    TREEDEFAULTS.onChange.apply(this);
+                }
+            });
+            //Default behavior on collapse
+            $Event.on(this, "collapse", function () {
+
+                if (typeof (TREEDEFAULTS.onCollapse) === "function") {
+                    TREEDEFAULTS.onCollapse.apply(this);
+                }
+            });
+            //Default behavior on expand
+            $Event.on(this, "expand", function () {
+                if (typeof (TREEDEFAULTS.onExpand) === "function") {
+                    TREEDEFAULTS.onExpand.apply($this);
+                }
+
+            });
+
+            return this;
+        },
+
         //Events
-        initEvents: function () {
+        initEvents: function ($this) {
 
             //Save state on change
             $Event.on(this, "change", function () {
 
                 TREEDEFAULTS.render.apply(this);
-                if (this.options.saveState) {
+                if ($this.options.saveState) {
                     TREEDEFAULTS.saveStates.apply(this);
                 }
             });
             //Default behavior on collapse
             $Event.on(this, "collapse", function () {
-                // var $this = this;
+
                 this.classList.remove('treegrid-expanded');
                 this.classList.add('treegrid-collapsed');
             });
@@ -1569,10 +1720,11 @@
          *
          * @returns {Node}
          */
-        initExpander: function () {
+        initExpander: function ($this) {
             // var $this = this;
-            var cell = this.querySelectorAll('td')[this.options.treeColumn];
-            var tpl = this.options.expanderTemplate;
+            var cell = this.querySelectorAll('td ')[$this.options.treeColumn];
+            // console.log($this.options.treeColumn, cell)
+            var tpl = $this.options.expanderTemplate;
             var expander = TREEDEFAULTS.getExpander.apply(this);
             if (expander) {
                 expander.forEach(ex => ex.removeChild());
@@ -1589,7 +1741,7 @@
          *
          * @returns {Node}
          */
-        initIndent: function () {
+        initIndent: function ($this) {
 
             this.querySelectorAll('.treegrid-indent').forEach(t => t.remove());
             // var tpl = $TREEDEFAULTS.getSetting', 'indentTemplate');
@@ -1599,11 +1751,12 @@
             // const tl = document.querySelector(tpl);
             // tl.parentNode.insertBefore(expander, tl);
             // }
-            // console.log(this)
+            // console.log(TREEDEFAULTS.getDepth.apply(this))
             for (var i = 0; i < TREEDEFAULTS.getDepth.apply(this); i++) {
                 // tl.parentNode.insertBefore($this.querySelector('.treegrid-expander', tl));
                 this.querySelectorAll('.treegrid-expander').forEach(tr =>
-                    tr.insertAdjacentHTML('beforeBegin', this.options.indentTemplate));
+
+                    tr.insertAdjacentHTML('beforeBegin', $this.options.indentTemplate));
             }
 
             return this;
@@ -1613,13 +1766,13 @@
          *
          * @returns {Node}
          */
-        initState: function () {
+        initState: function ($this) {
             // var $this = this;
-            if (TREEDEFAULTS.saveStates.apply(this) && !TREEDEFAULTS.isFirstInit.apply(this)) {
-                TREEDEFAULTS.restoreState.apply(this);
+            if ($this.options.saveStates && !TREEDEFAULTS.isFirstInit.apply(this, [$this])) {
+                TREEDEFAULTS.restoreState.apply(this, [$this]);
             } else {
-                if (TREEDEFAULTS.initialState.apply(this) === "expanded") {
-                    TREEDEFAULTS.expand;
+                if ($this.options.initialState === "expanded") {
+                    TREEDEFAULTS.expand.apply(this);
                 } else {
                     TREEDEFAULTS.collapse.apply(this);
                 }
@@ -1631,12 +1784,10 @@
              *
              * @returns {Node}
              */
-        saveStates: function () {
+        saveStates: function ($this) {
 
-            if (this.options.saveStateMethod === 'cookie') {
-
-                var stateArrayString = document.cookie(this.options.saveStateName) || '';
-                var stateArray = (stateArrayString === '' ? [] : stateArrayString.split(','));
+            if ($this.options.saveStateMethod === 'cookie') {
+                var stateArray = Utils.getCookie($this, $this.options.cookieIdTable, $this.options.saveStateName);
                 var nodeId = TREEDEFAULTS.getNodeId.apply(this);
 
                 if (TREEDEFAULTS.isExpanded.apply(this)) {
@@ -1648,19 +1799,18 @@
                         stateArray.splice(Utils.inArray(nodeId, stateArray), 1);
                     }
                 }
-                document.cookie(this.options.saveStateName) = stateArray.join(',');
+                Utils.setCookie($this, $this.options.saveStateName, stateArray.join(','));
             }
             return this;
         },
         /**
- * Restore state of current node.
- *
- * @returns {Node}
- */
-        restoreState: function () {
-
+        * Restore state of current node.
+        *
+        * @returns {Node}
+        */
+        restoreState: function ($this) {
             if (this.options.saveStateMethod === 'cookie') {
-                var stateArray = document.cookie(this.options.saveStateName).split(',');
+                var stateArray = Utils.getCookie($this, $this.options.cookieIdTable, $this.options.saveStateName).split(',');
                 if (Utils.inArray(TREEDEFAULTS.getNodeId.apply(this), stateArray) !== -1) {
                     TREEDEFAULTS.expand.apply(this);
                 } else {
@@ -1685,6 +1835,18 @@
          */
         isCollapsed: function () {
             return this.classList.contains('treegrid-collapsed');
+        },
+        /**
+         * Return true if this tree was never been initialised
+         *
+         * @returns {Boolean}
+         */
+        isFirstInit: function ($this) {
+            var tree = this;
+            if (tree.dataset['first_init'] === undefined) {
+                tree.dataset['first_init'] = Utils.getCookie($this, $this.options.cookieIdTable, $this.options.saveStateName) === undefined;
+            }
+            return tree.dataset['first_init'];
         },
 
         /**
@@ -1715,18 +1877,21 @@
         isNode: function () {
             return TREEDEFAULTS.getNodeId.apply(this) !== null;
         },
+        isLeaf: function () {
+            return TREEDEFAULTS.getChildNodes.apply(this, [TREEDEFAULTS.getNodeId.apply(this), this.closest('table')]).length === 0;
+        },
+
         /**
          * Mthod return id of node
          *
          * @returns {String}
          */
         getNodeId: function () {
-            // console.log("TreeGrid: get node id ", TREEDEFAULTS.getSetting', 'getNodeId'))
-            if (TREEDEFAULTS.getNodeId.apply(this) === null) {
-                return null;
-            } else {
-                return TREEDEFAULTS.getNodeId.apply(this);
+            var template = /treegrid-([A-Za-z0-9_-]+)/;
+            if (template.test(this['className'])) {
+                return template.exec(this['className'])[1];
             }
+            return null;
         },
         /**
          * Method return parent id of node or null if root node
@@ -1734,7 +1899,12 @@
          * @returns {String}
          */
         getParentNodeId: function () {
-            return TREEDEFAULTS.getParentNodeId.apply(this);
+            var template = /treegrid-parent-([A-Za-z0-9_-]+)/;
+            if (template.test(this['className'])) {
+                return template.exec(this['className'])[1];
+            }
+            return null;
+            // return TREEDEFAULTS.getParentNodeId.apply(this);
         },
         /**
          * Method return parent node or null if root node
@@ -1742,10 +1912,11 @@
          * @returns {Object[]}
          */
         getParentNode: function () {
+            // console.log(TREEDEFAULTS.getNodeById.apply(this, [TREEDEFAULTS.getParentNodeId.apply(this), this.closest('table')]))
             if (TREEDEFAULTS.getParentNodeId.apply(this) === null) {
                 return null;
             } else {
-                return TREEDEFAULTS.getNodeById.apply(this, [TREEDEFAULTS.getParentNodeId.apply(this), this]);
+                return TREEDEFAULTS.getNodeById.apply(this, [TREEDEFAULTS.getParentNodeId.apply(this), this.closest('table')]);
             }
         },
         /**
@@ -1753,9 +1924,9 @@
          *
          * @returns {Object[]}
          */
-        getChildNodes: function () {
-
-            return TREEDEFAULTS.getChildNodes.apply(this, [TREEDEFAULTS.getNodeId.apply(this), this]);
+        getChildNodes: function (id, treegridContainer) {
+            var templateClass = "treegrid-parent-" + id;
+            return treegridContainer.querySelectorAll('tr.' + templateClass);
         },
 
         /**
@@ -1766,11 +1937,22 @@
          * @returns {Number}
          */
         getDepth: function () {
+            // console.log(this);
+            // console.log(TREEDEFAULTS.getParentNode.apply(this));
             if (TREEDEFAULTS.getParentNode.apply(this) === null) {
                 return 0;
             }
             return TREEDEFAULTS.getDepth.apply(TREEDEFAULTS.getParentNode.apply(this)) + 1;
         },
+        /**
+ * Method return true if node is root
+ *
+ * @returns {Boolean}
+ */
+        isRoot: function () {
+            return TREEDEFAULTS.getDepth.apply(this) === 0;
+        },
+
 
         /**
          * Return true if at least one of parent node is collapsed
@@ -1779,7 +1961,7 @@
          */
         isOneOfParentsCollapsed: function () {
 
-            if (TREEDEFAULTS.isRoot) {
+            if (TREEDEFAULTS.isRoot.apply(this)) {
                 return false;
             } else {
                 if (TREEDEFAULTS.isCollapsed.apply(TREEDEFAULTS.getParentNode.apply(this))) {
@@ -1802,6 +1984,21 @@
             }
             return this;
         },
+        /**
+        * Collapse node
+        *
+        * @returns {Node}
+        */
+        collapse: function () {
+
+
+            if (!TREEDEFAULTS.isLeaf.apply(this) && !TREEDEFAULTS.isCollapsed.apply(this)) {
+                $Event.trigger(this, "collapse");
+                $Event.trigger(this, "change");
+            }
+            return this;
+        },
+
         /**
          * Expand if collapsed, Collapse if expanded
          *
@@ -1832,7 +2029,7 @@
             }
             if (!TREEDEFAULTS.isLeaf.apply(this)) {
                 TREEDEFAULTS.renderExpander.apply(this);
-                TREEDEFAULTS.getChildNodes.apply(this).forEach(cn => TREEDEFAULTS.render.apply(cn));
+                TREEDEFAULTS.getChildNodes.apply(this, [TREEDEFAULTS.getNodeId.apply(this), this.closest('table')]).forEach(cn => TREEDEFAULTS.render.apply(cn));
             }
             return this;
         },
@@ -1844,7 +2041,7 @@
         renderExpander: function () {
 
             var expander = TREEDEFAULTS.getExpander.apply(this);
-            console.log(expander);
+            // console.log(expander);
             if (expander) {
                 // console.log(TREEDEFAULTS. expanderExpandedClass );
                 if (!TREEDEFAULTS.isCollapsed.apply(this)) {
@@ -3057,7 +3254,7 @@
         }
 
     BootstrapTable.prototype.initTr =
-        function initTr(item, i, data, parentDom) {
+        function initTr(item, i, data, parentDom, rowStyle) {
             var that = this;
             // console.log(this.options)
             // var [nodes, data] = this.options.onGetNodes(item, data);
@@ -3071,7 +3268,7 @@
             // init sub node
             var len = nodes.length - 1;
             this.options.rowStyle = function (itm) {
-                var res = that._rowStyle(arguments);
+                var res = rowStyle.apply(that, Array.prototype.slice.apply(arguments));
                 var id = itm[that.options.idField] ? itm[that.options.idField] : 0;
                 var pid = itm[that.options.parentIdField] ? itm[that.options.parentIdField] : 0;
                 res.classes = [res.classes || '', 'treegrid-' + id, 'treegrid-parent-' + pid].join(' ');
@@ -3083,7 +3280,7 @@
                 node._parent = item;
                 if (i === len) node._last = 1;
                 // jquery.treegrid.js
-                this.initTr(node, Utils.inArray(node, data), data, parentDom);
+                this.initTr(node, Utils.inArray(node, data), data, parentDom, rowStyle);
             }
             return true
         }
@@ -3413,14 +3610,14 @@
             }
 
             var trFragments = document.createDocumentFragment();
-            var hasTr = false, treeData = [], tr;
+            var hasTr = false, tr;
             //tree begin
             if (this.options.treeEnable) {
-                this.options = Object.assign({}, this.options, TREEDEFAULTS);
-                this._rowStyle = this.options.rowStyle
+                this.options = Object.assign({}, TREEDEFAULTS, this.options);
+                var _rowStyle = this.options.rowStyle
                 // init root node
                 var i = data.length;
-                treeData = data
+                // treeData = data
                 while (i--) {
                     let item = data[i]
                     if (this.options.rootParentId === item[this.options.parentIdField] ||
@@ -3430,17 +3627,18 @@
                         }
                         // jquery.treegrid.js
                         this.options.rowStyle = function (item, idx) {
-                            var res = _this8._rowStyle(arguments);
+                            var res = _rowStyle.apply(_this8, Array.prototype.slice.apply(arguments));
                             var x = item[_this8.options.idField] ? item[_this8.options.idField] : 0;
                             res.classes = [res.classes || '', `treegrid-${x}`].join(' ');
                             return res;
                         };
                         // treeData.push(item);
                         // console.log(treeData)
-                        // data = data.splice(i, 1)
+                        // data = da ta.splice(i, 1)
                         // console.log(item)
-                        // init sub node                                                                                                   eld] : 0;
-                        var tr = this.initTr(item, i, data, trFragments);
+                        // init sub nodeeld] : 0;
+
+                        var tr = this.initTr(item, i, data, trFragments, _rowStyle);
                         hasTr = hasTr || !!tr;
                     }
 
@@ -3615,10 +3813,10 @@
 
             });
             //tree 
-            // if (this.options.treeEnable) {
-            // var rootnodes = this.options.getRootNodes(this.$body)
-            // rootnodes.forEach(rt => _this8.options.initNode(rt));
-            // }
+            if (this.options.treeEnable) {
+                var rootnodes = this.options.getRootNodes(this.$body)
+                rootnodes.forEach(rt => _this8.options.initNode.apply(rt, [rt, _this8]));
+            }
             //end
             this.updateSelected();
             this.resetView();
@@ -3809,7 +4007,7 @@
             for (var _len2 = arguments.length, args = Array(_len2 > 1 ? _len2 - 1 : 0), _key4 = 1; _key4 < _len2; _key4++) {
                 args[_key4 - 1] = arguments[_key4];
             }
-            console.log((_options = this.options)[BootstrapTable.EVENTS[name]]);
+            // console.log((_options = this.options)[BootstrapTable.EVENTS[name]]);
             (_options = this.options)[BootstrapTable.EVENTS[name]].apply(_options, args);
 
             // this.$el.trigger($.Event(name), args);
@@ -4422,7 +4620,7 @@
                     if (!_params2.hasOwnProperty('index') || !_params2.hasOwnProperty('row')) {
                         continue;
                     }
-                    $.extend(this.options.data[_params2.index], _params2.row);
+                    this.options.data[_params2.index] = Object.assign(this.options.data[_params2.index], _params2.row);
                 }
             } catch (err) {
                 _didIteratorError20 = true;
@@ -4624,8 +4822,7 @@
                 return row[_this16.header.stateField];
             });
         }
-    BootstrapTable.prototype.
-        checkAll =
+    BootstrapTable.prototype.checkAll =
         function checkAll() {
             this.checkAll_(true);
         }
@@ -4658,7 +4855,7 @@
             this.$selectAll.forEach(t => t.checked = checked);
             this.$selectAll_?.forEach(t => t.checked = checked);
             [...this.$selectItem].filter(row => !row.disabled).forEach(itm => itm.checked = checked);
-            // this.updateRows();
+            this.updateRows();
             if (checked) {
                 rows = this.getSelections();
             }
@@ -5081,9 +5278,9 @@
 
         var value = void 0;
 
-
+        // 
         var data = bstWeakMap.get(this);;
-
+        // var data = this.dataset['bootstrap.table'];
         if (typeof option === 'string') {
 
 
@@ -5094,17 +5291,21 @@
             if (!data) {
                 return;
             }
-
+            // data = JSON.parse(data);
             value = data[option].apply(data, args);
 
             if (option === 'destroy') {
-                delete this.dataset['bootstrap.table'];
+                // delete this.dataset['bootstrap.table'];
+                bstWeakMap.delete(this);
             }
         }
 
         var options = Object.assign({}, BootstrapTable.DEFAULTS, this.dataset, (typeof option === 'undefined' ? 'undefined' : _typeof(option)) === 'object' && option);
         if (!data) {
+
             bstWeakMap.set(this, data = new BootstrapTable(this, options));
+            // data = new BootstrapTable(this, options)
+            // this.dataset['bootstrap.table'] = JSON.stringify(data);
         }
         return typeof value === 'undefined' ? this : value;
     };

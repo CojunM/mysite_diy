@@ -1,23 +1,86 @@
+.Hui-article-box {
+    position: absolute;
+    top: 4px;
+    right: 0;
+    bottom: 0;
+    left: 20px;
+    overflow: hidden;
+    z-index: 1;
+    background-color: #fff
+}
 
-.Hui-article-box{position: absolute;top:4px;right:0;bottom: 0;left:20px; overflow:hidden; z-index:1; background-color:#fff}
-.Hui-article{position: absolute;top:34px;bottom:0;left:0; right:0;overflow:auto;z-index:1}
-.Hui-container{ padding:45px 0 0}
-.Hui-article-box{-moz-transition: all 0.2s ease 0s;-webkit-transition: all 0.2s ease 0s ;-o-transition: all 0.2s ease 0s;transition: all 0.2s ease 0s}
+.Hui-article {
+    position: absolute;
+    top: 34px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: auto;
+    z-index: 1
+}
+
+.Hui-container {
+    padding: 45px 0 0
+}
+
+.Hui-article-box {
+    -moz-transition: all 0.2s ease 0s;
+    -webkit-transition: all 0.2s ease 0s;
+    -o-transition: all 0.2s ease 0s;
+    transition: all 0.2s ease 0s
+}
+
 /*.big-page .Hui-article-box,.big-page .dislpayArrow,.big-page .breadcrumb{left:0px}*/
 
 /*选项卡导航*/
-.Hui-tabNav-wp{position:relative; height:35px;overflow:hidden;left:-32px}
+.Hui-tabNav-wp {
+    position: relative;
+    height: 35px;
+    overflow: hidden;
+    left: -32px
+}
+
 .Hui-tabNav,
-.Hui-tabNav .acrossTab li
-,.Hui-tabNav .acrossTab li em{background-image:url(../images/acrossTab/acrossTab-2.png)}
-.Hui-tabNav{height:35px; padding-right:75px;overflow:hidden; position:relative;background-color:#efeef0; background-repeat: repeat-x; background-position: 0 -175px;}
-.Hui-tabNav .acrossTab{ position:absolute; height:26px; line-height:26px; background:none; top:8px; left:0;padding-top:0}
-.Hui-tabNav .acrossTab li{height:26px;line-height:26px;}
-.Hui-tabNav .acrossTab li em{ right:-16px; height: 26px; width: 16px}
-.loading {background:url(../images/loading.gif) no-repeat center; height:100px}
-.show_iframe{ position:absolute; top:0; right:0; left:0; bottom:0;}
-.show_iframe iframe {position: absolute;bottom: 0;height: 100%;width: 100%}
-.Hui-tabNav-more {position: absolute;right:0 ;width:70px;top:4px;display: none}
+.Hui-tabNav .acrossTab li,
+.Hui-tabNav .acrossTab li em {
+    background-image: url(../images/acrossTab/acrossTab-2.png)
+}
+
+.Hui-tabNav {
+    height: 35px;
+    padding-right: 75px;
+    overflow: hidden;
+    position: relative;
+    background-color: #efeef0;
+    background-repeat: repeat-x;
+    background-position: 0 -175px;
+}
+
+.Hui-tabNav .acrossTab {
+    position: absolute;
+    height: 26px;
+    line-height: 26px;
+    background: none;
+    top: 8px;
+    left: 0;
+    padding-top: 0
+}
+
+.Hui-tabNav .acrossTab li {
+    height: 26px;
+    line-height: 26px;
+}
+
+.Hui-tabNav .acrossTab li em {
+    right: -16px;
+    height: 26px;
+    width: 16px
+}
+
+.loading {
+    background: url(../images/loading.gif) no-repeat center;
+    height: 100px
+}
 
 #iframe_box {
     position: relative;
@@ -29,34 +92,20 @@
     border-top: 0;
 }
 
-
-/*.Hui-tabNav .acrossTab li em {*/
-    /*background-image: url(../images/acrossTab/acrossTab-2.png)*/
-/*}*/
-
-/*.Hui-tabNav .acrossTab li i:hover {*/
-    /*color: #ff101d;*/
-
-/*}*/
-.acrossTab,.acrossTab li,.acrossTab li em{ background-image:url(../images/acrossTab/acrossTab-bg.png)}
-.acrossTab{height:29px; background-repeat: repeat-x; background-position: 0 0; padding-top:1px}
-.acrossTab li,.acrossTab li em{ background-repeat:no-repeat; background-position:0 0}
-.acrossTab li{position:relative;float:left; display:inline-block; height:29px; line-height:29px; font-size:12px;cursor:pointer;padding:0 30px; white-space:nowrap;color:#282828; background-position:0 0}
-.acrossTab li em{position:absolute; width:23px;height:29px;right:-20px; top:0;z-index:50; background-position:right -30px}
-.acrossTab li:hover{background-position:0 -60px}
-.acrossTab li:hover em{background-position:right -90px}
-.acrossTab li.active{background-position:0 -120px; z-index:99}
-.acrossTab li.active em{background-position:right -150px}
-.acrossTab li i{position:absolute; display:block; width:13px; height:13px; top:50%; margin-top:-6px; right:5px; font-size:0; line-height:0; cursor:pointer; background-image:url(../images/acrossTab/acrossTab-close.png); background-repeat:no-repeat; background-position:0 0}
-.acrossTab li i:hover{background-position:0 bottom}
-
-.show_iframe{
+/* .show_iframe { */
+/* position: absolute; */
+/* top: 0; */
+/* right: 0; */
+/* left: 0; */
+/* bottom: 10; */
+/* } */
+.show_iframe {
     position: relative;
     display: block;
     top: 0;
     right: 0;
     left: 0;
-    bottom: 0;;
+    bottom: 0;
     height: 100%;
     width: 94%
 }
@@ -70,3 +119,159 @@
     bottom: 0;
 }
 
+.show_iframe iframe {
+    position: absolute;
+    bottom: 0;
+    height: 90%;
+    width: 90%;
+    overflow-y: auto;
+}
+
+.Hui-tabNav-more {
+    position: absolute;
+    right: 0;
+    width: 70px;
+    top: 4px;
+    display: none
+}
+
+
+
+/*.Hui-tabNav .acrossTab li em {*/
+/*background-image: url(../images/acrossTab/acrossTab-2.png)*/
+/*}*/
+
+/*.Hui-tabNav .acrossTab li i:hover {*/
+/*color: #ff101d;*/
+
+/*}*/
+.acrossTab,
+.acrossTab li,
+.acrossTab li em {
+    background-image: url(../images/acrossTab/acrossTab-bg.png)
+}
+
+.acrossTab {
+    height: 29px;
+    background-repeat: repeat-x;
+    background-position: 0 0;
+    padding-top: 1px
+}
+
+.acrossTab li,
+.acrossTab li em {
+    background-repeat: no-repeat;
+    background-position: 0 0
+}
+
+.acrossTab li {
+    position: relative;
+    float: left;
+    display: inline-block;
+    height: 29px;
+    line-height: 29px;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 0 30px;
+    white-space: nowrap;
+    color: #282828;
+    background-position: 0 0
+}
+
+.acrossTab li em {
+    position: absolute;
+    width: 23px;
+    height: 29px;
+    right: -20px;
+    top: 0;
+    z-index: 50;
+    background-position: right -30px
+}
+
+.acrossTab li:hover {
+    background-position: 0 -60px
+}
+
+.acrossTab li:hover em {
+    background-position: right -90px
+}
+
+.acrossTab li.active {
+    background-position: 0 -120px;
+    z-index: 99
+}
+
+.acrossTab li.active em {
+    background-position: right -150px
+}
+
+.acrossTab li i {
+    position: absolute;
+    display: block;
+    width: 13px;
+    height: 13px;
+    top: 50%;
+    margin-top: -6px;
+    right: 5px;
+    font-size: 0;
+    line-height: 0;
+    cursor: pointer;
+    background-image: url(../images/acrossTab/acrossTab-close.png);
+    background-repeat: no-repeat;
+    background-position: 0 0
+}
+
+.acrossTab li i:hover {
+    background-position: 0 bottom
+}
+
+
+
+.btn-toggle {
+    display: inline-flex;
+    align-items: center;
+    padding: .25rem .5rem;
+    font-weight: 600;
+    color: rgba(0, 0, 0, .65);
+    background-color: transparent;
+    border: 0
+}
+
+.btn-toggle:hover,
+.btn-toggle:focus {
+    color: rgba(0, 0, 0, .85);
+    background-color: #d2f4ea
+}
+
+.btn-toggle::before {
+    width: 1.25em;
+    line-height: 0;
+    content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+    transition: transform .35s ease;
+    transform-origin: .5em 50%
+}
+
+.btn-toggle[aria-expanded="true"] {
+    color: rgba(0, 0, 0, .85)
+}
+
+.btn-toggle[aria-expanded="true"]::before {
+    transform: rotate(90deg)
+}
+
+.btn-toggle-nav a {
+    display: inline-fle x;
+    padding: .1875rem .5rem;
+    margin-top: .125rem;
+    margin-left: 1.25rem;
+    text-decoration: none
+}
+
+.btn-toggle-nav a:hover,
+.btn-toggle-nav a:focus {
+    background-color: #d2f4ea
+}
+
+.scrollarea {
+    overflow-y: auto
+}

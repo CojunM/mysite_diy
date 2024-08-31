@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 // 给所有的li的index属性赋值
                 this.lis[i].index = i;
                 // 点击之后执行toggleTab这个方法
-               this.lis[i].onclick =that.toggleTab;
+                this.lis[i].onclick = that.toggleTab;
                 // 输出的this指向的是 被点击的那个li的index属性
                 // console.log(this.index);
                 // 循环遍历，当点击删除按钮时,当前被点击按钮的操作
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 // 把li的所有li的类名全去掉，不用管指向谁直接
                 that.lis[i].classList.remove('active');
                 // console.log(this.lis[i].classList);
-                 that.show_iframe[i].classList.remove('active');
+                that.show_iframe[i].classList.remove('active');
             }
             // for (let i = 0; i < this.show_iframe.length; i++) {
             //         // 把li的所有li的类名全去掉，不用管指向谁直接
@@ -203,3 +203,42 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 });
+
+/*弹出层*/
+/*
+    参数解释：
+    title	标题
+    url		请求的url
+    id		需要操作的数据id
+    w		弹出层宽度（缺省调默认值）
+    h		弹出层高度（缺省调默认值）
+*/
+function layer_show(title, url, w, h) {
+    if (title == null || title == '') {
+        title = false;
+    };
+    if (url == null || url == '') {
+        url = "404.html";
+    };
+    if (w == null || w == '') {
+        w = 800;
+    };
+    if (h == null || h == '') {
+        h = (window.outerHeight - 50);
+    };
+    layer.open({
+        type: 2,
+        area: [w + 'px', h + 'px'],
+        fix: false, //不固定
+        maxmin: true,
+        shade: 0.4,
+        title: title,
+        content: url
+    });
+}
+/*关闭弹出框口*/
+function layer_close() {
+    var index = parent.layer.getFrameIndex(window.name);
+    parent.layer.close(index);
+}
+

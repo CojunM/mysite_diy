@@ -629,9 +629,10 @@ def parse_range_header(header, maxlen=0):
 
 ERROR_PAGE_TEMPLATE = """
 %%try:
-    %%#from %s import DEBUG, HTTP_CODES, request, tounicode
-   %%from brick.http.request import request
-   %%DEBUG = True
+    %%from brick.core.httphelper.response import HTTP_CODES
+    %%from brick.utils.encode import   tounicode
+   %%from brick.core.httphelper.request import request
+  %%DEBUG=True
     <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
     <html>
         <head>
@@ -662,7 +663,7 @@ ERROR_PAGE_TEMPLATE = """
     <b>ImportError:</b> Could not generate the error page. Please add :brick to
     the import path. %s
 %%end
-""" % (__name__, __name__)
+""" % __name__
 
 
 def make_default_app_wrapper(name):

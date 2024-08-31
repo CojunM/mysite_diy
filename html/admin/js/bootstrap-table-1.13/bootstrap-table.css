@@ -345,3 +345,9 @@ div.fixed-table-scroll-outer {
 .treegrid-expander-collapsed {
     background-image: url("data:image/svg+xml,%3Csvg  xmlns='http://www.w3.org/2000/svg' fill='currentColor'   viewBox='0 0 16 16'%3E%3Cpath d='m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z'/%3E%3C/svg%3E")
 }
+
+.changeColor {
+    background-color: #31b0d5 !important;
+    /* 使用一个 !important 规则时，此声明将覆盖任何其他声明。    */
+    color: white;
+}

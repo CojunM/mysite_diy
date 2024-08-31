@@ -20,11 +20,11 @@
 
     <!-- <script src="tset.js"></script> -->
     <!-- <script src="tsbt.js"></script> -->
-    <link rel="stylesheet" href="/html/admin/js/bsTtable1.22/bootstrap-table.css">
-    <!-- <link href="/html/admin/js/bootstrap-table-1.13/bootstrap-table.css" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" href="/html/admin/js/bsTtable1.22/bootstrap-table.css"> -->
+    <link href="/html/admin/js/bootstrap-table-1.13/bootstrap-table.css" rel="stylesheet">
 
     <!-- <link href="/html/admin/js/jquery.treegrid/jquery.treegrid.css"> -->
-    <script src="/html/admin/js/bootstrap_tree_table1.1.1.js"></script>
+    <script src="/html/admin/js/bootstrap_tree_table1.1.2.js"></script>
 </head>
 
 <body>
@@ -44,7 +44,7 @@
                 '{"id":10,"pid":2,"status":1,"name":"系统日志管理","permissionValue":"open:log:manage"},' +
                 '{"id":11,"pid":10,"status":1,"name":"新增日志","permissionValue":"open:log:add"},' +
                 '{"id":12,"pid":10,"status":1,"name":"修改日志","permissionValue":"open:log:edit"},' +
-                '{"id":13,"pid":10,"status":0,"name":"删除日志","permissionValue":"open:log:del"}]');
+                '{"id":13,"pid":10,"status":0,"name":"删除日志","permissionValue":"open:log:del"}              ]');
 
             // var data = [{
             //     "time": "2019-08-27",
@@ -130,6 +130,9 @@
                 // treeShowField: 'time',
                 //指定父id列
                 parentIdField: 'pid',
+                treeColumn: 1,
+                initialState: 'collapsed',
+                expandedTree: false,
                 // onCheck: function (row) {
                 // var datas = $table.bootstrapTable('getData');
                 // 勾选子类
@@ -143,9 +146,9 @@
                 // },
 
                 onUncheck: function (row) {
-                    // var datas = $table.bootstrapTable('getData');
+                    var datas = $table.bootstrapTable('getData');
                     // selectChilds(datas, row, "id", "pid", false);
-                    var datas = {};
+
                     $table.bootstrapTable('load', datas);
                 },
                 // bootstrap-table-treetreegrid.js 插件配置 -- end

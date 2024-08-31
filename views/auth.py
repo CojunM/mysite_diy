@@ -152,9 +152,24 @@ def get_menus():
                         html = html % {'chevron': ''}
                         # print('html12')
                     # 闭合菜单html
-                    temp = """ </ul>   </li> """
-                    html = html + temp
-                    print('html', html)
+                    temp = """ </ul>   </li>  """
+                        
+                html = html + temp
+        html = html +  """  <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
+          Orders
+        </button>
+        <div class="collapse" id="orders-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" class="link-dark rounded">New</a></li>
+            <li><a href="#" class="link-dark rounded">Processed</a></li>
+            <li><a href="#" class="link-dark rounded">Shipped</a></li>
+            <li><a href="#" class="link-dark rounded">Returned</a></li>
+          </ul>
+        </div>
+      </li> """
+                                                           
+        print('html', html)
         return web_helper.return_msg(0, '成功', {'menu_html': html})
     else:
         return web_helper.return_msg(-1, "查询失败")
